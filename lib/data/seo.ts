@@ -201,7 +201,7 @@ export const pageSEO: Record<string, PageSEO> = {
       "IT park office Salem",
       "tech startup Salem",
     ],
-    ogImage: "/images/og/tidel-neo-salem.jpg",
+    ogImage: "/images/og/tidel-neo.jpg",
   },
   "/locations/salem/fort-hosur": {
     title: "NammaOffice Fort Hosur, Salem",
@@ -219,7 +219,7 @@ export const pageSEO: Record<string, PageSEO> = {
       "office space Tiruchirappalli",
       "NammaOffice Trichy",
     ],
-    ogImage: "/images/og/asha-grand-trichy.jpg",
+    ogImage: "/images/og/asha-grand.jpg",
   },
   "/locations/tirupur/tidel-neo": {
     title: "NammaOffice TIDEL NEO, Tirupur",
@@ -230,7 +230,7 @@ export const pageSEO: Record<string, PageSEO> = {
       "office space Tirupur",
       "NammaOffice Tirupur",
     ],
-    ogImage: "/images/og/tidel-neo-tirupur.jpg",
+    ogImage: "/images/og/tidel-neo.jpg",
   },
 
   // Other pages

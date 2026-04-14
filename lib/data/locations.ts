@@ -47,7 +47,7 @@ export const cities: City[] = [
 
 export const locations: Location[] = [
   {
-    slug: "brindavan-road-salem",
+    slug: "brindavan-road",
     name: "Brindavan Road",
     city: "salem",
     address: "Anushka Tower, 5th Floor, Brindavan Road, Salem — 636 004",
@@ -100,7 +100,7 @@ export const locations: Location[] = [
       "NammaOffice Brindavan Road — premium coworking in Anushka Tower, 5th Floor, Salem. Private cabins, open desks, meeting halls. Book your workspace today.",
   },
   {
-    slug: "ramakrishna-road-salem",
+    slug: "ramakrishna-road",
     name: "Ramakrishna Road",
     city: "salem",
     address: "Balaji Tower, 3rd Floor, Ramakrishna Road, Salem — 636 007",
@@ -145,7 +145,7 @@ export const locations: Location[] = [
       "NammaOffice Ramakrishna Road — Balaji Tower, 3rd Floor, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
   },
   {
-    slug: "new-bus-stand-salem",
+    slug: "new-bus-stand",
     name: "New Bus Stand",
     city: "salem",
     address: "New Bus Stand Area, Salem — 636 004",
@@ -194,7 +194,7 @@ export const locations: Location[] = [
       "NammaOffice New Bus Stand, Salem — centrally located coworking space with excellent transport links. Private cabins, open desks, managed offices. Book today.",
   },
   {
-    slug: "tidel-neo-salem",
+    slug: "tidel-neo",
     name: "TIDEL NEO",
     city: "salem",
     address: "TIDEL NEO, Salem — 636 005",
@@ -246,7 +246,7 @@ export const locations: Location[] = [
       "NammaOffice TIDEL NEO Salem — premium IT park coworking for tech companies and startups. Managed offices, private cabins, business lounge. Book today.",
   },
   {
-    slug: "fort-hosur-salem",
+    slug: "fort-hosur",
     name: "Fort Hosur",
     city: "salem",
     address: "Fort Hosur, Salem — 636 001",
@@ -288,7 +288,7 @@ export const locations: Location[] = [
       "NammaOffice Fort Hosur Salem — coworking in Salem's heritage commercial district. Ideal for legal, financial, and trading professionals. Book your desk today.",
   },
   {
-    slug: "asha-grand-trichy",
+    slug: "asha-grand",
     name: "Asha Grand",
     city: "trichy",
     address: "Asha Grand, Trichy — 620 017",
@@ -342,7 +342,7 @@ export const locations: Location[] = [
       "NammaOffice Asha Grand Trichy — premium coworking in the heart of Tiruchirappalli. Private cabins, open desks, meeting halls, managed offices. Book today.",
   },
   {
-    slug: "tidel-neo-tirupur",
+    slug: "tidel-neo",
     name: "TIDEL NEO",
     city: "tirupur",
     address: "TIDEL NEO, Tirupur — 641 604",
@@ -401,7 +401,10 @@ export function getCity(slug: CitySlug): City | undefined {
   return cities.find((c) => c.slug === slug);
 }
 
-export function getLocation(slug: string): Location | undefined {
+export function getLocation(slug: string, city?: string): Location | undefined {
+  if (city) {
+    return locations.find((l) => l.slug === slug && l.city === city);
+  }
   return locations.find((l) => l.slug === slug);
 }
 

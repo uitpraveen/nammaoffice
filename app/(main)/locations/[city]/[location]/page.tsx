@@ -32,8 +32,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { location: locationSlug } = await params;
-  const location = getLocation(locationSlug);
+  const { city: citySlug, location: locationSlug } = await params;
+  const location = getLocation(locationSlug, citySlug);
   if (!location) return {};
   return {
     title: location.seoTitle,
@@ -49,7 +49,7 @@ export default async function LocationPage({ params }: Props) {
   const { city: citySlug, location: locationSlug } = await params;
 
   const city = getCity(citySlug as CitySlug);
-  const location = getLocation(locationSlug);
+  const location = getLocation(locationSlug, citySlug);
 
   if (!city || !location || location.city !== citySlug) notFound();
 
