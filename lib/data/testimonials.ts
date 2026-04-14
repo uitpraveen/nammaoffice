@@ -1,0 +1,88 @@
+import type { CitySlug, Testimonial } from "@/lib/types";
+
+export const testimonials: Testimonial[] = [
+  {
+    id: "t1",
+    name: "Karthik Rajan",
+    company: "TechSpark Solutions",
+    photo: "/images/testimonials/karthik-rajan.jpg",
+    rating: 5,
+    text: "NammaOffice has been a game-changer for our startup. The private cabin on Brindavan Road gives us the focus we need, and the community events have helped us find our first three clients. Highly recommend!",
+    location: "Brindavan Road, Salem",
+    city: "salem",
+  },
+  {
+    id: "t2",
+    name: "Priya Sundaram",
+    company: "Freelance UX Designer",
+    photo: "/images/testimonials/priya-sundaram.jpg",
+    rating: 5,
+    text: "I switched from working at home to NammaOffice's open desk plan and my productivity has doubled. The Wi-Fi is rock solid, the coffee is great, and the staff are incredibly helpful.",
+    location: "Ramakrishna Road, Salem",
+    city: "salem",
+  },
+  {
+    id: "t3",
+    name: "Anand Kumar",
+    company: "TextileEdge Exports",
+    photo: "/images/testimonials/anand-kumar.jpg",
+    rating: 5,
+    text: "As a textile exporter in Tirupur, I needed a professional office to meet international buyers. NammaOffice TIDEL NEO exceeded my expectations — the meeting halls are world-class and the managed office is perfect for our team.",
+    location: "TIDEL NEO, Tirupur",
+    city: "tirupur",
+  },
+  {
+    id: "t4",
+    name: "Deepa Raghunathan",
+    company: "CA Firm",
+    photo: "/images/testimonials/deepa-raghunathan.jpg",
+    rating: 5,
+    text: "Running a CA practice requires absolute confidentiality. NammaOffice's private cabin in Trichy gives us that, plus all the infrastructure of a premium office. The business address has added real credibility.",
+    location: "Asha Grand, Trichy",
+    city: "trichy",
+  },
+  {
+    id: "t5",
+    name: "Muthu Krishnan",
+    company: "SalesTech CRM",
+    photo: "/images/testimonials/muthu-krishnan.jpg",
+    rating: 5,
+    text: "We moved our 20-person sales team into a NammaOffice managed office in Salem. The entire setup — from internet to furniture to housekeeping — was handled perfectly. Zero downtime, zero stress.",
+    location: "TIDEL NEO, Salem",
+    city: "salem",
+  },
+  {
+    id: "t6",
+    name: "Lavanya Nair",
+    company: "Digital Marketing Agency",
+    photo: "/images/testimonials/lavanya-nair.jpg",
+    rating: 4,
+    text: "The cubicle plan is perfect for me. I have my own dedicated space, personal storage, and the community around me keeps me motivated. The Trichy centre has a fantastic vibe.",
+    location: "Asha Grand, Trichy",
+    city: "trichy",
+  },
+  {
+    id: "t7",
+    name: "Selvam Arumugam",
+    company: "Iron & Steel Trader",
+    photo: "/images/testimonials/selvam-arumugam.jpg",
+    rating: 5,
+    text: "I used to run my business from home. Now with NammaOffice's business lounge membership, I have a professional address in Salem, access to meeting rooms, and a network of fellow business owners. Best investment I made.",
+    location: "Brindavan Road, Salem",
+    city: "salem",
+  },
+  {
+    id: "t8",
+    name: "Rekha Venkatesan",
+    company: "EduTech Startup",
+    photo: "/images/testimonials/rekha-venkatesan.jpg",
+    rating: 5,
+    text: "We built our entire EduTech MVP from NammaOffice's TIDEL NEO in Tirupur. The tech park ecosystem, combined with NammaOffice's support, helped us go from idea to funded startup in 8 months.",
+    location: "TIDEL NEO, Tirupur",
+    city: "tirupur",
+  },
+];
+
+export function getTestimonialsByCity(city: CitySlug): Testimonial[] {
+  return testimonials.filter((t) => t.city === city);
+}
