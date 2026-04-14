@@ -6,11 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-interface DesktopNavProps {
-  light?: boolean;
-}
-
-export function DesktopNav({ light = false }: DesktopNavProps) {
+export function DesktopNav() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -21,22 +17,17 @@ export function DesktopNav({ light = false }: DesktopNavProps) {
   }, []);
 
   const handleClose = useCallback(() => {
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 150);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 120);
   }, []);
 
   useEffect(() => {
-    return () => {
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
+    return () => { if (closeTimer.current) clearTimeout(closeTimer.current); };
   }, []);
 
-  // Close on route change
-  useEffect(() => {
-    setOpenMenu(null);
-  }, [pathname]);
+  useEffect(() => { setOpenMenu(null); }, [pathname]);
 
   return (
-    <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+    <nav className="hidden lg:flex items-center gap-0" aria-label="Main navigation">
       {navigation.map((item) => {
         const isActive =
           pathname === item.href ||
@@ -50,108 +41,88 @@ export function DesktopNav({ light = false }: DesktopNavProps) {
             onMouseEnter={() => item.children && handleOpen(item.href)}
             onMouseLeave={handleClose}
           >
-            {/* Nav link */}
             <Link
               href={item.href}
               className={cn(
-                "relative flex items-center gap-1.5 px-4 py-2.5",
-                "text-[13px] font-semibold uppercase tracking-[0.12em]",
-                "transition-colors duration-200",
-                // Wine underline
-                "after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2px]",
-                "after:bg-terracotta after:transition-transform after:duration-300 after:origin-left",
-                isActive ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
-                // Text color
-                light
-                  ? isActive
-                    ? "text-terracotta-200"
-                    : "text-white/90 hover:text-white"
-                  : isActive
-                    ? "text-terracotta"
-                    : "text-warm-charcoal hover:text-warm-charcoal"
+                "flex items-center gap-1 px-4 py-6 text-[14px] font-semibold transition-colors duration-200",
+                isActive
+                  ? "text-terracotta"
+                  : "text-warm-charcoal/80 hover:text-terracotta"
               )}
             >
               {item.label}
               {item.children && (
                 <svg
                   className={cn(
-                    "w-3 h-3 transition-transform duration-200",
-                    openMenu === item.href ? "rotate-180" : ""
+                    "w-3.5 h-3.5 transition-transform duration-200 opacity-50",
+                    openMenu === item.href && "rotate-180 opacity-100"
                   )}
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  aria-hidden="true"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                 </svg>
               )}
             </Link>
 
-            {/* Mega dropdown */}
+            {/* Dropdown */}
             {item.children && openMenu === item.href && (
-              <div
-                className={cn(
-                  "absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50",
-                  "bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-warm-border/60",
-                  "animate-fade-in-up",
-                  // Width based on number of children
-                  item.children.length > 3 ? "w-[560px]" : "w-[340px]"
-                )}
-              >
-                {/* Header */}
-                <div className="px-6 pt-5 pb-3 border-b border-warm-border/40">
-                  <Link
-                    href={item.href}
-                    className="text-xs font-semibold uppercase tracking-[0.15em] text-warm-gray hover:text-terracotta transition-colors"
-                  >
-                    View All {item.label} &rarr;
-                  </Link>
-                </div>
+              <>
+                {/* Active indicator line */}
+                <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-terracotta" />
 
-                {/* Items grid */}
+                {/* Dropdown panel */}
                 <div
                   className={cn(
-                    "p-4 gap-1",
-                    item.children.length > 3
-                      ? "grid grid-cols-2"
-                      : "flex flex-col"
+                    "absolute top-full left-1/2 -translate-x-1/2 pt-0 z-50",
+                    item.children.length > 3 ? "w-[580px]" : "w-[320px]"
                   )}
                 >
-                  {item.children.map((child) => {
-                    const isChildActive = pathname === child.href || pathname.startsWith(child.href + "/");
-                    return (
+                  <div className="mt-0 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.1)] border border-warm-border/50 overflow-hidden">
+                    {/* Dropdown header */}
+                    <div className="px-5 py-3 bg-sand-50 border-b border-warm-border/40">
                       <Link
-                        key={child.href}
-                        href={child.href}
-                        className={cn(
-                          "group flex flex-col gap-1 px-4 py-3.5 rounded-xl transition-all duration-200",
-                          isChildActive
-                            ? "bg-terracotta/5"
-                            : "hover:bg-sand-100"
-                        )}
+                        href={item.href}
+                        className="text-[12px] font-bold uppercase tracking-[0.15em] text-warm-gray hover:text-terracotta transition-colors inline-flex items-center gap-1.5"
                       >
-                        <span
-                          className={cn(
-                            "text-sm font-semibold transition-colors duration-200",
-                            isChildActive
-                              ? "text-terracotta"
-                              : "text-warm-charcoal group-hover:text-terracotta"
-                          )}
-                        >
-                          {child.label}
-                        </span>
-                        <span className="text-xs leading-relaxed text-warm-gray/80">
-                          {child.description}
-                        </span>
+                        All {item.label}
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
                       </Link>
-                    );
-                  })}
+                    </div>
+
+                    {/* Items */}
+                    <div className={cn(
+                      "p-3",
+                      item.children.length > 3 ? "grid grid-cols-2 gap-0" : "flex flex-col"
+                    )}>
+                      {item.children.map((child) => {
+                        const isChildActive = pathname === child.href || pathname.startsWith(child.href + "/");
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={cn(
+                              "group flex flex-col gap-0.5 px-4 py-3 rounded-lg transition-all duration-150",
+                              isChildActive ? "bg-terracotta/5" : "hover:bg-sand-50"
+                            )}
+                          >
+                            <span className={cn(
+                              "text-[14px] font-semibold transition-colors",
+                              isChildActive ? "text-terracotta" : "text-warm-charcoal group-hover:text-terracotta"
+                            )}>
+                              {child.label}
+                            </span>
+                            <span className="text-[12px] leading-relaxed text-warm-gray/70 line-clamp-1">
+                              {child.description}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
         );

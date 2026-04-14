@@ -1,5 +1,4 @@
 import { BRAND } from "@/lib/constants";
-import { KolamDivider } from "@/components/ui/KolamDivider";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import Link from "next/link";
 
@@ -38,8 +37,6 @@ export function Footer() {
 
   return (
     <footer className="bg-warm-charcoal">
-      <KolamDivider variant="dark" />
-
       <div className="content-width py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
           {/* Column 1: Brand */}
