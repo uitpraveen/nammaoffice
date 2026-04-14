@@ -1,26 +1,165 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Colors - Terracotta */
+  --color-terracotta: #C4683C;
+  --color-terracotta-50: #FBF3EE;
+  --color-terracotta-100: #F5E1D4;
+  --color-terracotta-200: #EBBEA1;
+  --color-terracotta-300: #E09A6E;
+  --color-terracotta-400: #D47C4D;
+  --color-terracotta-500: #C4683C;
+  --color-terracotta-600: #A35530;
+  --color-terracotta-700: #7D4125;
+  --color-terracotta-800: #572E1A;
+  --color-terracotta-900: #311A0E;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Colors - Olive */
+  --color-olive: #3D5A3E;
+  --color-olive-50: #F0F4F0;
+  --color-olive-100: #D9E4DA;
+  --color-olive-200: #B3C9B4;
+  --color-olive-300: #8DAE8F;
+  --color-olive-400: #678A69;
+  --color-olive-500: #3D5A3E;
+  --color-olive-600: #324A33;
+  --color-olive-700: #263827;
+  --color-olive-800: #1A271B;
+  --color-olive-900: #0E150F;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Colors - Sand */
+  --color-sand: #F0EBE3;
+  --color-sand-50: #FAF8F5;
+  --color-sand-100: #F5F1EB;
+  --color-sand-200: #F0EBE3;
+  --color-sand-300: #E5DFD6;
+  --color-sand-400: #D4CCBF;
+  --color-sand-500: #BFB5A5;
+
+  /* Colors - Warm */
+  --color-warm-white: #FAF7F2;
+  --color-warm-gray: #6B6560;
+  --color-warm-charcoal: #2C2C2C;
+  --color-warm-border: #E5DFD6;
+
+  /* Fonts */
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+
+  /* Border Radius */
+  --radius-brand: 14px;
+
+  /* Box Shadows */
+  --shadow-brand: 0 4px 20px rgba(107, 101, 96, 0.08);
+  --shadow-brand-hover: 0 8px 30px rgba(107, 101, 96, 0.15);
+
+  /* Max Width */
+  --width-content: 1280px;
+
+  /* Spacing */
+  --spacing-section: 140px;
+  --spacing-section-sm: 80px;
+
+  /* Animations */
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-logo-scroll: logo-scroll 30s linear infinite;
+  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes logo-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-warm-white);
+    color: var(--color-warm-charcoal);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-terracotta) 20%, transparent);
+    color: var(--color-warm-charcoal);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  @media (max-width: 768px) {
+    .section-padding {
+      padding-top: var(--spacing-section-sm);
+      padding-bottom: var(--spacing-section-sm);
+    }
+  }
+
+  .content-width {
+    max-width: var(--width-content);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-width {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: all 0.7s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
