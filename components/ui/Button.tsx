@@ -15,11 +15,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-terracotta text-warm-charcoal hover:bg-terracotta-600 active:bg-terracotta-700",
+    "bg-terracotta text-white hover:bg-terracotta-600 active:bg-terracotta-700",
   secondary:
     "bg-olive text-white hover:bg-olive-600",
   outline:
-    "border-2 border-warm-charcoal text-warm-charcoal hover:bg-warm-charcoal hover:text-white",
+    "border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white",
   ghost:
     "text-warm-charcoal hover:bg-sand",
 };

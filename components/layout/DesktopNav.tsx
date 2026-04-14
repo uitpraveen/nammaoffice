@@ -57,14 +57,14 @@ export function DesktopNav({ light = false }: DesktopNavProps) {
                 "relative flex items-center gap-1.5 px-4 py-2.5",
                 "text-[13px] font-semibold uppercase tracking-[0.12em]",
                 "transition-colors duration-200",
-                // Gold underline
+                // Wine underline
                 "after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2px]",
                 "after:bg-terracotta after:transition-transform after:duration-300 after:origin-left",
                 isActive ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
                 // Text color
                 light
                   ? isActive
-                    ? "text-terracotta-300"
+                    ? "text-terracotta-200"
                     : "text-white/90 hover:text-white"
                   : isActive
                     ? "text-terracotta"

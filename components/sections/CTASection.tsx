@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/Button";
 
 export function CTASection() {
   return (
-    <section className="section-padding bg-gradient-to-br from-terracotta-700 via-terracotta to-olive-600 relative overflow-hidden">
+    <section className="section-padding bg-gradient-to-br from-[#2D2926] via-[#3D3833] to-[#2D2926] relative overflow-hidden">
       {/* Subtle texture */}
       <div
         className="absolute inset-0 opacity-5"

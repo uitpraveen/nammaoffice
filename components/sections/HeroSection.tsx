@@ -26,7 +26,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-warm-charcoal via-terracotta-800 to-olive-800">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2D2926] to-[#1a1a1a]">
       {/* Subtle overlay */}
       <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
 

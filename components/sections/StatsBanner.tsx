@@ -8,7 +8,7 @@ const bannerStats = stats.slice(0, 4);
 
 export function StatsBanner() {
   return (
-    <section className="bg-terracotta py-16 relative overflow-hidden">
+    <section className="bg-gradient-to-r from-[#2D2926] to-[#3D3833] py-16 relative overflow-hidden">
       {/* Subtle texture overlay */}
       <div
         className="absolute inset-0 opacity-5"

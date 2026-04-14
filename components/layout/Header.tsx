@@ -52,7 +52,7 @@ export function Header() {
               aria-label="NammaOffice home"
             >
               <span className="font-serif text-[28px] font-semibold tracking-[0.2em] text-white transition-colors duration-300">
-                NAMMA<span className="text-terracotta-300">OFFICE</span>
+                NAMMA<span className="text-terracotta">OFFICE</span>
               </span>
               <span className="text-[9px] font-sans font-medium tracking-[0.35em] uppercase text-white/40">
                 Premium Coworking

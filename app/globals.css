@@ -2,46 +2,46 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors - Terracotta (Warm Gold) */
-  --color-terracotta: #A16207;
-  --color-terracotta-50: #FEFCE8;
-  --color-terracotta-100: #FEF9C3;
-  --color-terracotta-200: #FEF08A;
-  --color-terracotta-300: #FDE047;
-  --color-terracotta-400: #FACC15;
-  --color-terracotta-500: #A16207;
-  --color-terracotta-600: #854D0E;
-  --color-terracotta-700: #713F12;
-  --color-terracotta-800: #422006;
-  --color-terracotta-900: #261502;
+  /* Colors - Terracotta (Deep Wine/Burgundy) */
+  --color-terracotta: #7C2D3E;
+  --color-terracotta-50: #FDF2F4;
+  --color-terracotta-100: #FCE7EB;
+  --color-terracotta-200: #F9CFD8;
+  --color-terracotta-300: #F4A7B8;
+  --color-terracotta-400: #EC7A93;
+  --color-terracotta-500: #7C2D3E;
+  --color-terracotta-600: #6B2535;
+  --color-terracotta-700: #5A1E2C;
+  --color-terracotta-800: #491823;
+  --color-terracotta-900: #38121A;
 
-  /* Colors - Olive (Dark Charcoal) */
-  --color-olive: #1C1917;
-  --color-olive-50: #FAFAF9;
-  --color-olive-100: #F5F5F4;
-  --color-olive-200: #E7E5E4;
-  --color-olive-300: #D6D3D1;
-  --color-olive-400: #A8A29E;
-  --color-olive-500: #1C1917;
-  --color-olive-600: #171412;
-  --color-olive-700: #0C0A09;
-  --color-olive-800: #080706;
-  --color-olive-900: #040303;
+  /* Colors - Olive (Warm Charcoal) */
+  --color-olive: #2D2926;
+  --color-olive-50: #F7F6F5;
+  --color-olive-100: #EEEDEB;
+  --color-olive-200: #DDDBD8;
+  --color-olive-300: #C4C0BC;
+  --color-olive-400: #8A8580;
+  --color-olive-500: #2D2926;
+  --color-olive-600: #252220;
+  --color-olive-700: #1D1B19;
+  --color-olive-800: #151412;
+  --color-olive-900: #0D0C0B;
 
   /* Colors - Sand */
-  --color-sand: #F5F5F4;
-  --color-sand-50: #FAFAF9;
-  --color-sand-100: #F5F5F4;
-  --color-sand-200: #E7E5E4;
-  --color-sand-300: #D6D3D1;
-  --color-sand-400: #A8A29E;
-  --color-sand-500: #78716C;
+  --color-sand: #F0EBE1;
+  --color-sand-50: #F9F6F1;
+  --color-sand-100: #F5F0E8;
+  --color-sand-200: #F0EBE1;
+  --color-sand-300: #E3DBCE;
+  --color-sand-400: #CFC5B4;
+  --color-sand-500: #B5A996;
 
   /* Colors - Warm */
-  --color-warm-white: #FAFAF9;
-  --color-warm-gray: #57534E;
-  --color-warm-charcoal: #1C1917;
-  --color-warm-border: #D6D3D1;
+  --color-warm-white: #F9F6F1;
+  --color-warm-gray: #6B6057;
+  --color-warm-charcoal: #1A1A1A;
+  --color-warm-border: #DDD6CC;
 
   /* Fonts */
   --font-serif: "Cormorant", Georgia, serif;
