@@ -6,12 +6,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export function DesktopNav() {
+interface DesktopNavProps {
+  /** When true, render links in white (for transparent hero top-bar mode) */
+  light?: boolean;
+}
+
+export function DesktopNav({ light = false }: DesktopNavProps) {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   return (
-    <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+    <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
       {navigation.map((item) => {
         const isActive =
           pathname === item.href || pathname.startsWith(item.href + "/");
@@ -26,17 +31,31 @@ export function DesktopNav() {
             <Link
               href={item.href}
               className={cn(
-                "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-brand transition-colors duration-200",
+                // Base: uppercase, tracked, Montserrat sm/medium
+                "relative flex items-center gap-1 px-3 py-2",
+                "text-xs font-medium uppercase tracking-wider",
+                "transition-colors duration-200",
+                // Gold underline pseudo-element via after:
+                "after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5",
+                "after:bg-terracotta after:transition-transform after:duration-300 after:origin-left",
                 isActive
-                  ? "text-terracotta"
-                  : "text-warm-charcoal hover:text-terracotta"
+                  ? "after:scale-x-100"
+                  : "after:scale-x-0 hover:after:scale-x-100",
+                // Text color
+                light
+                  ? isActive
+                    ? "text-terracotta-300"
+                    : "text-white/90 hover:text-white"
+                  : isActive
+                    ? "text-terracotta"
+                    : "text-warm-charcoal hover:text-warm-charcoal"
               )}
             >
               {item.label}
               {item.children && (
                 <svg
                   className={cn(
-                    "w-3.5 h-3.5 transition-transform duration-200",
+                    "w-3 h-3 transition-transform duration-200",
                     openMenu === item.href ? "rotate-180" : ""
                   )}
                   viewBox="0 0 16 16"
@@ -53,16 +72,16 @@ export function DesktopNav() {
             </Link>
 
             {item.children && openMenu === item.href && (
-              <div className="absolute top-full left-0 mt-1 min-w-[180px] bg-white rounded-brand shadow-brand-hover border border-warm-border py-1 z-50">
+              <div className="absolute top-full left-0 mt-1 min-w-[200px] bg-white rounded-brand shadow-brand-hover border border-warm-border py-1.5 z-50">
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
                     href={child.href}
                     className={cn(
-                      "block px-4 py-2 text-sm transition-colors duration-150",
+                      "block px-4 py-2.5 text-xs uppercase tracking-wider font-medium transition-colors duration-150",
                       pathname === child.href
-                        ? "text-terracotta font-medium"
-                        : "text-warm-charcoal hover:text-terracotta hover:bg-sand"
+                        ? "text-terracotta"
+                        : "text-warm-charcoal hover:text-terracotta hover:bg-sand-100"
                     )}
                   >
                     {child.label}

@@ -2,50 +2,50 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors - Terracotta */
-  --color-terracotta: #C4683C;
-  --color-terracotta-50: #FBF3EE;
-  --color-terracotta-100: #F5E1D4;
-  --color-terracotta-200: #EBBEA1;
-  --color-terracotta-300: #E09A6E;
-  --color-terracotta-400: #D47C4D;
-  --color-terracotta-500: #C4683C;
-  --color-terracotta-600: #A35530;
-  --color-terracotta-700: #7D4125;
-  --color-terracotta-800: #572E1A;
-  --color-terracotta-900: #311A0E;
+  /* Colors - Terracotta (Warm Gold) */
+  --color-terracotta: #A16207;
+  --color-terracotta-50: #FEFCE8;
+  --color-terracotta-100: #FEF9C3;
+  --color-terracotta-200: #FEF08A;
+  --color-terracotta-300: #FDE047;
+  --color-terracotta-400: #FACC15;
+  --color-terracotta-500: #A16207;
+  --color-terracotta-600: #854D0E;
+  --color-terracotta-700: #713F12;
+  --color-terracotta-800: #422006;
+  --color-terracotta-900: #261502;
 
-  /* Colors - Olive */
-  --color-olive: #3D5A3E;
-  --color-olive-50: #F0F4F0;
-  --color-olive-100: #D9E4DA;
-  --color-olive-200: #B3C9B4;
-  --color-olive-300: #8DAE8F;
-  --color-olive-400: #678A69;
-  --color-olive-500: #3D5A3E;
-  --color-olive-600: #324A33;
-  --color-olive-700: #263827;
-  --color-olive-800: #1A271B;
-  --color-olive-900: #0E150F;
+  /* Colors - Olive (Dark Charcoal) */
+  --color-olive: #1C1917;
+  --color-olive-50: #FAFAF9;
+  --color-olive-100: #F5F5F4;
+  --color-olive-200: #E7E5E4;
+  --color-olive-300: #D6D3D1;
+  --color-olive-400: #A8A29E;
+  --color-olive-500: #1C1917;
+  --color-olive-600: #171412;
+  --color-olive-700: #0C0A09;
+  --color-olive-800: #080706;
+  --color-olive-900: #040303;
 
   /* Colors - Sand */
-  --color-sand: #F0EBE3;
-  --color-sand-50: #FAF8F5;
-  --color-sand-100: #F5F1EB;
-  --color-sand-200: #F0EBE3;
-  --color-sand-300: #E5DFD6;
-  --color-sand-400: #D4CCBF;
-  --color-sand-500: #BFB5A5;
+  --color-sand: #F5F5F4;
+  --color-sand-50: #FAFAF9;
+  --color-sand-100: #F5F5F4;
+  --color-sand-200: #E7E5E4;
+  --color-sand-300: #D6D3D1;
+  --color-sand-400: #A8A29E;
+  --color-sand-500: #78716C;
 
   /* Colors - Warm */
-  --color-warm-white: #FAF7F2;
-  --color-warm-gray: #6B6560;
-  --color-warm-charcoal: #2C2C2C;
-  --color-warm-border: #E5DFD6;
+  --color-warm-white: #FAFAF9;
+  --color-warm-gray: #57534E;
+  --color-warm-charcoal: #1C1917;
+  --color-warm-border: #D6D3D1;
 
   /* Fonts */
-  --font-serif: "DM Serif Display", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Cormorant", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
 
   /* Border Radius */
   --radius-brand: 14px;

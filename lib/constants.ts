@@ -15,11 +15,10 @@ export const BRAND = {
 } as const;
 
 export const COLORS = {
-  terracotta: "#C4683C",
-  olive: "#3D5A3E",
-  warmWhite: "#FAF7F2",
-  charcoal: "#2C2C2C",
-  warmGray: "#6B6560",
-  sand: "#F0EBE3",
-  border: "#E5DFD6",
+  gold: "#A16207",
+  charcoal: "#1C1917",
+  warmWhite: "#FAFAF9",
+  warmGray: "#57534E",
+  sand: "#F5F5F4",
+  border: "#D6D3D1",
 } as const;
