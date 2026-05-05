@@ -1,0 +1,21 @@
+[      74ms] [INFO] DDC is about to load 1/2 scripts with pool size = 1000 @ http://localhost:3000/ddc_module_loader.js:1014
+[     341ms] [INFO] DDC is about to load 2212/2212 scripts with pool size = 1000 @ http://localhost:3000/ddc_module_loader.js:1014
+[    2021ms] [LOG] Starting application from main method in: org-dartlang-app:/web_entrypoint.dart. @ http://localhost:3000/ddc_module_loader.js:1585
+[    2510ms] [LOG] Got object store box in database upload_queue. @ http://localhost:3000/dart_sdk.js:26312
+[    2512ms] [LOG] ✅ Upload queue storage initialized (0 items) @ http://localhost:3000/dart_sdk.js:26312
+[    2514ms] [LOG] Got object store box in database session_metadata. @ http://localhost:3000/dart_sdk.js:26312
+[    2514ms] [LOG] ✅ Session metadata storage initialized (0 sessions) @ http://localhost:3000/dart_sdk.js:26312
+[    2516ms] [LOG] Got object store box in database voice_note_data. @ http://localhost:3000/dart_sdk.js:26312
+[    2516ms] [LOG] ✅ Voice note data storage initialized (0 sessions) @ http://localhost:3000/dart_sdk.js:26312
+[    2517ms] [LOG] Got object store box in database session_durations. @ http://localhost:3000/dart_sdk.js:26312
+[    2518ms] [LOG] ✅ Session duration storage initialized @ http://localhost:3000/dart_sdk.js:26312
+[    2560ms] [LOG] WebApp route info: uri=/ path=/ fragment= normalizedFromLocation=/ normalizedFromUri=/ @ http://localhost:3000/dart_sdk.js:26312
+[    2633ms] [LOG] WebApp route info: uri=/ path=/ fragment= normalizedFromLocation=/ normalizedFromUri=/ @ http://localhost:3000/dart_sdk.js:26312
+[    2634ms] [LOG] WebApp route context: path=/, chatType=thout, meetingId=null, spaceId=null, override=false @ http://localhost:3000/dart_sdk.js:26312
+[    2691ms] [LOG] WebApp route info: uri=/ path=/ fragment= normalizedFromLocation=/ normalizedFromUri=/ @ http://localhost:3000/dart_sdk.js:26312
+[    2703ms] [LOG] WebApp route info: uri=/ path=/ fragment= normalizedFromLocation=/ normalizedFromUri=/ @ http://localhost:3000/dart_sdk.js:26312
+[    2703ms] [LOG] WebApp route context: path=/, chatType=thout, meetingId=null, spaceId=null, override=false @ http://localhost:3000/dart_sdk.js:26312
+[    2813ms] [LOG] WebApp route info: uri=/auth path=/auth fragment= normalizedFromLocation=/auth normalizedFromUri=/auth @ http://localhost:3000/dart_sdk.js:26312
+[    2815ms] [LOG] [AppAnalytics] Logged: auth_landing_screen_viewed @ http://localhost:3000/dart_sdk.js:26312
+[    2821ms] [LOG] WebApp route info: uri=/auth path=/auth fragment= normalizedFromLocation=/auth normalizedFromUri=/auth @ http://localhost:3000/dart_sdk.js:26312
+[    2821ms] [LOG] WebApp route context: path=/auth, chatType=thout, meetingId=null, spaceId=null, override=false @ http://localhost:3000/dart_sdk.js:26312

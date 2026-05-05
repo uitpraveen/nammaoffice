@@ -3,44 +3,57 @@
 
 @theme {
   /* ------------------------------------------------------------------
-     Corporate Luxe · Trust Navy + Warm Gold
-     Single source of truth for the strict-parity revamp.
-     Old token names (terracotta / sand / olive / warm-* / accent /
-     secondary) keep resolving so any not-yet-restyled page still
-     renders — they now point at the navy/gold equivalents.
+     Premium Creative · Deep Purple + Champagne Gold (v2)
+     Replaces the navy palette. Variable names stayed `--color-navy-*`
+     so already-styled views pick up the repaint without code edits;
+     `--color-purple-*` aliases are exposed for new code that wants
+     to be explicit about the palette.
      ------------------------------------------------------------------ */
 
-  /* Navy — the brand primary. Used for headers (on scroll), footer,
-     dark CTAs, and headlines on light surfaces. */
-  --color-navy: #0B2545;
-  --color-navy-50: #EAEEF4;
-  --color-navy-100: #C8D2E0;
-  --color-navy-200: #95A5BD;
-  --color-navy-300: #5F7898;
-  --color-navy-400: #38567C;
-  --color-navy-500: #1B365D;
-  --color-navy-600: #0B2545;
-  --color-navy-700: #081C36;
-  --color-navy-800: #061427;
-  --color-navy-900: #030B17;
-  --color-navy-deep: #08182E;
-  --color-navy-soft: #1B365D;
+  /* Primary — deep aubergine purple. Used for headers (on scroll),
+     footer, dark CTAs, and headlines on light surfaces. */
+  --color-navy: #2A1A4A;
+  --color-navy-50: #F1ECF7;
+  --color-navy-100: #DCD0EB;
+  --color-navy-200: #BAA7D6;
+  --color-navy-300: #9580BC;
+  --color-navy-400: #6B5497;
+  --color-navy-500: #4A3270;
+  --color-navy-600: #2A1A4A;
+  --color-navy-700: #1F1239;
+  --color-navy-800: #150B27;
+  --color-navy-900: #0B0617;
+  --color-navy-deep: #1A0F33;
+  --color-navy-soft: #4A3270;
 
-  /* Gold — the brand accent. Used for primary CTAs, link hovers,
-     active indicators, and the top-bar accent. Restrained — never
-     used for body text or large surfaces. */
-  --color-gold: #C8A24A;
-  --color-gold-50: #FAF3E0;
-  --color-gold-100: #F2E2B0;
-  --color-gold-200: #E8CD7C;
-  --color-gold-300: #DCB85B;
-  --color-gold-400: #D2AB52;
-  --color-gold-500: #C8A24A;
-  --color-gold-600: #A88533;
-  --color-gold-700: #806326;
-  --color-gold-800: #58441A;
-  --color-gold-900: #2E230D;
-  --color-gold-deep: #A88533;
+  /* Explicit purple aliases for new code that wants to be clear. */
+  --color-purple: var(--color-navy);
+  --color-purple-50: var(--color-navy-50);
+  --color-purple-100: var(--color-navy-100);
+  --color-purple-200: var(--color-navy-200);
+  --color-purple-300: var(--color-navy-300);
+  --color-purple-400: var(--color-navy-400);
+  --color-purple-500: var(--color-navy-500);
+  --color-purple-600: var(--color-navy-600);
+  --color-purple-700: var(--color-navy-700);
+  --color-purple-800: var(--color-navy-800);
+  --color-purple-900: var(--color-navy-900);
+  --color-purple-deep: var(--color-navy-deep);
+
+  /* Champagne Gold — the brand accent. Brighter than the previous
+     gold to lift the page out of "dull" territory. */
+  --color-gold: #E8B547;
+  --color-gold-50: #FDF5E0;
+  --color-gold-100: #FAE7B0;
+  --color-gold-200: #F4D27D;
+  --color-gold-300: #EFC25C;
+  --color-gold-400: #ECBB52;
+  --color-gold-500: #E8B547;
+  --color-gold-600: #C99935;
+  --color-gold-700: #9C7325;
+  --color-gold-800: #6A4D17;
+  --color-gold-900: #3A2A0D;
+  --color-gold-deep: #C99935;
 
   /* Surfaces */
   --color-bg: #FAF7F0;
@@ -49,14 +62,15 @@
   --color-border: #E5E1D6;
   --color-border-strong: #D6CFBE;
 
-  /* Ink (text) */
-  --color-ink: #0F172A;
-  --color-ink-secondary: #475569;
-  --color-ink-muted: #94A3B8;
+  /* Ink (text) — deep purple-tinted neutrals so body type harmonises
+     with the primary, instead of going icy-blue. */
+  --color-ink: #1A1330;
+  --color-ink-secondary: #4F4664;
+  --color-ink-muted: #8B83A0;
 
-  /* Charcoal / dark surfaces — repurposed to navy-deep for the new palette. */
-  --color-charcoal: #08182E;
-  --color-charcoal-soft: #0B2545;
+  /* Charcoal / dark surfaces — repurposed to purple-deep for the new palette. */
+  --color-charcoal: #1A0F33;
+  --color-charcoal-soft: #2A1A4A;
 
   /* ----- Active brand semantic aliases ----- */
   /* "accent" used to be cyan; it is now gold — primary CTA colour. */
@@ -136,10 +150,10 @@
   --radius-pill: 999px;
 
   /* ----- Shadows ----- */
-  --shadow-brand: 0 1px 2px rgba(11, 37, 69, 0.05), 0 4px 16px rgba(11, 37, 69, 0.06);
-  --shadow-brand-hover: 0 8px 24px rgba(11, 37, 69, 0.10), 0 2px 4px rgba(11, 37, 69, 0.04);
-  --shadow-cta: 0 4px 16px rgba(200, 162, 74, 0.30);
-  --shadow-cta-hover: 0 6px 22px rgba(200, 162, 74, 0.40);
+  --shadow-brand: 0 1px 2px rgba(42, 26, 74, 0.05), 0 4px 16px rgba(42, 26, 74, 0.07);
+  --shadow-brand-hover: 0 8px 24px rgba(42, 26, 74, 0.12), 0 2px 4px rgba(42, 26, 74, 0.05);
+  --shadow-cta: 0 4px 16px rgba(232, 181, 71, 0.32);
+  --shadow-cta-hover: 0 6px 22px rgba(232, 181, 71, 0.42);
 
   /* ----- Layout ----- */
   --width-content: 1200px;
@@ -230,8 +244,8 @@
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
-    color: var(--color-navy);
+    background-color: color-mix(in srgb, var(--color-gold) 35%, transparent);
+    color: var(--color-purple);
   }
 
   :focus-visible {

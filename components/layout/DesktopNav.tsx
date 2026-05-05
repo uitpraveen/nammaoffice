@@ -125,7 +125,7 @@ export function DesktopNav({ theme = "dark" }: DesktopNavProps) {
                   layout.width
                 )}
               >
-                <div className="mt-1 bg-white rounded-2xl shadow-[0_24px_48px_-12px_rgba(11,37,69,0.25),0_0_0_1px_rgba(11,37,69,0.06)] overflow-hidden">
+                <div className="mt-1 bg-white rounded-2xl shadow-[0_24px_48px_-12px_rgba(42,26,74,0.28),0_0_0_1px_rgba(42,26,74,0.08)] overflow-hidden">
                   <div className={cn("p-2", layout.grid)}>
                     {item.children.map((child) => {
                       const Icon: LucideIcon =

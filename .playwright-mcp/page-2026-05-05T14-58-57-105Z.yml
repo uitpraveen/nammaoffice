@@ -1,0 +1,264 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - img [ref=e7]
+          - text: 4.9 / 5 from 200+ reviews
+        - generic [ref=e10]:
+          - img [ref=e11]
+          - text: 8 centres · 3 cities
+        - generic [ref=e15]:
+          - img [ref=e16]
+          - text: 500+ active members
+      - 'link "Call us : 90921 09213" [ref=e21] [cursor=pointer]':
+        - /url: tel:+919092109213
+        - generic [ref=e22]: 📞
+        - generic [ref=e23]: "Call us :"
+        - text: 90921 09213
+    - generic [ref=e25]:
+      - link "NammaOffice — home" [ref=e26] [cursor=pointer]:
+        - /url: /
+        - img "NammaOffice" [ref=e27]
+      - navigation "Main navigation" [ref=e28]:
+        - link "Locations" [ref=e30] [cursor=pointer]:
+          - /url: /locations
+          - text: Locations
+          - img [ref=e31]
+        - link "Amenities" [ref=e34] [cursor=pointer]:
+          - /url: /amenities
+        - link "Forms" [ref=e36] [cursor=pointer]:
+          - /url: /forms
+        - link "Franchise" [ref=e38] [cursor=pointer]:
+          - /url: /franchise
+        - link "Gate Pass" [ref=e40] [cursor=pointer]:
+          - /url: /gate-pass
+        - link "About" [ref=e43] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=e45] [cursor=pointer]:
+          - /url: /contact
+      - link "Book Now" [ref=e47] [cursor=pointer]:
+        - /url: /bookings
+        - text: Book Now
+        - generic [ref=e48]: →
+  - main [ref=e50]:
+    - generic [ref=e52]:
+      - paragraph [ref=e54]: Service Desk
+      - heading "Gate Pass" [level=1] [ref=e55]
+      - paragraph [ref=e56]: Request a visitor pass for the Salem or Tirupur TIDEL parks.
+    - generic [ref=e59]:
+      - paragraph [ref=e60]: TIDEL parks require a visitor pass for entry. Submit the form below and our centre team will arrange a pass and notify the host company. Allow at least 30 minutes during peak hours.
+      - generic [ref=e62]:
+        - textbox [ref=e63]
+        - group "What do you need?*" [ref=e64]:
+          - generic [ref=e65]: What do you need?*
+          - generic [ref=e66]:
+            - generic [ref=e67] [cursor=pointer]:
+              - radio "Meeting hall booking Book a boardroom or meeting hall at one of our centres." [ref=e68]
+              - generic [ref=e69]:
+                - generic [ref=e70]: Meeting hall booking
+                - generic [ref=e71]: Book a boardroom or meeting hall at one of our centres.
+            - generic [ref=e72] [cursor=pointer]:
+              - radio "Gate pass request Request a visitor pass for a TIDEL park entry." [checked] [ref=e73]
+              - generic [ref=e74]:
+                - generic [ref=e75]: Gate pass request
+                - generic [ref=e76]: Request a visitor pass for a TIDEL park entry.
+        - generic [ref=e77]:
+          - generic [ref=e78]:
+            - generic [ref=e79]: Company Name
+            - textbox "Company Name" [ref=e80]
+          - generic [ref=e81]:
+            - generic [ref=e82]: Venue
+            - combobox "Venue" [ref=e83] [cursor=pointer]:
+              - option "Select a centre" [disabled] [selected]
+              - option "Fairlands — Salem"
+              - option "Ramakrishna Road — Salem"
+              - option "Rajeshwari Towers — Salem"
+              - option "New Bus Stand — Salem"
+              - option "TIDEL NEO — Salem"
+              - option "Fort Hosur — Salem"
+              - option "Asha Grand — Trichy"
+              - option "TIDEL NEO — Tirupur"
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]: Booking Person Name
+            - textbox "Booking Person Name" [ref=e87]
+          - generic [ref=e88]:
+            - generic [ref=e89]: Booking Person Contact
+            - textbox "Booking Person Contact" [ref=e90]:
+              - /placeholder: +91 9000000000
+        - generic [ref=e91]:
+          - generic [ref=e92]: Booking Person Email
+          - textbox "Booking Person Email" [ref=e93]
+        - generic [ref=e94]:
+          - generic [ref=e95]: Company to Visit
+          - textbox "Company to Visit" [ref=e96]:
+            - /placeholder: The tenant inside TIDEL park
+        - generic [ref=e97]:
+          - generic [ref=e98]: Purpose of meeting
+          - textbox "Purpose of meeting" [ref=e99]
+        - generic [ref=e100]:
+          - generic [ref=e101]:
+            - generic [ref=e102]: No of Participants
+            - spinbutton "No of Participants" [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e105]: Booking Date-Time
+            - textbox "Booking Date-Time" [ref=e106]
+        - generic [ref=e107]:
+          - generic [ref=e108]: List of Guest Names
+          - textbox "List of Guest Names" [ref=e109]:
+            - /placeholder: One name per line
+        - generic [ref=e110]:
+          - generic [ref=e111]: Meeting Duration
+          - combobox "Meeting Duration" [ref=e112] [cursor=pointer]:
+            - option "Select duration" [disabled] [selected]
+            - option "30 minutes"
+            - option "1 hour"
+            - option "2 hours"
+            - option "Half day (4 hrs)"
+            - option "Full day (8 hrs)"
+        - generic [ref=e114]:
+          - checkbox "I agree to the terms & conditions" [ref=e115] [cursor=pointer]
+          - generic [ref=e116] [cursor=pointer]: I agree to the terms & conditions
+        - button "Request gate pass" [ref=e117]
+  - contentinfo [ref=e118]:
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - paragraph [ref=e122]: Get in touch
+        - heading "Ready to claim your space?" [level=2] [ref=e123]
+        - paragraph [ref=e124]: Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
+      - generic [ref=e125]:
+        - link "Book Now" [ref=e126] [cursor=pointer]:
+          - /url: /bookings
+          - text: Book Now
+          - generic [ref=e127]: →
+        - link "+91 9092109213" [ref=e128] [cursor=pointer]:
+          - /url: tel:+919092109213
+          - img [ref=e129]
+          - text: +91 9092109213
+    - generic [ref=e131]:
+      - generic [ref=e132]:
+        - link "NammaOffice home" [ref=e133] [cursor=pointer]:
+          - /url: /
+          - img "NammaOffice" [ref=e134]
+        - paragraph [ref=e135]: Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur.
+        - generic [ref=e136]:
+          - link "+91 9092109213" [ref=e137] [cursor=pointer]:
+            - /url: tel:+919092109213
+            - img [ref=e138]
+            - text: +91 9092109213
+          - link "info@nammaoffice.com" [ref=e140] [cursor=pointer]:
+            - /url: mailto:info@nammaoffice.com
+            - img [ref=e141]
+            - text: info@nammaoffice.com
+        - generic [ref=e144]:
+          - link "Instagram" [ref=e145] [cursor=pointer]:
+            - /url: https://instagram.com/nammaoffice
+            - img [ref=e146]
+          - link "LinkedIn" [ref=e148] [cursor=pointer]:
+            - /url: https://linkedin.com/company/nammaoffice
+            - img [ref=e149]
+          - link "Facebook" [ref=e151] [cursor=pointer]:
+            - /url: https://facebook.com/nammaoffice
+            - img [ref=e152]
+          - link "YouTube" [ref=e154] [cursor=pointer]:
+            - /url: https://youtube.com/@nammaoffice
+            - img [ref=e155]
+      - generic [ref=e157]:
+        - heading "Locations" [level=3] [ref=e158]
+        - list [ref=e159]:
+          - listitem [ref=e160]:
+            - link "Fairlands Salem" [ref=e161] [cursor=pointer]:
+              - /url: /locations/salem/fairlands
+              - text: Fairlands
+              - generic [ref=e162]: Salem
+          - listitem [ref=e163]:
+            - link "Ramakrishna Road Salem" [ref=e164] [cursor=pointer]:
+              - /url: /locations/salem/ramakrishna-road
+              - text: Ramakrishna Road
+              - generic [ref=e165]: Salem
+          - listitem [ref=e166]:
+            - link "Rajeshwari Towers Salem" [ref=e167] [cursor=pointer]:
+              - /url: /locations/salem/rajeshwari-towers
+              - text: Rajeshwari Towers
+              - generic [ref=e168]: Salem
+          - listitem [ref=e169]:
+            - link "New Bus Stand Salem" [ref=e170] [cursor=pointer]:
+              - /url: /locations/salem/new-bus-stand
+              - text: New Bus Stand
+              - generic [ref=e171]: Salem
+          - listitem [ref=e172]:
+            - link "TIDEL NEO Salem" [ref=e173] [cursor=pointer]:
+              - /url: /locations/salem/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e174]: Salem
+          - listitem [ref=e175]:
+            - link "Fort Hosur Salem" [ref=e176] [cursor=pointer]:
+              - /url: /locations/salem/fort-hosur
+              - text: Fort Hosur
+              - generic [ref=e177]: Salem
+          - listitem [ref=e178]:
+            - link "Asha Grand Trichy" [ref=e179] [cursor=pointer]:
+              - /url: /locations/trichy/asha-grand
+              - text: Asha Grand
+              - generic [ref=e180]: Trichy
+          - listitem [ref=e181]:
+            - link "TIDEL NEO Tirupur" [ref=e182] [cursor=pointer]:
+              - /url: /locations/tirupur/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e183]: Tirupur
+      - generic [ref=e184]:
+        - heading "Forms" [level=3] [ref=e185]
+        - list [ref=e186]:
+          - listitem [ref=e187]:
+            - link "Company Registration" [ref=e188] [cursor=pointer]:
+              - /url: /registration/company
+          - listitem [ref=e189]:
+            - link "User Registration" [ref=e190] [cursor=pointer]:
+              - /url: /registration/user
+          - listitem [ref=e191]:
+            - link "Vendor Form" [ref=e192] [cursor=pointer]:
+              - /url: /registration/vendor
+          - listitem [ref=e193]:
+            - link "Bookings" [ref=e194] [cursor=pointer]:
+              - /url: /bookings
+      - generic [ref=e195]:
+        - heading "Service & Legal" [level=3] [ref=e196]
+        - list [ref=e197]:
+          - listitem [ref=e198]:
+            - link "Gate Pass — Salem TIDEL" [ref=e199] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-salem
+          - listitem [ref=e200]:
+            - link "Gate Pass — Tirupur TIDEL" [ref=e201] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-tirupur
+          - listitem [ref=e202]:
+            - link "Franchise" [ref=e203] [cursor=pointer]:
+              - /url: /franchise
+          - listitem [ref=e204]:
+            - link "Amenities" [ref=e205] [cursor=pointer]:
+              - /url: /amenities
+          - listitem [ref=e206]:
+            - link "About" [ref=e207] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e208]:
+            - link "Contact" [ref=e209] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e210]:
+            - link "Privacy Policy" [ref=e211] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=e212]:
+            - link "Terms & Conditions" [ref=e213] [cursor=pointer]:
+              - /url: /terms-conditions
+          - listitem [ref=e214]:
+            - link "Refund Policy" [ref=e215] [cursor=pointer]:
+              - /url: /refund-policy
+    - generic [ref=e217]:
+      - paragraph [ref=e218]: © 2026 NammaOffice. All rights reserved.
+      - paragraph [ref=e219]:
+        - img [ref=e220]
+        - text: 8 centres · Salem · Trichy · Tirupur
+  - link "Chat with us on WhatsApp" [ref=e223] [cursor=pointer]:
+    - /url: https://wa.me/919092109213?text=Hi%2C%20I'm%20interested%20in%20NammaOffice%20workspaces
+    - img [ref=e224]
+  - button "Open Next.js Dev Tools" [ref=e231] [cursor=pointer]:
+    - img [ref=e232]

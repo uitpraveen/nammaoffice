@@ -14,7 +14,15 @@
       "Bash(npm install *)",
       "Bash(npx tsc *)",
       "Bash(npx eslint *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(npm run *)",
+      "Bash(echo \"started, pid=$!\")",
+      "Read(//tmp/**)",
+      "Bash(kill 6878)",
+      "Bash(PORT=3030 npm run dev)",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }
