@@ -3,30 +3,32 @@
 
 @theme {
   /* ------------------------------------------------------------------
-     Premium Creative · Deep Purple + Champagne Gold (v2)
-     Replaces the navy palette. Variable names stayed `--color-navy-*`
-     so already-styled views pick up the repaint without code edits;
-     `--color-purple-*` aliases are exposed for new code that wants
-     to be explicit about the palette.
+     Classic Premium · Charcoal Black + Champagne Gold (v2.2)
+     Neutral charcoal replaces the purple primary — reads as "high-end
+     watchmaker" rather than tinted. Variable names stay `--color-navy-*`
+     and `--color-purple-*` so already-styled views repaint without code
+     edits; `--color-ink-black-*` aliases are exposed for new code that
+     wants to be explicit about the new palette.
      ------------------------------------------------------------------ */
 
-  /* Primary — deep aubergine purple. Used for headers (on scroll),
-     footer, dark CTAs, and headlines on light surfaces. */
-  --color-navy: #2A1A4A;
-  --color-navy-50: #F1ECF7;
-  --color-navy-100: #DCD0EB;
-  --color-navy-200: #BAA7D6;
-  --color-navy-300: #9580BC;
-  --color-navy-400: #6B5497;
-  --color-navy-500: #4A3270;
-  --color-navy-600: #2A1A4A;
-  --color-navy-700: #1F1239;
-  --color-navy-800: #150B27;
-  --color-navy-900: #0B0617;
-  --color-navy-deep: #1A0F33;
-  --color-navy-soft: #4A3270;
+  /* Primary — near-black charcoal. Used for headers (on scroll), footer,
+     dark CTAs, and headlines on light surfaces. */
+  --color-navy: #0E0E10;
+  --color-navy-50: #F4F4F5;
+  --color-navy-100: #E4E4E7;
+  --color-navy-200: #C7C7CC;
+  --color-navy-300: #9A9AA0;
+  --color-navy-400: #6E6E76;
+  --color-navy-500: #404045;
+  --color-navy-600: #1F1F22;
+  --color-navy-700: #18181B;
+  --color-navy-800: #111114;
+  --color-navy-900: #0A0A0B;
+  --color-navy-deep: #050507;
+  --color-navy-soft: #1A1A1D;
 
-  /* Explicit purple aliases for new code that wants to be clear. */
+  /* Aliases — kept so any old `--color-purple-*` reference still
+     resolves to the new charcoal value. */
   --color-purple: var(--color-navy);
   --color-purple-50: var(--color-navy-50);
   --color-purple-100: var(--color-navy-100);
@@ -62,15 +64,14 @@
   --color-border: #E5E1D6;
   --color-border-strong: #D6CFBE;
 
-  /* Ink (text) — deep purple-tinted neutrals so body type harmonises
-     with the primary, instead of going icy-blue. */
-  --color-ink: #1A1330;
-  --color-ink-secondary: #4F4664;
-  --color-ink-muted: #8B83A0;
+  /* Ink (text) — neutral grayscale, no tint, harmonises with charcoal. */
+  --color-ink: #18181B;
+  --color-ink-secondary: #52525B;
+  --color-ink-muted: #A1A1AA;
 
-  /* Charcoal / dark surfaces — repurposed to purple-deep for the new palette. */
-  --color-charcoal: #1A0F33;
-  --color-charcoal-soft: #2A1A4A;
+  /* Charcoal / dark surfaces — pure charcoal scale. */
+  --color-charcoal: #050507;
+  --color-charcoal-soft: #0E0E10;
 
   /* ----- Active brand semantic aliases ----- */
   /* "accent" used to be cyan; it is now gold — primary CTA colour. */
@@ -150,8 +151,8 @@
   --radius-pill: 999px;
 
   /* ----- Shadows ----- */
-  --shadow-brand: 0 1px 2px rgba(42, 26, 74, 0.05), 0 4px 16px rgba(42, 26, 74, 0.07);
-  --shadow-brand-hover: 0 8px 24px rgba(42, 26, 74, 0.12), 0 2px 4px rgba(42, 26, 74, 0.05);
+  --shadow-brand: 0 1px 2px rgba(14, 14, 16, 0.05), 0 4px 16px rgba(14, 14, 16, 0.08);
+  --shadow-brand-hover: 0 8px 24px rgba(14, 14, 16, 0.14), 0 2px 4px rgba(14, 14, 16, 0.06);
   --shadow-cta: 0 4px 16px rgba(232, 181, 71, 0.32);
   --shadow-cta-hover: 0 6px 22px rgba(232, 181, 71, 0.42);
 

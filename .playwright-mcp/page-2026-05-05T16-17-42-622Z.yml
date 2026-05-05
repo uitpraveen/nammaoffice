@@ -1,0 +1,475 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - img [ref=e7]
+          - text: 4.9 / 5 from 200+ reviews
+        - generic [ref=e10]:
+          - img [ref=e11]
+          - text: 8 centres · 3 cities
+        - generic [ref=e15]:
+          - img [ref=e16]
+          - text: 500+ active members
+      - 'link "Call us : 90921 09213" [ref=e21] [cursor=pointer]':
+        - /url: tel:+919092109213
+        - generic [ref=e22]: 📞
+        - generic [ref=e23]: "Call us :"
+        - text: 90921 09213
+    - generic [ref=e25]:
+      - link "NammaOffice — home" [ref=e26] [cursor=pointer]:
+        - /url: /
+        - img "NammaOffice" [ref=e27]
+      - navigation "Main navigation" [ref=e28]:
+        - link "Locations" [ref=e30] [cursor=pointer]:
+          - /url: /locations
+          - text: Locations
+          - img [ref=e31]
+        - link "Amenities" [ref=e34] [cursor=pointer]:
+          - /url: /amenities
+        - link "Forms" [ref=e36] [cursor=pointer]:
+          - /url: /forms
+        - link "Franchise" [ref=e38] [cursor=pointer]:
+          - /url: /franchise
+        - link "Gate Pass" [ref=e40] [cursor=pointer]:
+          - /url: /gate-pass
+        - link "About" [ref=e42] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=e44] [cursor=pointer]:
+          - /url: /contact
+      - link "Book Now" [ref=e46] [cursor=pointer]:
+        - /url: /bookings
+        - text: Book Now
+        - generic [ref=e47]: →
+  - main [ref=e49]:
+    - generic [ref=e50]:
+      - paragraph [ref=e51]: Palette Demo
+      - heading "Pick a palette." [level=1] [ref=e52]
+      - paragraph [ref=e53]: "Each block below shows the same three pieces of the site rendered in a different palette: the “Find your space” CTA strip, a mid-page card, and a footer-style block. Tell me which letter you prefer (or describe a tweak — e.g. “C but darker burgundy”)."
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - paragraph [ref=e57]: Option A
+          - heading "Charcoal + Champagne Gold" [level=2] [ref=e58]
+          - paragraph [ref=e59]: Classic premium. Neutral dark — never reads 'weird color'.
+          - paragraph [ref=e60]: High-end watchmakers · Apple · Hermès packaging
+        - generic [ref=e61]:
+          - generic [ref=e64]: "dark #0E0E10"
+          - generic [ref=e67]: "accent #E8B547"
+          - generic [ref=e70]: "surface #FAF7F0"
+      - generic [ref=e72]:
+        - paragraph [ref=e73]: Ready when you are
+        - heading "Find your space. Start working tomorrow." [level=3] [ref=e74]:
+          - text: Find your space.
+          - text: Start working tomorrow.
+        - paragraph [ref=e75]: Book a tour at any centre. Walk through the spaces, meet the team, and pick the seat that fits.
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - text: Book a free tour
+            - img [ref=e78]
+          - generic [ref=e80]:
+            - img [ref=e81]
+            - text: WhatsApp us
+      - generic [ref=e83]:
+        - paragraph [ref=e84]: On a cream surface
+        - heading "The same headline on a light section." [level=3] [ref=e85]
+        - paragraph [ref=e86]: Body copy in this palette. The accent shows up as a small pill below — used for primary CTAs and active states.
+        - generic [ref=e87]:
+          - text: Primary CTA
+          - img [ref=e88]
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - paragraph [ref=e93]: NAMMA OFFICE
+            - paragraph [ref=e94]: Premium coworking spaces across Salem, Trichy, and Tirupur.
+            - generic [ref=e95]:
+              - paragraph [ref=e96]:
+                - img [ref=e97]
+                - text: +91 9092109213
+              - paragraph [ref=e99]:
+                - img [ref=e100]
+                - text: info@nammaoffice.com
+          - generic [ref=e103]:
+            - heading "Locations" [level=4] [ref=e104]
+            - list [ref=e105]:
+              - listitem [ref=e106]: Fairlands
+              - listitem [ref=e107]: Ramakrishna Road
+              - listitem [ref=e108]: Rajeshwari Towers
+              - listitem [ref=e109]: TIDEL Salem
+          - generic [ref=e110]:
+            - heading "Forms" [level=4] [ref=e111]
+            - list [ref=e112]:
+              - listitem [ref=e113]: Company Registration
+              - listitem [ref=e114]: User Registration
+              - listitem [ref=e115]: Vendor Onboarding
+              - listitem [ref=e116]: Bookings
+          - generic [ref=e117]:
+            - heading "Service & Legal" [level=4] [ref=e118]
+            - list [ref=e119]:
+              - listitem [ref=e120]: Gate Pass — Salem
+              - listitem [ref=e121]: Gate Pass — Tirupur
+              - listitem [ref=e122]: Franchise
+              - listitem [ref=e123]: Contact
+        - generic [ref=e124]:
+          - paragraph [ref=e125]: © 2026 NammaOffice. All rights reserved.
+          - paragraph [ref=e126]:
+            - img [ref=e127]
+            - text: 8 centres · Salem · Trichy · Tirupur
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - paragraph [ref=e133]: Option B
+          - heading "Deep Emerald + Champagne Gold" [level=2] [ref=e134]
+          - paragraph [ref=e135]: Distinctive organic luxury. Rare in coworking — strong differentiator.
+          - paragraph [ref=e136]: Bottega Veneta · Loro Piana · premium hospitality
+        - generic [ref=e137]:
+          - generic [ref=e140]: "dark #0F3D2E"
+          - generic [ref=e143]: "accent #E8B547"
+          - generic [ref=e146]: "surface #F8F5EC"
+      - generic [ref=e148]:
+        - paragraph [ref=e149]: Ready when you are
+        - heading "Find your space. Start working tomorrow." [level=3] [ref=e150]:
+          - text: Find your space.
+          - text: Start working tomorrow.
+        - paragraph [ref=e151]: Book a tour at any centre. Walk through the spaces, meet the team, and pick the seat that fits.
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - text: Book a free tour
+            - img [ref=e154]
+          - generic [ref=e156]:
+            - img [ref=e157]
+            - text: WhatsApp us
+      - generic [ref=e159]:
+        - paragraph [ref=e160]: On a cream surface
+        - heading "The same headline on a light section." [level=3] [ref=e161]
+        - paragraph [ref=e162]: Body copy in this palette. The accent shows up as a small pill below — used for primary CTAs and active states.
+        - generic [ref=e163]:
+          - text: Primary CTA
+          - img [ref=e164]
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - generic [ref=e168]:
+            - paragraph [ref=e169]: NAMMA OFFICE
+            - paragraph [ref=e170]: Premium coworking spaces across Salem, Trichy, and Tirupur.
+            - generic [ref=e171]:
+              - paragraph [ref=e172]:
+                - img [ref=e173]
+                - text: +91 9092109213
+              - paragraph [ref=e175]:
+                - img [ref=e176]
+                - text: info@nammaoffice.com
+          - generic [ref=e179]:
+            - heading "Locations" [level=4] [ref=e180]
+            - list [ref=e181]:
+              - listitem [ref=e182]: Fairlands
+              - listitem [ref=e183]: Ramakrishna Road
+              - listitem [ref=e184]: Rajeshwari Towers
+              - listitem [ref=e185]: TIDEL Salem
+          - generic [ref=e186]:
+            - heading "Forms" [level=4] [ref=e187]
+            - list [ref=e188]:
+              - listitem [ref=e189]: Company Registration
+              - listitem [ref=e190]: User Registration
+              - listitem [ref=e191]: Vendor Onboarding
+              - listitem [ref=e192]: Bookings
+          - generic [ref=e193]:
+            - heading "Service & Legal" [level=4] [ref=e194]
+            - list [ref=e195]:
+              - listitem [ref=e196]: Gate Pass — Salem
+              - listitem [ref=e197]: Gate Pass — Tirupur
+              - listitem [ref=e198]: Franchise
+              - listitem [ref=e199]: Contact
+        - generic [ref=e200]:
+          - paragraph [ref=e201]: © 2026 NammaOffice. All rights reserved.
+          - paragraph [ref=e202]:
+            - img [ref=e203]
+            - text: 8 centres · Salem · Trichy · Tirupur
+    - generic [ref=e206]:
+      - generic [ref=e207]:
+        - generic [ref=e208]:
+          - paragraph [ref=e209]: Option C
+          - heading "Burgundy + True Gold" [level=2] [ref=e210]
+          - paragraph [ref=e211]: Warm, classic, Indian-luxury. Resonates with festival / wedding palette.
+          - paragraph [ref=e212]: ITC hotels · Taj · premium Indian wedding palette
+        - generic [ref=e213]:
+          - generic [ref=e216]: "dark #5C0F2E"
+          - generic [ref=e219]: "accent #D4AF37"
+          - generic [ref=e222]: "surface #FAF5EC"
+      - generic [ref=e224]:
+        - paragraph [ref=e225]: Ready when you are
+        - heading "Find your space. Start working tomorrow." [level=3] [ref=e226]:
+          - text: Find your space.
+          - text: Start working tomorrow.
+        - paragraph [ref=e227]: Book a tour at any centre. Walk through the spaces, meet the team, and pick the seat that fits.
+        - generic [ref=e228]:
+          - generic [ref=e229]:
+            - text: Book a free tour
+            - img [ref=e230]
+          - generic [ref=e232]:
+            - img [ref=e233]
+            - text: WhatsApp us
+      - generic [ref=e235]:
+        - paragraph [ref=e236]: On a cream surface
+        - heading "The same headline on a light section." [level=3] [ref=e237]
+        - paragraph [ref=e238]: Body copy in this palette. The accent shows up as a small pill below — used for primary CTAs and active states.
+        - generic [ref=e239]:
+          - text: Primary CTA
+          - img [ref=e240]
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - paragraph [ref=e245]: NAMMA OFFICE
+            - paragraph [ref=e246]: Premium coworking spaces across Salem, Trichy, and Tirupur.
+            - generic [ref=e247]:
+              - paragraph [ref=e248]:
+                - img [ref=e249]
+                - text: +91 9092109213
+              - paragraph [ref=e251]:
+                - img [ref=e252]
+                - text: info@nammaoffice.com
+          - generic [ref=e255]:
+            - heading "Locations" [level=4] [ref=e256]
+            - list [ref=e257]:
+              - listitem [ref=e258]: Fairlands
+              - listitem [ref=e259]: Ramakrishna Road
+              - listitem [ref=e260]: Rajeshwari Towers
+              - listitem [ref=e261]: TIDEL Salem
+          - generic [ref=e262]:
+            - heading "Forms" [level=4] [ref=e263]
+            - list [ref=e264]:
+              - listitem [ref=e265]: Company Registration
+              - listitem [ref=e266]: User Registration
+              - listitem [ref=e267]: Vendor Onboarding
+              - listitem [ref=e268]: Bookings
+          - generic [ref=e269]:
+            - heading "Service & Legal" [level=4] [ref=e270]
+            - list [ref=e271]:
+              - listitem [ref=e272]: Gate Pass — Salem
+              - listitem [ref=e273]: Gate Pass — Tirupur
+              - listitem [ref=e274]: Franchise
+              - listitem [ref=e275]: Contact
+        - generic [ref=e276]:
+          - paragraph [ref=e277]: © 2026 NammaOffice. All rights reserved.
+          - paragraph [ref=e278]:
+            - img [ref=e279]
+            - text: 8 centres · Salem · Trichy · Tirupur
+    - generic [ref=e282]:
+      - generic [ref=e283]:
+        - generic [ref=e284]:
+          - paragraph [ref=e285]: Option D
+          - heading "Soft Light — no dark sections" [level=2] [ref=e286]
+          - paragraph [ref=e287]: Eliminate the dark bands entirely. Cream-on-cream with strong type.
+          - paragraph [ref=e288]: Stripe · Linear · Vercel — current SaaS standard
+        - generic [ref=e289]:
+          - generic [ref=e292]: "dark #FAF7F0"
+          - generic [ref=e295]: "accent #E8B547"
+          - generic [ref=e298]: "surface #FFFFFF"
+      - generic [ref=e300]:
+        - paragraph [ref=e301]: Ready when you are
+        - heading "Find your space. Start working tomorrow." [level=3] [ref=e302]:
+          - text: Find your space.
+          - text: Start working tomorrow.
+        - paragraph [ref=e303]: Book a tour at any centre. Walk through the spaces, meet the team, and pick the seat that fits.
+        - generic [ref=e304]:
+          - generic [ref=e305]:
+            - text: Book a free tour
+            - img [ref=e306]
+          - generic [ref=e308]:
+            - img [ref=e309]
+            - text: WhatsApp us
+      - generic [ref=e311]:
+        - paragraph [ref=e312]: On a cream surface
+        - heading "The same headline on a light section." [level=3] [ref=e313]
+        - paragraph [ref=e314]: Body copy in this palette. The accent shows up as a small pill below — used for primary CTAs and active states.
+        - generic [ref=e315]:
+          - text: Primary CTA
+          - img [ref=e316]
+      - generic [ref=e318]:
+        - generic [ref=e319]:
+          - generic [ref=e320]:
+            - paragraph [ref=e321]: NAMMA OFFICE
+            - paragraph [ref=e322]: Premium coworking spaces across Salem, Trichy, and Tirupur.
+            - generic [ref=e323]:
+              - paragraph [ref=e324]:
+                - img [ref=e325]
+                - text: +91 9092109213
+              - paragraph [ref=e327]:
+                - img [ref=e328]
+                - text: info@nammaoffice.com
+          - generic [ref=e331]:
+            - heading "Locations" [level=4] [ref=e332]
+            - list [ref=e333]:
+              - listitem [ref=e334]: Fairlands
+              - listitem [ref=e335]: Ramakrishna Road
+              - listitem [ref=e336]: Rajeshwari Towers
+              - listitem [ref=e337]: TIDEL Salem
+          - generic [ref=e338]:
+            - heading "Forms" [level=4] [ref=e339]
+            - list [ref=e340]:
+              - listitem [ref=e341]: Company Registration
+              - listitem [ref=e342]: User Registration
+              - listitem [ref=e343]: Vendor Onboarding
+              - listitem [ref=e344]: Bookings
+          - generic [ref=e345]:
+            - heading "Service & Legal" [level=4] [ref=e346]
+            - list [ref=e347]:
+              - listitem [ref=e348]: Gate Pass — Salem
+              - listitem [ref=e349]: Gate Pass — Tirupur
+              - listitem [ref=e350]: Franchise
+              - listitem [ref=e351]: Contact
+        - generic [ref=e352]:
+          - paragraph [ref=e353]: © 2026 NammaOffice. All rights reserved.
+          - paragraph [ref=e354]:
+            - img [ref=e355]
+            - text: 8 centres · Salem · Trichy · Tirupur
+    - paragraph [ref=e359]:
+      - text: Tell me
+      - strong [ref=e360]: A
+      - text: ","
+      - strong [ref=e361]: B
+      - text: ","
+      - strong [ref=e362]: C
+      - text: ", or"
+      - strong [ref=e363]: D
+      - text: — or describe a different direction.
+  - contentinfo [ref=e364]:
+    - generic [ref=e366]:
+      - generic [ref=e367]:
+        - paragraph [ref=e368]: Get in touch
+        - heading "Ready to claim your space?" [level=2] [ref=e369]
+        - paragraph [ref=e370]: Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
+      - generic [ref=e371]:
+        - link "Book Now" [ref=e372] [cursor=pointer]:
+          - /url: /bookings
+          - text: Book Now
+          - generic [ref=e373]: →
+        - link "+91 9092109213" [ref=e374] [cursor=pointer]:
+          - /url: tel:+919092109213
+          - img [ref=e375]
+          - text: +91 9092109213
+    - generic [ref=e377]:
+      - generic [ref=e378]:
+        - link "NammaOffice home" [ref=e379] [cursor=pointer]:
+          - /url: /
+          - img "NammaOffice" [ref=e380]
+        - paragraph [ref=e381]: Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur.
+        - generic [ref=e382]:
+          - link "+91 9092109213" [ref=e383] [cursor=pointer]:
+            - /url: tel:+919092109213
+            - img [ref=e384]
+            - text: +91 9092109213
+          - link "info@nammaoffice.com" [ref=e386] [cursor=pointer]:
+            - /url: mailto:info@nammaoffice.com
+            - img [ref=e387]
+            - text: info@nammaoffice.com
+        - generic [ref=e390]:
+          - link "Instagram" [ref=e391] [cursor=pointer]:
+            - /url: https://instagram.com/nammaoffice
+            - img [ref=e392]
+          - link "LinkedIn" [ref=e394] [cursor=pointer]:
+            - /url: https://linkedin.com/company/nammaoffice
+            - img [ref=e395]
+          - link "Facebook" [ref=e397] [cursor=pointer]:
+            - /url: https://facebook.com/nammaoffice
+            - img [ref=e398]
+          - link "YouTube" [ref=e400] [cursor=pointer]:
+            - /url: https://youtube.com/@nammaoffice
+            - img [ref=e401]
+      - generic [ref=e403]:
+        - heading "Locations" [level=3] [ref=e404]
+        - list [ref=e405]:
+          - listitem [ref=e406]:
+            - link "Fairlands Salem" [ref=e407] [cursor=pointer]:
+              - /url: /locations/salem/fairlands
+              - text: Fairlands
+              - generic [ref=e408]: Salem
+          - listitem [ref=e409]:
+            - link "Ramakrishna Road Salem" [ref=e410] [cursor=pointer]:
+              - /url: /locations/salem/ramakrishna-road
+              - text: Ramakrishna Road
+              - generic [ref=e411]: Salem
+          - listitem [ref=e412]:
+            - link "Rajeshwari Towers Salem" [ref=e413] [cursor=pointer]:
+              - /url: /locations/salem/rajeshwari-towers
+              - text: Rajeshwari Towers
+              - generic [ref=e414]: Salem
+          - listitem [ref=e415]:
+            - link "New Bus Stand Salem" [ref=e416] [cursor=pointer]:
+              - /url: /locations/salem/new-bus-stand
+              - text: New Bus Stand
+              - generic [ref=e417]: Salem
+          - listitem [ref=e418]:
+            - link "TIDEL NEO Salem" [ref=e419] [cursor=pointer]:
+              - /url: /locations/salem/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e420]: Salem
+          - listitem [ref=e421]:
+            - link "Fort Hosur Salem" [ref=e422] [cursor=pointer]:
+              - /url: /locations/salem/fort-hosur
+              - text: Fort Hosur
+              - generic [ref=e423]: Salem
+          - listitem [ref=e424]:
+            - link "Asha Grand Trichy" [ref=e425] [cursor=pointer]:
+              - /url: /locations/trichy/asha-grand
+              - text: Asha Grand
+              - generic [ref=e426]: Trichy
+          - listitem [ref=e427]:
+            - link "TIDEL NEO Tirupur" [ref=e428] [cursor=pointer]:
+              - /url: /locations/tirupur/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e429]: Tirupur
+      - generic [ref=e430]:
+        - heading "Forms" [level=3] [ref=e431]
+        - list [ref=e432]:
+          - listitem [ref=e433]:
+            - link "Company Registration" [ref=e434] [cursor=pointer]:
+              - /url: /registration/company
+          - listitem [ref=e435]:
+            - link "User Registration" [ref=e436] [cursor=pointer]:
+              - /url: /registration/user
+          - listitem [ref=e437]:
+            - link "Vendor Form" [ref=e438] [cursor=pointer]:
+              - /url: /registration/vendor
+          - listitem [ref=e439]:
+            - link "Bookings" [ref=e440] [cursor=pointer]:
+              - /url: /bookings
+      - generic [ref=e441]:
+        - heading "Service & Legal" [level=3] [ref=e442]
+        - list [ref=e443]:
+          - listitem [ref=e444]:
+            - link "Gate Pass — Salem TIDEL" [ref=e445] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-salem
+          - listitem [ref=e446]:
+            - link "Gate Pass — Tirupur TIDEL" [ref=e447] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-tirupur
+          - listitem [ref=e448]:
+            - link "Franchise" [ref=e449] [cursor=pointer]:
+              - /url: /franchise
+          - listitem [ref=e450]:
+            - link "Amenities" [ref=e451] [cursor=pointer]:
+              - /url: /amenities
+          - listitem [ref=e452]:
+            - link "About" [ref=e453] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e454]:
+            - link "Contact" [ref=e455] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e456]:
+            - link "Privacy Policy" [ref=e457] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=e458]:
+            - link "Terms & Conditions" [ref=e459] [cursor=pointer]:
+              - /url: /terms-conditions
+          - listitem [ref=e460]:
+            - link "Refund Policy" [ref=e461] [cursor=pointer]:
+              - /url: /refund-policy
+    - generic [ref=e463]:
+      - paragraph [ref=e464]: © 2026 NammaOffice. All rights reserved.
+      - paragraph [ref=e465]:
+        - img [ref=e466]
+        - text: 8 centres · Salem · Trichy · Tirupur
+  - link "Chat with us on WhatsApp" [ref=e469] [cursor=pointer]:
+    - /url: https://wa.me/919092109213?text=Hi%2C%20I'm%20interested%20in%20NammaOffice%20workspaces
+    - img [ref=e470]
+  - button "Open Next.js Dev Tools" [ref=e477] [cursor=pointer]:
+    - img [ref=e478]
