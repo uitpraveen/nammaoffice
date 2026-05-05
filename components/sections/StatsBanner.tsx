@@ -3,34 +3,32 @@
 import { Counter } from "@/components/ui/Counter";
 import { stats } from "@/lib/data/stats";
 
-// Show only 4 key stats on the banner
 const bannerStats = stats.slice(0, 4);
 
 export function StatsBanner() {
   return (
-    <section className="bg-gradient-to-r from-[#2D2926] to-[#3D3833] py-16 relative overflow-hidden">
-      {/* Subtle texture overlay */}
+    <section className="bg-gradient-accent relative overflow-hidden">
+      {/* Soft static highlight */}
       <div
-        className="absolute inset-0 opacity-5"
-        aria-hidden="true"
+        aria-hidden
+        className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-          backgroundSize: "32px 32px",
+          background:
+            "radial-gradient(circle at 20% 0%, rgba(255,255,255,0.18), transparent 50%), radial-gradient(circle at 90% 100%, rgba(0,0,0,0.18), transparent 50%)",
         }}
       />
 
-      <div className="content-width relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {bannerStats.map((stat) => (
+      <div className="content-width relative z-10 py-16 md:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/15">
+          {bannerStats.map((stat, idx) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center text-center gap-2"
+              className={`flex flex-col gap-2 ${idx % 2 === 0 ? "pr-6 lg:pr-8" : "pl-6 lg:pl-8"} ${idx >= 2 ? "pt-8 lg:pt-0" : "pb-8 lg:pb-0"} lg:px-8`}
             >
-              <div className="font-serif text-4xl sm:text-5xl text-white">
+              <div className="text-white text-[44px] md:text-[56px] font-bold tracking-[-0.03em] leading-none">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="font-sans text-sm text-white/80 leading-snug max-w-[120px]">
+              <p className="text-white/80 text-[13px] md:text-[14px] leading-snug max-w-[160px]">
                 {stat.label}
               </p>
             </div>

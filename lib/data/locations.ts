@@ -1,4 +1,5 @@
 import type { City, CitySlug, Location } from "@/lib/types";
+import { wix } from "@/lib/data/wix-pool";
 
 export const cities: City[] = [
   {
@@ -9,7 +10,7 @@ export const cities: City[] = [
       "Salem is one of Tamil Nadu's fastest-growing tier-2 cities, home to a thriving MSME ecosystem, textile industry, and a rapidly expanding IT corridor. NammaOffice has 5 centres strategically located across Salem's key business districts.",
     seoContent:
       "Looking for coworking space in Salem? NammaOffice offers premium coworking spaces, private cabins, meeting halls, and managed offices at 5 locations across Salem — Brindavan Road, Ramakrishna Road, New Bus Stand, TIDEL NEO, and Fort Hosur. Flexible daily, monthly, and annual plans available.",
-    image: "/images/cities/salem.jpg",
+    image: wix.ramakrishna,
     centreCount: 5,
     seoTitle: "Coworking Space in Salem | NammaOffice — 5 Centres",
     seoDescription:
@@ -23,7 +24,7 @@ export const cities: City[] = [
       "Tiruchirappalli (Trichy) is a major educational and industrial hub in Tamil Nadu. With strong connectivity, a growing startup ecosystem, and proximity to top engineering colleges, Trichy offers immense opportunity for coworking and managed office solutions.",
     seoContent:
       "Looking for coworking space in Trichy? NammaOffice Asha Grand is Trichy's premium coworking destination, offering private cabins, open desks, meeting halls, and managed offices in the heart of the city. Flexible plans for individuals and teams.",
-    image: "/images/cities/trichy.jpg",
+    image: wix.g,
     centreCount: 1,
     seoTitle: "Coworking Space in Trichy | NammaOffice — Asha Grand",
     seoDescription:
@@ -37,7 +38,7 @@ export const cities: City[] = [
       "Tirupur is globally recognised as India's knitwear and textile export capital. With a booming export economy and growing number of MSMEs, Tirupur entrepreneurs need world-class workspaces to match their global ambitions.",
     seoContent:
       "Looking for coworking space in Tirupur? NammaOffice TIDEL NEO is Tirupur's premium coworking destination, offering private cabins, open desks, meeting halls, and managed offices. Ideal for textile exporters, MSMEs, and growing businesses.",
-    image: "/images/cities/tirupur.jpg",
+    image: wix.newbus,
     centreCount: 1,
     seoTitle: "Coworking Space in Tirupur | NammaOffice — TIDEL NEO",
     seoDescription:
@@ -78,11 +79,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "business-lounge",
     ],
-    images: [
-      "/images/locations/brindavan-road-1.jpg",
-      "/images/locations/brindavan-road-2.jpg",
-      "/images/locations/brindavan-road-3.jpg",
-    ],
+    images: [wix.b, wix.e, wix.h],
     nearbyLandmarks: [
       "Salem Junction Railway Station (2 km)",
       "Salem Bus Stand (3 km)",
@@ -125,10 +122,7 @@ export const locations: Location[] = [
       "breakout-zone",
     ],
     workspaceTypes: ["private-cabin", "open-desk", "cubicle", "meeting-hall"],
-    images: [
-      "/images/locations/ramakrishna-road-1.jpg",
-      "/images/locations/ramakrishna-road-2.jpg",
-    ],
+    images: [wix.ramakrishna, wix.c, wix.k],
     nearbyLandmarks: [
       "Ramakrishna Hospital (0.8 km)",
       "Salem New Bus Stand (2 km)",
@@ -174,10 +168,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "managed-office",
     ],
-    images: [
-      "/images/locations/new-bus-stand-1.jpg",
-      "/images/locations/new-bus-stand-2.jpg",
-    ],
+    images: [wix.newbus, wix.n, wix.o],
     nearbyLandmarks: [
       "Salem New Bus Stand (200m)",
       "Salem Railway Station (3 km)",
@@ -225,11 +216,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      "/images/locations/tidel-neo-salem-1.jpg",
-      "/images/locations/tidel-neo-salem-2.jpg",
-      "/images/locations/tidel-neo-salem-3.jpg",
-    ],
+    images: [wix.newbus, wix.e, wix.f],
     nearbyLandmarks: [
       "TIDEL NEO Technology Park",
       "Salem Airport (10 km)",
@@ -268,10 +255,7 @@ export const locations: Location[] = [
       "ergonomic-furniture",
     ],
     workspaceTypes: ["open-desk"],
-    images: [
-      "/images/locations/fort-hosur-1.jpg",
-      "/images/locations/fort-hosur-2.jpg",
-    ],
+    images: [wix.a, wix.l, wix.m],
     nearbyLandmarks: [
       "Salem Fort (0.5 km)",
       "Salem Court Complex (1 km)",
@@ -320,11 +304,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      "/images/locations/asha-grand-trichy-1.jpg",
-      "/images/locations/asha-grand-trichy-2.jpg",
-      "/images/locations/asha-grand-trichy-3.jpg",
-    ],
+    images: [wix.g, wix.h, wix.b],
     nearbyLandmarks: [
       "Trichy Junction Railway Station (3 km)",
       "Rockfort Temple (4 km)",
@@ -342,7 +322,7 @@ export const locations: Location[] = [
       "NammaOffice Asha Grand Trichy — premium coworking in the heart of Tiruchirappalli. Private cabins, open desks, meeting halls, managed offices. Book today.",
   },
   {
-    slug: "tidel-neo",
+    slug: "tidel-neo-tirupur",
     name: "TIDEL NEO",
     city: "tirupur",
     address: "TIDEL NEO, Tirupur — 641 604",
@@ -375,9 +355,7 @@ export const locations: Location[] = [
       "managed-office",
     ],
     images: [
-      "/images/locations/tidel-neo-tirupur-1.jpg",
-      "/images/locations/tidel-neo-tirupur-2.jpg",
-      "/images/locations/tidel-neo-tirupur-3.jpg",
+      wix.newbus, wix.o, wix.e,
     ],
     nearbyLandmarks: [
       "Tirupur Railway Station (5 km)",

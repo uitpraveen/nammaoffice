@@ -1,4 +1,5 @@
 import type { Workspace, WorkspaceSlug } from "@/lib/types";
+import { wix } from "@/lib/data/wix-pool";
 
 export const workspaces: Workspace[] = [
   {
@@ -9,11 +10,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "Our Private Cabins are designed for entrepreneurs, small teams, and branch offices that need the focus and confidentiality of a traditional office without the overhead. Each cabin comes fully furnished with ergonomic furniture, dedicated internet, and branded glass-door entry. Enjoy the feel of your own office while sharing world-class amenities with a vibrant professional community.",
     icon: "/icons/workspace-cabin.svg",
-    images: [
-      "/images/workspaces/private-cabin-1.jpg",
-      "/images/workspaces/private-cabin-2.jpg",
-      "/images/workspaces/private-cabin-3.jpg",
-    ],
+    images: [wix.cabin, wix.e, wix.f],
     features: [
       "Fully enclosed glass-door cabin",
       "Dedicated gigabit internet line",
@@ -46,7 +43,7 @@ export const workspaces: Workspace[] = [
       "new-bus-stand",
       "tidel-neo",
       "asha-grand",
-      "tidel-neo",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Private Cabin Coworking Space | NammaOffice",
     seoDescription:
@@ -60,10 +57,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "The Open Desk is our most flexible workspace option. Walk in, pick your seat, and get straight to work. You get access to our high-speed Wi-Fi, ergonomic seating, printing facilities, and all common area amenities. Perfect for freelancers, remote employees, and digital nomads who want a professional environment without a fixed commitment.",
     icon: "/icons/workspace-open-desk.svg",
-    images: [
-      "/images/workspaces/open-desk-1.jpg",
-      "/images/workspaces/open-desk-2.jpg",
-    ],
+    images: [wix.b, wix.h, wix.i],
     features: [
       "Flexible daily, weekly, or monthly plans",
       "Access to shared high-speed internet",
@@ -94,7 +88,7 @@ export const workspaces: Workspace[] = [
       "tidel-neo",
       "fort-hosur",
       "asha-grand",
-      "tidel-neo",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Open Desk Coworking Space | NammaOffice",
     seoDescription:
@@ -108,10 +102,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "NammaOffice Cubicles offer the best of both worlds: the focus and semi-privacy of a partitioned workspace combined with the community and shared amenities of a coworking environment. Your dedicated desk is always yours — no hot-desking, no sharing. Store your belongings, personalise your space, and enjoy consistent access without a full cabin commitment.",
     icon: "/icons/workspace-cubicle.svg",
-    images: [
-      "/images/workspaces/cubicle-1.jpg",
-      "/images/workspaces/cubicle-2.jpg",
-    ],
+    images: [wix.c, wix.j, wix.k],
     features: [
       "Dedicated fixed desk — always yours",
       "Partitioned walls for focus",
@@ -140,8 +131,9 @@ export const workspaces: Workspace[] = [
       "brindavan-road",
       "ramakrishna-road",
       "new-bus-stand",
-      "asha-grand",
       "tidel-neo",
+      "asha-grand",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Dedicated Cubicle Workspace | NammaOffice",
     seoDescription:
@@ -155,11 +147,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "Impress clients and collaborate effectively in NammaOffice's fully equipped meeting halls. Available in sizes from intimate 6-person boardrooms to large 40-person conference halls, each space features HD projectors or LED screens, high-speed internet, whiteboard walls, and professional AV systems. Book by the hour, half-day, or full day.",
     icon: "/icons/workspace-meeting.svg",
-    images: [
-      "/images/workspaces/meeting-hall-1.jpg",
-      "/images/workspaces/meeting-hall-2.jpg",
-      "/images/workspaces/meeting-hall-3.jpg",
-    ],
+    images: [wix.discussion, wix.l, wix.m],
     features: [
       "HD projector / LED display",
       "Video conferencing setup",
@@ -189,7 +177,7 @@ export const workspaces: Workspace[] = [
       "new-bus-stand",
       "tidel-neo",
       "asha-grand",
-      "tidel-neo",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Meeting Hall & Conference Room Booking | NammaOffice",
     seoDescription:
@@ -203,10 +191,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "The NammaOffice Business Lounge is an exclusive, premium workspace designed for senior professionals, consultants, and frequent travellers who need a sophisticated environment on demand. Enjoy premium seating, barista-style coffee, a prestigious business address, and a curated community of high-calibre professionals. Available on day-pass or monthly membership.",
     icon: "/icons/workspace-lounge.svg",
-    images: [
-      "/images/workspaces/business-lounge-1.jpg",
-      "/images/workspaces/business-lounge-2.jpg",
-    ],
+    images: [wix.d, wix.h, wix.i],
     features: [
       "Premium ergonomic seating",
       "Complimentary barista coffee and snacks",
@@ -236,7 +221,7 @@ export const workspaces: Workspace[] = [
       "brindavan-road",
       "tidel-neo",
       "asha-grand",
-      "tidel-neo",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Business Lounge Membership | NammaOffice",
     seoDescription:
@@ -250,11 +235,7 @@ export const workspaces: Workspace[] = [
     fullDescription:
       "NammaOffice Managed Offices are purpose-built for growing companies that need a fully fitted, professionally managed workspace without the capital expenditure and hassle of a traditional lease. We handle everything — design, build, IT infrastructure, housekeeping, security, and facilities management — so your team can focus entirely on growth. Custom layouts, your branding, flexible lease terms.",
     icon: "/icons/workspace-managed.svg",
-    images: [
-      "/images/workspaces/managed-office-1.jpg",
-      "/images/workspaces/managed-office-2.jpg",
-      "/images/workspaces/managed-office-3.jpg",
-    ],
+    images: [wix.e, wix.f, wix.g],
     features: [
       "Custom branded interior design",
       "End-to-end IT infrastructure setup",
@@ -286,7 +267,7 @@ export const workspaces: Workspace[] = [
       "tidel-neo",
       "new-bus-stand",
       "asha-grand",
-      "tidel-neo",
+      "tidel-neo-tirupur",
     ],
     seoTitle: "Managed Office Space for Teams | NammaOffice",
     seoDescription:

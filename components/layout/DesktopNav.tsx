@@ -5,8 +5,48 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Armchair,
+  ArrowRight,
+  Building2,
+  ChevronDown,
+  DoorClosed,
+  FileSignature,
+  Handshake,
+  HelpCircle,
+  Images,
+  Mail,
+  MapPin,
+  PanelsTopLeft,
+  Plane,
+  Presentation,
+  Sofa,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 
-export function DesktopNav() {
+const ICON_MAP: Record<string, LucideIcon> = {
+  Armchair,
+  Building2,
+  DoorClosed,
+  FileSignature,
+  Handshake,
+  HelpCircle,
+  Images,
+  Mail,
+  MapPin,
+  PanelsTopLeft,
+  Plane,
+  Presentation,
+  Sofa,
+  Sparkles,
+};
+
+interface DesktopNavProps {
+  theme?: "light" | "dark";
+}
+
+export function DesktopNav({ theme = "dark" }: DesktopNavProps) {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -21,13 +61,19 @@ export function DesktopNav() {
   }, []);
 
   useEffect(() => {
-    return () => { if (closeTimer.current) clearTimeout(closeTimer.current); };
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
   }, []);
 
-  useEffect(() => { setOpenMenu(null); }, [pathname]);
+  useEffect(() => {
+    setOpenMenu(null);
+  }, [pathname]);
+
+  const isLight = theme === "light";
 
   return (
-    <nav className="hidden lg:flex items-center gap-0" aria-label="Main navigation">
+    <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
       {navigation.map((item) => {
         const isActive =
           pathname === item.href ||
@@ -44,85 +90,103 @@ export function DesktopNav() {
             <Link
               href={item.href}
               className={cn(
-                "flex items-center gap-1 px-4 py-6 text-[14px] font-semibold transition-colors duration-200",
-                isActive
-                  ? "text-terracotta"
-                  : "text-warm-charcoal/80 hover:text-terracotta"
+                "flex items-center gap-1 h-[68px] px-3 text-[13.5px] font-medium transition-colors",
+                isLight
+                  ? isActive
+                    ? "text-white"
+                    : "text-white/85 hover:text-white"
+                  : isActive
+                    ? "text-[var(--color-accent)]"
+                    : "text-[var(--color-ink-secondary)] hover:text-[var(--color-ink)]"
               )}
             >
               {item.label}
               {item.children && (
-                <svg
+                <ChevronDown
                   className={cn(
-                    "w-3.5 h-3.5 transition-transform duration-200 opacity-50",
+                    "w-3.5 h-3.5 transition-transform duration-200 opacity-70",
                     openMenu === item.href && "rotate-180 opacity-100"
                   )}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
+                  strokeWidth={2.25}
+                />
               )}
             </Link>
 
-            {/* Dropdown */}
+            {/* Active underline indicator */}
+            {isActive && (
+              <span
+                aria-hidden
+                className={cn(
+                  "absolute left-3 right-3 bottom-0 h-[2px]",
+                  isLight ? "bg-[var(--color-accent-300)]" : "bg-[var(--color-accent)]"
+                )}
+              />
+            )}
+
             {item.children && openMenu === item.href && (
-              <>
-                {/* Active indicator line */}
-                <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-terracotta" />
-
-                {/* Dropdown panel */}
-                <div
-                  className={cn(
-                    "absolute top-full left-1/2 -translate-x-1/2 pt-0 z-50",
-                    item.children.length > 3 ? "w-[580px]" : "w-[320px]"
-                  )}
-                >
-                  <div className="mt-0 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.1)] border border-warm-border/50 overflow-hidden">
-                    {/* Dropdown header */}
-                    <div className="px-5 py-3 bg-sand-50 border-b border-warm-border/40">
-                      <Link
-                        href={item.href}
-                        className="text-[12px] font-bold uppercase tracking-[0.15em] text-warm-gray hover:text-terracotta transition-colors inline-flex items-center gap-1.5"
-                      >
-                        All {item.label}
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                      </Link>
-                    </div>
-
-                    {/* Items */}
-                    <div className={cn(
-                      "p-3",
-                      item.children.length > 3 ? "grid grid-cols-2 gap-0" : "flex flex-col"
-                    )}>
-                      {item.children.map((child) => {
-                        const isChildActive = pathname === child.href || pathname.startsWith(child.href + "/");
-                        return (
-                          <Link
-                            key={child.href}
-                            href={child.href}
+              <div
+                className={cn(
+                  "absolute top-full left-1/2 -translate-x-1/2 z-50",
+                  item.children.length > 3 ? "w-[640px]" : "w-[340px]"
+                )}
+              >
+                <div className="mt-1 bg-white rounded-2xl shadow-[0_24px_48px_-12px_rgba(10,10,10,0.25),0_0_0_1px_rgba(10,10,10,0.04)] overflow-hidden">
+                  <div
+                    className={cn(
+                      "p-2",
+                      item.children.length > 3 ? "grid grid-cols-2 gap-1" : "flex flex-col gap-1"
+                    )}
+                  >
+                    {item.children.map((child) => {
+                      const Icon: LucideIcon =
+                        (child.icon ? ICON_MAP[child.icon] : undefined) ?? MapPin;
+                      const isChildActive =
+                        pathname === child.href || pathname.startsWith(child.href + "/");
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className={cn(
+                            "group flex items-start gap-3 px-3 py-2.5 rounded-xl transition-colors",
+                            isChildActive
+                              ? "bg-[var(--color-accent-50)]"
+                              : "hover:bg-[var(--color-surface-alt)]"
+                          )}
+                        >
+                          <span
                             className={cn(
-                              "group flex flex-col gap-0.5 px-4 py-3 rounded-lg transition-all duration-150",
-                              isChildActive ? "bg-terracotta/5" : "hover:bg-sand-50"
+                              "shrink-0 mt-0.5 inline-flex items-center justify-center w-9 h-9 rounded-lg transition-colors",
+                              isChildActive
+                                ? "bg-[var(--color-accent)] text-white"
+                                : "bg-[var(--color-surface-alt)] text-[var(--color-ink-secondary)] group-hover:bg-white group-hover:text-[var(--color-accent)]"
                             )}
                           >
-                            <span className={cn(
-                              "text-[14px] font-semibold transition-colors",
-                              isChildActive ? "text-terracotta" : "text-warm-charcoal group-hover:text-terracotta"
-                            )}>
+                            <Icon className="w-4 h-4" strokeWidth={1.75} />
+                          </span>
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-[14px] font-semibold leading-tight text-[var(--color-ink)]">
                               {child.label}
                             </span>
-                            <span className="text-[12px] leading-relaxed text-warm-gray/70 line-clamp-1">
+                            <span className="block text-[12.5px] text-[var(--color-ink-secondary)] mt-0.5 truncate">
                               {child.description}
                             </span>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  <div className="px-4 py-3 bg-[var(--color-surface-alt)] border-t border-[var(--color-border)]">
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors"
+                    >
+                      View all {item.label.toLowerCase()}
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.25} />
+                    </Link>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         );

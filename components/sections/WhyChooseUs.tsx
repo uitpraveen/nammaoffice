@@ -1,77 +1,86 @@
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import {
+  CalendarRange,
+  Clock,
+  MapPin,
+  Sparkles,
+  Users2,
+  Wifi,
+} from "lucide-react";
 
 interface Feature {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
 
 const features: Feature[] = [
   {
-    icon: "⚡",
-    title: "High-Speed Internet",
+    icon: <Wifi className="w-5 h-5" strokeWidth={1.75} />,
+    title: "Gigabit fibre internet",
     description:
-      "Dedicated gigabit fibre connections with redundant ISPs ensure zero downtime for your work.",
+      "Dedicated lines and redundant ISPs at every centre — no buffering, no excuses.",
   },
   {
-    icon: "🔓",
-    title: "24/7 Access",
+    icon: <Clock className="w-5 h-5" strokeWidth={1.75} />,
+    title: "24/7 biometric access",
     description:
-      "Work on your own schedule with round-the-clock biometric access to your workspace.",
+      "Walk in at any hour. Your hours, your schedule, your space.",
   },
   {
-    icon: "✨",
-    title: "Premium Interiors",
+    icon: <Sparkles className="w-5 h-5" strokeWidth={1.75} />,
+    title: "Considered interiors",
     description:
-      "Thoughtfully designed spaces with ergonomic furniture, natural lighting, and a productive ambience.",
+      "Ergonomic furniture, plants, natural light. Designed for long, focused days.",
   },
   {
-    icon: "📅",
-    title: "Flexible Plans",
+    icon: <CalendarRange className="w-5 h-5" strokeWidth={1.75} />,
+    title: "Plans that flex",
     description:
-      "Daily, weekly, monthly, and annual plans — scale up or down as your business needs evolve.",
+      "Day passes, monthly seats, annual cabins — scale up and down as you grow.",
   },
   {
-    icon: "🤝",
-    title: "Thriving Community",
+    icon: <Users2 className="w-5 h-5" strokeWidth={1.75} />,
+    title: "Real community",
     description:
-      "Connect, collaborate, and grow with a vibrant ecosystem of entrepreneurs, freelancers, and professionals.",
+      "Founders, freelancers, agencies — meet at the coffee bar, find your next client.",
   },
   {
-    icon: "📍",
-    title: "Strategic Locations",
+    icon: <MapPin className="w-5 h-5" strokeWidth={1.75} />,
+    title: "Strategic locations",
     description:
-      "Prime addresses across Salem, Trichy, and Tirupur — close to transport hubs and business districts.",
+      "Prime addresses near transport hubs and business districts in every city.",
   },
 ];
 
 export function WhyChooseUs() {
   return (
-    <section className="section-padding bg-sand">
+    <section className="section-padding bg-[var(--color-bg)]">
       <div className="content-width">
-        <SectionHeading
-          title="Why Choose NammaOffice"
-          subtitle="Everything you need to do your best work — in one place."
-          className="mb-12"
-        />
+        <div className="max-w-2xl mb-10 md:mb-14">
+          <p className="eyebrow">Why NammaOffice</p>
+          <h2 className="display-lg mt-3 text-[var(--color-ink)]">
+            The details add up.
+          </h2>
+          <p className="mt-4 text-[16px] text-[var(--color-ink-secondary)] leading-relaxed">
+            Six things we get right, every day, at every centre.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature) => (
-            <div key={feature.title} className="flex flex-col gap-4">
-              {/* Icon circle */}
-              <div className="w-12 h-12 rounded-full bg-terracotta/10 flex items-center justify-center shrink-0">
-                <span className="text-2xl" aria-hidden="true">
-                  {feature.icon}
-                </span>
+            <div
+              key={feature.title}
+              className="group bg-white border border-[var(--color-border)] rounded-2xl p-6 hover:border-[var(--color-border-strong)] hover:shadow-[0_4px_16px_rgba(10,10,10,0.04)] transition-all"
+            >
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[var(--color-accent-50)] text-[var(--color-accent)] group-hover:bg-gradient-accent group-hover:text-white transition-colors">
+                {feature.icon}
               </div>
-              <div className="flex flex-col gap-2">
-                <h3 className="font-serif text-lg text-warm-charcoal">
-                  {feature.title}
-                </h3>
-                <p className="font-sans text-sm text-warm-gray leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
+              <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">
+                {feature.title}
+              </h3>
+              <p className="mt-2 text-[14px] text-[var(--color-ink-secondary)] leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>

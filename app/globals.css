@@ -2,125 +2,236 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors - Terracotta (Deep Wine/Burgundy) */
-  --color-terracotta: #7C2D3E;
-  --color-terracotta-50: #FDF2F4;
-  --color-terracotta-100: #FCE7EB;
-  --color-terracotta-200: #F9CFD8;
-  --color-terracotta-300: #F4A7B8;
-  --color-terracotta-400: #EC7A93;
-  --color-terracotta-500: #7C2D3E;
-  --color-terracotta-600: #6B2535;
-  --color-terracotta-700: #5A1E2C;
-  --color-terracotta-800: #491823;
-  --color-terracotta-900: #38121A;
+  /* ------------------------------------------------------------------
+     Clean Modern · Ocean Teal
+     Single source of truth. Old token names (terracotta / sand / olive /
+     warm-*) are preserved so existing pages keep rendering, but they now
+     point at the new palette.
+     ------------------------------------------------------------------ */
 
-  /* Colors - Olive (Warm Charcoal) */
-  --color-olive: #2D2926;
-  --color-olive-50: #F7F6F5;
-  --color-olive-100: #EEEDEB;
-  --color-olive-200: #DDDBD8;
-  --color-olive-300: #C4C0BC;
-  --color-olive-400: #8A8580;
-  --color-olive-500: #2D2926;
-  --color-olive-600: #252220;
-  --color-olive-700: #1D1B19;
-  --color-olive-800: #151412;
-  --color-olive-900: #0D0C0B;
+  /* Accent — Sky Cyan (#1FB5E0). Pulled directly from the "OFFICE" word
+     in the live NammaOffice logo. Saffron secondary (#F4A933) lives below
+     and is what gives the site its dual-tone brand identity. */
+  --color-accent: #1FB5E0;
+  --color-accent-50: #E8F7FC;
+  --color-accent-100: #CFEFF8;
+  --color-accent-200: #A7E1F2;
+  --color-accent-300: #7DD3F0;
+  --color-accent-400: #4AC1E5;
+  --color-accent-500: #1FB5E0;
+  --color-accent-600: #1A9FC7;
+  --color-accent-700: #1685A8;
+  --color-accent-800: #0F6280;
+  --color-accent-900: #093F53;
 
-  /* Colors - Sand */
-  --color-sand: #F0EBE1;
-  --color-sand-50: #F9F6F1;
-  --color-sand-100: #F5F0E8;
-  --color-sand-200: #F0EBE1;
-  --color-sand-300: #E3DBCE;
-  --color-sand-400: #CFC5B4;
-  --color-sand-500: #B5A996;
+  /* Secondary — Saffron Yellow (the "NAMMA" colour). Used for highlights
+     where the cyan would compete (hero italic emphasis, eyebrows, hover
+     accents) — keeps the dual-colour brand identity legible across UI. */
+  --color-secondary: #F4A933;
+  --color-secondary-50: #FEF6E6;
+  --color-secondary-100: #FCEAC2;
+  --color-secondary-200: #F9D88A;
+  --color-secondary-300: #F8C45C;
+  --color-secondary-400: #F6B543;
+  --color-secondary-500: #F4A933;
+  --color-secondary-600: #D89320;
+  --color-secondary-700: #AC731A;
+  --color-secondary-800: #6E4A11;
+  --color-secondary-900: #3F2A09;
 
-  /* Colors - Warm */
-  --color-warm-white: #F9F6F1;
-  --color-warm-gray: #6B6057;
-  --color-warm-charcoal: #1A1A1A;
-  --color-warm-border: #DDD6CC;
+  /* Brand gradient — saffron → cyan, mirroring NAMMA → OFFICE in the logo */
+  --gradient-accent: linear-gradient(135deg, #F4A933 0%, #1FB5E0 100%);
+  --gradient-accent-soft: linear-gradient(135deg, rgba(244,169,51,0.14) 0%, rgba(31,181,224,0.14) 100%);
 
-  /* Fonts */
-  --font-serif: "Cormorant", Georgia, serif;
-  --font-sans: "Montserrat", system-ui, sans-serif;
+  /* Ink (text + foreground) — LIGHT MODE */
+  --color-ink: #0A0A0A;
+  --color-ink-secondary: #525252;
+  --color-ink-muted: #A3A3A3;
 
-  /* Border Radius */
-  --radius-brand: 14px;
+  /* Surfaces — saffron-tinted page background gives the site a warm,
+     "Indian premium" feel without using any saturated colour. */
+  --color-bg: #FEF6E6;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F9EDD3;
+  --color-border: #EFE2C9;
+  --color-border-strong: #DCC9A6;
 
-  /* Box Shadows */
-  --shadow-brand: 0 4px 20px rgba(107, 101, 96, 0.08);
-  --shadow-brand-hover: 0 8px 30px rgba(107, 101, 96, 0.15);
+  /* Charcoal — used for footer + dark CTAs only */
+  --color-charcoal: #0A0A0A;
+  --color-charcoal-soft: #1A1A1A;
 
-  /* Max Width */
-  --width-content: 1280px;
+  /* ----- Backwards-compatible aliases for un-touched pages ----- */
+  --color-terracotta: var(--color-accent);
+  --color-terracotta-50: var(--color-accent-50);
+  --color-terracotta-100: var(--color-accent-100);
+  --color-terracotta-200: var(--color-accent-200);
+  --color-terracotta-300: var(--color-accent-300);
+  --color-terracotta-400: var(--color-accent-400);
+  --color-terracotta-500: var(--color-accent-500);
+  --color-terracotta-600: var(--color-accent-600);
+  --color-terracotta-700: var(--color-accent-700);
+  --color-terracotta-800: var(--color-accent-800);
+  --color-terracotta-900: var(--color-accent-900);
 
-  /* Spacing */
-  --spacing-section: 140px;
-  --spacing-section-sm: 80px;
+  --color-olive: var(--color-ink);
+  --color-olive-50: var(--color-bg);
+  --color-olive-100: var(--color-surface-alt);
+  --color-olive-200: var(--color-border);
+  --color-olive-300: var(--color-border-strong);
+  --color-olive-400: var(--color-ink-muted);
+  --color-olive-500: var(--color-ink);
+  --color-olive-600: var(--color-charcoal-soft);
+  --color-olive-700: var(--color-charcoal);
+  --color-olive-800: var(--color-charcoal);
+  --color-olive-900: var(--color-charcoal);
 
-  /* Animations */
+  --color-sand: var(--color-surface-alt);
+  --color-sand-50: var(--color-bg);
+  --color-sand-100: var(--color-surface-alt);
+  --color-sand-200: var(--color-surface-alt);
+  --color-sand-300: var(--color-border);
+  --color-sand-400: var(--color-border-strong);
+  --color-sand-500: var(--color-ink-muted);
+
+  --color-warm-white: var(--color-bg);
+  --color-warm-gray: var(--color-ink-secondary);
+  --color-warm-charcoal: var(--color-ink);
+  --color-warm-border: var(--color-border);
+
+  /* ----- Typography ----- */
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-inter), system-ui, sans-serif; /* alias — same family, just heavier weights for headings */
+
+  /* ----- Radius ----- */
+  --radius-brand: 12px;
+  --radius-pill: 999px;
+
+  /* ----- Shadows ----- */
+  --shadow-brand: 0 1px 2px rgba(10, 10, 10, 0.04), 0 4px 16px rgba(10, 10, 10, 0.04);
+  --shadow-brand-hover: 0 8px 24px rgba(10, 10, 10, 0.08), 0 2px 4px rgba(10, 10, 10, 0.04);
+
+  /* ----- Layout ----- */
+  --width-content: 1200px;
+  --spacing-section: 96px;
+  --spacing-section-sm: 64px;
+
+  /* ----- Animations ----- */
   --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
   --animate-logo-scroll: logo-scroll 30s linear infinite;
   --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
 
   @keyframes fade-in-up {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes logo-scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   @keyframes pulse-slow {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
   }
+
+  @keyframes hero-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* --- Marquee (infinite scroll showcase) --- */
+  @keyframes marquee-left  { 0% { transform: translate3d(0, 0, 0); }     100% { transform: translate3d(-50%, 0, 0); } }
+  @keyframes marquee-right { 0% { transform: translate3d(-50%, 0, 0); }  100% { transform: translate3d(0, 0, 0); } }
+}
+
+@layer utilities {
+  .hero-progress {
+    animation-name: hero-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    width: 100%;
+  }
+
+  .hero-content-anim {
+    animation: hero-content-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-marquee-left  { animation: marquee-left linear infinite; }
+  .animate-marquee-right { animation: marquee-right linear infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee-left,
+    .animate-marquee-right { animation: none; }
+  }
+
+  @keyframes hero-content-in {
+    0% { opacity: 0; transform: translateY(14px); filter: blur(2px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  /* --- Gradient utilities --- */
+  .text-gradient {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .bg-gradient-accent-soft {
+    background-image: var(--gradient-accent-soft);
+  }
+  .border-gradient-accent {
+    border-image: var(--gradient-accent) 1;
+  }
+
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Anchor offset — matches responsive header height (88px mobile, 100px desktop) */
+    scroll-padding-top: 88px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 768px) {
+    html { scroll-padding-top: 100px; }
   }
 
   body {
-    background-color: var(--color-warm-white);
-    color: var(--color-warm-charcoal);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
     font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01", "ss03";
+    overflow-x: clip; /* clip is stronger than hidden — no scrollbar AND no scroll */
   }
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif);
+  /* Defensive: prevent images/videos/embeds from breaking the viewport on mobile */
+  img, video, iframe, svg {
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-terracotta) 20%, transparent);
-    color: var(--color-warm-charcoal);
+    background-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-terracotta);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
@@ -161,5 +272,18 @@
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Type scale helpers used by the new home page sections.
+     Min sizes are deliberately small enough to fit a 320px viewport. */
+  .display-xl { font-size: clamp(2rem, 5vw + 0.75rem, 4.5rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; overflow-wrap: anywhere; }
+  .display-lg { font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; overflow-wrap: anywhere; }
+  .display-md { font-size: clamp(1.5rem, 2vw + 0.75rem, 2.25rem); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; overflow-wrap: anywhere; }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
   }
 }

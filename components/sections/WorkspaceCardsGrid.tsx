@@ -1,84 +1,75 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ArrowUpRight } from "lucide-react";
 import { workspaces } from "@/lib/data/workspaces";
-
-// Placeholder colors per workspace type
-const workspaceColors: Record<string, string> = {
-  "private-cabin": "bg-terracotta-100",
-  "open-desk": "bg-olive-100",
-  cubicle: "bg-sand-100",
-  "meeting-hall": "bg-terracotta-200",
-  "business-lounge": "bg-olive-200",
-  "managed-office": "bg-sand-300",
-};
+import { noImageUrl, workspacePhotos } from "@/lib/data/nammaoffice-images";
 
 export function WorkspaceCardsGrid() {
   return (
-    <section className="section-padding bg-warm-white">
+    <section className="section-padding bg-[var(--color-bg)]">
       <div className="content-width">
-        <SectionHeading
-          title="Workspaces Designed for You"
-          subtitle="From solo freelancers to large enterprise teams — we have the perfect space for every stage of your journey."
-          className="mb-12"
-        />
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
+          <div className="max-w-2xl">
+            <p className="eyebrow">Spaces</p>
+            <h2 className="display-lg mt-3 text-[var(--color-ink)]">
+              Six space types.
+              <br />
+              <span className="text-[var(--color-ink-secondary)]">One that fits how you work.</span>
+            </h2>
+          </div>
+          <Link
+            href="/workspaces"
+            className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors self-start"
+          >
+            Compare all spaces
+            <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workspaces.map((ws) => (
-            <Card key={ws.slug} hover className="flex flex-col">
-              {/* Placeholder image area */}
-              <div
-                className={`h-48 flex items-center justify-center ${workspaceColors[ws.slug] ?? "bg-sand"}`}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {workspaces.map((ws) => {
+            const img = workspacePhotos[ws.slug];
+            return (
+              <Link
+                key={ws.slug}
+                href={`/workspaces/${ws.slug}`}
+                className="group relative block bg-white rounded-2xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:shadow-[0_8px_24px_rgba(10,10,10,0.06)] transition-all"
               >
-                <div className="flex flex-col items-center gap-2 p-4 text-center">
-                  <div className="w-12 h-12 rounded-full bg-terracotta/20 flex items-center justify-center">
-                    <span className="text-terracotta text-xl font-serif">
-                      {ws.name.charAt(0)}
+                <div className="relative aspect-[4/3] bg-[var(--color-surface-alt)] overflow-hidden">
+                  {img && (
+                    <Image
+                      src={noImageUrl(img)}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-[var(--color-ink)] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <div className="flex items-baseline justify-between gap-3 mb-2">
+                    <h3 className="text-[18px] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">
+                      {ws.name}
+                    </h3>
+                    <span className="shrink-0 text-[12px] font-medium text-[var(--color-ink-muted)]">
+                      {ws.capacity}
                     </span>
                   </div>
-                  <span className="text-warm-charcoal font-sans text-sm font-medium">
-                    {ws.name}
-                  </span>
+                  <p className="text-[13.5px] text-[var(--color-ink-secondary)] leading-relaxed line-clamp-2">
+                    {ws.shortDescription}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-accent)]">
+                    Explore
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
+                  </div>
                 </div>
-              </div>
-
-              {/* Card body */}
-              <div className="p-6 flex flex-col gap-3 flex-1">
-                <h3 className="font-serif text-xl text-warm-charcoal">
-                  {ws.name}
-                </h3>
-                <p className="text-warm-gray font-sans text-sm leading-relaxed flex-1">
-                  {ws.shortDescription}
-                </p>
-                <div className="flex items-center gap-4 text-xs text-warm-gray font-sans">
-                  <span>{ws.capacity}</span>
-                  <span className="text-warm-border">·</span>
-                  <span>{ws.flexibility}</span>
-                </div>
-                <Link
-                  href={`/workspaces/${ws.slug}`}
-                  className="text-terracotta font-sans text-sm font-medium hover:text-terracotta-600 transition-colors inline-flex items-center gap-1 mt-1"
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </Card>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,28 +1,29 @@
 import type { TeamMember } from "@/lib/types";
+import { wix } from "@/lib/data/wix-pool";
 
 export const team: TeamMember[] = [
   {
     name: "Founder & CEO",
     role: "Founder & Chief Executive Officer",
-    photo: "/images/team/founder.jpg",
+    photo: wix.team,
     bio: "Visionary entrepreneur who identified the coworking opportunity in Tamil Nadu's tier-2 cities and built NammaOffice from the ground up across Salem, Trichy, and Tirupur.",
   },
   {
     name: "Operations Head",
     role: "Head of Operations",
-    photo: "/images/team/operations-head.jpg",
+    photo: wix.team,
     bio: "Ensures seamless operations across all 7 NammaOffice centres, maintaining the highest standards of service and member experience.",
   },
   {
     name: "Sales Director",
     role: "Director of Sales & Partnerships",
-    photo: "/images/team/sales-director.jpg",
+    photo: wix.team,
     bio: "Drives enterprise and franchise partnerships, helping businesses of all sizes find the perfect workspace solution at NammaOffice.",
   },
   {
     name: "Community Manager",
     role: "Community & Events Manager",
-    photo: "/images/team/community-manager.jpg",
+    photo: wix.team,
     bio: "Builds the NammaOffice community through networking events, workshops, and member-centric initiatives across all centres.",
   },
 ];

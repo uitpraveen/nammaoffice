@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
-import { Cormorant, Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GoogleTagManager from "@/components/analytics/GoogleTagManager";
 import MetaPixel from "@/components/analytics/MetaPixel";
 
-const cormorant = Cormorant({
-  weight: ["400", "500", "600", "700"],
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -48,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${montserrat.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body>
         <GoogleTagManager />
         {children}

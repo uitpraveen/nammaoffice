@@ -104,6 +104,8 @@ export interface NavChild {
   label: string;
   href: string;
   description: string;
+  /** Lucide icon name (PascalCase). Optional — falls back to a default. */
+  icon?: string;
 }
 
 export interface NavItem {

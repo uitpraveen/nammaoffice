@@ -1,0 +1,67 @@
+- generic [ref=e3]:
+  - region "top of page"
+  - generic [ref=e9]:
+    - banner [ref=e10]:
+      - generic [ref=e16]:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - link "Namma Office Logo With Slogan_edited_edi" [ref=e18] [cursor=pointer]:
+                    - /url: https://www.nammaoffice.com
+                    - img "Namma Office Logo With Slogan_edited_edi" [ref=e19]
+                  - button "Log In" [ref=e21] [cursor=pointer]:
+                    - img [ref=e25]
+                    - generic [ref=e28]: Log In
+            - 'link "Call us : 90921 09213" [ref=e30] [cursor=pointer]':
+              - /url: tel:+919092109213
+              - generic [ref=e32]: "Call us : 90921 09213"
+            - navigation "Site" [ref=e34]:
+              - list [ref=e35]:
+                - listitem [ref=e36] [cursor=pointer]:
+                  - link "Home" [ref=e37]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e40]: Home
+                - listitem [ref=e41] [cursor=pointer]:
+                  - link "About" [ref=e42]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e45]: About
+                - listitem [ref=e46] [cursor=pointer]:
+                  - link "Location's" [ref=e47]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e50]: Location's
+                  - button "More Location's pages" [ref=e51]:
+                    - img [ref=e52]
+                - listitem [ref=e54] [cursor=pointer]:
+                  - link "Amenities" [ref=e55]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e58]: Amenities
+                - listitem [ref=e59] [cursor=pointer]:
+                  - link "Registration Forms" [ref=e60]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e63]: Registration Forms
+                  - button "More Registration Forms pages" [ref=e64]:
+                    - img [ref=e65]
+                - listitem [ref=e67] [cursor=pointer]:
+                  - link "Franchise" [ref=e68]:
+                    - /url: https://www.nammaoffice.com/franchise
+                    - paragraph [ref=e71]: Franchise
+                - listitem [ref=e72] [cursor=pointer]:
+                  - link "Service Desk" [ref=e73]:
+                    - /url: https://www.nammaoffice.com/my-service-request
+                    - paragraph [ref=e76]: Service Desk
+                  - button "More Service Desk pages" [ref=e77]:
+                    - img [ref=e78]
+    - main [ref=e80]
+    - contentinfo [ref=e91]:
+      - paragraph [ref=e107]:
+        - generic [ref=e111]:
+          - text: Powered by
+          - link "Thulir Technology" [ref=e113] [cursor=pointer]:
+            - /url: https://www.thulirtechnology.com/
+          - text: .
+          - link "Terms & Conditions" [ref=e115] [cursor=pointer]:
+            - /url: https://www.nammaoffice.com/terms-conditions
+          - text: "- @Copyright of NammaOffice"
+  - region "bottom of page"

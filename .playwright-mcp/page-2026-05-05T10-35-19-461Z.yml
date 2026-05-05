@@ -1,0 +1,218 @@
+- generic [ref=e3]:
+  - region "top of page" [active]
+  - button "Skip to Main Content"
+  - generic [ref=e9]:
+    - banner [ref=e10]:
+      - generic [ref=e16]:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - link "Namma Office Logo With Slogan_edited_edi" [ref=e18] [cursor=pointer]:
+                    - /url: https://www.nammaoffice.com
+                    - img "Namma Office Logo With Slogan_edited_edi" [ref=e19]
+                  - button "Log In" [ref=e21] [cursor=pointer]:
+                    - img [ref=e25]
+                    - generic [ref=e28]: Log In
+            - 'link "Call us : 90921 09213" [ref=e30] [cursor=pointer]':
+              - /url: tel:+919092109213
+              - generic [ref=e32]: "Call us : 90921 09213"
+            - navigation "Site" [ref=e34]:
+              - list [ref=e35]:
+                - listitem [ref=e36] [cursor=pointer]:
+                  - link "Home" [ref=e37]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e40]: Home
+                - listitem [ref=e41] [cursor=pointer]:
+                  - link "About" [ref=e42]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e45]: About
+                - listitem [ref=e46] [cursor=pointer]:
+                  - link "Location's" [ref=e47]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e50]: Location's
+                  - button "More Location's pages" [ref=e51]:
+                    - img [ref=e52]
+                - listitem [ref=e54] [cursor=pointer]:
+                  - link "Amenities" [ref=e55]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e58]: Amenities
+                - listitem [ref=e59] [cursor=pointer]:
+                  - link "Registration Forms" [ref=e60]:
+                    - /url: https://www.nammaoffice.com
+                    - paragraph [ref=e63]: Registration Forms
+                  - button "More Registration Forms pages" [ref=e64]:
+                    - img [ref=e65]
+                - listitem [ref=e67] [cursor=pointer]:
+                  - link "Franchise" [ref=e68]:
+                    - /url: https://www.nammaoffice.com/franchise
+                    - paragraph [ref=e71]: Franchise
+                - listitem [ref=e72] [cursor=pointer]:
+                  - link "Service Desk" [ref=e73]:
+                    - /url: https://www.nammaoffice.com/my-service-request
+                    - paragraph [ref=e76]: Service Desk
+                  - button "More Service Desk pages" [ref=e77]:
+                    - img [ref=e78]
+    - main [ref=e80]:
+      - iframe [ref=e118]:
+        - form [ref=f5e3]:
+          - generic [ref=f5e9]:
+            - generic [ref=f5e11]:
+              - img [ref=f5e13]
+              - generic [ref=f5e14]:
+                - heading "Namma office Meeting Hall & Gate Pass Bookings" [level=2] [ref=f5e15]
+                - paragraph [ref=f5e16]: Use this form to book a meeting hall or request a gate pass. If you only need a gate pass, kindly check the box before submitting your details.
+            - generic [ref=f5e17]:
+              - generic [ref=f5e18]:
+                - generic [ref=f5e20]:
+                  - generic [ref=f5e22]:
+                    - text: Request Type
+                    - emphasis [ref=f5e23]: "*"
+                    - generic [ref=f5e24]: Required
+                  - group "Request Type Required" [ref=f5e26]:
+                    - generic [ref=f5e27]:
+                      - generic [ref=f5e28]:
+                        - checkbox "Gate Pass Request" [checked] [ref=f5e29]
+                        - emphasis [ref=f5e31] [cursor=pointer]: Gate Pass Request
+                      - generic [ref=f5e32]:
+                        - checkbox "Booking Request" [ref=f5e33]
+                        - emphasis [ref=f5e35] [cursor=pointer]: Booking Request
+                - generic [ref=f5e37]:
+                  - generic [ref=f5e39]:
+                    - text: Company Name
+                    - emphasis [ref=f5e40]: "*"
+                    - generic [ref=f5e41]: Required
+                  - generic [ref=f5e44]:
+                    - textbox "Company Name Required" [ref=f5e45]:
+                      - /placeholder: ""
+                    - img [ref=f5e46]
+                - generic [ref=f5e49]:
+                  - generic [ref=f5e51]:
+                    - text: Booking Person Name
+                    - emphasis [ref=f5e52]: "*"
+                    - generic [ref=f5e53]: Required
+                  - generic [ref=f5e56]:
+                    - textbox "Booking Person Name Required" [ref=f5e57]:
+                      - /placeholder: ""
+                    - img [ref=f5e58]
+                - generic [ref=f5e61]:
+                  - generic [ref=f5e63]:
+                    - text: Booking Person Contact
+                    - emphasis [ref=f5e64]: "*"
+                    - generic [ref=f5e65]: Required
+                  - generic [ref=f5e69]:
+                    - textbox "Booking Person Contact Required" [ref=f5e70]:
+                      - /placeholder: ""
+                    - img [ref=f5e71]
+                - generic [ref=f5e74]:
+                  - generic [ref=f5e76]:
+                    - text: Booking Person Email
+                    - emphasis [ref=f5e77]: "*"
+                    - generic [ref=f5e78]: Required
+                  - generic [ref=f5e81]:
+                    - textbox "Booking Person Email Required" [ref=f5e82]:
+                      - /placeholder: ""
+                    - img [ref=f5e83]
+                - generic [ref=f5e86]:
+                  - generic [ref=f5e88]:
+                    - text: Venue
+                    - emphasis [ref=f5e89]: "*"
+                    - generic [ref=f5e90]: Required
+                  - generic [ref=f5e91]:
+                    - generic [ref=f5e92]:
+                      - combobox [ref=f5e93]
+                      - combobox "Gate Pass - TIDEL NEO SALEM" [ref=f5e96] [cursor=pointer]:
+                        - generic "Gate Pass - TIDEL NEO SALEM" [ref=f5e97]:
+                          - emphasis [ref=f5e98]:
+                            - img [ref=f5e99]
+                          - generic [ref=f5e101]: Gate Pass - TIDEL NEO SALEM
+                    - generic [ref=f5e102]: Please select your preferred meeting room or choose Gate Pass if you only need a gate pass
+                - generic [ref=f5e104]:
+                  - generic [ref=f5e106]:
+                    - text: Company to Visit
+                    - emphasis [ref=f5e107]: "*"
+                  - generic [ref=f5e110]:
+                    - textbox "Company to Visit *" [ref=f5e111]:
+                      - /placeholder: ""
+                    - img [ref=f5e112]
+                - generic [ref=f5e115]:
+                  - generic [ref=f5e117]:
+                    - text: Purpose of meeting
+                    - emphasis [ref=f5e118]: "*"
+                    - generic [ref=f5e119]: Required
+                  - generic [ref=f5e122]:
+                    - textbox "Purpose of meeting Required" [ref=f5e123]:
+                      - /placeholder: ""
+                    - img [ref=f5e124]
+                - generic [ref=f5e127]:
+                  - generic [ref=f5e129]:
+                    - text: No of Partcipants
+                    - emphasis [ref=f5e130]: "*"
+                    - generic [ref=f5e131]: Required
+                  - generic [ref=f5e134]:
+                    - textbox "No of Partcipants Required" [ref=f5e135]:
+                      - /placeholder: ""
+                    - img [ref=f5e136]
+                - generic [ref=f5e139]:
+                  - generic [ref=f5e141]:
+                    - text: List of Guest Name
+                    - emphasis [ref=f5e142]: "*"
+                  - textbox "List of Guest Name *" [ref=f5e146]:
+                    - /placeholder: ""
+                - generic [ref=f5e148]:
+                  - generic [ref=f5e150]:
+                    - text: Booking Date-Time
+                    - emphasis [ref=f5e151]: "*"
+                    - generic [ref=f5e152]: Required
+                  - generic [ref=f5e154]:
+                    - generic [ref=f5e155]:
+                      - textbox "Booking Date-Time Required" [ref=f5e156]:
+                        - /placeholder: ""
+                        - text: 05-May-2026 04:05 PM
+                      - text: 
+                      - img [ref=f5e157]
+                    - generic [ref=f5e159]: dd-MMM-yyyy HH:MM AM/PM
+                - generic [ref=f5e161]:
+                  - generic [ref=f5e163]:
+                    - text: Terms and Conditions
+                    - emphasis [ref=f5e164]: "*"
+                    - generic [ref=f5e165]: Required
+                  - generic [ref=f5e168]:
+                    - group "Terms and Conditions Required I accept not to use NammaOffice or Tidel or any of our client Logo in any of my company promotional activities or any sort without prior consent from NammaOffice. I accept not to use NammaOffice premises for any of the Job Interviews involving financial transactions inside the premises of NammaOffice." [ref=f5e169]:
+                      - list [ref=f5e170]:
+                        - listitem [ref=f5e171]: I accept not to use NammaOffice or Tidel or any of our client Logo in any of my company promotional activities or any sort without prior consent from NammaOffice.
+                        - listitem [ref=f5e172]: I accept not to use NammaOffice premises for any of the Job Interviews involving financial transactions inside the premises of NammaOffice.
+                    - generic [ref=f5e174]:
+                      - checkbox "Terms and Conditions Required I accept the Terms and Conditions." [ref=f5e175]
+                      - generic [ref=f5e178]: I accept the Terms and Conditions.
+                - generic [ref=f5e180]:
+                  - generic [ref=f5e182]: Smart Scan
+                  - generic [ref=f5e184]:
+                    - generic [ref=f5e185]:
+                      - button "Smart Scan Upload file" [ref=f5e186]
+                      - generic [ref=f5e188]:
+                        - generic [ref=f5e190]:
+                          - generic [ref=f5e191] [cursor=pointer]: Upload file
+                          - button "Smart Scan Upload file" [ref=f5e192] [cursor=pointer]:
+                            - img [ref=f5e193]
+                        - generic [ref=f5e195] [cursor=pointer]:
+                          - img [ref=f5e196]
+                          - text: Choose File
+                    - text: 
+              - generic [ref=f5e200]:
+                - button "Review" [ref=f5e202] [cursor=pointer]:
+                  - emphasis [ref=f5e203]: Review
+                - button "Submit" [ref=f5e205] [cursor=pointer]:
+                  - emphasis [ref=f5e206]: Submit
+    - contentinfo [ref=e91]:
+      - paragraph [ref=e107]:
+        - generic [ref=e111]:
+          - text: Powered by
+          - link "Thulir Technology" [ref=e113] [cursor=pointer]:
+            - /url: https://www.thulirtechnology.com/
+          - text: .
+          - link "Terms & Conditions" [ref=e115] [cursor=pointer]:
+            - /url: https://www.nammaoffice.com/terms-conditions
+          - text: "- @Copyright of NammaOffice"
+  - region "bottom of page"

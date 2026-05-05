@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 import { CTASection } from "@/components/sections/CTASection";
-import { Timeline } from "@/components/sections/Timeline";
+import { JourneyStepper } from "@/components/sections/JourneyStepper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { team, milestones } from "@/lib/data/team";
@@ -151,15 +151,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-padding bg-sand-50">
+      {/* Journey */}
+      <section className="section-padding bg-[var(--color-bg)]">
         <div className="content-width">
-          <SectionHeading
-            title="Our Journey"
-            subtitle="Five years of growth, resilience, and community building across Tamil Nadu."
-            className="mb-12"
-          />
-          <Timeline milestones={milestones} />
+          <div className="max-w-3xl mx-auto text-center mb-14 md:mb-20">
+            <p className="eyebrow !text-[var(--color-accent)]">Our Journey</p>
+            <h2 className="display-lg mt-3 text-[var(--color-ink)]">
+              Five years.{" "}
+              <span className="italic font-normal text-[var(--color-ink-secondary)]">
+                Three cities.
+              </span>{" "}
+              One community.
+            </h2>
+            <p className="mt-5 text-[16px] text-[var(--color-ink-secondary)] leading-relaxed">
+              From a single centre on Brindavan Road to seven workspaces across
+              Tamil Nadu — every step shaped by the founders, freelancers and
+              teams who built it with us.
+            </p>
+          </div>
+          <JourneyStepper milestones={milestones} />
         </div>
       </section>
 

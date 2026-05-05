@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { StarRating } from "@/components/ui/StarRating";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { testimonials } from "@/lib/data/testimonials";
 
 export function TestimonialsSlider() {
@@ -16,7 +15,7 @@ export function TestimonialsSlider() {
       setTimeout(() => {
         setCurrent(index);
         setIsAnimating(false);
-      }, 300);
+      }, 250);
     },
     [isAnimating]
   );
@@ -29,130 +28,105 @@ export function TestimonialsSlider() {
     goTo((current + 1) % testimonials.length);
   }, [current, goTo]);
 
-  // Auto-advance every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       goNext();
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [goNext]);
 
   const t = testimonials[current];
 
   return (
-    <section className="section-padding bg-warm-white">
+    <section className="section-padding bg-white">
       <div className="content-width">
-        <SectionHeading
-          title="What Our Community Says"
-          subtitle="Real stories from real members across our 7+ centres."
-          className="mb-12"
-        />
-
-        <div className="max-w-3xl mx-auto">
-          {/* Testimonial card */}
-          <div
-            className="bg-white rounded-brand shadow-brand p-8 md:p-12 flex flex-col gap-6 transition-opacity duration-300"
-            style={{ opacity: isAnimating ? 0 : 1 }}
-          >
-            {/* Large quote mark */}
-            <span
-              className="font-serif text-6xl text-terracotta leading-none select-none"
-              aria-hidden="true"
-            >
-              &ldquo;
-            </span>
-
-            {/* Quote text */}
-            <p className="font-sans text-lg italic text-warm-charcoal leading-relaxed -mt-4">
-              {t.text}
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
+          <div>
+            <p className="eyebrow">Members</p>
+            <h2 className="display-lg mt-3 text-[var(--color-ink)]">
+              People who chose us.
+            </h2>
+            <p className="mt-4 text-[16px] text-[var(--color-ink-secondary)] leading-relaxed max-w-md">
+              Real stories from founders, freelancers and operators across our
+              centres.
             </p>
-
-            {/* Author row */}
-            <div className="flex items-center gap-4 pt-2 border-t border-warm-border">
-              {/* Placeholder avatar */}
-              <div className="w-16 h-16 rounded-full bg-terracotta-100 flex items-center justify-center shrink-0">
-                <span className="font-serif text-xl text-terracotta">
-                  {t.name.charAt(0)}
-                </span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-sans font-medium text-warm-charcoal">
-                  {t.name}
-                </span>
-                <span className="font-sans text-sm text-warm-gray">
-                  {t.company}
-                </span>
-                {t.location && (
-                  <span className="font-sans text-xs text-warm-gray">
-                    {t.location}
-                  </span>
-                )}
-                <StarRating rating={t.rating} className="mt-1" />
-              </div>
+            <div className="mt-8 flex items-center gap-2">
+              <button
+                onClick={goPrev}
+                aria-label="Previous testimonial"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[var(--color-border-strong)] text-[var(--color-ink)] hover:border-[var(--color-ink)] transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" strokeWidth={2.25} />
+              </button>
+              <button
+                onClick={goNext}
+                aria-label="Next testimonial"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[var(--color-border-strong)] text-[var(--color-ink)] hover:border-[var(--color-ink)] transition-colors"
+              >
+                <ChevronRight className="w-4 h-4" strokeWidth={2.25} />
+              </button>
+              <span className="ml-3 text-[13px] text-[var(--color-ink-muted)] tabular-nums">
+                {String(current + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+              </span>
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            {/* Prev button */}
-            <button
-              onClick={goPrev}
-              aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full border border-warm-border bg-white hover:bg-sand hover:border-terracotta transition-colors flex items-center justify-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-            </button>
+          <div
+            className="relative bg-[var(--color-bg)] border border-[var(--color-border)] rounded-3xl p-8 md:p-12 transition-opacity duration-200"
+            style={{ opacity: isAnimating ? 0 : 1 }}
+          >
+            <Quote
+              aria-hidden
+              className="absolute top-8 right-8 w-16 h-16 text-[var(--color-accent-100)]"
+              strokeWidth={1}
+            />
 
-            {/* Dot indicators */}
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
+            <div className="flex items-center gap-1 mb-6">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
                   key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
-                    i === current
-                      ? "w-6 h-2.5 bg-terracotta"
-                      : "w-2.5 h-2.5 bg-warm-border hover:bg-terracotta/40"
-                  }`}
+                  className={`w-4 h-4 ${i < t.rating ? "fill-[var(--color-accent)] text-[var(--color-accent)]" : "text-[var(--color-border-strong)]"}`}
+                  strokeWidth={1.5}
                 />
               ))}
             </div>
 
-            {/* Next button */}
-            <button
-              onClick={goNext}
-              aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full border border-warm-border bg-white hover:bg-sand hover:border-terracotta transition-colors flex items-center justify-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </button>
+            <p className="relative text-[20px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-[var(--color-ink)] font-medium">
+              &ldquo;{t.text}&rdquo;
+            </p>
+
+            <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--color-accent-50)] text-[var(--color-accent)] text-[16px] font-semibold">
+                  {t.name.charAt(0)}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[14px] font-semibold text-[var(--color-ink)]">
+                    {t.name}
+                  </p>
+                  <p className="text-[13px] text-[var(--color-ink-secondary)] truncate">
+                    {t.company}
+                    {t.location && <span className="text-[var(--color-ink-muted)]"> · {t.location}</span>}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dots */}
+            <div className="mt-6 flex items-center gap-1.5">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  aria-label={`Show testimonial ${i + 1}`}
+                  className={`h-1 rounded-full transition-all ${
+                    i === current
+                      ? "w-6 bg-[var(--color-accent)]"
+                      : "w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-ink-muted)]"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { WorkspaceCardsGrid } from "@/components/sections/WorkspaceCardsGrid";
+import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CityCardsSection } from "@/components/sections/CityCardsSection";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { StatsBanner } from "@/components/sections/StatsBanner";
@@ -12,6 +13,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <WorkspaceCardsGrid />
+      <HowItWorks />
       <CityCardsSection />
       <WhyChooseUs />
       <StatsBanner />

@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -32,33 +32,35 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <p className="text-green-400 text-sm font-medium">
-        Subscribed! Thank you.
-      </p>
+      <div className="flex items-center gap-2 px-4 h-14 rounded-full bg-[var(--color-accent)]/15 border border-[var(--color-accent)]/30 text-[var(--color-accent-300)]">
+        <CheckCircle2 className="w-4 h-4" strokeWidth={2} />
+        <p className="text-[14px] font-medium">Thanks — you’re subscribed.</p>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit} className="relative">
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Your email address"
+        placeholder="you@example.com"
         required
-        className={cn(
-          "flex-1 px-3 py-2 rounded-brand text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/40",
-          "focus:outline-none focus:ring-1 focus:ring-terracotta focus:border-terracotta",
-          "transition-colors duration-200"
-        )}
+        aria-label="Email address"
+        className="w-full h-14 pl-5 pr-36 rounded-full bg-white/5 border border-white/15 text-white placeholder:text-white/40 text-[14px] focus:outline-none focus:border-[var(--color-accent)] focus:bg-white/10 transition-colors"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="px-4 py-2 rounded-brand bg-terracotta text-white text-sm font-medium hover:bg-terracotta-600 transition-colors duration-200 disabled:opacity-60 whitespace-nowrap"
+        className="absolute top-1.5 right-1.5 inline-flex items-center gap-1.5 h-11 px-5 bg-[var(--color-accent)] text-white text-[13px] font-semibold rounded-full hover:bg-[var(--color-accent-600)] transition-colors disabled:opacity-60"
       >
-        {status === "loading" ? "..." : "Subscribe"}
+        {status === "loading" ? "…" : "Subscribe"}
+        {status !== "loading" && <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.25} />}
       </button>
+      {status === "error" && (
+        <p className="mt-2 text-[12.5px] text-red-300">Something went wrong. Try again.</p>
+      )}
     </form>
   );
 }
