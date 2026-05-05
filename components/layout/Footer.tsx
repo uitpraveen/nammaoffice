@@ -3,7 +3,7 @@ import { locations } from "@/lib/data/locations";
 import { formatPhone } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 
 const formsLinks = [
   { label: "Company Registration", href: "/registration/company" },
@@ -12,82 +12,86 @@ const formsLinks = [
   { label: "Bookings", href: "/bookings" },
 ];
 
-const serviceLegalLinks = [
+const serviceLinks = [
   { label: "Gate Pass — Salem TIDEL", href: "/gate-pass/tidel-neo-salem" },
   { label: "Gate Pass — Tirupur TIDEL", href: "/gate-pass/tidel-neo-tirupur" },
   { label: "Franchise", href: "/franchise" },
   { label: "Amenities", href: "/amenities" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms-conditions" },
-  { label: "Refund Policy", href: "/refund-policy" },
+];
+
+const legalLinks = [
+  { label: "Privacy", href: "/privacy-policy" },
+  { label: "Terms", href: "/terms-conditions" },
+  { label: "Refund", href: "/refund-policy" },
 ];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-navy)] text-white/80">
-      {/* CTA strip */}
-      <div className="border-b border-white/10">
-        <div className="content-width py-12 md:py-16 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-center">
-          <div>
-            <p className="eyebrow !text-[var(--color-gold-300)]">Get in touch</p>
-            <h2 className="font-display text-3xl md:text-4xl !text-white mt-3 leading-tight">
-              Ready to claim your space?
-            </h2>
-            <p className="mt-3 text-[15px] text-white/65 max-w-md leading-relaxed">
-              Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/bookings"
-              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
-            >
-              Book Now
-              <span aria-hidden>→</span>
-            </Link>
-            <a
-              href={`tel:${formatPhone(BRAND.phone)}`}
-              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors"
-            >
-              <Phone className="w-4 h-4" strokeWidth={2} />
-              {BRAND.phone}
-            </a>
-          </div>
+    <footer className="bg-[var(--color-bg)] border-t border-[var(--color-border)]">
+      {/* Single CTA strip — cream-on-cream tone, gold pill anchors the page. */}
+      <div className="content-width py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16">
+        <div>
+          <p className="eyebrow">Get in touch</p>
+          <h2 className="font-display text-3xl md:text-4xl text-[var(--color-navy)] mt-2 leading-tight">
+            Ready to claim your space?
+          </h2>
+          <p className="mt-3 text-[15px] text-[var(--color-ink-secondary)] max-w-xl leading-relaxed">
+            Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          <Link
+            href="/bookings"
+            className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
+          >
+            Book Now
+            <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
+          </Link>
+          <a
+            href={`tel:${formatPhone(BRAND.phone)}`}
+            className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full border border-[var(--color-border-strong)] text-[var(--color-navy)] hover:bg-white transition-colors"
+          >
+            <Phone className="w-4 h-4" strokeWidth={2} />
+            {BRAND.phone}
+          </a>
         </div>
       </div>
 
-      {/* Link columns */}
-      <div className="content-width py-12 md:py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
-        <div className="col-span-2 md:col-span-4 lg:col-span-1">
+      {/* Divider */}
+      <div className="border-t border-[var(--color-border)]" />
+
+      {/* Link grid — light, well-spaced, three primary columns. */}
+      <div className="content-width py-12 md:py-14 grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+        <div>
           <Link href="/" className="inline-flex items-center" aria-label="NammaOffice home">
             <Image
               src="/images/logo.png"
               alt="NammaOffice"
               width={1000}
               height={137}
-              className="h-9 w-auto brightness-0 invert"
+              className="h-9 w-auto"
             />
           </Link>
-          <p className="mt-3 text-[14px] text-white/60 leading-relaxed max-w-xs">
-            Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur.
+          <p className="mt-4 text-[14px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xs">
+            Premium coworking spaces across Salem, Trichy, and Tirupur.
           </p>
-          <div className="mt-5 space-y-2.5 text-[13.5px]">
+          <div className="mt-5 space-y-1.5 text-[13.5px]">
             <a
               href={`tel:${formatPhone(BRAND.phone)}`}
-              className="flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+              className="inline-flex items-center gap-2 text-[var(--color-ink-secondary)] hover:text-[var(--color-navy)] transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+              <Phone className="w-3.5 h-3.5 shrink-0 text-[var(--color-gold-deep)]" strokeWidth={2} />
               {BRAND.phone}
             </a>
             <a
               href={`mailto:${BRAND.email}`}
-              className="flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+              className="inline-flex items-center gap-2 text-[var(--color-ink-secondary)] hover:text-[var(--color-navy)] transition-colors"
             >
-              <Mail className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+              <Mail className="w-3.5 h-3.5 shrink-0 text-[var(--color-gold-deep)]" strokeWidth={2} />
               {BRAND.email}
             </a>
           </div>
@@ -124,19 +128,30 @@ export function Footer() {
           }))}
         />
         <FooterColumn title="Forms" links={formsLinks} />
-        <FooterColumn title="Service & Legal" links={serviceLegalLinks} />
+        <FooterColumn title="Service Desk" links={serviceLinks} />
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="content-width py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="text-[12.5px] text-white/50">
+      {/* Bottom bar — copyright + legal pill links */}
+      <div className="border-t border-[var(--color-border)]">
+        <div className="content-width py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <p className="text-[12.5px] text-[var(--color-ink-muted)]">
             &copy; {currentYear} NammaOffice. All rights reserved.
           </p>
-          <p className="text-[12.5px] text-white/40 inline-flex items-center gap-1.5">
-            <MapPin className="w-3 h-3" strokeWidth={2} />
-            8 centres · Salem · Trichy · Tirupur
-          </p>
+          <div className="flex items-center gap-4 text-[12.5px]">
+            {legalLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-[var(--color-ink-muted)] hover:text-[var(--color-navy)] transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[var(--color-ink-muted)]">
+              <MapPin className="w-3 h-3" strokeWidth={2} />
+              8 centres · 3 cities
+            </span>
+          </div>
         </div>
       </div>
     </footer>
@@ -152,7 +167,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-300)] mb-4">
+      <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-deep)] mb-4">
         {title}
       </h3>
       <ul className="space-y-2.5">
@@ -160,11 +175,11 @@ function FooterColumn({
           <li key={link.href + link.label}>
             <Link
               href={link.href}
-              className="group block text-[13.5px] text-white/75 hover:text-white transition-colors"
+              className="group block text-[13.5px] text-[var(--color-ink-secondary)] hover:text-[var(--color-navy)] transition-colors"
             >
               {link.label}
               {link.sub && (
-                <span className="block text-[11px] text-white/40 mt-0.5 group-hover:text-white/60">
+                <span className="block text-[11px] text-[var(--color-ink-muted)] mt-0.5">
                   {link.sub}
                 </span>
               )}
@@ -191,7 +206,7 @@ function SocialIcon({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="inline-flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-[var(--color-gold-300)] hover:bg-white/10 transition-colors"
+      className="inline-flex items-center justify-center w-9 h-9 rounded-full text-[var(--color-ink-secondary)] hover:text-[var(--color-gold-deep)] hover:bg-[var(--color-surface-alt)] transition-colors"
     >
       {children}
     </a>

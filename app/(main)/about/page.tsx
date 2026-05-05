@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Heart, Telescope } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
-import { CTASection } from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
   title: "About NammaOffice — Our Story & Mission",
@@ -110,7 +109,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CTASection />
     </>
   );
 }

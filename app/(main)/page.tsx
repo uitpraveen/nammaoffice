@@ -1,12 +1,12 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { LocationThumbnails } from "@/components/sections/LocationThumbnails";
 import { AmenitiesPreview } from "@/components/sections/AmenitiesPreview";
-import { CTASection } from "@/components/sections/CTASection";
 
 /**
- * Home page — radically minimal per client feedback. Four sections:
- * Hero, all-centre thumbnails, amenities icon strip, CTA. Detail content
- * (process, why-us, comparisons) lives on inner pages.
+ * Home page — radically minimal per repeated client feedback. Three
+ * sections: Hero, all-centre thumbnails, amenities icon strip. The
+ * single conversion CTA lives in the footer; a dedicated dark CTA
+ * band on top of the footer felt like double-dipping.
  */
 export default function HomePage() {
   return (
@@ -14,7 +14,6 @@ export default function HomePage() {
       <HeroSection />
       <LocationThumbnails />
       <AmenitiesPreview />
-      <CTASection />
     </>
   );
 }

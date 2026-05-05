@@ -1,33 +1,15 @@
 import type { NavItem } from "@/lib/types";
-import { cities, locations } from "@/lib/data/locations";
 
 /**
- * Locations dropdown — flat list of all 8 centres with a city tag chip.
- * Generated from `locations` data so adding a centre updates the nav.
- * Order: Salem (6), Trichy, Tirupur — matches the homepage and footer.
+ * Top nav — fully flat. Every item is a direct link to a page; no
+ * dropdowns at all. Locations was the last dropdown and now resolves
+ * to /locations, which grids all 8 centres in one tap.
  *
- * Locations is the only dropdown in the v2 nav. Forms and Service Desk
- * (formerly dropdowns) collapsed to single landing pages — `/forms` and
- * `/gate-pass` — that internally grid the sub-options. Lighter chrome,
- * one less mental step for the user.
+ * Forms aggregates the 4 form pages at /forms; Gate Pass aggregates
+ * the unified bookings/gate-pass form at /gate-pass.
  */
-const locationChildren = locations.map((loc) => {
-  const city = cities.find((c) => c.slug === loc.city);
-  return {
-    label: loc.name,
-    href: `/locations/${loc.city}/${loc.slug}`,
-    description: loc.address,
-    icon: "MapPin",
-    cityTag: city?.name ?? loc.city,
-  };
-});
-
 export const navigation: NavItem[] = [
-  {
-    label: "Locations",
-    href: "/locations",
-    children: locationChildren,
-  },
+  { label: "Locations", href: "/locations" },
   { label: "Amenities", href: "/amenities" },
   { label: "Forms", href: "/forms" },
   { label: "Franchise", href: "/franchise" },
