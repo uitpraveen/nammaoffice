@@ -15,7 +15,7 @@ export function StatsBand() {
         className="absolute inset-0 pointer-events-none opacity-[0.18]"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(215,38,96,0.55) 1px, transparent 1px)",
+            "radial-gradient(rgba(184,85,58,0.50) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -25,7 +25,7 @@ export function StatsBand() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 60% at 80% 30%, rgba(215,38,96,0.18), transparent 60%), radial-gradient(40% 60% at 10% 90%, rgba(215,38,96,0.10), transparent 60%)",
+            "radial-gradient(50% 60% at 80% 30%, rgba(184,85,58,0.16), transparent 60%), radial-gradient(40% 60% at 10% 90%, rgba(184,85,58,0.10), transparent 60%)",
         }}
       />
 

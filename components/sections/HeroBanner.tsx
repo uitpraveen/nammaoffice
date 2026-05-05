@@ -41,7 +41,7 @@ export function HeroBanner({
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(circle at 70% 20%, rgba(215,38,96,0.18), transparent 55%)",
+            "radial-gradient(circle at 70% 20%, rgba(184,85,58,0.16), transparent 55%)",
         }}
       />
       {backgroundImage && <div className="absolute inset-0 bg-[var(--color-navy-deep)]/65" aria-hidden="true" />}
