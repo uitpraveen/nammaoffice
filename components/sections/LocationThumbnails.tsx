@@ -37,7 +37,7 @@ export function LocationThumbnails() {
             <Link
               key={`${loc.city}-${loc.slug}`}
               href={`/locations/${loc.city}/${loc.slug}`}
-              className="group relative block aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(232,181,71,0.5),0_20px_40px_-12px_rgba(232,181,71,0.25)] hover:-translate-y-0.5"
+              className="group relative block aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(215,38,96,0.55),0_20px_40px_-12px_rgba(215,38,96,0.30)] hover:-translate-y-0.5"
             >
               {loc.images[0] && (
                 <Image

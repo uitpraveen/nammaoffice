@@ -3,29 +3,27 @@
 
 @theme {
   /* ------------------------------------------------------------------
-     Classic Premium · Charcoal Black + Champagne Gold (v2.2)
-     Neutral charcoal replaces the purple primary — reads as "high-end
-     watchmaker" rather than tinted. Variable names stay `--color-navy-*`
-     and `--color-purple-*` so already-styled views repaint without code
-     edits; `--color-ink-black-*` aliases are exposed for new code that
-     wants to be explicit about the new palette.
+     Catchy Premium · Magenta + Plum + Cream (v3.2)
+     Bold creative palette — deep plum on the dark surfaces with hot
+     magenta as the catchy accent. Token names kept (`--color-navy-*`,
+     `--color-purple-*`) so already-styled views repaint without code
+     edits.
      ------------------------------------------------------------------ */
 
-  /* Primary — near-black charcoal. Used for headers (on scroll), footer,
-     dark CTAs, and headlines on light surfaces. */
-  --color-navy: #0E0E10;
-  --color-navy-50: #F4F4F5;
-  --color-navy-100: #E4E4E7;
-  --color-navy-200: #C7C7CC;
-  --color-navy-300: #9A9AA0;
-  --color-navy-400: #6E6E76;
-  --color-navy-500: #404045;
-  --color-navy-600: #1F1F22;
-  --color-navy-700: #18181B;
-  --color-navy-800: #111114;
-  --color-navy-900: #0A0A0B;
-  --color-navy-deep: #050507;
-  --color-navy-soft: #1A1A1D;
+  /* Primary — deep plum. Used for masthead, footer, dark CTAs, headlines. */
+  --color-navy: #5C2D5C;
+  --color-navy-50: #F4ECF4;
+  --color-navy-100: #E1CCE1;
+  --color-navy-200: #C29CC2;
+  --color-navy-300: #9E6E9E;
+  --color-navy-400: #7A4A7A;
+  --color-navy-500: #5C2D5C;
+  --color-navy-600: #481F48;
+  --color-navy-700: #371637;
+  --color-navy-800: #250D25;
+  --color-navy-900: #170617;
+  --color-navy-deep: #2E1230;
+  --color-navy-soft: #724772;
 
   /* Aliases — kept so any old `--color-purple-*` reference still
      resolves to the new charcoal value. */
@@ -42,20 +40,21 @@
   --color-purple-900: var(--color-navy-900);
   --color-purple-deep: var(--color-navy-deep);
 
-  /* Champagne Gold — the brand accent. Brighter than the previous
-     gold to lift the page out of "dull" territory. */
-  --color-gold: #E8B547;
-  --color-gold-50: #FDF5E0;
-  --color-gold-100: #FAE7B0;
-  --color-gold-200: #F4D27D;
-  --color-gold-300: #EFC25C;
-  --color-gold-400: #ECBB52;
-  --color-gold-500: #E8B547;
-  --color-gold-600: #C99935;
-  --color-gold-700: #9C7325;
-  --color-gold-800: #6A4D17;
-  --color-gold-900: #3A2A0D;
-  --color-gold-deep: #C99935;
+  /* Hot Magenta — catchy creative accent. Used for primary CTAs, link
+     hovers, active indicators, eyebrow text, and decorative emphasis.
+     Bright, eye-catching — meant to pop against plum and cream. */
+  --color-gold: #D72660;
+  --color-gold-50: #FCE6EE;
+  --color-gold-100: #F8C2D6;
+  --color-gold-200: #F092B5;
+  --color-gold-300: #E66291;
+  --color-gold-400: #E04079;
+  --color-gold-500: #D72660;
+  --color-gold-600: #B91D52;
+  --color-gold-700: #921742;
+  --color-gold-800: #5E0E2A;
+  --color-gold-900: #380718;
+  --color-gold-deep: #B91D52;
 
   /* Surfaces */
   --color-bg: #FAF7F0;
@@ -64,14 +63,15 @@
   --color-border: #E5E1D6;
   --color-border-strong: #D6CFBE;
 
-  /* Ink (text) — neutral grayscale, no tint, harmonises with charcoal. */
-  --color-ink: #18181B;
-  --color-ink-secondary: #52525B;
-  --color-ink-muted: #A1A1AA;
+  /* Ink (text) — plum-tinted neutrals so body type harmonises with the
+     primary instead of going icy-grey. */
+  --color-ink: #1F1320;
+  --color-ink-secondary: #5A4A5C;
+  --color-ink-muted: #9A8A9C;
 
-  /* Charcoal / dark surfaces — pure charcoal scale. */
-  --color-charcoal: #050507;
-  --color-charcoal-soft: #0E0E10;
+  /* "Charcoal" / dark surfaces — repurposed to deep plum. */
+  --color-charcoal: #2E1230;
+  --color-charcoal-soft: #5C2D5C;
 
   /* ----- Active brand semantic aliases ----- */
   /* "accent" used to be cyan; it is now gold — primary CTA colour. */
@@ -151,10 +151,10 @@
   --radius-pill: 999px;
 
   /* ----- Shadows ----- */
-  --shadow-brand: 0 1px 2px rgba(14, 14, 16, 0.05), 0 4px 16px rgba(14, 14, 16, 0.08);
-  --shadow-brand-hover: 0 8px 24px rgba(14, 14, 16, 0.14), 0 2px 4px rgba(14, 14, 16, 0.06);
-  --shadow-cta: 0 4px 16px rgba(232, 181, 71, 0.32);
-  --shadow-cta-hover: 0 6px 22px rgba(232, 181, 71, 0.42);
+  --shadow-brand: 0 1px 2px rgba(92, 45, 92, 0.06), 0 4px 16px rgba(92, 45, 92, 0.10);
+  --shadow-brand-hover: 0 8px 24px rgba(92, 45, 92, 0.18), 0 2px 4px rgba(92, 45, 92, 0.08);
+  --shadow-cta: 0 4px 16px rgba(215, 38, 96, 0.32);
+  --shadow-cta-hover: 0 6px 22px rgba(215, 38, 96, 0.45);
 
   /* ----- Layout ----- */
   --width-content: 1200px;

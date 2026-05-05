@@ -50,7 +50,7 @@ export function Header() {
         </div>
 
         {/* Masthead bar */}
-        <div className="h-16 md:h-20 bg-[#0A0A0B] border-b border-[var(--color-gold)] text-white relative">
+        <div className="h-16 md:h-20 bg-[var(--color-navy)] border-b border-[var(--color-gold)] text-white relative">
           {/* Optional subtle inner rule above the gold border for "newspaper" feel */}
           <span
             aria-hidden
@@ -85,7 +85,7 @@ export function Header() {
                 href="/bookings"
                 className={cn(
                   "hidden lg:inline-flex items-center justify-center gap-1.5 h-full px-6 whitespace-nowrap",
-                  "bg-[var(--color-gold)] text-[#0A0A0B] hover:bg-white",
+                  "bg-[var(--color-gold)] text-white hover:bg-[var(--color-gold-deep)]",
                   "transition-colors",
                   "text-[11.5px] font-bold uppercase tracking-[0.18em] font-[var(--font-serif)]"
                 )}
