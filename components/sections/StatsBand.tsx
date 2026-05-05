@@ -9,16 +9,8 @@ import { ArrowUpRight } from "lucide-react";
 export function StatsBand() {
   return (
     <section className="bg-[var(--color-charcoal)] relative overflow-hidden">
-      {/* Subtle dot-grid pattern */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.18]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(184,85,58,0.50) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
+      {/* Royal tile pattern — same architectural grid used in masthead + footer */}
+      <span aria-hidden className="absolute inset-0 bg-pattern-royal opacity-60 pointer-events-none" />
       {/* Soft gold radial glow */}
       <div
         aria-hidden
@@ -81,7 +73,7 @@ function Stat({
 }) {
   return (
     <div
-      className="relative rounded-2xl p-5 md:p-6 transition-transform hover:-translate-y-0.5"
+      className="relative rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(184,85,58,0.6),0_0_24px_rgba(184,85,58,0.30)]"
       style={{
         background:
           "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",

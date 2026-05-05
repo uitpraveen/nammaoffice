@@ -85,14 +85,16 @@ export default async function LocationPage({ params }: Props) {
         ]}
       />
 
-      {/* Hero image strip */}
+      {/* Hero image strip — featured 1 large + 2 smaller */}
       <section className="content-width pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-2 md:gap-3 rounded-2xl overflow-hidden h-auto md:h-[440px]">
           {location.images.slice(0, 3).map((src, i) => (
             <div
-              key={`${src}-${i}`}
-              className={`relative aspect-[4/3] md:aspect-auto bg-[var(--color-surface-alt)] ${
-                i === 0 ? "md:col-span-2 md:row-span-2 md:aspect-[4/3]" : "md:aspect-[5/3]"
+              key={`hero-${src}-${i}`}
+              className={`relative bg-[var(--color-surface-alt)] ${
+                i === 0
+                  ? "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto"
+                  : "aspect-[5/3] md:aspect-auto"
               }`}
             >
               <Image
@@ -121,6 +123,31 @@ export default async function LocationPage({ params }: Props) {
                 {location.description}
               </p>
             </div>
+
+            {/* Gallery — remaining centre photos beyond the hero strip */}
+            {location.images.length > 3 && (
+              <div>
+                <h2 className="font-display text-2xl text-[var(--color-navy)] mb-5">
+                  Inside the centre
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {location.images.slice(3).map((src, i) => (
+                    <div
+                      key={`gal-${src}-${i}`}
+                      className="relative aspect-[4/3] rounded-xl overflow-hidden bg-[var(--color-surface-alt)] group"
+                    >
+                      <Image
+                        src={src}
+                        alt={`${location.name}, ${city.name} — gallery ${i + 4}`}
+                        fill
+                        sizes="(max-width: 640px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Workspace types */}
             {location.workspaceTypes.length > 0 && (

@@ -7,16 +7,17 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, MapPin, Menu, Phone, Star } from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, Menu, Phone, Star } from "lucide-react";
 import { useState } from "react";
 
 /**
- * Newspaper-Masthead navbar — bold, solid black, sharp corners, no
- * transparency. Two horizontal bands:
- *   1. 28px charcoal utility strip — rating left, phone right
- *   2. 80px solid-black masthead — large logo, Fraunces uppercase serif
- *      nav, full-height gold BOOK NOW tile on the far right
- * A 1px gold rule line sits beneath the masthead. Total ~108px fixed.
+ * Newspaper-Masthead navbar v2 — bold matt black with neon brick rule.
+ *  1. 32px utility strip — rating · centres · hours on the left;
+ *     email · phone on the right.
+ *  2. 80px solid matt-black masthead — large logo, Fraunces uppercase
+ *     serif nav, full-height brick BOOK NOW tile flush on the far right.
+ *  3. Thin neon brick rule beneath the masthead with a soft glow halo
+ *     for the "royal & promising" feel.
  */
 export function Header() {
   const pathname = usePathname();
@@ -26,38 +27,53 @@ export function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-40">
-        {/* Utility strip */}
-        <div className="h-7 bg-[var(--color-charcoal)] text-white text-[11px] font-medium border-b border-white/5">
+        {/* Utility strip — richer info: rating · centres · hours · email · phone */}
+        <div className="h-8 bg-[var(--color-charcoal)] text-white text-[11px] font-medium border-b border-white/5">
           <div className="content-width h-full flex items-center justify-between gap-3">
-            <span className="inline-flex items-center gap-1.5 text-white/85">
-              <Star className="w-3 h-3 fill-[var(--color-gold)] text-[var(--color-gold)]" strokeWidth={1.5} />
-              <span className="font-semibold text-white">4.9</span>
-              <span className="hidden sm:inline">/5 from 200+ members</span>
-              <span className="hidden md:inline opacity-30 mx-1">·</span>
-              <span className="hidden md:inline-flex items-center gap-1 text-white/70">
+            {/* Left cluster — public-trust signals */}
+            <div className="flex items-center gap-x-3 lg:gap-x-4 text-white/80 min-w-0">
+              <span className="inline-flex items-center gap-1 shrink-0">
+                <Star className="w-3 h-3 fill-[var(--color-gold)] text-[var(--color-gold)]" strokeWidth={1.5} />
+                <span className="font-semibold text-white">4.9</span>
+                <span className="hidden sm:inline ml-1">/5 · 200+ members</span>
+              </span>
+              <span className="hidden md:inline opacity-30">·</span>
+              <span className="hidden md:inline-flex items-center gap-1 shrink-0">
                 <MapPin className="w-2.5 h-2.5" strokeWidth={2} />
                 8 centres · 3 cities
               </span>
-            </span>
-            <a
-              href={`tel:${formatPhone(BRAND.phone)}`}
-              className="inline-flex items-center gap-1.5 text-white/85 hover:text-[var(--color-gold-300)] transition-colors"
-            >
-              <Phone className="w-3 h-3" strokeWidth={2} />
-              <span className="font-semibold text-white">{BRAND.phone}</span>
-            </a>
+              <span className="hidden lg:inline opacity-30">·</span>
+              <span className="hidden lg:inline-flex items-center gap-1 shrink-0">
+                <Clock className="w-2.5 h-2.5" strokeWidth={2} />
+                Mon–Sat 8 AM – 9 PM
+              </span>
+            </div>
+
+            {/* Right cluster — direct contact */}
+            <div className="flex items-center gap-x-3 lg:gap-x-4 shrink-0">
+              <a
+                href={`mailto:${BRAND.email}`}
+                className="hidden md:inline-flex items-center gap-1 text-white/80 hover:text-[var(--color-gold-300)] transition-colors"
+              >
+                <Mail className="w-2.5 h-2.5" strokeWidth={2} />
+                {BRAND.email}
+              </a>
+              <span className="hidden md:inline opacity-30">·</span>
+              <a
+                href={`tel:${formatPhone(BRAND.phone)}`}
+                className="inline-flex items-center gap-1 text-white/85 hover:text-[var(--color-gold-300)] transition-colors"
+              >
+                <Phone className="w-3 h-3" strokeWidth={2} />
+                <span className="font-semibold text-white">{BRAND.phone}</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Masthead bar */}
-        <div className="h-16 md:h-20 bg-[var(--color-navy)] border-b border-[var(--color-gold)] text-white relative">
-          {/* Optional subtle inner rule above the gold border for "newspaper" feel */}
-          <span
-            aria-hidden
-            className="absolute left-0 right-0 bottom-[1px] h-px bg-white/8"
-          />
-
-          <div className="content-width h-full flex items-stretch justify-between gap-4">
+        {/* Masthead bar — solid matt black with royal tile pattern overlay */}
+        <div className="h-16 md:h-20 bg-[var(--color-navy)] text-white relative overflow-hidden">
+          <span aria-hidden className="absolute inset-0 bg-pattern-royal opacity-60 pointer-events-none" />
+          <div className="relative content-width h-full flex items-stretch justify-between gap-4">
             {/* Logo */}
             <Link
               href="/"
@@ -74,7 +90,7 @@ export function Header() {
               />
             </Link>
 
-            {/* Center nav */}
+            {/* Center nav — Fraunces uppercase, evenly spaced */}
             <div className="flex-1 flex items-center justify-center min-w-0">
               <DesktopNav />
             </div>
@@ -103,13 +119,30 @@ export function Header() {
               </button>
             </div>
           </div>
+
+          {/* Neon brick rule + glow halo — runs beneath the masthead.
+              Two layers: a hairline at the very edge, and a soft outer
+              glow that bleeds 12px below for a "neon sign" feel. */}
+          <span
+            aria-hidden
+            className="absolute left-0 right-0 -bottom-px h-px bg-[var(--color-gold)]"
+          />
+          <span
+            aria-hidden
+            className="absolute left-0 right-0 -bottom-3 h-3 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(184,85,58,0.45) 0%, rgba(184,85,58,0) 100%)",
+              filter: "blur(4px)",
+            }}
+          />
         </div>
       </header>
 
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* Spacer for non-home pages — matches utility strip + masthead height */}
-      {!isHome && <div className="h-[calc(28px+64px)] md:h-[calc(28px+80px)]" aria-hidden />}
+      {/* Spacer for non-home pages — utility strip + masthead height */}
+      {!isHome && <div className="h-[calc(32px+64px)] md:h-[calc(32px+80px)]" aria-hidden />}
     </>
   );
 }

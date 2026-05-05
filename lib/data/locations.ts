@@ -79,7 +79,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "business-lounge",
     ],
-    images: [wix.b, wix.e, wix.h],
+    images: [wix.b, wix.e, wix.h, wix.cabin, wix.team, wix.discussion],
     nearbyLandmarks: [
       "Salem Junction Railway Station (2 km)",
       "Salem Bus Stand (3 km)",
@@ -122,7 +122,7 @@ export const locations: Location[] = [
       "breakout-zone",
     ],
     workspaceTypes: ["private-cabin", "open-desk", "cubicle", "meeting-hall"],
-    images: [wix.ramakrishna, wix.c, wix.k],
+    images: [wix.ramakrishna, wix.c, wix.k, wix.i, wix.discussion, wix.j],
     nearbyLandmarks: [
       "Ramakrishna Hospital (0.8 km)",
       "Salem New Bus Stand (2 km)",
@@ -170,7 +170,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "business-lounge",
     ],
-    images: [wix.rajeshwari, wix.d, wix.j],
+    images: [wix.rajeshwari, wix.d, wix.j, wix.cabin, wix.team, wix.b],
     nearbyLandmarks: [
       "Salem Junction Railway Station (2.5 km)",
       "Salem Bus Stand (1.5 km)",
@@ -216,7 +216,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "managed-office",
     ],
-    images: [wix.newbus, wix.n, wix.o],
+    images: [wix.newbus, wix.n, wix.o, wix.m, wix.l, wix.discussion],
     nearbyLandmarks: [
       "Salem New Bus Stand (200m)",
       "Salem Railway Station (3 km)",
@@ -264,7 +264,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [wix.newbus, wix.e, wix.f],
+    images: [wix.f, wix.e, wix.h, wix.g, wix.cabin, wix.team],
     nearbyLandmarks: [
       "TIDEL NEO Technology Park",
       "Salem Airport (10 km)",
@@ -303,7 +303,7 @@ export const locations: Location[] = [
       "ergonomic-furniture",
     ],
     workspaceTypes: ["open-desk"],
-    images: [wix.a, wix.l, wix.m],
+    images: [wix.a, wix.l, wix.m, wix.k, wix.discussion, wix.team],
     nearbyLandmarks: [
       "Salem Fort (0.5 km)",
       "Salem Court Complex (1 km)",
@@ -352,7 +352,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [wix.g, wix.h, wix.b],
+    images: [wix.g, wix.h, wix.b, wix.cabin, wix.team, wix.i],
     nearbyLandmarks: [
       "Trichy Junction Railway Station (3 km)",
       "Rockfort Temple (4 km)",
@@ -402,7 +402,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [wix.newbus, wix.o, wix.e],
+    images: [wix.newbus, wix.o, wix.e, wix.f, wix.n, wix.discussion],
     nearbyLandmarks: [
       "Tirupur Railway Station (5 km)",
       "Tirupur Bus Stand (4 km)",
