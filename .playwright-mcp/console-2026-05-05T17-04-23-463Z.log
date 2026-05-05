@@ -1,0 +1,20 @@
+[     149ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     313ms] [LOG] [Fast Refresh] done in 265ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     716ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     751ms] [LOG] [HMR] connected @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    1202ms] [WARNING] Image with src "https://static.wixstatic.com/media/fd8c76_6980b1eaf30345c28279fecef6e205cb~mv2.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    1231ms] [WARNING] Error while trying to use the following icon from the Manifest: http://localhost:3030/favicon.ico (Resource size is not correct - typo in the Manifest?) @ http://localhost:3030/locations/salem/fairlands:0
+[    1353ms] [WARNING] Image with src "https://static.wixstatic.com/media/fd8c76_663f3b9fb3164f65bdb59a98c33da458~mv2.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    4618ms] [WARNING] The resource http://localhost:3030/_next/static/media/5c285b27cdda1fe8-s.p.0yo6-5yoeeudq.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3030/locations/salem/fairlands:0
+[    4619ms] [WARNING] The resource http://localhost:3030/_next/static/media/0c8f209abc35ee02-s.p.03rqv30url-~q.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3030/locations/salem/fairlands:0
+[    4619ms] [WARNING] The resource http://localhost:3030/_next/static/chunks/%5Bnext%5D_internal_font_google_0mg.b23._.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3030/locations/salem/fairlands:0
+[    7683ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    7814ms] [LOG] [Fast Refresh] done in 233ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    8815ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    9006ms] [LOG] [Fast Refresh] done in 291ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    9463ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    9669ms] [LOG] [Fast Refresh] done in 307ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   10333ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   10543ms] [LOG] [Fast Refresh] done in 312ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   11756ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   11887ms] [LOG] [Fast Refresh] done in 231ms @ http://localhost:3030/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

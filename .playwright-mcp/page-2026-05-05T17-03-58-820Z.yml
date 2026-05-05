@@ -1,0 +1,408 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e6]
+        - generic [ref=e8]: "4.9"
+        - generic [ref=e9]: /5 from 200+ members
+        - generic [ref=e10]: ·
+        - generic [ref=e11]:
+          - img [ref=e12]
+          - text: 8 centres · 3 cities
+      - link "+91 9092109213" [ref=e15] [cursor=pointer]:
+        - /url: tel:+919092109213
+        - img [ref=e16]
+        - generic [ref=e18]: +91 9092109213
+    - generic [ref=e21]:
+      - link "NammaOffice — home" [ref=e22] [cursor=pointer]:
+        - /url: /
+        - img "NammaOffice" [ref=e23]
+      - navigation "Main navigation" [ref=e25]:
+        - link "Locations" [ref=e26] [cursor=pointer]:
+          - /url: /locations
+          - generic [ref=e27]: Locations
+        - link "Amenities" [ref=e28] [cursor=pointer]:
+          - /url: /amenities
+          - generic [ref=e29]: Amenities
+        - link "Forms" [ref=e30] [cursor=pointer]:
+          - /url: /forms
+          - generic [ref=e31]: Forms
+        - link "Franchise" [ref=e32] [cursor=pointer]:
+          - /url: /franchise
+          - generic [ref=e33]: Franchise
+        - link "Gate Pass" [ref=e34] [cursor=pointer]:
+          - /url: /gate-pass
+          - generic [ref=e35]: Gate Pass
+        - link "About" [ref=e36] [cursor=pointer]:
+          - /url: /about
+          - generic [ref=e37]: About
+        - link "Contact" [ref=e38] [cursor=pointer]:
+          - /url: /contact
+          - generic [ref=e39]: Contact
+      - link "Book Now" [ref=e41] [cursor=pointer]:
+        - /url: /bookings
+        - text: Book Now
+        - img [ref=e42]
+  - main [ref=e44]:
+    - generic [ref=e45]:
+      - img "NammaOffice modern coworking interior — Salem" [ref=e47]
+      - img [ref=e49]
+      - img [ref=e51]
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - img [ref=e55]
+            - text: Coworking · Salem
+          - heading "Build Your Business From Your City" [level=1] [ref=e58]:
+            - text: Build Your Business From
+            - generic [ref=e59]: Your City
+          - paragraph [ref=e60]: Premium workspaces for startups, freelancers, and growing teams in Tier-2 & Tier-3 cities.
+        - list [ref=e61]:
+          - listitem [ref=e62]:
+            - img [ref=e64]
+            - text: High-Speed Internet
+          - listitem [ref=e68]:
+            - img [ref=e70]
+            - text: Prime Locations
+          - listitem [ref=e73]:
+            - img [ref=e75]
+            - text: Flexible Plans
+        - generic [ref=e79]:
+          - link "Book Now" [ref=e80] [cursor=pointer]:
+            - /url: /bookings
+            - text: Book Now
+            - img [ref=e81]
+          - link "Explore centres" [ref=e83] [cursor=pointer]:
+            - /url: /locations
+      - generic [ref=e84]:
+        - generic [ref=e85]:
+          - paragraph [ref=e86]: 01/03
+          - paragraph [ref=e87]: Designed for focused work
+          - paragraph [ref=e88]: Fairlands · Salem
+        - generic [ref=e89]:
+          - button "Go to slide 1" [ref=e90]
+          - button "Go to slide 2" [ref=e91]
+          - button "Go to slide 3" [ref=e92]
+        - generic [ref=e93]:
+          - button "Previous slide" [ref=e94]:
+            - img [ref=e95]
+          - button "Pause autoplay" [ref=e97]:
+            - img [ref=e98]
+          - button "Next slide" [ref=e101]:
+            - img [ref=e102]
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - paragraph [ref=e108]: Centres
+          - heading "8 centres. 3 cities. One ecosystem." [level=2] [ref=e109]
+        - link "View all centres" [ref=e110] [cursor=pointer]:
+          - /url: /locations
+          - text: View all centres
+          - img [ref=e111]
+      - generic [ref=e113]:
+        - link "Fairlands, Salem Salem Fairlands Anushka Tower, 5th Floor, Brindavan Road, Fairlands, Salem — 636 016 View centre" [ref=e114] [cursor=pointer]:
+          - /url: /locations/salem/fairlands
+          - img "Fairlands, Salem" [ref=e115]
+          - generic [ref=e118]: Salem
+          - generic [ref=e119]:
+            - heading "Fairlands" [level=3] [ref=e120]
+            - paragraph [ref=e121]:
+              - img [ref=e122]
+              - generic [ref=e125]: Anushka Tower, 5th Floor, Brindavan Road, Fairlands, Salem — 636 016
+            - generic [ref=e126]:
+              - text: View centre
+              - img [ref=e127]
+        - link "Ramakrishna Road, Salem Salem Ramakrishna Road Balaji Tower, 3rd Floor, Ramakrishna Road, Salem — 636 007 View centre" [ref=e129] [cursor=pointer]:
+          - /url: /locations/salem/ramakrishna-road
+          - img "Ramakrishna Road, Salem" [ref=e130]
+          - generic [ref=e133]: Salem
+          - generic [ref=e134]:
+            - heading "Ramakrishna Road" [level=3] [ref=e135]
+            - paragraph [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e140]: Balaji Tower, 3rd Floor, Ramakrishna Road, Salem — 636 007
+            - generic [ref=e141]:
+              - text: View centre
+              - img [ref=e142]
+        - link "Rajeshwari Towers, Salem Salem Rajeshwari Towers Rajeshwari Towers, Salem — 636 007 View centre" [ref=e144] [cursor=pointer]:
+          - /url: /locations/salem/rajeshwari-towers
+          - img "Rajeshwari Towers, Salem" [ref=e145]
+          - generic [ref=e148]: Salem
+          - generic [ref=e149]:
+            - heading "Rajeshwari Towers" [level=3] [ref=e150]
+            - paragraph [ref=e151]:
+              - img [ref=e152]
+              - generic [ref=e155]: Rajeshwari Towers, Salem — 636 007
+            - generic [ref=e156]:
+              - text: View centre
+              - img [ref=e157]
+        - link "New Bus Stand, Salem Salem New Bus Stand New Bus Stand Area, Salem — 636 004 View centre" [ref=e159] [cursor=pointer]:
+          - /url: /locations/salem/new-bus-stand
+          - img "New Bus Stand, Salem" [ref=e160]
+          - generic [ref=e163]: Salem
+          - generic [ref=e164]:
+            - heading "New Bus Stand" [level=3] [ref=e165]
+            - paragraph [ref=e166]:
+              - img [ref=e167]
+              - generic [ref=e170]: New Bus Stand Area, Salem — 636 004
+            - generic [ref=e171]:
+              - text: View centre
+              - img [ref=e172]
+        - link "TIDEL NEO, Salem Salem TIDEL NEO TIDEL NEO, Salem — 636 005 View centre" [ref=e174] [cursor=pointer]:
+          - /url: /locations/salem/tidel-neo
+          - img "TIDEL NEO, Salem" [ref=e175]
+          - generic [ref=e178]: Salem
+          - generic [ref=e179]:
+            - heading "TIDEL NEO" [level=3] [ref=e180]
+            - paragraph [ref=e181]:
+              - img [ref=e182]
+              - generic [ref=e185]: TIDEL NEO, Salem — 636 005
+            - generic [ref=e186]:
+              - text: View centre
+              - img [ref=e187]
+        - link "Fort Hosur, Salem Salem Fort Hosur Fort Hosur, Salem — 636 001 View centre" [ref=e189] [cursor=pointer]:
+          - /url: /locations/salem/fort-hosur
+          - img "Fort Hosur, Salem" [ref=e190]
+          - generic [ref=e193]: Salem
+          - generic [ref=e194]:
+            - heading "Fort Hosur" [level=3] [ref=e195]
+            - paragraph [ref=e196]:
+              - img [ref=e197]
+              - generic [ref=e200]: Fort Hosur, Salem — 636 001
+            - generic [ref=e201]:
+              - text: View centre
+              - img [ref=e202]
+        - link "Asha Grand, Trichy Trichy Asha Grand Asha Grand, Trichy — 620 017 View centre" [ref=e204] [cursor=pointer]:
+          - /url: /locations/trichy/asha-grand
+          - img "Asha Grand, Trichy" [ref=e205]
+          - generic [ref=e208]: Trichy
+          - generic [ref=e209]:
+            - heading "Asha Grand" [level=3] [ref=e210]
+            - paragraph [ref=e211]:
+              - img [ref=e212]
+              - generic [ref=e215]: Asha Grand, Trichy — 620 017
+            - generic [ref=e216]:
+              - text: View centre
+              - img [ref=e217]
+        - link "TIDEL NEO, Tirupur Tirupur TIDEL NEO TIDEL NEO, Tirupur — 641 604 View centre" [ref=e219] [cursor=pointer]:
+          - /url: /locations/tirupur/tidel-neo
+          - img "TIDEL NEO, Tirupur" [ref=e220]
+          - generic [ref=e223]: Tirupur
+          - generic [ref=e224]:
+            - heading "TIDEL NEO" [level=3] [ref=e225]
+            - paragraph [ref=e226]:
+              - img [ref=e227]
+              - generic [ref=e230]: TIDEL NEO, Tirupur — 641 604
+            - generic [ref=e231]:
+              - text: View centre
+              - img [ref=e232]
+    - generic [ref=e236]:
+      - generic [ref=e237]:
+        - paragraph [ref=e238]: By the numbers
+        - heading "Built across Tamil Nadu's fastest-growing cities." [level=2] [ref=e239]:
+          - text: Built across Tamil Nadu's
+          - text: fastest-growing cities.
+        - paragraph [ref=e240]: Eight centres. Three cities. Hundreds of members building everything from textile exports to SaaS startups.
+        - link "About NammaOffice" [ref=e241] [cursor=pointer]:
+          - /url: /about
+          - text: About NammaOffice
+          - img [ref=e242]
+      - generic [ref=e245]:
+        - generic [ref=e246]:
+          - paragraph [ref=e247]: "8"
+          - paragraph [ref=e248]: Centres
+        - generic [ref=e249]:
+          - paragraph [ref=e250]: "3"
+          - paragraph [ref=e251]: Cities
+        - generic [ref=e252]:
+          - paragraph [ref=e253]: 500+
+          - paragraph [ref=e254]: Members
+        - generic [ref=e255]:
+          - paragraph [ref=e256]: 4.9/5
+          - paragraph [ref=e257]: Rating
+    - generic [ref=e259]:
+      - generic [ref=e260]:
+        - generic [ref=e261]:
+          - paragraph [ref=e262]: Amenities
+          - heading "Everything you need, included." [level=2] [ref=e263]
+          - paragraph [ref=e264]: From fibre internet to ergonomic seating, every amenity is on every floor — at every centre.
+        - link "See full list" [ref=e265] [cursor=pointer]:
+          - /url: /amenities
+          - text: See full list
+          - img [ref=e266]
+      - list [ref=e268]:
+        - listitem [ref=e269]:
+          - img [ref=e271]
+          - generic [ref=e275]: Gigabit Wi-Fi
+        - listitem [ref=e276]:
+          - img [ref=e278]
+          - generic [ref=e280]: Power backup
+        - listitem [ref=e281]:
+          - img [ref=e283]
+          - generic [ref=e287]: Air conditioning
+        - listitem [ref=e288]:
+          - img [ref=e290]
+          - generic [ref=e292]: Cafeteria
+        - listitem [ref=e293]:
+          - img [ref=e295]
+          - generic [ref=e299]: Printing & scan
+        - listitem [ref=e300]:
+          - img [ref=e302]
+          - generic [ref=e306]: Free parking
+        - listitem [ref=e307]:
+          - img [ref=e309]
+          - generic [ref=e312]: 24/7 security
+        - listitem [ref=e313]:
+          - img [ref=e315]
+          - generic [ref=e318]: Personal locker
+        - listitem [ref=e319]:
+          - img [ref=e321]
+          - generic [ref=e326]: Conference rooms
+        - listitem [ref=e327]:
+          - img [ref=e329]
+          - generic [ref=e332]: Reception
+        - listitem [ref=e333]:
+          - img [ref=e335]
+          - generic [ref=e338]: Ergonomic seating
+        - listitem [ref=e339]:
+          - img [ref=e341]
+          - generic [ref=e344]: Breakout zones
+  - contentinfo [ref=e345]:
+    - generic [ref=e346]:
+      - generic [ref=e347]:
+        - paragraph [ref=e348]: Get in touch
+        - heading "Ready to claim your space?" [level=2] [ref=e349]
+        - paragraph [ref=e350]: Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
+      - generic [ref=e351]:
+        - link "Book Now" [ref=e352] [cursor=pointer]:
+          - /url: /bookings
+          - text: Book Now
+          - img [ref=e353]
+        - link "+91 9092109213" [ref=e355] [cursor=pointer]:
+          - /url: tel:+919092109213
+          - img [ref=e356]
+          - text: +91 9092109213
+    - generic [ref=e359]:
+      - generic [ref=e360]:
+        - link "NammaOffice home" [ref=e361] [cursor=pointer]:
+          - /url: /
+          - img "NammaOffice" [ref=e362]
+        - paragraph [ref=e363]: Premium coworking spaces across Salem, Trichy, and Tirupur.
+        - generic [ref=e364]:
+          - link "+91 9092109213" [ref=e365] [cursor=pointer]:
+            - /url: tel:+919092109213
+            - img [ref=e366]
+            - text: +91 9092109213
+          - link "info@nammaoffice.com" [ref=e368] [cursor=pointer]:
+            - /url: mailto:info@nammaoffice.com
+            - img [ref=e369]
+            - text: info@nammaoffice.com
+        - generic [ref=e372]:
+          - link "Instagram" [ref=e373] [cursor=pointer]:
+            - /url: https://instagram.com/nammaoffice
+            - img [ref=e374]
+          - link "LinkedIn" [ref=e376] [cursor=pointer]:
+            - /url: https://linkedin.com/company/nammaoffice
+            - img [ref=e377]
+          - link "Facebook" [ref=e379] [cursor=pointer]:
+            - /url: https://facebook.com/nammaoffice
+            - img [ref=e380]
+          - link "YouTube" [ref=e382] [cursor=pointer]:
+            - /url: https://youtube.com/@nammaoffice
+            - img [ref=e383]
+      - generic [ref=e385]:
+        - heading "Locations" [level=3] [ref=e386]
+        - list [ref=e387]:
+          - listitem [ref=e388]:
+            - link "Fairlands Salem" [ref=e389] [cursor=pointer]:
+              - /url: /locations/salem/fairlands
+              - text: Fairlands
+              - generic [ref=e390]: Salem
+          - listitem [ref=e391]:
+            - link "Ramakrishna Road Salem" [ref=e392] [cursor=pointer]:
+              - /url: /locations/salem/ramakrishna-road
+              - text: Ramakrishna Road
+              - generic [ref=e393]: Salem
+          - listitem [ref=e394]:
+            - link "Rajeshwari Towers Salem" [ref=e395] [cursor=pointer]:
+              - /url: /locations/salem/rajeshwari-towers
+              - text: Rajeshwari Towers
+              - generic [ref=e396]: Salem
+          - listitem [ref=e397]:
+            - link "New Bus Stand Salem" [ref=e398] [cursor=pointer]:
+              - /url: /locations/salem/new-bus-stand
+              - text: New Bus Stand
+              - generic [ref=e399]: Salem
+          - listitem [ref=e400]:
+            - link "TIDEL NEO Salem" [ref=e401] [cursor=pointer]:
+              - /url: /locations/salem/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e402]: Salem
+          - listitem [ref=e403]:
+            - link "Fort Hosur Salem" [ref=e404] [cursor=pointer]:
+              - /url: /locations/salem/fort-hosur
+              - text: Fort Hosur
+              - generic [ref=e405]: Salem
+          - listitem [ref=e406]:
+            - link "Asha Grand Trichy" [ref=e407] [cursor=pointer]:
+              - /url: /locations/trichy/asha-grand
+              - text: Asha Grand
+              - generic [ref=e408]: Trichy
+          - listitem [ref=e409]:
+            - link "TIDEL NEO Tirupur" [ref=e410] [cursor=pointer]:
+              - /url: /locations/tirupur/tidel-neo
+              - text: TIDEL NEO
+              - generic [ref=e411]: Tirupur
+      - generic [ref=e412]:
+        - heading "Forms" [level=3] [ref=e413]
+        - list [ref=e414]:
+          - listitem [ref=e415]:
+            - link "Company Registration" [ref=e416] [cursor=pointer]:
+              - /url: /registration/company
+          - listitem [ref=e417]:
+            - link "User Registration" [ref=e418] [cursor=pointer]:
+              - /url: /registration/user
+          - listitem [ref=e419]:
+            - link "Vendor Form" [ref=e420] [cursor=pointer]:
+              - /url: /registration/vendor
+          - listitem [ref=e421]:
+            - link "Bookings" [ref=e422] [cursor=pointer]:
+              - /url: /bookings
+      - generic [ref=e423]:
+        - heading "Service Desk" [level=3] [ref=e424]
+        - list [ref=e425]:
+          - listitem [ref=e426]:
+            - link "Gate Pass — Salem TIDEL" [ref=e427] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-salem
+          - listitem [ref=e428]:
+            - link "Gate Pass — Tirupur TIDEL" [ref=e429] [cursor=pointer]:
+              - /url: /gate-pass/tidel-neo-tirupur
+          - listitem [ref=e430]:
+            - link "Franchise" [ref=e431] [cursor=pointer]:
+              - /url: /franchise
+          - listitem [ref=e432]:
+            - link "Amenities" [ref=e433] [cursor=pointer]:
+              - /url: /amenities
+          - listitem [ref=e434]:
+            - link "About" [ref=e435] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e436]:
+            - link "Contact" [ref=e437] [cursor=pointer]:
+              - /url: /contact
+    - generic [ref=e439]:
+      - paragraph [ref=e440]: © 2026 NammaOffice. All rights reserved.
+      - generic [ref=e441]:
+        - link "Privacy" [ref=e442] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Terms" [ref=e443] [cursor=pointer]:
+          - /url: /terms-conditions
+        - link "Refund" [ref=e444] [cursor=pointer]:
+          - /url: /refund-policy
+        - generic [ref=e445]:
+          - img [ref=e446]
+          - text: 8 centres · 3 cities
+  - link "Chat with us on WhatsApp" [ref=e449] [cursor=pointer]:
+    - /url: https://wa.me/919092109213?text=Hi%2C%20I'm%20interested%20in%20NammaOffice%20workspaces
+    - img [ref=e450]
+  - button "Open Next.js Dev Tools" [ref=e457] [cursor=pointer]:
+    - img [ref=e458]

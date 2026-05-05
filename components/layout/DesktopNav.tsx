@@ -5,21 +5,20 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface DesktopNavProps {
-  theme?: "light" | "dark";
-}
-
 /**
- * Flat horizontal nav for the floating pill. Each item gets an animated
- * gold underline that slides in from left on hover; the active route
- * shows a permanent underline.
+ * Newspaper-masthead nav — Fraunces uppercase serif, generous letter
+ * spacing, gold underline on the active route, gold underline that
+ * slides in left-to-right on hover. Always renders white-on-black
+ * inside the masthead bar.
  */
-export function DesktopNav({ theme = "dark" }: DesktopNavProps) {
+export function DesktopNav() {
   const pathname = usePathname();
-  const isLight = theme === "light";
 
   return (
-    <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
+    <nav
+      className="hidden lg:flex items-center gap-x-5 xl:gap-x-7"
+      aria-label="Main navigation"
+    >
       {navigation.map((item) => {
         const isActive =
           pathname === item.href || pathname.startsWith(item.href + "/");
@@ -28,26 +27,22 @@ export function DesktopNav({ theme = "dark" }: DesktopNavProps) {
           <Link
             key={item.href}
             href={item.href}
-            className={cn(
-              "group relative px-3 py-2 text-[13px] font-medium transition-colors rounded-full",
-              isLight
-                ? isActive
-                  ? "text-white"
-                  : "text-white/80 hover:text-white"
-                : isActive
-                  ? "text-[var(--color-navy)]"
-                  : "text-[var(--color-ink-secondary)] hover:text-[var(--color-navy)]"
-            )}
+            className="group relative inline-block py-1 whitespace-nowrap"
           >
-            <span className="relative z-10">{item.label}</span>
-
-            {/* Animated underline — slides in left-to-right on hover.
-                Active route keeps it visible permanently. */}
+            <span
+              className={cn(
+                "block font-[var(--font-serif)] text-[11.5px] uppercase tracking-[0.16em] font-medium",
+                "transition-colors duration-200",
+                isActive ? "text-[var(--color-gold)]" : "text-white/85 group-hover:text-white"
+              )}
+            >
+              {item.label}
+            </span>
             <span
               aria-hidden
               className={cn(
-                "absolute left-3 right-3 bottom-1 h-[1.5px] origin-left transition-transform duration-200",
-                isLight ? "bg-[var(--color-gold-300)]" : "bg-[var(--color-gold)]",
+                "absolute left-0 right-0 -bottom-1 h-[1.5px] origin-left transition-transform duration-200",
+                "bg-[var(--color-gold)]",
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )}
             />
