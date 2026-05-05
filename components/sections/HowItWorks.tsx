@@ -45,14 +45,14 @@ export function HowItWorks() {
             <p className="eyebrow">How it works</p>
             <h2 className="display-lg mt-3 text-[var(--color-ink)]">
               Three steps from{" "}
-              <span className="italic font-normal text-[var(--color-accent)]">
+              <span className="italic font-normal text-[var(--color-gold-deep)]">
                 hello
               </span>{" "}
               to working.
             </h2>
           </div>
           <p className="text-[16px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xl">
-            We've trimmed the friction out of finding a workspace. Browse, tour,
+            We&apos;ve trimmed the friction out of finding a workspace. Browse, tour,
             move in — most members are at their new desk within 48 hours of
             their first enquiry.
           </p>
@@ -74,10 +74,10 @@ export function HowItWorks() {
                   className="group relative bg-[var(--color-bg)] rounded-2xl border border-[var(--color-border)] p-6 md:p-7 hover:border-[var(--color-border-strong)] hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(10,10,10,0.06)] transition-all"
                 >
                   <div className="flex items-start justify-between gap-4 mb-5">
-                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-accent)] text-white shadow-[0_4px_16px_rgba(31,181,224,0.25)]">
+                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-navy)] text-[var(--color-gold)] shadow-[0_4px_16px_rgba(11,37,69,0.18)]">
                       <Icon className="w-5 h-5" strokeWidth={1.75} />
                     </span>
-                    <span className="text-[44px] font-bold tabular-nums leading-none text-[var(--color-secondary)] tracking-[-0.03em]">
+                    <span className="text-[44px] font-bold tabular-nums leading-none text-[var(--color-gold-300)] tracking-[-0.03em] font-display">
                       {s.num}
                     </span>
                   </div>
@@ -99,17 +99,17 @@ export function HowItWorks() {
 
         <div className="mt-12 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/book-tour"
-            className="inline-flex items-center gap-2 h-12 px-7 bg-[var(--color-accent)] text-white text-[14px] font-semibold rounded-full hover:bg-[var(--color-accent-600)] transition-colors shadow-[0_4px_16px_rgba(31,181,224,0.25)]"
+            href="/bookings"
+            className="inline-flex items-center gap-2 h-12 px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
           >
-            Start with a tour
+            Book a tour
             <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
           </Link>
           <Link
-            href="/pricing"
-            className="inline-flex items-center gap-2 h-12 px-7 border border-[var(--color-border-strong)] text-[var(--color-ink)] text-[14px] font-semibold rounded-full hover:border-[var(--color-ink)] transition-colors"
+            href="/locations"
+            className="inline-flex items-center gap-2 h-12 px-7 border border-[var(--color-navy)] text-[var(--color-navy)] text-[14px] font-semibold rounded-full hover:bg-[var(--color-navy)] hover:text-white transition-colors"
           >
-            See plans &amp; pricing
+            Browse all centres
           </Link>
         </div>
       </div>

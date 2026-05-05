@@ -6,7 +6,7 @@ import { cn, formatPhone, whatsappUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Mail, MessageCircle, Phone, X } from "lucide-react";
 
 interface MobileMenuProps {
@@ -18,14 +18,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
-  // Close on route change. We intentionally exclude `onClose` from deps —
-  // it's a parent-defined callback that gets re-created every render, and
-  // including it would close the menu the instant it opens (the parent
-  // re-renders the moment isOpen flips to true, recreating onClose, which
-  // re-fires this effect and closes the menu again).
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Close on route change. Stash onClose in a ref so the effect can call the
+  // latest callback without depending on it (parent recreates it every render,
+  // and including it in deps would close the menu the instant it opens).
+  const onCloseRef = useRef(onClose);
   useEffect(() => {
-    onClose();
+    onCloseRef.current = onClose;
+  });
+  useEffect(() => {
+    onCloseRef.current();
   }, [pathname]);
 
   useEffect(() => {
@@ -170,10 +171,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         <div className="px-5 py-4 border-t border-[var(--color-border)] space-y-3 bg-[var(--color-bg)]">
           <Link
-            href="/book-tour"
-            className="flex items-center justify-center gap-2 w-full h-12 bg-[var(--color-ink)] text-white text-[14px] font-semibold rounded-full hover:bg-[var(--color-charcoal-soft)] transition-colors"
+            href="/bookings"
+            className="flex items-center justify-center gap-2 w-full h-12 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
           >
-            Book a tour <span aria-hidden>→</span>
+            Book Now <span aria-hidden>→</span>
           </Link>
           <div className="grid grid-cols-3 gap-2">
             <a

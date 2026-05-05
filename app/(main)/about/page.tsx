@@ -1,45 +1,38 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Compass, Heart, Telescope } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 import { CTASection } from "@/components/sections/CTASection";
-import { JourneyStepper } from "@/components/sections/JourneyStepper";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { team, milestones } from "@/lib/data/team";
 
 export const metadata: Metadata = {
-  title: "About NammaOffice — Our Story, Mission & Team",
+  title: "About NammaOffice — Our Story & Mission",
   description:
-    "Learn about NammaOffice — how we started in Salem and grew to 7 centres across Tamil Nadu. Our mission: make premium workspaces accessible to every entrepreneur.",
-  keywords: [
-    "about NammaOffice",
-    "NammaOffice history",
-    "coworking Tamil Nadu story",
-  ],
+    "How NammaOffice grew from a single Salem centre to 8 premium workspaces across Tamil Nadu — built for tier-2 entrepreneurs, freelancers, and growing teams.",
+  keywords: ["about NammaOffice", "NammaOffice history", "coworking Tamil Nadu story"],
   openGraph: {
-    title: "About NammaOffice — Our Story, Mission & Team",
-    description:
-      "From a single centre on Brindavan Road to 7 locations across Tamil Nadu.",
+    title: "About NammaOffice — Our Story & Mission",
+    description: "From a single Brindavan Road centre to 8 locations across Tamil Nadu.",
   },
 };
 
-const values = [
+const VALUES = [
   {
-    icon: "🎯",
+    icon: Compass,
     title: "Mission",
     description:
-      "To make premium, professional workspaces accessible to every entrepreneur, freelancer, and growing team in Tamil Nadu's tier-2 cities — eliminating the barrier between ambition and infrastructure.",
+      "Make premium, professional workspaces accessible to every entrepreneur, freelancer, and growing team in Tamil Nadu's tier-2 cities — eliminating the barrier between ambition and infrastructure.",
   },
   {
-    icon: "🔭",
+    icon: Telescope,
     title: "Vision",
     description:
-      "To be the most trusted coworking network in South India — a brand synonymous with community, productivity, and opportunity for the next generation of Tamil Nadu's business leaders.",
+      "To be the most trusted coworking network in South India — synonymous with community, productivity, and opportunity for the next generation of Tamil Nadu's business leaders.",
   },
   {
-    icon: "💡",
+    icon: Heart,
     title: "Values",
     description:
-      "Community over competition. Flexibility over rigidity. Quality without compromise. We believe that when entrepreneurs thrive, cities thrive — and NammaOffice is committed to being the catalyst.",
+      "Community over competition. Flexibility over rigidity. Quality without compromise. When entrepreneurs thrive, cities thrive — and NammaOffice is committed to being the catalyst.",
   },
 ];
 
@@ -47,133 +40,90 @@ export default function AboutPage() {
   return (
     <>
       <HeroBanner
-        title="Our Story"
-        subtitle="Born in Salem, built for Tamil Nadu — NammaOffice is more than a coworking space. It's a community."
+        eyebrow="Our story"
+        title="Born in Salem. Built for Tamil Nadu."
+        subtitle="NammaOffice is more than a coworking space — it's a community of builders, freelancers, and growing businesses across Salem, Trichy, and Tirupur."
       />
 
-      {/* Company Story */}
-      <section className="section-padding">
-        <div className="content-width">
-          <div className="max-w-3xl mx-auto space-y-6 font-sans text-warm-gray text-base leading-relaxed">
-            <p>
-              NammaOffice began with a simple observation: the entrepreneurs and
-              professionals of Salem, Trichy, and Tirupur were as ambitious as
-              their counterparts in Chennai or Bengaluru — but lacked the
-              infrastructure to match. Premium coworking was a metropolitan
-              luxury. We set out to change that.
-            </p>
-            <p>
-              In 2019, we opened our first centre on Brindavan Road, Salem, with
-              50 seats and a vision. The response was overwhelming. Within months,
-              we had a waiting list. Within a year, we were expanding. Today,
-              NammaOffice operates 7 centres — 5 in Salem, 1 in Trichy, and 1 in
-              Tirupur — and serves over 500 active members ranging from solo
-              freelancers to 50-person enterprises.
-            </p>
-            <p>
-              Our philosophy has never changed: create spaces that professionals
-              are proud to work from, build communities that support each other&apos;s
-              growth, and keep quality high while keeping costs predictable. Every
-              NammaOffice centre is designed with the same commitment to ergonomics,
-              connectivity, and community that made our Brindavan Road centre a
-              success.
-            </p>
-          </div>
+      {/* Story */}
+      <section className="content-width py-16 md:py-24">
+        <div className="max-w-3xl mx-auto space-y-6 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
+          <p>
+            NammaOffice began with a simple observation: the entrepreneurs and professionals of Salem, Trichy, and Tirupur were as ambitious as their counterparts in Chennai or Bengaluru — but lacked the infrastructure to match. Premium coworking was a metropolitan luxury. We set out to change that.
+          </p>
+          <p>
+            Our first centre opened on Brindavan Road, in the Fairlands area of Salem, with 50 seats and a vision. The response was overwhelming. Within months, we had a waiting list. Within a year, we were expanding. Today, NammaOffice operates <strong className="text-[var(--color-navy)]">8 centres</strong> — 6 in Salem, 1 in Trichy, and 1 in Tirupur — serving members ranging from solo freelancers to 50-person teams.
+          </p>
+          <p>
+            Our philosophy has never changed: build spaces professionals are proud to work from, foster communities that support each other&apos;s growth, and keep quality high while keeping costs predictable. Every NammaOffice centre is designed with the same commitment to ergonomics, connectivity, and community that made our first centre a success.
+          </p>
         </div>
       </section>
 
-      {/* Mission, Vision, Values */}
-      <section className="section-padding bg-sand-50">
+      {/* Mission · Vision · Values */}
+      <section className="bg-[var(--color-surface-alt)] py-16 md:py-24">
         <div className="content-width">
-          <SectionHeading
-            title="What Drives Us"
-            subtitle="The mission, vision, and values that guide every NammaOffice decision."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((item) => (
-              <Card key={item.title} className="p-8 flex flex-col gap-4">
-                <div className="text-4xl" aria-hidden="true">{item.icon}</div>
-                <h3 className="font-serif text-2xl text-warm-charcoal">{item.title}</h3>
-                <p className="font-sans text-sm text-warm-gray leading-relaxed">
-                  {item.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="section-padding">
-        <div className="content-width">
-          <SectionHeading
-            title="Our Team"
-            subtitle="The people behind NammaOffice — passionate about workspaces, communities, and Tamil Nadu."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <Card key={member.name} className="overflow-hidden">
-                {/* Photo placeholder */}
-                <div className="h-56 bg-gradient-to-br from-terracotta-100 to-olive-100 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full bg-white/50 flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-warm-charcoal/40"
-                      aria-hidden="true"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                      <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-serif text-lg text-warm-charcoal">{member.name}</h3>
-                  <p className="font-sans text-sm text-terracotta font-medium mt-1">{member.role}</p>
-                  {member.bio && (
-                    <p className="font-sans text-xs text-warm-gray mt-3 leading-relaxed">
-                      {member.bio}
-                    </p>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Journey */}
-      <section className="section-padding bg-[var(--color-bg)]">
-        <div className="content-width">
-          <div className="max-w-3xl mx-auto text-center mb-14 md:mb-20">
-            <p className="eyebrow !text-[var(--color-accent)]">Our Journey</p>
-            <h2 className="display-lg mt-3 text-[var(--color-ink)]">
-              Five years.{" "}
-              <span className="italic font-normal text-[var(--color-ink-secondary)]">
-                Three cities.
-              </span>{" "}
-              One community.
+          <div className="max-w-2xl mb-10">
+            <p className="eyebrow">What drives us</p>
+            <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+              Mission, vision, values.
             </h2>
-            <p className="mt-5 text-[16px] text-[var(--color-ink-secondary)] leading-relaxed">
-              From a single centre on Brindavan Road to seven workspaces across
-              Tamil Nadu — every step shaped by the founders, freelancers and
-              teams who built it with us.
+            <p className="mt-4 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
+              The principles that guide every NammaOffice decision — from how we design our spaces to how we treat our members.
             </p>
           </div>
-          <JourneyStepper milestones={milestones} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {VALUES.map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="rounded-2xl bg-white border border-[var(--color-border)] p-6 md:p-7 flex flex-col gap-4"
+              >
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-navy)] text-[var(--color-gold)]">
+                  <Icon className="w-5 h-5" strokeWidth={1.75} />
+                </span>
+                <h3 className="font-display text-2xl text-[var(--color-navy)]">{title}</h3>
+                <p className="text-[14px] text-[var(--color-ink-secondary)] leading-relaxed">
+                  {description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick stats */}
+      <section className="content-width py-14 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <Stat number="8" label="Centres" />
+          <Stat number="3" label="Cities" />
+          <Stat number="500+" label="Members" />
+          <Stat number="4.9" label="Rating" />
+        </div>
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/locations"
+            className="inline-flex items-center gap-2 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
+          >
+            Explore our centres
+            <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
+          </Link>
         </div>
       </section>
 
       <CTASection />
     </>
+  );
+}
+
+function Stat({ number, label }: { number: string; label: string }) {
+  return (
+    <div>
+      <p className="font-display text-4xl md:text-5xl text-[var(--color-navy)] leading-none">
+        {number}
+      </p>
+      <p className="mt-2 text-[12px] uppercase tracking-[0.18em] font-semibold text-[var(--color-gold-deep)]">
+        {label}
+      </p>
+    </div>
   );
 }

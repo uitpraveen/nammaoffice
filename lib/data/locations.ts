@@ -7,14 +7,14 @@ export const cities: City[] = [
     name: "Salem",
     tagline: "Steel City's Premier Coworking Hub",
     description:
-      "Salem is one of Tamil Nadu's fastest-growing tier-2 cities, home to a thriving MSME ecosystem, textile industry, and a rapidly expanding IT corridor. NammaOffice has 5 centres strategically located across Salem's key business districts.",
+      "Salem is one of Tamil Nadu's fastest-growing tier-2 cities, home to a thriving MSME ecosystem, textile industry, and a rapidly expanding IT corridor. NammaOffice has 6 centres strategically located across Salem's key business districts.",
     seoContent:
-      "Looking for coworking space in Salem? NammaOffice offers premium coworking spaces, private cabins, meeting halls, and managed offices at 5 locations across Salem — Brindavan Road, Ramakrishna Road, New Bus Stand, TIDEL NEO, and Fort Hosur. Flexible daily, monthly, and annual plans available.",
+      "Looking for coworking space in Salem? NammaOffice offers premium coworking spaces, private cabins, meeting halls, and managed offices at 6 locations across Salem — Fairlands, Ramakrishna Road, Rajeshwari Towers, New Bus Stand, TIDEL NEO, and Fort Hosur. Flexible daily, monthly, and annual plans available.",
     image: wix.ramakrishna,
-    centreCount: 5,
-    seoTitle: "Coworking Space in Salem | NammaOffice — 5 Centres",
+    centreCount: 6,
+    seoTitle: "Coworking Space in Salem | NammaOffice — 6 Centres",
     seoDescription:
-      "Premium coworking spaces in Salem at 5 locations. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Salem today.",
+      "Premium coworking spaces in Salem at 6 locations. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Salem today.",
   },
   {
     slug: "trichy",
@@ -48,16 +48,16 @@ export const cities: City[] = [
 
 export const locations: Location[] = [
   {
-    slug: "brindavan-road",
-    name: "Brindavan Road",
+    slug: "fairlands",
+    name: "Fairlands",
     city: "salem",
-    address: "Anushka Tower, 5th Floor, Brindavan Road, Salem — 636 004",
+    address: "Anushka Tower, 5th Floor, Brindavan Road, Fairlands, Salem — 636 016",
     phone: "+91 9092109213",
-    email: "brindavan@nammaoffice.com",
+    email: "fairlands@nammaoffice.com",
     coordinates: { lat: 11.6643, lng: 78.146 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "Our flagship Salem centre on the bustling Brindavan Road. Located on the 5th floor of Anushka Tower, this centre offers panoramic views of Salem city and is steps away from major banks, restaurants, and retail outlets.",
+      "Our flagship Salem centre on the bustling Brindavan Road in Fairlands. Located on the 5th floor of Anushka Tower, this centre offers panoramic views of Salem city and is steps away from major banks, restaurants, and retail outlets.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -92,9 +92,9 @@ export const locations: Location[] = [
       { icon: "🏨", label: "Hotel Sarada Park (1 km)" },
       { icon: "🏥", label: "Vinayaka Hospital (1.5 km)" },
     ],
-    seoTitle: "Coworking Space on Brindavan Road, Salem | NammaOffice",
+    seoTitle: "Coworking Space in Fairlands, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice Brindavan Road — premium coworking in Anushka Tower, 5th Floor, Salem. Private cabins, open desks, meeting halls. Book your workspace today.",
+      "NammaOffice Fairlands — premium coworking in Anushka Tower, Brindavan Road, Salem. Private cabins, open desks, meeting halls. Book your workspace today.",
   },
   {
     slug: "ramakrishna-road",
@@ -137,6 +137,54 @@ export const locations: Location[] = [
     seoTitle: "Coworking Space on Ramakrishna Road, Salem | NammaOffice",
     seoDescription:
       "NammaOffice Ramakrishna Road — Balaji Tower, 3rd Floor, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
+  },
+  {
+    slug: "rajeshwari-towers",
+    name: "Rajeshwari Towers",
+    city: "salem",
+    address: "Rajeshwari Towers, Salem — 636 007",
+    phone: "+91 9092109213",
+    email: "rajeshwari@nammaoffice.com",
+    coordinates: { lat: 11.6735, lng: 78.1503 },
+    operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
+    description:
+      "NammaOffice Rajeshwari Towers brings premium coworking to a landmark address in central Salem. Spacious cabins, well-appointed meeting halls, and a quiet business-lounge atmosphere — designed for professionals who value calm focus alongside on-demand collaboration spaces.",
+    amenities: [
+      "high-speed-wifi",
+      "power-backup",
+      "air-conditioning",
+      "cafeteria",
+      "printing",
+      "parking",
+      "security",
+      "locker",
+      "conference-room",
+      "reception",
+      "ergonomic-furniture",
+      "breakout-zone",
+    ],
+    workspaceTypes: [
+      "private-cabin",
+      "open-desk",
+      "cubicle",
+      "meeting-hall",
+      "business-lounge",
+    ],
+    images: [wix.rajeshwari, wix.d, wix.j],
+    nearbyLandmarks: [
+      "Salem Junction Railway Station (2.5 km)",
+      "Salem Bus Stand (1.5 km)",
+      "Salem Collectorate (1 km)",
+    ],
+    nearbyFacilities: [
+      { icon: "🏦", label: "Major nationalised banks within 300m" },
+      { icon: "🍽️", label: "Restaurants and cafés within 200m" },
+      { icon: "🏨", label: "Business hotels within 1 km" },
+      { icon: "🏥", label: "Multi-speciality hospitals nearby" },
+    ],
+    seoTitle: "Coworking Space at Rajeshwari Towers, Salem | NammaOffice",
+    seoDescription:
+      "NammaOffice Rajeshwari Towers — premium coworking in central Salem. Private cabins, meeting halls, and business lounge. Book your workspace today.",
   },
   {
     slug: "new-bus-stand",
@@ -322,7 +370,7 @@ export const locations: Location[] = [
       "NammaOffice Asha Grand Trichy — premium coworking in the heart of Tiruchirappalli. Private cabins, open desks, meeting halls, managed offices. Book today.",
   },
   {
-    slug: "tidel-neo-tirupur",
+    slug: "tidel-neo",
     name: "TIDEL NEO",
     city: "tirupur",
     address: "TIDEL NEO, Tirupur — 641 604",
@@ -354,9 +402,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      wix.newbus, wix.o, wix.e,
-    ],
+    images: [wix.newbus, wix.o, wix.e],
     nearbyLandmarks: [
       "Tirupur Railway Station (5 km)",
       "Tirupur Bus Stand (4 km)",
@@ -388,4 +434,9 @@ export function getLocation(slug: string, city?: string): Location | undefined {
 
 export function getLocationsByCity(citySlug: CitySlug): Location[] {
   return locations.filter((l) => l.city === citySlug);
+}
+
+/** All centres in display order — used by nav, locations index, and footer. */
+export function getAllLocations(): Location[] {
+  return locations;
 }

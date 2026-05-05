@@ -41,7 +41,7 @@ export function Header() {
               <span className="self-stretch w-px bg-white/25" aria-hidden="true" />
               <span className="inline-flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" strokeWidth={2} />
-                7+ centres · 3 cities
+                8 centres · 3 cities
               </span>
               <span className="hidden lg:block self-stretch w-px bg-white/25" aria-hidden="true" />
               <span className="hidden lg:inline-flex items-center gap-1.5">
@@ -92,10 +92,10 @@ export function Header() {
 
             <div className="flex items-center gap-2">
               <Link
-                href="/book-tour"
-                className="hidden lg:inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold rounded-full bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-600)] transition-colors shadow-[0_4px_16px_rgba(31,181,224,0.35)]"
+                href="/bookings"
+                className="hidden lg:inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
               >
-                Book Meeting Hall
+                Book Now
                 <span aria-hidden>→</span>
               </Link>
 

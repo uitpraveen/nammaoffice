@@ -3,75 +3,101 @@
 
 @theme {
   /* ------------------------------------------------------------------
-     Clean Modern · Ocean Teal
-     Single source of truth. Old token names (terracotta / sand / olive /
-     warm-*) are preserved so existing pages keep rendering, but they now
-     point at the new palette.
+     Corporate Luxe · Trust Navy + Warm Gold
+     Single source of truth for the strict-parity revamp.
+     Old token names (terracotta / sand / olive / warm-* / accent /
+     secondary) keep resolving so any not-yet-restyled page still
+     renders — they now point at the navy/gold equivalents.
      ------------------------------------------------------------------ */
 
-  /* Accent — Sky Cyan (#1FB5E0). Pulled directly from the "OFFICE" word
-     in the live NammaOffice logo. Saffron secondary (#F4A933) lives below
-     and is what gives the site its dual-tone brand identity. */
-  --color-accent: #1FB5E0;
-  --color-accent-50: #E8F7FC;
-  --color-accent-100: #CFEFF8;
-  --color-accent-200: #A7E1F2;
-  --color-accent-300: #7DD3F0;
-  --color-accent-400: #4AC1E5;
-  --color-accent-500: #1FB5E0;
-  --color-accent-600: #1A9FC7;
-  --color-accent-700: #1685A8;
-  --color-accent-800: #0F6280;
-  --color-accent-900: #093F53;
+  /* Navy — the brand primary. Used for headers (on scroll), footer,
+     dark CTAs, and headlines on light surfaces. */
+  --color-navy: #0B2545;
+  --color-navy-50: #EAEEF4;
+  --color-navy-100: #C8D2E0;
+  --color-navy-200: #95A5BD;
+  --color-navy-300: #5F7898;
+  --color-navy-400: #38567C;
+  --color-navy-500: #1B365D;
+  --color-navy-600: #0B2545;
+  --color-navy-700: #081C36;
+  --color-navy-800: #061427;
+  --color-navy-900: #030B17;
+  --color-navy-deep: #08182E;
+  --color-navy-soft: #1B365D;
 
-  /* Secondary — Saffron Yellow (the "NAMMA" colour). Used for highlights
-     where the cyan would compete (hero italic emphasis, eyebrows, hover
-     accents) — keeps the dual-colour brand identity legible across UI. */
-  --color-secondary: #F4A933;
-  --color-secondary-50: #FEF6E6;
-  --color-secondary-100: #FCEAC2;
-  --color-secondary-200: #F9D88A;
-  --color-secondary-300: #F8C45C;
-  --color-secondary-400: #F6B543;
-  --color-secondary-500: #F4A933;
-  --color-secondary-600: #D89320;
-  --color-secondary-700: #AC731A;
-  --color-secondary-800: #6E4A11;
-  --color-secondary-900: #3F2A09;
+  /* Gold — the brand accent. Used for primary CTAs, link hovers,
+     active indicators, and the top-bar accent. Restrained — never
+     used for body text or large surfaces. */
+  --color-gold: #C8A24A;
+  --color-gold-50: #FAF3E0;
+  --color-gold-100: #F2E2B0;
+  --color-gold-200: #E8CD7C;
+  --color-gold-300: #DCB85B;
+  --color-gold-400: #D2AB52;
+  --color-gold-500: #C8A24A;
+  --color-gold-600: #A88533;
+  --color-gold-700: #806326;
+  --color-gold-800: #58441A;
+  --color-gold-900: #2E230D;
+  --color-gold-deep: #A88533;
 
-  /* Brand gradient — saffron → cyan, mirroring NAMMA → OFFICE in the logo */
-  --gradient-accent: linear-gradient(135deg, #F4A933 0%, #1FB5E0 100%);
-  --gradient-accent-soft: linear-gradient(135deg, rgba(244,169,51,0.14) 0%, rgba(31,181,224,0.14) 100%);
-
-  /* Ink (text + foreground) — LIGHT MODE */
-  --color-ink: #0A0A0A;
-  --color-ink-secondary: #525252;
-  --color-ink-muted: #A3A3A3;
-
-  /* Surfaces — saffron-tinted page background gives the site a warm,
-     "Indian premium" feel without using any saturated colour. */
-  --color-bg: #FEF6E6;
+  /* Surfaces */
+  --color-bg: #FAF7F0;
   --color-surface: #FFFFFF;
-  --color-surface-alt: #F9EDD3;
-  --color-border: #EFE2C9;
-  --color-border-strong: #DCC9A6;
+  --color-surface-alt: #F2EDE0;
+  --color-border: #E5E1D6;
+  --color-border-strong: #D6CFBE;
 
-  /* Charcoal — used for footer + dark CTAs only */
-  --color-charcoal: #0A0A0A;
-  --color-charcoal-soft: #1A1A1A;
+  /* Ink (text) */
+  --color-ink: #0F172A;
+  --color-ink-secondary: #475569;
+  --color-ink-muted: #94A3B8;
 
-  /* ----- Backwards-compatible aliases for un-touched pages ----- */
-  --color-terracotta: var(--color-accent);
-  --color-terracotta-50: var(--color-accent-50);
-  --color-terracotta-100: var(--color-accent-100);
-  --color-terracotta-200: var(--color-accent-200);
-  --color-terracotta-300: var(--color-accent-300);
-  --color-terracotta-400: var(--color-accent-400);
-  --color-terracotta-500: var(--color-accent-500);
-  --color-terracotta-600: var(--color-accent-600);
-  --color-terracotta-700: var(--color-accent-700);
-  --color-terracotta-800: var(--color-accent-800);
-  --color-terracotta-900: var(--color-accent-900);
+  /* Charcoal / dark surfaces — repurposed to navy-deep for the new palette. */
+  --color-charcoal: #08182E;
+  --color-charcoal-soft: #0B2545;
+
+  /* ----- Active brand semantic aliases ----- */
+  /* "accent" used to be cyan; it is now gold — primary CTA colour. */
+  --color-accent: var(--color-gold);
+  --color-accent-50: var(--color-gold-50);
+  --color-accent-100: var(--color-gold-100);
+  --color-accent-200: var(--color-gold-200);
+  --color-accent-300: var(--color-gold-300);
+  --color-accent-400: var(--color-gold-400);
+  --color-accent-500: var(--color-gold-500);
+  --color-accent-600: var(--color-gold-600);
+  --color-accent-700: var(--color-gold-700);
+  --color-accent-800: var(--color-gold-800);
+  --color-accent-900: var(--color-gold-900);
+
+  /* "secondary" used to be saffron; now it points at navy — the brand
+     primary, used for secondary buttons and dark eyebrows. */
+  --color-secondary: var(--color-navy);
+  --color-secondary-50: var(--color-navy-50);
+  --color-secondary-100: var(--color-navy-100);
+  --color-secondary-200: var(--color-navy-200);
+  --color-secondary-300: var(--color-navy-300);
+  --color-secondary-400: var(--color-navy-400);
+  --color-secondary-500: var(--color-navy-500);
+  --color-secondary-600: var(--color-navy-600);
+  --color-secondary-700: var(--color-navy-700);
+  --color-secondary-800: var(--color-navy-800);
+  --color-secondary-900: var(--color-navy-900);
+
+  /* ----- Backwards-compat aliases for un-restyled pages ----- */
+  --color-terracotta: var(--color-gold);
+  --color-terracotta-50: var(--color-gold-50);
+  --color-terracotta-100: var(--color-gold-100);
+  --color-terracotta-200: var(--color-gold-200);
+  --color-terracotta-300: var(--color-gold-300);
+  --color-terracotta-400: var(--color-gold-400);
+  --color-terracotta-500: var(--color-gold-500);
+  --color-terracotta-600: var(--color-gold-600);
+  --color-terracotta-700: var(--color-gold-700);
+  --color-terracotta-800: var(--color-gold-800);
+  --color-terracotta-900: var(--color-gold-900);
 
   --color-olive: var(--color-ink);
   --color-olive-50: var(--color-bg);
@@ -79,11 +105,11 @@
   --color-olive-200: var(--color-border);
   --color-olive-300: var(--color-border-strong);
   --color-olive-400: var(--color-ink-muted);
-  --color-olive-500: var(--color-ink);
-  --color-olive-600: var(--color-charcoal-soft);
-  --color-olive-700: var(--color-charcoal);
-  --color-olive-800: var(--color-charcoal);
-  --color-olive-900: var(--color-charcoal);
+  --color-olive-500: var(--color-ink-secondary);
+  --color-olive-600: var(--color-ink);
+  --color-olive-700: var(--color-navy);
+  --color-olive-800: var(--color-navy-deep);
+  --color-olive-900: var(--color-navy-deep);
 
   --color-sand: var(--color-surface-alt);
   --color-sand-50: var(--color-bg);
@@ -95,20 +121,25 @@
 
   --color-warm-white: var(--color-bg);
   --color-warm-gray: var(--color-ink-secondary);
-  --color-warm-charcoal: var(--color-ink);
+  --color-warm-charcoal: var(--color-navy);
   --color-warm-border: var(--color-border);
 
-  /* ----- Typography ----- */
+  /* ----- Typography -----
+     Body: Inter (variable font, set by next/font in app/layout.tsx).
+     Display/Headings: Fraunces (high-contrast serif, weights 600/700) —
+     the corporate-luxe accent that pairs naturally with gold. */
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-serif: var(--font-inter), system-ui, sans-serif; /* alias — same family, just heavier weights for headings */
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
 
   /* ----- Radius ----- */
   --radius-brand: 12px;
   --radius-pill: 999px;
 
   /* ----- Shadows ----- */
-  --shadow-brand: 0 1px 2px rgba(10, 10, 10, 0.04), 0 4px 16px rgba(10, 10, 10, 0.04);
-  --shadow-brand-hover: 0 8px 24px rgba(10, 10, 10, 0.08), 0 2px 4px rgba(10, 10, 10, 0.04);
+  --shadow-brand: 0 1px 2px rgba(11, 37, 69, 0.05), 0 4px 16px rgba(11, 37, 69, 0.06);
+  --shadow-brand-hover: 0 8px 24px rgba(11, 37, 69, 0.10), 0 2px 4px rgba(11, 37, 69, 0.04);
+  --shadow-cta: 0 4px 16px rgba(200, 162, 74, 0.30);
+  --shadow-cta-hover: 0 6px 22px rgba(200, 162, 74, 0.40);
 
   /* ----- Layout ----- */
   --width-content: 1200px;
@@ -117,17 +148,11 @@
 
   /* ----- Animations ----- */
   --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
-  --animate-logo-scroll: logo-scroll 30s linear infinite;
   --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
 
   @keyframes fade-in-up {
     0% { opacity: 0; transform: translateY(16px); }
     100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes logo-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
   }
 
   @keyframes pulse-slow {
@@ -139,10 +164,6 @@
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
   }
-
-  /* --- Marquee (infinite scroll showcase) --- */
-  @keyframes marquee-left  { 0% { transform: translate3d(0, 0, 0); }     100% { transform: translate3d(-50%, 0, 0); } }
-  @keyframes marquee-right { 0% { transform: translate3d(-50%, 0, 0); }  100% { transform: translate3d(0, 0, 0); } }
 }
 
 @layer utilities {
@@ -157,12 +178,8 @@
     animation: hero-content-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .animate-marquee-left  { animation: marquee-left linear infinite; }
-  .animate-marquee-right { animation: marquee-right linear infinite; }
-
   @media (prefers-reduced-motion: reduce) {
-    .animate-marquee-left,
-    .animate-marquee-right { animation: none; }
+    .hero-content-anim { animation: none; }
   }
 
   @keyframes hero-content-in {
@@ -170,23 +187,13 @@
     100% { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  /* --- Gradient utilities --- */
-  .text-gradient {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Serif display utility — opt-in via class for headings that should
+     use Fraunces. Body text and small UI stays sans (Inter). */
+  .font-display {
+    font-family: var(--font-serif);
+    font-feature-settings: "ss01", "ss02";
+    letter-spacing: -0.02em;
   }
-  .bg-gradient-accent {
-    background-image: var(--gradient-accent);
-  }
-  .bg-gradient-accent-soft {
-    background-image: var(--gradient-accent-soft);
-  }
-  .border-gradient-accent {
-    border-image: var(--gradient-accent) 1;
-  }
-
 }
 
 @layer base {
@@ -208,28 +215,27 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "cv11", "ss01", "ss03";
-    overflow-x: clip; /* clip is stronger than hidden — no scrollbar AND no scroll */
+    overflow-x: clip;
   }
 
-  /* Defensive: prevent images/videos/embeds from breaking the viewport on mobile */
   img, video, iframe, svg {
     max-width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     font-weight: 700;
-    letter-spacing: -0.025em;
-    color: var(--color-ink);
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
-    color: var(--color-ink);
+    background-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+    color: var(--color-navy);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-gold);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -274,16 +280,17 @@
     transform: translateY(0);
   }
 
-  /* Type scale helpers used by the new home page sections.
-     Min sizes are deliberately small enough to fit a 320px viewport. */
-  .display-xl { font-size: clamp(2rem, 5vw + 0.75rem, 4.5rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; overflow-wrap: anywhere; }
-  .display-lg { font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; overflow-wrap: anywhere; }
-  .display-md { font-size: clamp(1.5rem, 2vw + 0.75rem, 2.25rem); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; overflow-wrap: anywhere; }
+  /* Display sizes — Fraunces serif scale.
+     Min sizes deliberately small enough for a 320px viewport. */
+  .display-xl { font-family: var(--font-serif); font-size: clamp(2rem, 5vw + 0.75rem, 4.5rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 700; overflow-wrap: anywhere; }
+  .display-lg { font-family: var(--font-serif); font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem); line-height: 1.08; letter-spacing: -0.022em; font-weight: 700; overflow-wrap: anywhere; }
+  .display-md { font-family: var(--font-serif); font-size: clamp(1.5rem, 2vw + 0.75rem, 2.25rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; overflow-wrap: anywhere; }
   .eyebrow {
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-gold-deep);
   }
 }

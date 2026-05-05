@@ -72,7 +72,7 @@ export function WhyChooseUs() {
               key={feature.title}
               className="group bg-white border border-[var(--color-border)] rounded-2xl p-6 hover:border-[var(--color-border-strong)] hover:shadow-[0_4px_16px_rgba(10,10,10,0.04)] transition-all"
             >
-              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[var(--color-accent-50)] text-[var(--color-accent)] group-hover:bg-gradient-accent group-hover:text-white transition-colors">
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[var(--color-gold-50)] text-[var(--color-gold-deep)] group-hover:bg-[var(--color-navy)] group-hover:text-[var(--color-gold)] transition-colors">
                 {feature.icon}
               </div>
               <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">

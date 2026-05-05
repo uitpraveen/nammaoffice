@@ -1,126 +1,84 @@
 import type { NavItem } from "@/lib/types";
+import { cities, locations } from "@/lib/data/locations";
+
+/**
+ * Locations dropdown — flat list of all 8 centres with a city tag chip.
+ * Generated from `locations` data so adding a centre updates the nav.
+ * Order: Salem (6), Trichy, Tirupur — matches the homepage and footer.
+ */
+const locationChildren = locations.map((loc) => {
+  const city = cities.find((c) => c.slug === loc.city);
+  return {
+    label: loc.name,
+    href: `/locations/${loc.city}/${loc.slug}`,
+    description: loc.address,
+    icon: "MapPin",
+    cityTag: city?.name ?? loc.city,
+  };
+});
 
 export const navigation: NavItem[] = [
   {
-    label: "Workspaces",
-    href: "/workspaces",
-    children: [
-      {
-        label: "Private Cabin",
-        href: "/workspaces/private-cabin",
-        description: "Lockable office for focused work",
-        icon: "DoorClosed",
-      },
-      {
-        label: "Open Desk",
-        href: "/workspaces/open-desk",
-        description: "Flexible shared seating",
-        icon: "Armchair",
-      },
-      {
-        label: "Cubicle",
-        href: "/workspaces/cubicle",
-        description: "Dedicated semi-private desk",
-        icon: "PanelsTopLeft",
-      },
-      {
-        label: "Meeting Hall",
-        href: "/workspaces/meeting-hall",
-        description: "AV-ready rooms for presentations",
-        icon: "Presentation",
-      },
-      {
-        label: "Business Lounge",
-        href: "/workspaces/business-lounge",
-        description: "Premium space for client meetings",
-        icon: "Sofa",
-      },
-      {
-        label: "Managed Office",
-        href: "/workspaces/managed-office",
-        description: "Plug-and-play offices for teams",
-        icon: "Building2",
-      },
-    ],
-  },
-  {
     label: "Locations",
     href: "/locations",
-    children: [
-      {
-        label: "Salem",
-        href: "/locations/salem",
-        description: "5 centres across the Steel City",
-        icon: "MapPin",
-      },
-      {
-        label: "Trichy",
-        href: "/locations/trichy",
-        description: "Asha Grand — Temple City",
-        icon: "MapPin",
-      },
-      {
-        label: "Tirupur",
-        href: "/locations/tirupur",
-        description: "TIDEL NEO — Knitwear Capital",
-        icon: "MapPin",
-      },
-    ],
+    children: locationChildren,
   },
   {
-    label: "Services",
-    href: "/services",
+    label: "Amenities",
+    href: "/amenities",
+  },
+  {
+    label: "Forms",
+    href: "/registration/company",
     children: [
       {
         label: "Company Registration",
-        href: "/services/company-registration",
-        description: "End-to-end business filing",
-        icon: "FileSignature",
+        href: "/registration/company",
+        description: "Register your company with NammaOffice",
+        icon: "Building2",
       },
       {
-        label: "Virtual Office",
-        href: "/services/virtual-office",
-        description: "Address, mail, GST support",
-        icon: "Mail",
+        label: "User Registration",
+        href: "/registration/user",
+        description: "Register as a member or visitor",
+        icon: "UserPlus",
       },
       {
-        label: "Workation",
-        href: "/workation",
-        description: "Work from inspiring locations",
-        icon: "Plane",
+        label: "Vendor Form",
+        href: "/registration/vendor",
+        description: "Onboard as a NammaOffice vendor",
+        icon: "Briefcase",
+      },
+      {
+        label: "Bookings",
+        href: "/bookings",
+        description: "Book a meeting hall or boardroom",
+        icon: "CalendarCheck",
       },
     ],
   },
   {
-    label: "Company",
-    href: "/about",
+    label: "Franchise",
+    href: "/franchise",
+  },
+  {
+    label: "Service Desk",
+    href: "/gate-pass/tidel-neo-salem",
     children: [
       {
-        label: "About Us",
-        href: "/about",
-        description: "Our story and mission",
-        icon: "Sparkles",
+        label: "Gate Pass — Salem TIDEL",
+        href: "/gate-pass/tidel-neo-salem",
+        description: "Request a visitor gate pass for Salem TIDEL NEO",
+        icon: "Ticket",
       },
       {
-        label: "Franchise",
-        href: "/franchise",
-        description: "40% ROI partnership program",
-        icon: "Handshake",
-      },
-      {
-        label: "Gallery",
-        href: "/gallery",
-        description: "Photos from our spaces",
-        icon: "Images",
-      },
-      {
-        label: "FAQ",
-        href: "/faq",
-        description: "Common questions answered",
-        icon: "HelpCircle",
+        label: "Gate Pass — Tirupur TIDEL",
+        href: "/gate-pass/tidel-neo-tirupur",
+        description: "Request a visitor gate pass for Tirupur TIDEL NEO",
+        icon: "Ticket",
       },
     ],
   },
-  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

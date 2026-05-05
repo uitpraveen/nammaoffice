@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
 import { cities, locations } from "@/lib/data/locations";
-import { workspaces } from "@/lib/data/workspaces";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nammaoffice.com";
@@ -8,17 +7,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     "",
     "/about",
-    "/workspaces",
     "/locations",
-    "/pricing",
+    "/amenities",
     "/franchise",
-    "/workation",
-    "/services/company-registration",
-    "/services/virtual-office",
     "/contact",
-    "/book-tour",
-    "/faq",
-    "/gallery",
+    "/registration/company",
+    "/registration/user",
+    "/registration/vendor",
+    "/bookings",
+    "/gate-pass/tidel-neo-salem",
+    "/gate-pass/tidel-neo-tirupur",
     "/privacy-policy",
     "/terms-conditions",
     "/refund-policy",
@@ -29,13 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: path === "" ? "daily" : "weekly",
     priority: path === "" ? 1 : 0.8,
-  }));
-
-  const workspaceEntries: MetadataRoute.Sitemap = workspaces.map((workspace) => ({
-    url: `${baseUrl}/workspaces/${workspace.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.7,
   }));
 
   const cityEntries: MetadataRoute.Sitemap = cities.map((city) => ({
@@ -52,10 +43,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [
-    ...staticEntries,
-    ...workspaceEntries,
-    ...cityEntries,
-    ...locationEntries,
-  ];
+  return [...staticEntries, ...cityEntries, ...locationEntries];
 }

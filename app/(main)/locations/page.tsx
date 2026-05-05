@@ -1,59 +1,85 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, MapPin } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CTASection } from "@/components/sections/CTASection";
-import { getPageSEO } from "@/lib/data/seo";
-import { cities } from "@/lib/data/locations";
-import LocationsSearch from "./LocationsSearch";
+import { cities, locations } from "@/lib/data/locations";
 
-export function generateMetadata(): Metadata {
-  const seo = getPageSEO("/locations");
-  return {
-    title: seo.title,
-    description: seo.description,
-    keywords: seo.keywords,
-    openGraph: {
-      title: seo.title,
-      description: seo.description,
-      images: seo.ogImage ? [seo.ogImage] : [],
-    },
-  };
-}
-
-// City gradient colors
-const cityGradients: Record<string, string> = {
-  salem: "from-terracotta-700 to-terracotta-400",
-  trichy: "from-olive-700 to-olive-400",
-  tirupur: "from-warm-charcoal to-warm-gray",
+export const metadata: Metadata = {
+  title: "All Locations — 8 Centres Across Salem, Trichy & Tirupur",
+  description:
+    "NammaOffice has 8 centres across 3 cities — Salem (6), Trichy (1), and Tirupur (1). Find your nearest premium coworking space.",
 };
 
 export default function LocationsPage() {
   return (
     <>
       <HeroBanner
-        title="Our Locations"
-        subtitle="7 centres across Salem, Trichy, and Tirupur — find your nearest NammaOffice."
+        eyebrow="Our Centres"
+        title="8 centres. 3 cities."
+        subtitle="Find the NammaOffice nearest to you. Premium workspaces across Salem, Trichy, and Tirupur."
       />
 
-      <section className="section-padding">
-        <div className="content-width">
-          <SectionHeading
-            title="Find Us in Your City"
-            subtitle="We're present across Tamil Nadu's fastest-growing cities with premium coworking infrastructure."
-            className="mb-12"
-          />
+      {cities.map((city) => {
+        const cityLocations = locations.filter((l) => l.city === city.slug);
+        if (cityLocations.length === 0) return null;
 
-          {/* Client-side search + city cards */}
-          <LocationsSearch
-            cities={cities.map((city) => ({
-              ...city,
-              gradient: cityGradients[city.slug] ?? "from-warm-charcoal to-warm-gray",
-            }))}
-          />
-        </div>
-      </section>
+        return (
+          <section key={city.slug} className="content-width py-14 md:py-20 first:pt-16">
+            <div className="flex items-end justify-between gap-6 mb-8">
+              <div>
+                <p className="eyebrow !text-[var(--color-gold-deep)]">{city.name}</p>
+                <h2 className="font-display text-3xl md:text-4xl text-[var(--color-navy)] mt-2 leading-tight">
+                  {city.tagline}
+                </h2>
+              </div>
+              <p className="hidden md:block text-[13.5px] text-[var(--color-ink-secondary)] font-medium">
+                {cityLocations.length} centre{cityLocations.length !== 1 ? "s" : ""}
+              </p>
+            </div>
 
-      <CTASection />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {cityLocations.map((loc) => (
+                <Link
+                  key={`${loc.city}-${loc.slug}`}
+                  href={`/locations/${loc.city}/${loc.slug}`}
+                  className="group flex flex-col rounded-2xl bg-white border border-[var(--color-border)] overflow-hidden hover:shadow-[var(--shadow-brand-hover)] hover:border-[var(--color-gold-300)] transition-all"
+                >
+                  <div className="relative aspect-[5/3] bg-[var(--color-surface-alt)]">
+                    {loc.images[0] && (
+                      <Image
+                        src={loc.images[0]}
+                        alt={loc.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1 p-5 flex flex-col gap-2">
+                    <h3 className="font-display text-xl text-[var(--color-navy)] leading-tight">
+                      {loc.name}
+                    </h3>
+                    <p className="text-[13px] text-[var(--color-ink-secondary)] inline-flex items-start gap-1.5 leading-snug">
+                      <MapPin className="w-3.5 h-3.5 mt-0.5 text-[var(--color-gold-deep)] shrink-0" strokeWidth={2} />
+                      <span>{loc.address}</span>
+                    </p>
+                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-[var(--color-border)]">
+                      <span className="text-[12px] text-[var(--color-ink-secondary)]">
+                        {loc.workspaceTypes.length} workspace types
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-[var(--color-navy)] group-hover:text-[var(--color-gold-deep)] transition-colors">
+                        View details
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.25} />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </>
   );
 }

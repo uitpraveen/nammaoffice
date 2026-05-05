@@ -15,12 +15,16 @@ export const BRAND = {
 } as const;
 
 export const COLORS = {
-  wine: "#7C2D3E",
-  charcoal: "#2D2926",
-  warmWhite: "#F9F6F1",
-  warmGray: "#6B6057",
-  sand: "#F0EBE1",
-  border: "#DDD6CC",
-  richBlack: "#1A1A1A",
-  accentGold: "#B8860B",
+  navy: "#0B2545",
+  navyDeep: "#08182E",
+  navySoft: "#1B365D",
+  gold: "#C8A24A",
+  goldDeep: "#A88533",
+  cream: "#FAF7F0",
+  surface: "#FFFFFF",
+  ink: "#0F172A",
+  inkSecondary: "#475569",
+  inkMuted: "#94A3B8",
+  border: "#E5E1D6",
+  borderStrong: "#D6CFBE",
 } as const;

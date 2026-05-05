@@ -12,6 +12,7 @@
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
+    "@vercel/blob": "^2.3.3",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
     "motion": "^12.38.0",

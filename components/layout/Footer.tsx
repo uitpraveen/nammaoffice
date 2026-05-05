@@ -1,35 +1,24 @@
 import { BRAND } from "@/lib/constants";
-import { NewsletterForm } from "@/components/forms/NewsletterForm";
+import { locations } from "@/lib/data/locations";
 import { formatPhone } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
-const workspaceLinks = [
-  { label: "Private Cabin", href: "/workspaces/private-cabin" },
-  { label: "Open Desk", href: "/workspaces/open-desk" },
-  { label: "Cubicle", href: "/workspaces/cubicle" },
-  { label: "Meeting Hall", href: "/workspaces/meeting-hall" },
-  { label: "Business Lounge", href: "/workspaces/business-lounge" },
-  { label: "Managed Office", href: "/workspaces/managed-office" },
+const formsLinks = [
+  { label: "Company Registration", href: "/registration/company" },
+  { label: "User Registration", href: "/registration/user" },
+  { label: "Vendor Form", href: "/registration/vendor" },
+  { label: "Bookings", href: "/bookings" },
 ];
 
-const locationLinks = [
-  { label: "Salem", href: "/locations/salem" },
-  { label: "Trichy", href: "/locations/trichy" },
-  { label: "Tirupur", href: "/locations/tirupur" },
-];
-
-const companyLinks = [
-  { label: "About", href: "/about" },
+const serviceLegalLinks = [
+  { label: "Gate Pass — Salem TIDEL", href: "/gate-pass/tidel-neo-salem" },
+  { label: "Gate Pass — Tirupur TIDEL", href: "/gate-pass/tidel-neo-tirupur" },
   { label: "Franchise", href: "/franchise" },
-  { label: "Workation", href: "/workation" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Amenities", href: "/amenities" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-];
-
-const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms-conditions" },
   { label: "Refund Policy", href: "/refund-policy" },
@@ -39,45 +28,40 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-charcoal)] text-white/80">
-      {/* Big CTA row */}
+    <footer className="bg-[var(--color-navy)] text-white/80">
+      {/* CTA strip */}
       <div className="border-b border-white/10">
-        <div className="content-width py-14 md:py-20 grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center">
+        <div className="content-width py-12 md:py-16 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-center">
           <div>
-            <p className="eyebrow !text-[var(--color-accent-300)]">Get started</p>
-            <h2 className="display-lg !text-white mt-3">
-              Find your space.
-              <br />
-              <span className="text-white/60">Start working tomorrow.</span>
+            <p className="eyebrow !text-[var(--color-gold-300)]">Get in touch</p>
+            <h2 className="font-display text-3xl md:text-4xl !text-white mt-3 leading-tight">
+              Ready to claim your space?
             </h2>
-            <p className="mt-4 text-[15px] text-white/60 max-w-md leading-relaxed">
-              Subscribe for new locations, member offers and workspace tips. No spam — one email a month, max.
+            <p className="mt-3 text-[15px] text-white/65 max-w-md leading-relaxed">
+              Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
             </p>
           </div>
-          <div className="w-full max-w-md lg:min-w-[420px]">
-            <NewsletterForm />
-            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px]">
-              <a
-                href={`tel:${formatPhone(BRAND.phone)}`}
-                className="inline-flex items-center gap-1.5 text-white/70 hover:text-white transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5" strokeWidth={2} />
-                {BRAND.phone}
-              </a>
-              <a
-                href={`mailto:${BRAND.email}`}
-                className="inline-flex items-center gap-1.5 text-white/70 hover:text-white transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5" strokeWidth={2} />
-                {BRAND.email}
-              </a>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/bookings"
+              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
+            >
+              Book Now
+              <span aria-hidden>→</span>
+            </Link>
+            <a
+              href={`tel:${formatPhone(BRAND.phone)}`}
+              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors"
+            >
+              <Phone className="w-4 h-4" strokeWidth={2} />
+              {BRAND.phone}
+            </a>
           </div>
         </div>
       </div>
 
       {/* Link columns */}
-      <div className="content-width py-14 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-10">
+      <div className="content-width py-12 md:py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
         <div className="col-span-2 md:col-span-4 lg:col-span-1">
           <Link href="/" className="inline-flex items-center" aria-label="NammaOffice home">
             <Image
@@ -89,23 +73,25 @@ export function Footer() {
             />
           </Link>
           <p className="mt-3 text-[14px] text-white/60 leading-relaxed max-w-xs">
-            {BRAND.description}
+            Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur.
           </p>
-        </div>
-
-        <FooterColumn title="Workspaces" links={workspaceLinks} />
-        <FooterColumn title="Locations" links={locationLinks} />
-        <FooterColumn title="Company" links={companyLinks} />
-        <FooterColumn title="Legal" links={legalLinks} />
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="content-width py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="text-[12.5px] text-white/50">
-            &copy; {currentYear} NammaOffice. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1">
+          <div className="mt-5 space-y-2.5 text-[13.5px]">
+            <a
+              href={`tel:${formatPhone(BRAND.phone)}`}
+              className="flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+              {BRAND.phone}
+            </a>
+            <a
+              href={`mailto:${BRAND.email}`}
+              className="flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+              {BRAND.email}
+            </a>
+          </div>
+          <div className="mt-5 flex items-center gap-1">
             <SocialIcon href={BRAND.social.instagram} label="Instagram">
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden>
                 <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.64-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z" />
@@ -128,6 +114,30 @@ export function Footer() {
             </SocialIcon>
           </div>
         </div>
+
+        <FooterColumn
+          title="Locations"
+          links={locations.map((l) => ({
+            label: l.name,
+            href: `/locations/${l.city}/${l.slug}`,
+            sub: l.city.charAt(0).toUpperCase() + l.city.slice(1),
+          }))}
+        />
+        <FooterColumn title="Forms" links={formsLinks} />
+        <FooterColumn title="Service & Legal" links={serviceLegalLinks} />
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="content-width py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <p className="text-[12.5px] text-white/50">
+            &copy; {currentYear} NammaOffice. All rights reserved.
+          </p>
+          <p className="text-[12.5px] text-white/40 inline-flex items-center gap-1.5">
+            <MapPin className="w-3 h-3" strokeWidth={2} />
+            8 centres · Salem · Trichy · Tirupur
+          </p>
+        </div>
       </div>
     </footer>
   );
@@ -138,21 +148,26 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; sub?: string }[];
 }) {
   return (
     <div>
-      <h3 className="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
+      <h3 className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-300)] mb-4">
         {title}
       </h3>
       <ul className="space-y-2.5">
         {links.map((link) => (
-          <li key={link.href}>
+          <li key={link.href + link.label}>
             <Link
               href={link.href}
-              className="text-[13.5px] text-white/75 hover:text-white transition-colors"
+              className="group block text-[13.5px] text-white/75 hover:text-white transition-colors"
             >
               {link.label}
+              {link.sub && (
+                <span className="block text-[11px] text-white/40 mt-0.5 group-hover:text-white/60">
+                  {link.sub}
+                </span>
+              )}
             </Link>
           </li>
         ))}
@@ -176,7 +191,7 @@ function SocialIcon({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="inline-flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+      className="inline-flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-[var(--color-gold-300)] hover:bg-white/10 transition-colors"
     >
       {children}
     </a>

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { HeroBanner } from "@/components/sections/HeroBanner";
-import { ProcessStepper } from "@/components/sections/ProcessStepper";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
 import { Accordion } from "@/components/ui/Accordion";
 import { FranchiseForm } from "@/components/forms/FranchiseForm";
 import {
@@ -12,11 +9,12 @@ import {
   franchiseSupportPhases,
 } from "@/lib/data/franchise";
 import { getFaqsByCategory } from "@/lib/data/faqs";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "NammaOffice Franchise — Own a Coworking Centre | 40% ROI",
+  title: "Franchise — Own a NammaOffice Centre",
   description:
-    "Own a NammaOffice franchise. 2,000–20,000 sq ft centres, 5+5 year agreement, 40% projected ROI, 2.5 year payback. Full support from site to launch. Apply today.",
+    "Own a NammaOffice franchise. 2,000–20,000 sq ft centres, 5+5 year agreement, 40% projected ROI, 2.5 year payback. Full support from site to launch.",
   keywords: [
     "coworking franchise Tamil Nadu",
     "NammaOffice franchise",
@@ -24,7 +22,7 @@ export const metadata: Metadata = {
     "franchise investment India",
   ],
   openGraph: {
-    title: "NammaOffice Franchise — Own a Coworking Centre | 40% ROI",
+    title: "Franchise — Own a NammaOffice Centre",
     description:
       "Own a NammaOffice franchise. 40% projected ROI. Full support from site to launch.",
   },
@@ -34,23 +32,10 @@ const investmentStats = [
   {
     label: "Space Required",
     value: `${franchiseInvestment.minSize.toLocaleString()}–${franchiseInvestment.maxSize.toLocaleString()} ${franchiseInvestment.unit}`,
-    icon: "🏢",
   },
-  {
-    label: "Agreement Term",
-    value: franchiseInvestment.agreementTerm,
-    icon: "📝",
-  },
-  {
-    label: "Projected ROI",
-    value: franchiseInvestment.projectedROI,
-    icon: "📈",
-  },
-  {
-    label: "Payback Period",
-    value: franchiseInvestment.paybackPeriod,
-    icon: "⏱️",
-  },
+  { label: "Agreement Term", value: franchiseInvestment.agreementTerm },
+  { label: "Projected ROI", value: franchiseInvestment.projectedROI },
+  { label: "Payback Period", value: franchiseInvestment.paybackPeriod },
 ];
 
 const franchiseFaqs = getFaqsByCategory("franchise");
@@ -59,167 +44,164 @@ export default function FranchisePage() {
   return (
     <>
       <HeroBanner
-        title="Partner With Us — Own a NammaOffice"
-        subtitle="Join India's fastest-growing coworking network in Tamil Nadu. Proven systems, strong returns, and end-to-end support."
+        eyebrow="Franchise"
+        title="Own a NammaOffice centre."
+        subtitle="Join Tamil Nadu's fastest-growing coworking network. Proven systems, strong returns, and end-to-end support."
       />
 
-      {/* Why Partner */}
-      <section className="section-padding">
-        <div className="content-width">
-          <SectionHeading
-            title="Why Partner With NammaOffice?"
-            subtitle="Eight reasons why entrepreneurs choose the NammaOffice franchise model."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {franchiseBenefits.slice(0, 4).map((benefit) => (
-              <Card key={benefit.title} hover className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-brand bg-terracotta-50 flex items-center justify-center">
-                  <span className="text-2xl" aria-hidden="true">
-                    {benefit.title === "Proven Brand" && "🏆"}
-                    {benefit.title === "Strong ROI" && "📈"}
-                    {benefit.title === "Full Operational Support" && "🤝"}
-                    {benefit.title === "Technology Platform" && "💻"}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg text-warm-charcoal mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="font-sans text-sm text-warm-gray leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          {/* Second row of benefits */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-            {franchiseBenefits.slice(4, 8).map((benefit) => (
-              <Card key={benefit.title} hover className="p-6 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-brand bg-olive-50 flex items-center justify-center">
-                  <span className="text-2xl" aria-hidden="true">
-                    {benefit.title === "Staff Training" && "🎓"}
-                    {benefit.title === "Marketing & Lead Generation" && "📣"}
-                    {benefit.title === "Interior Design & Fitout" && "🎨"}
-                    {benefit.title === "Exclusive Territory" && "🗺️"}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg text-warm-charcoal mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="font-sans text-sm text-warm-gray leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-              </Card>
-            ))}
-          </div>
+      {/* Investment at a glance */}
+      <section className="content-width py-14 md:py-20">
+        <div className="max-w-2xl mb-10">
+          <p className="eyebrow">Investment at a glance</p>
+          <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+            Transparent numbers. No surprises.
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          {investmentStats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl bg-white border border-[var(--color-border)] p-6"
+            >
+              <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-gold-deep)]">
+                {stat.label}
+              </p>
+              <p className="font-display text-2xl md:text-3xl text-[var(--color-navy)] mt-2">
+                {stat.value}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Investment Details */}
-      <section className="section-padding bg-sand-50">
+      {/* Why partner */}
+      <section className="bg-[var(--color-surface-alt)] py-14 md:py-20">
         <div className="content-width">
-          <SectionHeading
-            title="Investment at a Glance"
-            subtitle="Transparent investment parameters for prospective franchise partners."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {investmentStats.map((stat) => (
-              <Card key={stat.label} className="p-8 text-center">
-                <div className="text-4xl mb-4" aria-hidden="true">
-                  {stat.icon}
-                </div>
-                <p className="font-serif text-2xl text-terracotta font-bold mb-2">
-                  {stat.value}
+          <div className="max-w-2xl mb-10">
+            <p className="eyebrow">Why partner</p>
+            <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+              Eight reasons to join us.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {franchiseBenefits.map((benefit) => (
+              <div
+                key={benefit.title}
+                className="rounded-2xl bg-white border border-[var(--color-border)] p-6 flex flex-col gap-3"
+              >
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--color-gold-50)] text-[var(--color-gold-deep)]">
+                  <Check className="w-5 h-5" strokeWidth={2} />
+                </span>
+                <h3 className="font-display text-lg text-[var(--color-navy)] leading-tight">
+                  {benefit.title}
+                </h3>
+                <p className="text-[13.5px] text-[var(--color-ink-secondary)] leading-relaxed">
+                  {benefit.description}
                 </p>
-                <p className="font-sans text-sm text-warm-gray">{stat.label}</p>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process Stepper */}
-      <section className="section-padding">
-        <div className="content-width">
-          <SectionHeading
-            title="How to Become a Franchise Partner"
-            subtitle="A clear, step-by-step journey from enquiry to grand opening."
-            className="mb-12"
-          />
-          <ProcessStepper steps={franchiseProcess} />
+      {/* How it works */}
+      <section className="content-width py-14 md:py-20">
+        <div className="max-w-2xl mb-10">
+          <p className="eyebrow">How it works</p>
+          <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+            From enquiry to grand opening.
+          </h2>
         </div>
+        <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {franchiseProcess.map((step, i) => (
+            <li
+              key={step.title}
+              className="rounded-2xl bg-white border border-[var(--color-border)] p-6"
+            >
+              <p className="font-display text-3xl text-[var(--color-gold-deep)] tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h3 className="font-display text-lg text-[var(--color-navy)] mt-3 leading-tight">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-[13.5px] text-[var(--color-ink-secondary)] leading-relaxed">
+                {step.description}
+              </p>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      {/* Support Phases */}
-      <section className="section-padding bg-sand-50">
+      {/* Support phases */}
+      <section className="bg-[var(--color-surface-alt)] py-14 md:py-20">
         <div className="content-width">
-          <SectionHeading
-            title="What Support Do You Get?"
-            subtitle="NammaOffice partners are never alone — from day one to long-term growth."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="max-w-2xl mb-10">
+            <p className="eyebrow">Support</p>
+            <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+              You&apos;re never alone.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {franchiseSupportPhases.map((phase) => (
-              <Card key={phase.phase} className="p-8">
-                <div className="inline-block px-3 py-1 rounded-full text-xs font-medium font-sans bg-terracotta-50 text-terracotta mb-4">
+              <div
+                key={phase.phase}
+                className="rounded-2xl bg-white border border-[var(--color-border)] p-6"
+              >
+                <span className="inline-flex items-center text-[10.5px] uppercase tracking-[0.18em] font-semibold px-2.5 py-1 rounded bg-[var(--color-navy)] text-white">
                   {phase.phase}
-                </div>
-                <h3 className="font-serif text-xl text-warm-charcoal mb-4">
+                </span>
+                <h3 className="font-display text-xl text-[var(--color-navy)] mt-4">
                   {phase.title}
                 </h3>
-                <ul className="space-y-2">
+                <ul className="mt-4 space-y-2">
                   {phase.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-sans text-sm text-warm-gray">
-                      <span className="text-terracotta mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-[13.5px] text-[var(--color-ink-secondary)]"
+                    >
+                      <Check className="w-3.5 h-3.5 mt-1 text-[var(--color-gold-deep)] shrink-0" strokeWidth={2.5} />
                       {item}
                     </li>
                   ))}
                 </ul>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Franchise Form */}
-      <section className="section-padding">
-        <div className="content-width">
-          <div className="max-w-2xl mx-auto">
-            <SectionHeading
-              title="Apply for a NammaOffice Franchise"
-              subtitle="Fill in your details and our franchise development team will contact you within 48 hours."
-              className="mb-10"
-            />
-            <Card className="p-8">
-              <FranchiseForm />
-            </Card>
+      {/* Application form */}
+      <section className="content-width py-14 md:py-20">
+        <div className="max-w-2xl mx-auto">
+          <p className="eyebrow text-center">Apply</p>
+          <h2 className="display-lg mt-3 text-[var(--color-navy)] text-center">
+            Apply for a franchise.
+          </h2>
+          <p className="mt-4 text-[15px] text-[var(--color-ink-secondary)] leading-relaxed text-center">
+            Fill in your details and our franchise development team will reach out within 48 hours.
+          </p>
+          <div className="mt-8 rounded-2xl bg-white border border-[var(--color-border)] p-6 md:p-8 shadow-[var(--shadow-brand)]">
+            <FranchiseForm />
           </div>
         </div>
       </section>
 
-      {/* FAQ Accordion */}
+      {/* FAQs */}
       {franchiseFaqs.length > 0 && (
-        <section className="section-padding bg-sand-50">
-          <div className="content-width">
-            <SectionHeading
-              title="Franchise FAQs"
-              subtitle="Answers to common questions from prospective franchise partners."
-              className="mb-10"
-            />
-            <div className="max-w-3xl mx-auto">
-              <Accordion
-                items={franchiseFaqs.map((faq) => ({
-                  question: faq.question,
-                  answer: faq.answer,
-                }))}
-              />
+        <section className="bg-[var(--color-surface-alt)] py-14 md:py-20">
+          <div className="content-width max-w-3xl">
+            <div className="mb-8">
+              <p className="eyebrow">FAQ</p>
+              <h2 className="display-lg mt-3 text-[var(--color-navy)]">
+                Franchise FAQs.
+              </h2>
             </div>
+            <Accordion
+              items={franchiseFaqs.map((faq) => ({
+                question: faq.question,
+                answer: faq.answer,
+              }))}
+            />
           </div>
         </section>
       )}

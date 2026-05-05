@@ -33,7 +33,7 @@ const SLIDES: Slide[] = [
     alt: "NammaOffice modern coworking interior — Salem",
     eyebrow: "Coworking · Salem",
     caption: "Designed for focused work",
-    location: "Brindavan Road · Salem",
+    location: "Fairlands · Salem",
     headline: { lead: "Build Your Business From", emphasis: "Your City" },
     subhead:
       "Premium workspaces for startups, freelancers, and growing teams in Tier-2 & Tier-3 cities.",
@@ -165,7 +165,7 @@ export function HeroSection() {
             className="flex flex-col items-center"
           >
             <div className="inline-flex items-center gap-2 h-7 px-3 rounded-full bg-white/[0.08] backdrop-blur border border-white/15 text-white text-[12px] font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--color-accent-300)]" strokeWidth={2.25} />
+              <Sparkles className="w-3.5 h-3.5 text-[var(--color-gold-300)]" strokeWidth={2.25} />
               {slide.eyebrow}
             </div>
 
@@ -174,7 +174,7 @@ export function HeroSection() {
               style={{ textShadow: "0 2px 16px rgba(0,0,0,0.45)" }}
             >
               {slide.headline.lead}{" "}
-              <span className="text-[var(--color-accent-300)] italic inline-block px-[0.06em]">
+              <span className="text-[var(--color-gold-300)] italic inline-block px-[0.06em]">
                 {slide.headline.emphasis}
               </span>
               {slide.headline.tail ? <> {slide.headline.tail}</> : null}
@@ -203,20 +203,20 @@ export function HeroSection() {
 
         <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
           <Link
-            href="/book-tour"
-            className="group inline-flex items-center justify-center gap-2 h-12 px-7 bg-[var(--color-accent)] text-white text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-accent-600)] hover:scale-[1.02] shadow-[0_8px_24px_rgba(31,181,224,0.40)]"
+            href="/bookings"
+            className="group inline-flex items-center justify-center gap-2 h-12 px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-gold-deep)] hover:text-white hover:scale-[1.02] shadow-[var(--shadow-cta)]"
           >
-            Book Meeting Hall
+            Book Now
             <ArrowRight
               className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
               strokeWidth={2.25}
             />
           </Link>
           <Link
-            href="/workspaces"
+            href="/locations"
             className="inline-flex items-center justify-center gap-2 h-12 px-7 border border-white/30 text-white text-[14px] font-semibold rounded-full hover:bg-white/10 active:bg-white/15 transition-colors"
           >
-            Explore spaces
+            Explore centres
           </Link>
         </div>
       </div>
@@ -277,7 +277,7 @@ export function HeroSection() {
                       duration: paused ? 0 : SLIDE_MS / 1000,
                       ease: "linear",
                     }}
-                    className="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-accent origin-left"
+                    className="absolute bottom-0 left-0 h-[3px] w-full bg-[var(--color-gold)] origin-left"
                   />
                 )}
               </motion.button>

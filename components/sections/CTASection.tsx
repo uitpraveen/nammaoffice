@@ -5,33 +5,34 @@ import { whatsappUrl } from "@/lib/utils";
 
 export function CTASection() {
   return (
-    <section className="bg-[var(--color-charcoal)] relative overflow-hidden">
-      {/* Soft static accent — single radial, no blur animation */}
+    <section className="bg-[var(--color-navy)] relative overflow-hidden">
+      {/* Soft gold radial accent — single static layer */}
       <div
         aria-hidden
-        className="absolute inset-0 opacity-60 pointer-events-none"
+        className="absolute inset-0 opacity-70 pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 60% at 80% 50%, rgba(31,181,224,0.22), transparent 60%), radial-gradient(40% 40% at 0% 100%, rgba(244,169,51,0.18), transparent 60%)",
+            "radial-gradient(45% 60% at 80% 50%, rgba(200,162,74,0.20), transparent 60%), radial-gradient(40% 40% at 0% 100%, rgba(200,162,74,0.10), transparent 60%)",
         }}
       />
 
       <div className="content-width relative z-10 py-20 md:py-28 flex flex-col items-center text-center">
-        <p className="eyebrow text-gradient">Ready when you are</p>
+        <p className="eyebrow !text-[var(--color-gold-300)]">Ready when you are</p>
         <h2 className="display-xl mt-4 max-w-3xl text-white">
           Find your space.
           <br />
-          <span className="text-gradient italic font-normal">Start working tomorrow.</span>
+          <span className="text-[var(--color-gold-300)] italic font-normal">
+            Start working tomorrow.
+          </span>
         </h2>
         <p className="mt-6 text-[16px] md:text-[17px] text-white/70 max-w-xl leading-relaxed">
-          Book a tour at any centre. Walk through the spaces, meet the team,
-          and pick the seat that fits.
+          Book a tour at any centre. Walk through the spaces, meet the team, and pick the seat that fits.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="/book-tour"
-            className="group relative inline-flex items-center gap-2 h-12 px-6 bg-gradient-accent text-white text-[14px] font-semibold rounded-full transition-transform hover:scale-[1.03] shadow-[0_8px_32px_rgba(99,102,241,0.45)]"
+            href="/bookings"
+            className="group relative inline-flex items-center gap-2 h-12 px-6 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full transition-transform hover:scale-[1.03] hover:bg-[var(--color-gold-deep)] hover:text-white shadow-[var(--shadow-cta)]"
           >
             Book a free tour
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.25} />

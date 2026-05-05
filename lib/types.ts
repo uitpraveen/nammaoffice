@@ -106,6 +106,8 @@ export interface NavChild {
   description: string;
   /** Lucide icon name (PascalCase). Optional — falls back to a default. */
   icon?: string;
+  /** Optional city tag — shown as a small chip next to the label in the locations dropdown. */
+  cityTag?: string;
 }
 
 export interface NavItem {
