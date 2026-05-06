@@ -211,19 +211,6 @@
     letter-spacing: -0.02em;
   }
 
-  /* Royal tile pattern — subtle architectural blueprint grid in brick
-     rgba. Two scales: a fine 36px grid + a stronger 144px major grid
-     overlaid. Sits at very low alpha so it reads as "texture" not
-     "graph paper". Use as an absolute overlay on dark surfaces. */
-  .bg-pattern-royal {
-    background-image:
-      linear-gradient(rgba(184, 85, 58, 0.18) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(184, 85, 58, 0.18) 1px, transparent 1px),
-      linear-gradient(rgba(184, 85, 58, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(184, 85, 58, 0.06) 1px, transparent 1px);
-    background-size: 144px 144px, 144px 144px, 36px 36px, 36px 36px;
-    background-position: 0 0, 0 0, 0 0, 0 0;
-  }
 }
 
 @layer base {

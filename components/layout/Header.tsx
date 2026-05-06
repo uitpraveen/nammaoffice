@@ -70,10 +70,9 @@ export function Header() {
           </div>
         </div>
 
-        {/* Masthead bar — solid matt black with royal tile pattern overlay */}
-        <div className="h-16 md:h-20 bg-[var(--color-navy)] text-white relative overflow-hidden">
-          <span aria-hidden className="absolute inset-0 bg-pattern-royal opacity-60 pointer-events-none" />
-          <div className="relative content-width h-full flex items-stretch justify-between gap-4">
+        {/* Masthead bar — solid matt black */}
+        <div className="h-16 md:h-20 bg-[var(--color-navy)] text-white relative">
+          <div className="content-width h-full flex items-stretch justify-between gap-4">
             {/* Logo */}
             <Link
               href="/"

@@ -9,8 +9,18 @@ import { ArrowUpRight } from "lucide-react";
 export function StatsBand() {
   return (
     <section className="bg-[var(--color-charcoal)] relative overflow-hidden">
-      {/* Royal tile pattern — same architectural grid used in masthead + footer */}
-      <span aria-hidden className="absolute inset-0 bg-pattern-royal opacity-60 pointer-events-none" />
+      {/* Subtle dot-grid pattern — kept ONLY here (the "Built across…"
+          stats band) per client preference. Masthead and footer stay
+          plain matt black. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-[0.18]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(184,85,58,0.50) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
       {/* Soft gold radial glow */}
       <div
         aria-hidden

@@ -31,18 +31,15 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-navy)] text-white/80 relative overflow-hidden">
-      {/* Royal tile pattern overlay — same texture used in masthead + StatsBand */}
-      <span aria-hidden className="absolute inset-0 bg-pattern-royal opacity-50 pointer-events-none" />
-
+    <footer className="bg-[var(--color-navy)] text-white/80 relative">
       {/* Top neon brick rule + soft halo — bookends the page in matte black. */}
       <span
         aria-hidden
-        className="absolute left-0 right-0 top-0 h-px bg-[var(--color-gold)] z-10"
+        className="absolute left-0 right-0 top-0 h-px bg-[var(--color-gold)]"
       />
       <span
         aria-hidden
-        className="absolute left-0 right-0 top-0 h-3 pointer-events-none z-10"
+        className="absolute left-0 right-0 top-0 h-3 pointer-events-none"
         style={{
           background:
             "linear-gradient(0deg, rgba(184,85,58,0.40) 0%, rgba(184,85,58,0) 100%)",
