@@ -74,32 +74,34 @@ export function Footer() {
         />
       </span>
 
-      {/* CTA strip */}
-      <div className="content-width relative py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16 border-b border-white/8">
-        <div>
-          <p className="eyebrow !text-[var(--color-gold-300)]">Get in touch</p>
-          <h2 className="font-display text-3xl md:text-4xl !text-white mt-2 leading-tight">
-            Ready to claim your space?
-          </h2>
-          <p className="mt-3 text-[15px] text-white/65 max-w-xl leading-relaxed">
-            Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, or Tirupur.
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-          <Link
-            href="/bookings"
-            className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-white hover:bg-[var(--color-gold-deep)] transition-colors shadow-[var(--shadow-cta-hover)]"
-          >
-            Book Now
-            <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-          </Link>
-          <a
-            href={`tel:${formatPhone(BRAND.phone)}`}
-            className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full border border-white/25 text-white hover:bg-white/10 hover:border-[var(--color-gold-300)] transition-colors"
-          >
-            <Phone className="w-4 h-4" strokeWidth={2} />
-            {BRAND.phone}
-          </a>
+      {/* CTA strip — full-width bottom rule, content stays constrained. */}
+      <div className="relative border-b border-white/8">
+        <div className="content-width py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16">
+          <div>
+            <p className="eyebrow !text-[var(--color-gold-300)]">Get in touch</p>
+            <h2 className="font-display text-3xl md:text-4xl !text-white mt-2 leading-tight">
+              Ready to claim your space?
+            </h2>
+            <p className="mt-3 text-[15px] text-white/65 max-w-xl leading-relaxed">
+              Book a meeting hall, request a gate pass, or talk to us about a managed office across Salem, Trichy, Tirupur, Erode, or Hosur.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link
+              href="/bookings"
+              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-white hover:bg-[var(--color-gold-deep)] transition-colors shadow-[var(--shadow-cta-hover)]"
+            >
+              Book Now
+              <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
+            </Link>
+            <a
+              href={`tel:${formatPhone(BRAND.phone)}`}
+              className="inline-flex items-center justify-center gap-1.5 h-12 px-6 text-[14px] font-semibold rounded-full border border-white/25 text-white hover:bg-white/10 hover:border-[var(--color-gold-300)] transition-colors"
+            >
+              <Phone className="w-4 h-4" strokeWidth={2} />
+              {BRAND.phone}
+            </a>
+          </div>
         </div>
       </div>
 
