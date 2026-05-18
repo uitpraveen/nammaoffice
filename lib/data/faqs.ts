@@ -5,7 +5,7 @@ export const faqs: FAQItem[] = [
   {
     question: "What is NammaOffice?",
     answer:
-      "NammaOffice is a premium coworking and managed office space provider with 7 centres across Salem, Trichy, and Tirupur in Tamil Nadu. We offer a range of workspace solutions including private cabins, open desks, cubicles, meeting halls, business lounges, and fully managed offices.",
+      "NammaOffice is a premium coworking and managed office space provider with 10 centres across Salem, Trichy, Tirupur, Erode, and Hosur in Tamil Nadu. We offer a range of workspace solutions including private cabins, open desks, cubicles, meeting halls, business lounges, and fully managed offices.",
     category: "general",
   },
   {
@@ -55,13 +55,13 @@ export const faqs: FAQItem[] = [
   {
     question: "How many NammaOffice centres are there?",
     answer:
-      "We have 7 centres — 5 in Salem (Brindavan Road, Ramakrishna Road, New Bus Stand, TIDEL NEO, and Fort Hosur), 1 in Trichy (Asha Grand), and 1 in Tirupur (TIDEL NEO).",
+      "We have 10 centres across 5 cities — 6 in Salem (Anushka Tower / Fairlands, Balaji Tower / Ramakrishna Road, Rajeshwari Towers, New Bus Stand / Meyyanur, TIDEL NEO / Karuppur, and IPOD / Reliance Mega Mall), 1 in Trichy (TIDEL NEO), 1 in Tirupur (TIDEL NEO / Thirumuruganpoondi), 1 in Erode (Texvalley, NH-544), and 1 in Hosur (Sipcot Phase II).",
     category: "locations",
   },
   {
     question: "Can I use multiple NammaOffice locations with one membership?",
     answer:
-      "Yes. Our multi-location plans allow you to access coworking facilities across our centres. Ask our team about our All-City Pass that gives you open desk access at any NammaOffice location across Salem, Trichy, and Tirupur.",
+      "Yes. Our multi-location plans allow you to access coworking facilities across our centres. Ask our team about our All-City Pass that gives you open desk access at any NammaOffice location across Salem, Trichy, Tirupur, Erode, and Hosur.",
     category: "locations",
   },
   {

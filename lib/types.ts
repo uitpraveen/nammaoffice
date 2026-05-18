@@ -17,7 +17,7 @@ export interface Location {
   seoDescription: string;
 }
 
-export type CitySlug = "salem" | "trichy" | "tirupur";
+export type CitySlug = "salem" | "trichy" | "tirupur" | "erode" | "hosur";
 
 export interface City {
   slug: CitySlug;

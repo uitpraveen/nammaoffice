@@ -43,7 +43,7 @@ const SLIDES: Slide[] = [
     alt: "NammaOffice premium workspace — Trichy",
     eyebrow: "Coworking · Trichy",
     caption: "Where teams come together",
-    location: "Asha Grand · Trichy",
+    location: "TIDEL NEO · Trichy",
     headline: { lead: "Where Founders Find Their", emphasis: "People" },
     subhead:
       "Join a community of entrepreneurs, freelancers, and remote teams across Tamil Nadu.",
