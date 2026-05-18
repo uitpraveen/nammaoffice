@@ -1,14 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
 /**
  * Mid-page dark accent strip — a single dark moment that breaks up the
  * cream surfaces and gives the page visual rhythm. SaaS-style stat tiles
- * with gradient borders + soft glow.
+ * with gradient borders + soft glow. Scroll-driven reveal: text fades up
+ * first, then the four stat tiles cascade in with a 60ms stagger.
  */
 export function StatsBand() {
   return (
-    <section className="bg-[var(--color-charcoal)] relative overflow-hidden">
+    <section id="stats" className="bg-[var(--color-charcoal)] relative overflow-hidden">
       {/* Subtle dot-grid pattern — kept ONLY here (the "Built across…"
           stats band) per client preference. Masthead and footer stay
           plain matt black. */}
@@ -33,7 +37,12 @@ export function StatsBand() {
 
       <div className="content-width relative z-10 py-16 md:py-24">
         <div className="grid lg:grid-cols-[1.2fr_2fr] gap-10 lg:gap-16 items-center">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <p
               className="text-[11px] font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--color-gold-300)" }}
@@ -58,14 +67,20 @@ export function StatsBand() {
               About NammaOffice
               <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
             </Link>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ staggerChildren: 0.06, delayChildren: 0.15 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3"
+          >
             <Stat label="Centres" value="8" />
             <Stat label="Cities" value="3" />
             <Stat label="Members" value="500+" />
             <Stat label="Rating" value="4.9" suffix="/5" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -82,7 +97,12 @@ function Stat({
   suffix?: string;
 }) {
   return (
-    <div
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 22, scale: 0.96 },
+        visible: { opacity: 1, y: 0, scale: 1 },
+      }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className="relative rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(184,85,58,0.6),0_0_24px_rgba(184,85,58,0.30)]"
       style={{
         background:
@@ -98,6 +118,6 @@ function Stat({
       <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
         {label}
       </p>
-    </div>
+    </motion.div>
   );
 }

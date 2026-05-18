@@ -40,3 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .superpowers/
+
+# debug screenshots and test artifacts (root-only — public/images PNGs are kept)
+/*.png
+/.playwright-mcp/
+
+# claude code local settings (machine-specific permission allowlist)
+/.claude/settings.local.json

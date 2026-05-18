@@ -119,22 +119,27 @@ export function Header() {
             </div>
           </div>
 
-          {/* Neon brick rule + glow halo — runs beneath the masthead.
-              Two layers: a hairline at the very edge, and a soft outer
-              glow that bleeds 12px below for a "neon sign" feel. */}
+          {/* Gold hairline + travelling comet of light. The hairline is the
+              static rule beneath the masthead; the comet is a brighter gold
+              teardrop with a fading tail and a soft glow ring, sweeping
+              across on a ~4.5s loop. */}
           <span
             aria-hidden
             className="absolute left-0 right-0 -bottom-px h-px bg-[var(--color-gold)]"
           />
           <span
             aria-hidden
-            className="absolute left-0 right-0 -bottom-3 h-3 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(184,85,58,0.45) 0%, rgba(184,85,58,0) 100%)",
-              filter: "blur(4px)",
-            }}
-          />
+            className="absolute -bottom-px left-0 right-0 h-px overflow-hidden pointer-events-none"
+          >
+            <span
+              className="header-light-sweep block h-px w-[26%] min-w-[180px] max-w-[360px]"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(232,162,107,0.45) 55%, rgba(255,215,150,1) 90%, transparent 100%)",
+                boxShadow: "0 0 6px 0.5px rgba(255,215,150,0.85)",
+              }}
+            />
+          </span>
         </div>
       </header>
 

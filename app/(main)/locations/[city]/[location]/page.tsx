@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -15,6 +14,8 @@ import {
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { GoogleMap } from "@/components/ui/GoogleMap";
+import { LocationHeroStrip, LocationInsideGallery } from "@/components/sections/LocationGallery";
+import { Reveal } from "@/components/ui/Reveal";
 import { locations, getCity, getLocation } from "@/lib/data/locations";
 import { getAmenities } from "@/lib/data/amenities";
 import { googleMapsUrl, whatsappUrl, formatPhone } from "@/lib/utils";
@@ -85,36 +86,17 @@ export default async function LocationPage({ params }: Props) {
         ]}
       />
 
-      {/* Hero image strip — featured 1 large + 2 smaller */}
-      <section className="content-width pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-2 md:gap-3 rounded-2xl overflow-hidden h-auto md:h-[440px]">
-          {location.images.slice(0, 3).map((src, i) => (
-            <div
-              key={`hero-${src}-${i}`}
-              className={`relative bg-[var(--color-surface-alt)] ${
-                i === 0
-                  ? "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto"
-                  : "aspect-[5/3] md:aspect-auto"
-              }`}
-            >
-              <Image
-                src={src}
-                alt={`${location.name}, ${city.name} — photo ${i + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                priority={i === 0}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      <LocationHeroStrip
+        images={location.images}
+        locationName={location.name}
+        cityName={city.name}
+      />
 
       <section className="content-width pb-24">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left — content */}
           <div className="lg:w-[62%] flex flex-col gap-12">
-            <div>
+            <Reveal>
               <p className="eyebrow !text-[var(--color-gold-deep)]">{city.name}</p>
               <h1 className="font-display text-4xl md:text-5xl text-[var(--color-navy)] leading-tight mt-2">
                 {location.name}
@@ -122,36 +104,17 @@ export default async function LocationPage({ params }: Props) {
               <p className="mt-5 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed max-w-2xl">
                 {location.description}
               </p>
-            </div>
+            </Reveal>
 
-            {/* Gallery — remaining centre photos beyond the hero strip */}
-            {location.images.length > 3 && (
-              <div>
-                <h2 className="font-display text-2xl text-[var(--color-navy)] mb-5">
-                  Inside the centre
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                  {location.images.slice(3).map((src, i) => (
-                    <div
-                      key={`gal-${src}-${i}`}
-                      className="relative aspect-[4/3] rounded-xl overflow-hidden bg-[var(--color-surface-alt)] group"
-                    >
-                      <Image
-                        src={src}
-                        alt={`${location.name}, ${city.name} — gallery ${i + 4}`}
-                        fill
-                        sizes="(max-width: 640px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            <LocationInsideGallery
+              images={location.images}
+              locationName={location.name}
+              cityName={city.name}
+            />
 
             {/* Workspace types */}
             {location.workspaceTypes.length > 0 && (
-              <div>
+              <Reveal>
                 <h2 className="font-display text-2xl text-[var(--color-navy)] mb-5">
                   Workspaces available here
                 </h2>
@@ -168,11 +131,11 @@ export default async function LocationPage({ params }: Props) {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Reveal>
             )}
 
             {/* Amenities */}
-            <div>
+            <Reveal>
               <h2 className="font-display text-2xl text-[var(--color-navy)] mb-5">
                 Amenities at this centre
               </h2>
@@ -198,44 +161,46 @@ export default async function LocationPage({ params }: Props) {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
             {/* Operating hours + Nearby */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h2 className="font-display text-xl text-[var(--color-navy)] mb-3 inline-flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-[var(--color-gold-deep)]" strokeWidth={1.75} />
-                  Operating hours
-                </h2>
-                <p className="text-[14.5px] text-[var(--color-ink-secondary)]">
-                  {location.operatingHours}
-                </p>
-              </div>
-
-              {location.nearbyLandmarks.length > 0 && (
+            <Reveal>
+              <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h2 className="font-display text-xl text-[var(--color-navy)] mb-3 inline-flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[var(--color-gold-deep)]" strokeWidth={1.75} />
-                    Nearby landmarks
+                    <Clock className="w-5 h-5 text-[var(--color-gold-deep)]" strokeWidth={1.75} />
+                    Operating hours
                   </h2>
-                  <ul className="space-y-1.5">
-                    {location.nearbyLandmarks.map((lm) => (
-                      <li
-                        key={lm}
-                        className="text-[13.5px] text-[var(--color-ink-secondary)] flex items-start gap-2"
-                      >
-                        <span className="mt-1.5 inline-block w-1 h-1 rounded-full bg-[var(--color-gold)] shrink-0" />
-                        {lm}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-[14.5px] text-[var(--color-ink-secondary)]">
+                    {location.operatingHours}
+                  </p>
                 </div>
-              )}
-            </div>
+
+                {location.nearbyLandmarks.length > 0 && (
+                  <div>
+                    <h2 className="font-display text-xl text-[var(--color-navy)] mb-3 inline-flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-[var(--color-gold-deep)]" strokeWidth={1.75} />
+                      Nearby landmarks
+                    </h2>
+                    <ul className="space-y-1.5">
+                      {location.nearbyLandmarks.map((lm) => (
+                        <li
+                          key={lm}
+                          className="text-[13.5px] text-[var(--color-ink-secondary)] flex items-start gap-2"
+                        >
+                          <span className="mt-1.5 inline-block w-1 h-1 rounded-full bg-[var(--color-gold)] shrink-0" />
+                          {lm}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </Reveal>
 
             {/* Nearby facilities */}
             {location.nearbyFacilities.length > 0 && (
-              <div>
+              <Reveal>
                 <h2 className="font-display text-xl text-[var(--color-navy)] mb-4">
                   Around the building
                 </h2>
@@ -254,7 +219,7 @@ export default async function LocationPage({ params }: Props) {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Reveal>
             )}
           </div>
 

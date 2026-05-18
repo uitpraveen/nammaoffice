@@ -1,5 +1,5 @@
 import { BRAND } from "@/lib/constants";
-import { locations } from "@/lib/data/locations";
+import { cities, locations } from "@/lib/data/locations";
 import { formatPhone } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,8 +16,8 @@ const serviceLinks = [
   { label: "Gate Pass — Salem TIDEL", href: "/gate-pass/tidel-neo-salem" },
   { label: "Gate Pass — Tirupur TIDEL", href: "/gate-pass/tidel-neo-tirupur" },
   { label: "Franchise", href: "/franchise" },
-  { label: "Amenities", href: "/amenities" },
-  { label: "About", href: "/about" },
+  { label: "Amenities", href: "/#amenities" },
+  { label: "About", href: "/#about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -31,24 +31,51 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-navy)] text-white/80 relative">
-      {/* Top neon brick rule + soft halo — bookends the page in matte black. */}
+    <footer className="relative overflow-hidden bg-[#0E0E0E] text-white/80">
+      {/* Layered background — vertical gradient + warm brick halo radial in
+          the top-right and a deep ember in the bottom-left. Adds depth without
+          competing with the content. */}
+      <div aria-hidden className="absolute inset-0 -z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#0E0E0E] to-[#050505]" />
+        <div
+          className="absolute -top-48 -right-32 w-[42rem] h-[42rem] rounded-full opacity-[0.10]"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(184,85,58,1), rgba(184,85,58,0))",
+            filter: "blur(60px)",
+          }}
+        />
+        <div
+          className="absolute -bottom-40 -left-40 w-[36rem] h-[36rem] rounded-full opacity-[0.07]"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(216,150,120,1), rgba(216,150,120,0))",
+            filter: "blur(60px)",
+          }}
+        />
+      </div>
+
+      {/* Gold hairline + travelling comet of light, mirroring the masthead. */}
       <span
         aria-hidden
-        className="absolute left-0 right-0 top-0 h-px bg-[var(--color-gold)]"
+        className="absolute left-0 right-0 top-0 h-px bg-[var(--color-gold)] z-10"
       />
       <span
         aria-hidden
-        className="absolute left-0 right-0 top-0 h-3 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(184,85,58,0.40) 0%, rgba(184,85,58,0) 100%)",
-          filter: "blur(4px)",
-        }}
-      />
+        className="absolute left-0 right-0 top-0 h-px z-10 overflow-hidden pointer-events-none"
+      >
+        <span
+          className="header-light-sweep block h-px w-[26%] min-w-[180px] max-w-[360px]"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(232,162,107,0.45) 55%, rgba(255,215,150,1) 90%, transparent 100%)",
+            boxShadow: "0 0 6px 0.5px rgba(255,215,150,0.85)",
+          }}
+        />
+      </span>
 
       {/* CTA strip */}
-      <div className="content-width py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16 border-b border-white/8">
+      <div className="content-width relative py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16 border-b border-white/8">
         <div>
           <p className="eyebrow !text-[var(--color-gold-300)]">Get in touch</p>
           <h2 className="font-display text-3xl md:text-4xl !text-white mt-2 leading-tight">
@@ -77,8 +104,8 @@ export function Footer() {
       </div>
 
       {/* Link grid */}
-      <div className="content-width py-12 md:py-14 grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
-        <div>
+      <div className="content-width relative py-12 md:py-14 grid grid-cols-1 md:grid-cols-[1.5fr_1.2fr_1fr_1fr] gap-10">
+        <div className="flex flex-col gap-6">
           <Link href="/" className="inline-flex items-center" aria-label="NammaOffice home">
             <Image
               src="/images/logo.png"
@@ -88,26 +115,48 @@ export function Footer() {
               className="h-9 w-auto brightness-0 invert"
             />
           </Link>
-          <p className="mt-4 text-[14px] text-white/60 leading-relaxed max-w-xs">
+          <p className="text-[14px] text-white/60 leading-relaxed max-w-xs">
             Premium coworking spaces across Salem, Trichy, and Tirupur.
           </p>
-          <div className="mt-5 space-y-1.5 text-[13.5px]">
+
+          {/* Contact blocks — labelled, larger so phone & email read as
+              their own cards instead of cramped inline links. */}
+          <div className="flex flex-col gap-2.5 max-w-sm">
             <a
               href={`tel:${formatPhone(BRAND.phone)}`}
-              className="inline-flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+              className="group flex items-center gap-3.5 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3 hover:border-[var(--color-gold-300)]/40 hover:bg-white/[0.06] transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 shrink-0 text-[var(--color-gold-300)]" strokeWidth={2} />
-              {BRAND.phone}
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-gold-700)]/35 text-[var(--color-gold-300)] shrink-0">
+                <Phone className="w-4 h-4" strokeWidth={2} />
+              </span>
+              <span className="flex flex-col min-w-0">
+                <span className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-white/40">
+                  Call us
+                </span>
+                <span className="text-[15px] font-medium text-white/95 group-hover:text-[var(--color-gold-300)] transition-colors mt-0.5 truncate">
+                  {BRAND.phone}
+                </span>
+              </span>
             </a>
             <a
               href={`mailto:${BRAND.email}`}
-              className="inline-flex items-center gap-2 text-white/75 hover:text-[var(--color-gold-300)] transition-colors"
+              className="group flex items-center gap-3.5 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3 hover:border-[var(--color-gold-300)]/40 hover:bg-white/[0.06] transition-colors"
             >
-              <Mail className="w-3.5 h-3.5 shrink-0 text-[var(--color-gold-300)]" strokeWidth={2} />
-              {BRAND.email}
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-gold-700)]/35 text-[var(--color-gold-300)] shrink-0">
+                <Mail className="w-4 h-4" strokeWidth={2} />
+              </span>
+              <span className="flex flex-col min-w-0">
+                <span className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-white/40">
+                  Email us
+                </span>
+                <span className="text-[15px] font-medium text-white/95 group-hover:text-[var(--color-gold-300)] transition-colors mt-0.5 truncate">
+                  {BRAND.email}
+                </span>
+              </span>
             </a>
           </div>
-          <div className="mt-5 flex items-center gap-1">
+
+          <div className="flex items-center gap-1 -ml-2">
             <SocialIcon href={BRAND.social.instagram} label="Instagram">
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden>
                 <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.64-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z" />
@@ -131,20 +180,13 @@ export function Footer() {
           </div>
         </div>
 
-        <FooterColumn
-          title="Locations"
-          links={locations.map((l) => ({
-            label: l.name,
-            href: `/locations/${l.city}/${l.slug}`,
-            sub: l.city.charAt(0).toUpperCase() + l.city.slice(1),
-          }))}
-        />
+        <FooterLocations />
         <FooterColumn title="Forms" links={formsLinks} />
         <FooterColumn title="Service Desk" links={serviceLinks} />
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/8">
+      <div className="relative border-t border-white/8">
         <div className="content-width py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <p className="text-[12.5px] text-white/45">
             &copy; {currentYear} NammaOffice. All rights reserved.
@@ -167,6 +209,54 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+/**
+ * Footer locations column — grouped by city instead of a flat 8-row
+ * list. Each city heading is a clickable link to the city overview;
+ * the centres list under it sits behind a subtle vertical rule so the
+ * grouping reads at a glance.
+ */
+function FooterLocations() {
+  return (
+    <div>
+      <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-300)] mb-4">
+        Locations
+      </h3>
+      <div className="flex flex-col gap-5">
+        {cities.map((city) => {
+          const centres = locations.filter((l) => l.city === city.slug);
+          return (
+            <div key={city.slug}>
+              <Link
+                href={`/locations/${city.slug}`}
+                className="group flex items-baseline gap-2 mb-2"
+              >
+                <span className="text-[13.5px] font-semibold text-white/90 group-hover:text-white transition-colors">
+                  {city.name}
+                </span>
+                <span className="text-[10.5px] text-white/40 group-hover:text-[var(--color-gold-300)] transition-colors">
+                  · {centres.length} {centres.length === 1 ? "centre" : "centres"}
+                </span>
+              </Link>
+              <ul className="pl-3 border-l border-white/8 space-y-1.5">
+                {centres.map((l) => (
+                  <li key={`${l.city}-${l.slug}`}>
+                    <Link
+                      href={`/locations/${l.city}/${l.slug}`}
+                      className="block text-[12.5px] text-white/55 hover:text-white/95 hover:translate-x-0.5 transition-all"
+                    >
+                      {l.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

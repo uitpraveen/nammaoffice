@@ -8,9 +8,8 @@ import { ArrowUpRight } from "lucide-react";
 import { wix } from "@/lib/data/wix-pool";
 
 const STORY_IMAGES = [
-  { src: wix.team, alt: "NammaOffice team gathering" },
-  { src: wix.cabin, alt: "A private cabin at NammaOffice" },
-  { src: wix.discussion, alt: "A discussion room in session" },
+  { src: wix.dining, alt: "Our cafeteria and dining area, designed for breaks and conversations", caption: "Pause & refresh" },
+  { src: wix.discussion, alt: "A discussion room mid-session — daylight, whiteboards, and focus", caption: "Collaboration" },
 ];
 
 /**
@@ -23,17 +22,17 @@ const STORY_IMAGES = [
  */
 export function StoryStrip() {
   return (
-    <section className="bg-[var(--color-bg)] py-20 md:py-32 border-t border-[var(--color-border)]">
+    <section id="about" className="bg-[var(--color-bg)] py-20 md:py-32 border-t border-[var(--color-border)]">
       <div className="content-width">
         <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16">
           {/* Left — sticky narrative */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="eyebrow">Our story</p>
             <h2 className="font-display text-4xl md:text-5xl text-[var(--color-navy)] mt-3 leading-[1.05]">
-              Born in Salem.
+              More than a desk.
               <br />
               <span className="text-[var(--color-gold-deep)] italic font-normal">
-                Built for Tamil Nadu.
+                A community for builders.
               </span>
             </h2>
             <div className="mt-6 space-y-4 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xl">
@@ -59,7 +58,7 @@ export function StoryStrip() {
           {/* Right — stacked parallax photos */}
           <div className="space-y-6 lg:space-y-10">
             {STORY_IMAGES.map((img, i) => (
-              <ParallaxImage key={i} src={img.src} alt={img.alt} index={i} />
+              <ParallaxImage key={i} src={img.src} alt={img.alt} caption={img.caption} index={i} />
             ))}
           </div>
         </div>
@@ -68,7 +67,7 @@ export function StoryStrip() {
   );
 }
 
-function ParallaxImage({ src, alt, index }: { src: string; alt: string; index: number }) {
+function ParallaxImage({ src, alt, caption, index }: { src: string; alt: string; caption: string; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -98,7 +97,7 @@ function ParallaxImage({ src, alt, index }: { src: string; alt: string; index: n
       {/* Caption strip */}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-[var(--color-charcoal)]/85 via-[var(--color-charcoal)]/30 to-transparent">
         <p className="text-[12px] uppercase tracking-[0.18em] font-semibold text-[var(--color-gold-300)]">
-          {String(index + 1).padStart(2, "0")} · {index === 0 ? "Community" : index === 1 ? "Focused work" : "Collaboration"}
+          {String(index + 1).padStart(2, "0")} · {caption}
         </p>
       </div>
     </motion.div>

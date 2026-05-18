@@ -101,6 +101,7 @@ export function HeroSection() {
 
   return (
     <section
+      id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--color-charcoal)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

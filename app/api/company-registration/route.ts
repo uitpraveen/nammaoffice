@@ -1,5 +1,27 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail } from "@/lib/email";
+import { submitToZohoForm } from "@/lib/zoho";
+
+const COMPANY_TYPE_LABELS: Record<string, string> = {
+  "private-limited": "Private Limited",
+  llp: "LLP",
+  partnership: "Partnership",
+  "sole-proprietorship": "Sole Proprietorship",
+  // NOTE: "OPC" is in our form but not in the Zoho dropdown yet — add it
+  // there or remove the option here. Falls back to the raw slug otherwise.
+};
+
+/**
+ * Split a phone string into Zoho's split phone-field shape.
+ * Strips spaces/dashes/parens, takes the last 10 digits as the number,
+ * and treats anything before that as the country code (defaults to "+91").
+ */
+function splitPhone(raw: string): { code: string; number: string } {
+  const digits = raw.replace(/\D+/g, "");
+  if (digits.length <= 10) return { code: "+91", number: digits };
+  const number = digits.slice(-10);
+  const code = "+" + digits.slice(0, -10);
+  return { code, number };
+}
 
 export async function POST(request: Request) {
   try {
@@ -10,25 +32,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const html = `
-      <h2>New Company Registration Enquiry</h2>
-      <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
-        <tr><th>Field</th><th>Value</th></tr>
-        <tr><td>Company Name</td><td>${companyName}</td></tr>
-        <tr><td>Company Type</td><td>${companyType}</td></tr>
-        <tr><td>Number of Directors</td><td>${numberOfDirectors || "—"}</td></tr>
-        <tr><td>Contact Name</td><td>${name}</td></tr>
-        <tr><td>Phone</td><td>${phone}</td></tr>
-        <tr><td>Email</td><td>${email}</td></tr>
-        <tr><td>Message</td><td>${message || "—"}</td></tr>
-      </table>
-    `;
+    const { code, number } = splitPhone(phone);
 
-    await sendNotificationEmail({
-      subject: `Company Registration Enquiry: ${companyName}`,
-      html,
-      replyTo: email,
+    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_COMPANY, {
+      zf_referrer_name: "NammaOffice Website",
+      zf_redirect_url: "",
+      zc_gad: "",
+      SingleLine: companyName,
+      Dropdown: COMPANY_TYPE_LABELS[companyType] ?? companyType,
+      Number: numberOfDirectors,
+      SingleLine1: name,
+      // Despite the names, Zoho's split-phone fields are reversed:
+      //   `_countrycodeval` carries the country code (e.g. "91")
+      //   `_countrycode`    carries the phone digits.
+      PhoneNumber_countrycodeval: code,
+      PhoneNumber_countrycode: number,
+      Email: email,
+      MultiLine: message,
     });
+
+    if (!ok) {
+      return NextResponse.json(
+        { error: "Submission could not be delivered" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

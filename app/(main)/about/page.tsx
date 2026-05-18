@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Heart, Telescope } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "About NammaOffice — Our Story & Mission",
@@ -46,7 +47,7 @@ export default function AboutPage() {
 
       {/* Story */}
       <section className="content-width py-16 md:py-24">
-        <div className="max-w-3xl mx-auto space-y-6 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
+        <Reveal className="max-w-3xl mx-auto space-y-6 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
           <p>
             NammaOffice began with a simple observation: the entrepreneurs and professionals of Salem, Trichy, and Tirupur were as ambitious as their counterparts in Chennai or Bengaluru — but lacked the infrastructure to match. Premium coworking was a metropolitan luxury. We set out to change that.
           </p>
@@ -56,13 +57,13 @@ export default function AboutPage() {
           <p>
             Our philosophy has never changed: build spaces professionals are proud to work from, foster communities that support each other&apos;s growth, and keep quality high while keeping costs predictable. Every NammaOffice centre is designed with the same commitment to ergonomics, connectivity, and community that made our first centre a success.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* Mission · Vision · Values */}
       <section className="bg-[var(--color-surface-alt)] py-16 md:py-24">
         <div className="content-width">
-          <div className="max-w-2xl mb-10">
+          <Reveal className="max-w-2xl mb-10">
             <p className="eyebrow">What drives us</p>
             <h2 className="display-lg mt-3 text-[var(--color-navy)]">
               Mission, vision, values.
@@ -70,11 +71,12 @@ export default function AboutPage() {
             <p className="mt-4 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
               The principles that guide every NammaOffice decision — from how we design our spaces to how we treat our members.
             </p>
-          </div>
+          </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {VALUES.map(({ icon: Icon, title, description }) => (
-              <div
+            {VALUES.map(({ icon: Icon, title, description }, i) => (
+              <Reveal
                 key={title}
+                delay={i * 0.08}
                 className="rounded-2xl bg-white border border-[var(--color-border)] p-6 md:p-7 flex flex-col gap-4"
               >
                 <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-navy)] text-[var(--color-gold)]">
@@ -84,7 +86,7 @@ export default function AboutPage() {
                 <p className="text-[14px] text-[var(--color-ink-secondary)] leading-relaxed">
                   {description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -92,13 +94,13 @@ export default function AboutPage() {
 
       {/* Quick stats */}
       <section className="content-width py-14 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Reveal className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <Stat number="8" label="Centres" />
           <Stat number="3" label="Cities" />
           <Stat number="500+" label="Members" />
           <Stat number="4.9" label="Rating" />
-        </div>
-        <div className="mt-12 flex justify-center">
+        </Reveal>
+        <Reveal delay={0.15} className="mt-12 flex justify-center">
           <Link
             href="/locations"
             className="inline-flex items-center gap-2 h-12 px-6 text-[14px] font-semibold rounded-full bg-[var(--color-gold)] text-[var(--color-navy-deep)] hover:bg-[var(--color-gold-deep)] hover:text-white transition-colors shadow-[var(--shadow-cta)]"
@@ -106,7 +108,7 @@ export default function AboutPage() {
             Explore our centres
             <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
           </Link>
-        </div>
+        </Reveal>
       </section>
 
     </>

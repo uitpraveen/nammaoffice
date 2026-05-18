@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail, emailShell, renderRows } from "@/lib/email";
-import { uploadFile, fileLinkHtml } from "@/lib/blob";
+import { submitToZohoForm } from "@/lib/zoho";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -44,56 +43,47 @@ export async function POST(request: Request) {
     const panFile = fd.get("panCard");
     const bankFile = fd.get("bankPassbook");
 
-    const [gstDoc, panCard, bankPassbook] = await Promise.all([
-      gstFile instanceof File && gstFile.size > 0
-        ? uploadFile(gstFile, "vendor/gst")
-        : null,
-      panFile instanceof File && panFile.size > 0
-        ? uploadFile(panFile, "vendor/pan")
-        : null,
-      bankFile instanceof File && bankFile.size > 0
-        ? uploadFile(bankFile, "vendor/bank")
-        : null,
-    ]);
-
-    if (!bankPassbook) {
+    if (!(bankFile instanceof File) || bankFile.size === 0) {
       return NextResponse.json({ error: "Bank passbook is required" }, { status: 400 });
     }
 
-    const html = emailShell(
-      `Vendor Onboarding — ${data.companyName}`,
-      "Procurement",
-      renderRows({
-        "Vendor Name": data.vendorName,
-        "Category of Service": data.category,
-        "Company Name": data.companyName,
-        Website: data.website,
-        "Company Address": data.companyAddress,
-        "Service & Specialization": data.serviceSpecialization,
-        "Contact Person Phone": data.contactPersonPhone,
-        "Contact Person Email": data.contactPersonEmail,
-        "Company Phone": data.companyPhone,
-        "Company Email": data.companyEmail,
-        "GST Number": data.gstNumber,
-        "GST Documents": fileLinkHtml(gstDoc),
-        "PAN Card Name": data.panName,
-        "PAN Number": data.panNumber,
-        "PAN Card File": fileLinkHtml(panCard),
-        "Bank Name": data.bankName,
-        "Account Holder": data.accountHolderName,
-        "Account Number": data.accountNumber,
-        "IFSC Code": data.ifscCode,
-        "Branch & City": data.branchCity,
-        "Bank Passbook": fileLinkHtml(bankPassbook),
-        Comments: data.comments,
-      })
-    );
-
-    await sendNotificationEmail({
-      subject: `[VENDOR ONBOARDING] ${data.companyName} — ${data.category}`,
-      html,
-      replyTo: data.contactPersonEmail,
+    // Forward to Zoho Forms. Set ZOHO_FORM_URL_VENDOR and replace the
+    // placeholder keys below with the actual Zoho field IDs from the
+    // published Vendor Onboarding form.
+    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_VENDOR, {
+      // TODO: replace each key below with the matching Zoho field name.
+      Name_First: data.vendorName,
+      Dropdown: data.category,
+      SingleLine: data.companyName,
+      Website: data.website,
+      MultiLine: data.companyAddress,
+      MultiLine1: data.serviceSpecialization,
+      PhoneNumber_countrycodeval: data.contactPersonPhone,
+      Email: data.contactPersonEmail,
+      PhoneNumber1_countrycodeval: data.companyPhone,
+      Email1: data.companyEmail,
+      SingleLine1: data.gstNumber,
+      SingleLine2: data.panName,
+      SingleLine3: data.panNumber,
+      SingleLine4: data.bankName,
+      SingleLine5: data.accountHolderName,
+      Number: data.accountNumber,
+      SingleLine6: data.ifscCode,
+      SingleLine7: data.branchCity,
+      MultiLine2: data.comments,
+      FileUpload:
+        gstFile instanceof File && gstFile.size > 0 ? gstFile : undefined,
+      FileUpload1:
+        panFile instanceof File && panFile.size > 0 ? panFile : undefined,
+      FileUpload2: bankFile,
     });
+
+    if (!ok) {
+      return NextResponse.json(
+        { error: "Submission could not be delivered" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

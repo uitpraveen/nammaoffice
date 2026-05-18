@@ -55,7 +55,7 @@ export default async function CityPage({ params }: Props) {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {cityLocations.map((loc) => (
             <Link
-              key={loc.slug}
+              key={`${city.slug}-${loc.slug}`}
               href={`/locations/${city.slug}/${loc.slug}`}
               className="group flex flex-col rounded-2xl bg-white border border-[var(--color-border)] overflow-hidden hover:shadow-[var(--shadow-brand-hover)] hover:border-[var(--color-gold-300)] transition-all"
             >

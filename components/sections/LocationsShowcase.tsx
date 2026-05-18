@@ -19,7 +19,7 @@ export function LocationsShowcase() {
     slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return (
-    <section className="bg-white border-y border-[var(--color-border)] py-20 md:py-28">
+    <section id="centres" className="bg-white border-y border-[var(--color-border)] py-20 md:py-28">
       <div className="content-width">
         {/* Header — fades up as it enters viewport */}
         <motion.div

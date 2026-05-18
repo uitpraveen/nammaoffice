@@ -3,6 +3,7 @@
 import { navigation } from "@/lib/data/navigation";
 import { BRAND } from "@/lib/constants";
 import { cn, formatPhone, whatsappUrl } from "@/lib/utils";
+import { useActiveHref } from "@/lib/hooks/use-active-href";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,6 +37,26 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
+  // Close the menu when any link inside it is tapped. Runs in window's
+  // capture phase so it fires BEFORE SmoothScroll's document-level
+  // anchor interceptor — that handler calls `stopImmediatePropagation`
+  // for in-page hash links (/#about, /#amenities, Home-on-Home), which
+  // would otherwise prevent React's onClick (and therefore onClose)
+  // from ever firing.
+  const menuRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const onCapture = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target || !menuRef.current?.contains(target)) return;
+      if (!target.closest("a")) return;
+      document.body.style.overflow = "";
+      onCloseRef.current();
+    };
+    window.addEventListener("click", onCapture, { capture: true });
+    return () => window.removeEventListener("click", onCapture, { capture: true });
+  }, [isOpen]);
+
   return (
     <>
       <div
@@ -48,6 +69,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       />
 
       <div
+        ref={menuRef}
         className={cn(
           "fixed inset-y-0 right-0 w-full max-w-[420px] bg-white z-50 lg:hidden",
           "transition-transform duration-300 ease-out flex flex-col",
@@ -79,22 +101,21 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Mobile navigation">
           {navigation.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              pathname.startsWith(item.href + "/") ||
-              item.children?.some(
-                (c) => pathname === c.href || pathname.startsWith(c.href + "/")
-              );
-
             if (item.children) {
               const isExpanded = openAccordion === item.href;
+              const isParentActive =
+                pathname === item.href ||
+                pathname.startsWith(item.href + "/") ||
+                item.children.some(
+                  (c) => pathname === c.href || pathname.startsWith(c.href + "/")
+                );
               return (
                 <div key={item.href} className="mb-0.5">
                   <button
                     onClick={() => setOpenAccordion(isExpanded ? null : item.href)}
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-3 rounded-xl text-[15px] font-semibold transition-colors",
-                      isActive
+                      isParentActive
                         ? "text-[var(--color-accent-700)] bg-[var(--color-accent-50)]"
                         : "text-[var(--color-ink)] hover:bg-[var(--color-surface-alt)]"
                     )}
@@ -116,36 +137,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     )}
                   >
                     <div className="ml-3 pl-3 border-l border-[var(--color-border)] space-y-0.5 pb-2">
-                      {item.children.map((child) => {
-                        const isChildActive =
-                          pathname === child.href || pathname.startsWith(child.href + "/");
-                        return (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={cn(
-                              "block px-3 py-2.5 rounded-lg transition-colors",
-                              isChildActive
-                                ? "bg-[var(--color-accent-50)]"
-                                : "hover:bg-[var(--color-surface-alt)]"
-                            )}
-                          >
-                            <span
-                              className={cn(
-                                "block text-[14px] font-semibold leading-tight",
-                                isChildActive
-                                  ? "text-[var(--color-accent-700)]"
-                                  : "text-[var(--color-ink)]"
-                              )}
-                            >
-                              {child.label}
-                            </span>
-                            <span className="block text-[12.5px] text-[var(--color-ink-secondary)] mt-0.5">
-                              {child.description}
-                            </span>
-                          </Link>
-                        );
-                      })}
+                      {item.children.map((child) => (
+                        <MobileChildLink
+                          key={child.href}
+                          href={child.href}
+                          label={child.label}
+                          description={child.description}
+                          pathname={pathname}
+                          onClose={onClose}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -153,18 +154,13 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             }
 
             return (
-              <Link
+              <MobileLeafLink
                 key={item.href}
                 href={item.href}
-                className={cn(
-                  "block px-3 py-3 rounded-xl text-[15px] font-semibold transition-colors mb-0.5",
-                  isActive
-                    ? "text-[var(--color-accent-700)] bg-[var(--color-accent-50)]"
-                    : "text-[var(--color-ink)] hover:bg-[var(--color-surface-alt)]"
-                )}
-              >
-                {item.label}
-              </Link>
+                label={item.label}
+                pathname={pathname}
+                onClose={onClose}
+              />
             );
           })}
         </nav>
@@ -201,5 +197,88 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
       </div>
     </>
+  );
+}
+
+/**
+ * Synchronously restore body scroll BEFORE the click bubbles to SmoothScroll's
+ * anchor handler. The menu's `overflow: hidden` lock would otherwise still be
+ * applied when Lenis tries to scroll to a `/#section` anchor, leaving the
+ * menu closed but the page parked at the top.
+ */
+function handleMenuLinkClick(onClose: () => void) {
+  return () => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "";
+    }
+    onClose();
+  };
+}
+
+function MobileLeafLink({
+  href,
+  label,
+  pathname,
+  onClose,
+}: {
+  href: string;
+  label: string;
+  pathname: string;
+  onClose: () => void;
+}) {
+  const isActive = useActiveHref(href, pathname);
+  return (
+    <Link
+      href={href}
+      onClick={handleMenuLinkClick(onClose)}
+      className={cn(
+        "block px-3 py-3 rounded-xl text-[15px] font-semibold transition-colors mb-0.5",
+        isActive
+          ? "text-[var(--color-accent-700)] bg-[var(--color-accent-50)]"
+          : "text-[var(--color-ink)] hover:bg-[var(--color-surface-alt)]"
+      )}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function MobileChildLink({
+  href,
+  label,
+  description,
+  pathname,
+  onClose,
+}: {
+  href: string;
+  label: string;
+  description?: string;
+  pathname: string;
+  onClose: () => void;
+}) {
+  const isActive = useActiveHref(href, pathname);
+  return (
+    <Link
+      href={href}
+      onClick={handleMenuLinkClick(onClose)}
+      className={cn(
+        "block px-3 py-2.5 rounded-lg transition-colors",
+        isActive ? "bg-[var(--color-accent-50)]" : "hover:bg-[var(--color-surface-alt)]"
+      )}
+    >
+      <span
+        className={cn(
+          "block text-[14px] font-semibold leading-tight",
+          isActive ? "text-[var(--color-accent-700)]" : "text-[var(--color-ink)]"
+        )}
+      >
+        {label}
+      </span>
+      {description && (
+        <span className="block text-[12.5px] text-[var(--color-ink-secondary)] mt-0.5">
+          {description}
+        </span>
+      )}
+    </Link>
   );
 }

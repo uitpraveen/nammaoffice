@@ -211,20 +211,41 @@
     letter-spacing: -0.02em;
   }
 
+  /* Comet bead that streaks across the gold rule under the masthead /
+     above the footer. The bead is a bright gold-orange teardrop with a
+     fading tail; a glow ring travels with it so the gold line appears
+     to "light up" as the bead passes over. */
+  @keyframes header-light-sweep {
+    0%   { transform: translateX(-40%); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateX(calc(100vw + 40%)); opacity: 0; }
+  }
+
+  .header-light-sweep {
+    animation: header-light-sweep 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-light-sweep { animation: none; opacity: 0.5; }
+  }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Anchor offset — matches responsive header height (88px mobile, 100px desktop) */
-    scroll-padding-top: 88px;
+    /* Anchor offset — clears the sticky masthead (112px desktop incl.
+       utility strip; ~96px mobile) plus a small breathing buffer so
+       section eyebrows don't hug the header. */
+    scroll-padding-top: 96px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   @media (min-width: 768px) {
-    html { scroll-padding-top: 100px; }
+    html { scroll-padding-top: 124px; }
   }
 
   body {

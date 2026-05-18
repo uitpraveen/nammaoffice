@@ -7,8 +7,11 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { locations } from "@/lib/data/locations";
 
+// Two centres share the slug "tidel-neo" (Salem & Tirupur), so the
+// option value must include the city to stay unique — otherwise the
+// rendered <option> elements collide on React's key.
 const locationOptions = locations.map((loc) => ({
-  value: loc.slug,
+  value: `${loc.city}/${loc.slug}`,
   label: `${loc.name} — ${loc.city.charAt(0).toUpperCase() + loc.city.slice(1)}`,
 }));
 

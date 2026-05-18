@@ -55,7 +55,7 @@ export default function ContactPage() {
               <div className="space-y-6">
                 {locations.map((location) => (
                   <div
-                    key={location.slug}
+                    key={`${location.city}-${location.slug}`}
                     className="bg-white rounded-brand shadow-brand p-5 border border-warm-border"
                   >
                     <div className="flex items-start justify-between gap-2 mb-3">

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail, emailShell, renderRows } from "@/lib/email";
-import { uploadFile, fileLinkHtml } from "@/lib/blob";
+import { submitToZohoForm } from "@/lib/zoho";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -20,36 +19,34 @@ export async function POST(request: Request) {
     }
 
     const aadhaarFile = fd.get("aadhaar");
-    const aadhaar =
-      aadhaarFile instanceof File && aadhaarFile.size > 0
-        ? await uploadFile(aadhaarFile, "user-registration/aadhaar")
-        : null;
 
-    const html = emailShell(
-      `User Registration — ${data.name || "(no name)"}`,
-      "Member onboarding",
-      renderRows({
-        Name: data.name,
-        "Date of Birth": data.dob,
-        Phone: data.phone,
-        Email: data.email,
-        "Company Name": data.companyName,
-        "Bike Number": data.bikeNumber,
-        "Car Number": data.carNumber,
-        "T-shirt Size": data.tshirtSize,
-        Gender: data.gender,
-        Address: data.address,
-        "Aadhaar Card": aadhaar ? fileLinkHtml(aadhaar) : "—",
-        "Facilities Required": data.facilities,
-        Comments: data.comments,
-      })
-    );
-
-    await sendNotificationEmail({
-      subject: `[USER REGISTRATION] ${data.name || data.email || data.phone || "New member"}`,
-      html,
-      replyTo: data.email || undefined,
+    // Forward to Zoho Forms. Set ZOHO_FORM_URL_USER and replace the
+    // placeholder keys below with the actual Zoho field IDs from the
+    // published User Registration form.
+    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_USER, {
+      // TODO: replace each key below with the matching Zoho field name.
+      Name_First: data.name,
+      Date: data.dob,
+      PhoneNumber_countrycodeval: data.phone,
+      Email: data.email,
+      SingleLine: data.companyName,
+      SingleLine1: data.bikeNumber,
+      SingleLine2: data.carNumber,
+      Dropdown: data.tshirtSize,
+      Radio: data.gender,
+      MultiLine: data.address,
+      MultiLine1: data.facilities,
+      MultiLine2: data.comments,
+      FileUpload:
+        aadhaarFile instanceof File && aadhaarFile.size > 0 ? aadhaarFile : undefined,
     });
+
+    if (!ok) {
+      return NextResponse.json(
+        { error: "Submission could not be delivered" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

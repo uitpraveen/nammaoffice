@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail, emailShell, renderRows } from "@/lib/email";
 import { locations } from "@/lib/data/locations";
+import { submitToZohoForm } from "@/lib/zoho";
 
 export const runtime = "nodejs";
 
@@ -41,12 +41,6 @@ function venueLabel(venue: string): string {
   return `${loc.name} — ${cityName}`;
 }
 
-function gatePassLabel(venue: string): string {
-  if (venue.startsWith("salem/tidel-neo")) return "Salem";
-  if (venue.startsWith("tirupur/tidel-neo")) return "Tirupur";
-  return "Unknown";
-}
-
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as BookingPayload;
@@ -72,9 +66,6 @@ export async function POST(request: Request) {
     }
 
     const isGatePass = body.requestType === "gate-pass";
-    const subjectPrefix = isGatePass
-      ? `[GATEPASS — ${gatePassLabel(body.venue)}]`
-      : `[BOOKING]`;
 
     const formattedDateTime = (() => {
       try {
@@ -88,30 +79,31 @@ export async function POST(request: Request) {
       }
     })();
 
-    const html = emailShell(
-      isGatePass ? "Gate Pass Request" : "Meeting Hall Booking",
-      isGatePass ? "Service Desk" : "Bookings",
-      renderRows({
-        "Request Type": isGatePass ? "Gate Pass" : "Meeting Hall Booking",
-        Venue: venueLabel(body.venue),
-        ...(isGatePass ? { "Company to Visit": body.companyToVisit } : {}),
-        "Booking Date & Time": formattedDateTime,
-        Duration: body.duration,
-        "No. of Participants": body.numParticipants,
-        "Guest Names": body.guestNames,
-        Purpose: body.purpose,
-        "Company Name": body.companyName,
-        "Booking Person": body.bookingPersonName,
-        Phone: body.bookingPersonContact,
-        Email: body.bookingPersonEmail,
-      })
-    );
-
-    await sendNotificationEmail({
-      subject: `${subjectPrefix} ${body.companyName} — ${formattedDateTime}`,
-      html,
-      replyTo: body.bookingPersonEmail,
+    // Forward to Zoho Forms. Set ZOHO_FORM_URL_BOOKINGS and replace the
+    // placeholder keys below with the actual Zoho field IDs from the
+    // published Bookings/Gate-Pass form.
+    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_BOOKINGS, {
+      // TODO: replace each key below with the matching Zoho field name.
+      Radio: isGatePass ? "Gate Pass" : "Meeting Hall Booking",
+      Dropdown: venueLabel(body.venue),
+      SingleLine: body.companyToVisit,
+      DateTime: formattedDateTime,
+      SingleLine1: body.duration,
+      Number: body.numParticipants,
+      MultiLine: body.guestNames,
+      MultiLine1: body.purpose,
+      SingleLine2: body.companyName,
+      Name_First: body.bookingPersonName,
+      PhoneNumber_countrycodeval: body.bookingPersonContact,
+      Email: body.bookingPersonEmail,
     });
+
+    if (!ok) {
+      return NextResponse.json(
+        { error: "Submission could not be delivered" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {
