@@ -2,146 +2,166 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { ArrowRight, MapPin } from "lucide-react";
-import { cities, locations } from "@/lib/data/locations";
+import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { locations } from "@/lib/data/locations";
+import { fadeUp } from "@/lib/motion";
 
 /**
- * Locations showcase — a richer replacement for the previous flat
- * thumbnails grid. The section header pins as the cards animate in
- * with stagger, and each card photo has subtle parallax as it crosses
- * the viewport.
+ * Centres bento grid (ported from Elevate). 10 centres from
+ * lib/data/locations laid out in a 12-col asymmetric grid. Each card
+ * pairs an Elevate-pooled photograph with the centre's real name and
+ * full address, and links to the centre's detail page.
  */
+
+const bentoImages = [
+  "/images/elevate/bento-cabin.jpg",
+  "/images/elevate/bento-open.jpg",
+  "/images/elevate/bento-meeting.jpg",
+  "/images/elevate/bento-lounge.jpg",
+  "/images/elevate/bento-cafe.jpg",
+  "/images/elevate/bento-facade.jpg",
+];
+
+// 10 layout slots in 12-col grid order — sums per row to 12 where possible.
+// Designed so the largest "anchor" card breaks the rhythm on row 1.
+const layoutSlots: { span: string; aspect: string }[] = [
+  { span: "md:col-span-7", aspect: "aspect-[16/10]" }, // 0 — flagship
+  { span: "md:col-span-5", aspect: "aspect-[4/3]" },   // 1
+  { span: "md:col-span-5", aspect: "aspect-[4/3]" },   // 2
+  { span: "md:col-span-4", aspect: "aspect-square" },  // 3
+  { span: "md:col-span-3", aspect: "aspect-[4/3]" },   // 4
+  { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 5
+  { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 6
+  { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 7
+  { span: "md:col-span-8", aspect: "aspect-[16/9]" },  // 8 — wide
+  { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 9
+];
+
+const cityLabel: Record<string, string> = {
+  salem: "Salem",
+  trichy: "Trichy",
+  tirupur: "Tirupur",
+  erode: "Erode",
+  hosur: "Hosur",
+};
+
 export function LocationsShowcase() {
-  const cityName = (slug: string) =>
-    cities.find((c) => c.slug === slug)?.name ??
-    slug.charAt(0).toUpperCase() + slug.slice(1);
-
   return (
-    <section id="centres" className="bg-white border-y border-[var(--color-border)] py-20 md:py-28">
-      <div className="content-width">
-        {/* Header — fades up as it enters viewport */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-14"
-        >
-          <div className="max-w-2xl">
-            <p className="eyebrow">Centres</p>
-            <h2 className="display-lg mt-3 text-[var(--color-navy)]">
-              Eight centres.{" "}
-              <span className="text-[var(--color-gold-deep)] italic font-normal">
-                Three cities.
-              </span>
-              <br />
-              One ecosystem.
-            </h2>
+    <section
+      id="centres"
+      className="py-24 md:py-32"
+      style={{ background: "var(--canvas-alt)" }}
+    >
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+        <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
+          <div>
+            <motion.p {...fadeUp} className="eyebrow mb-6">
+              Centres
+            </motion.p>
+            <motion.h2
+              {...fadeUp}
+              className="display text-[40px] md:text-[64px] max-w-[18ch]"
+              style={{ color: "var(--ink)" }}
+            >
+              Ten centres. Five cities.{" "}
+              <span className="display-italic">One ecosystem.</span>
+            </motion.h2>
           </div>
-          <Link
-            href="/locations"
-            className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--color-navy)] hover:text-[var(--color-gold-deep)] transition-colors group"
-          >
-            View all centres
-            <ArrowRight
-              className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
-              strokeWidth={2.25}
-            />
-          </Link>
-        </motion.div>
+          <motion.div {...fadeUp}>
+            <Link
+              href="/locations"
+              className="inline-flex items-center gap-1.5 text-[14px] font-medium border-b pb-0.5"
+              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
+            >
+              View all centres{" "}
+              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
+            </Link>
+          </motion.div>
+        </div>
 
-        {/* Cards — stagger reveal, each card holds its own parallax photo */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ staggerChildren: 0.08, delayChildren: 0.05 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
-        >
-          {locations.map((loc) => (
-            <CentreCard
-              key={`${loc.city}-${loc.slug}`}
-              href={`/locations/${loc.city}/${loc.slug}`}
-              image={loc.images[0]}
-              name={loc.name}
-              cityTag={cityName(loc.city)}
-              address={loc.address}
-            />
-          ))}
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+          {locations.map((loc, i) => {
+            const slot = layoutSlots[i] ?? layoutSlots[layoutSlots.length - 1];
+            const img = bentoImages[i % bentoImages.length];
+            return (
+              <motion.div
+                key={`${loc.city}-${loc.slug}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: (i % 3) * 0.05,
+                }}
+                whileHover={{ y: -6 }}
+                className={`group relative overflow-hidden rounded-3xl border hairline transition-all ${slot.span}`}
+                style={{ background: "var(--card)" }}
+              >
+                <Link
+                  href={`/locations/${loc.city}/${loc.slug}`}
+                  className="block"
+                  aria-label={`${loc.name} — ${cityLabel[loc.city] ?? loc.city}`}
+                >
+                  <div className={`relative ${slot.aspect} overflow-hidden`}>
+                    <Image
+                      src={img}
+                      alt={`${loc.name}, ${cityLabel[loc.city] ?? loc.city}`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(14,14,14,0.55) 0%, rgba(14,14,14,0) 50%)",
+                      }}
+                    />
+                    <div
+                      className="absolute top-4 left-4 eyebrow text-white/85 px-2.5 py-1 rounded-full"
+                      style={{
+                        background: "rgba(14,14,14,0.45)",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      {cityLabel[loc.city] ?? loc.city}
+                    </div>
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <h3
+                          className="display text-[20px] md:text-[22px] leading-tight"
+                          style={{ color: "var(--ink)" }}
+                        >
+                          {loc.name}
+                        </h3>
+                        <p
+                          className="mt-2 text-[13px] leading-[1.55] line-clamp-2"
+                          style={{ color: "var(--ink-muted)" }}
+                        >
+                          {loc.address}
+                        </p>
+                      </div>
+                      <span
+                        className="flex-shrink-0 w-8 h-8 rounded-full border hairline flex items-center justify-center transition-all group-hover:translate-x-1 group-hover:-translate-y-1"
+                        style={{ color: "var(--ink-muted)" }}
+                      >
+                        <ArrowUpRight
+                          className="w-3.5 h-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function CentreCard({
-  href,
-  image,
-  name,
-  cityTag,
-  address,
-}: {
-  href: string;
-  image: string;
-  name: string;
-  cityTag: string;
-  address: string;
-}) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [25, -25]);
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      variants={{
-        hidden: { opacity: 0, y: 28 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative block aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(184,85,58,0.50),0_24px_48px_-16px_rgba(184,85,58,0.30)] hover:-translate-y-0.5"
-    >
-      <motion.div style={{ y }} className="absolute -inset-y-8 inset-x-0">
-        {image && (
-          <Image
-            src={image}
-            alt={`${name}, ${cityTag}`}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        )}
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-charcoal)]/85 via-[var(--color-charcoal)]/25 to-transparent" />
-
-      <div className="absolute top-4 left-4">
-        <span className="inline-flex items-center text-[10.5px] font-semibold uppercase tracking-[0.12em] px-2 py-1 rounded bg-white/95 text-[var(--color-navy)]">
-          {cityTag}
-        </span>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <h3 className="font-display text-white text-[22px] md:text-[24px] font-bold leading-tight tracking-[-0.01em]">
-          {name}
-        </h3>
-        <p className="mt-1.5 text-white/75 text-[12.5px] leading-snug inline-flex items-start gap-1">
-          <MapPin className="w-3 h-3 mt-1 shrink-0" strokeWidth={2.25} />
-          <span className="line-clamp-1">{address}</span>
-        </p>
-        <span className="mt-3 inline-flex items-center gap-1 text-[var(--color-gold-300)] text-[12.5px] font-semibold">
-          View centre
-          <ArrowRight
-            className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"
-            strokeWidth={2.25}
-          />
-        </span>
-      </div>
-    </motion.a>
   );
 }

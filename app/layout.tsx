@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GoogleTagManager from "@/components/analytics/GoogleTagManager";
@@ -12,11 +13,26 @@ const inter = Inter({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
+/**
+ * Satoshi from Indian Type Foundry / Fontshare. Self-hosted: .woff2
+ * files live in `public/fonts/`. The CSS variable is named `--font-serif`
+ * for historical compatibility — every component reads from it.
+ */
+const satoshi = localFont({
+  src: [
+    {
+      path: "../public/fonts/Satoshi-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-serif",
   display: "swap",
-  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${satoshi.variable}`}>
       <body>
         <SmoothScroll />
         <GoogleTagManager />

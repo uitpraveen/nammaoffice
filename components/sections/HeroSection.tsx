@@ -12,6 +12,7 @@ import {
   Pause,
   Play,
   Sparkles,
+  Star,
   Wifi,
 } from "lucide-react";
 import { HeroParticles } from "@/components/ui/HeroParticles";
@@ -29,7 +30,7 @@ interface Slide {
 
 const SLIDES: Slide[] = [
   {
-    src: "/images/hero/slide-1.png",
+    src: "/images/elevate/hero-slide-1.jpg",
     alt: "NammaOffice modern coworking interior — Salem",
     eyebrow: "Coworking · Salem",
     caption: "Designed for focused work",
@@ -39,7 +40,7 @@ const SLIDES: Slide[] = [
       "Premium workspaces for startups, freelancers, and growing teams in Tier-2 & Tier-3 cities.",
   },
   {
-    src: "/images/hero/slide-2.png",
+    src: "/images/elevate/hero-slide-2.jpg",
     alt: "NammaOffice premium workspace — Trichy",
     eyebrow: "Coworking · Trichy",
     caption: "Where teams come together",
@@ -49,7 +50,7 @@ const SLIDES: Slide[] = [
       "Join a community of entrepreneurs, freelancers, and remote teams across Tamil Nadu.",
   },
   {
-    src: "/images/hero/slide-3.png",
+    src: "/images/elevate/hero-slide-3.jpg",
     alt: "NammaOffice managed office — Tirupur",
     eyebrow: "Coworking · Tirupur",
     caption: "Built for ambitious businesses",
@@ -139,7 +140,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.50) 30%, rgba(10,10,10,0.55) 65%, rgba(10,10,10,0.95) 100%)",
+            "linear-gradient(180deg, rgba(8,8,10,0.82) 0%, rgba(8,8,10,0.68) 30%, rgba(8,8,10,0.72) 65%, rgba(8,8,10,0.98) 100%)",
         }}
       />
       <div
@@ -147,78 +148,190 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 45%, rgba(10,10,10,0.45), transparent 75%)",
+            "radial-gradient(70% 60% at 40% 45%, rgba(8,8,10,0.55), transparent 75%)",
         }}
       />
 
       {/* Particle field */}
       <HeroParticles />
 
-      {/* Content */}
-      <div className="relative z-10 content-width w-full pt-[110px] md:pt-[130px] pb-36 md:pb-32 lg:pb-40 text-center flex flex-col items-center">
-        <AnimatePresence initial={false} mode="wait">
+      {/* Content — left text column + right glass cards column (lg+) */}
+      <div className="relative z-10 content-width w-full pt-[110px] md:pt-[130px] pb-36 md:pb-32 lg:pb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-16 items-center">
+          {/* Left — copy */}
+          <div className="text-left flex flex-col items-start max-w-[720px]">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={`content-${active}`}
+                initial={{ opacity: 0, y: direction * 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: direction * -14 }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="flex flex-col items-start"
+              >
+                <div className="inline-flex items-center gap-2 h-7 px-3 rounded-full bg-white/[0.08] backdrop-blur border border-white/15 text-white text-[12px] font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--color-gold-300)]" strokeWidth={2.25} />
+                  {slide.eyebrow}
+                </div>
+
+                <h1
+                  className="display-xl mt-7 max-w-full md:max-w-[20ch] text-white"
+                  style={{ textShadow: "0 2px 16px rgba(0,0,0,0.45)" }}
+                >
+                  {slide.headline.lead}{" "}
+                  <span className="display-italic inline-block px-[0.06em]">
+                    {slide.headline.emphasis}
+                  </span>
+                  {slide.headline.tail ? <> {slide.headline.tail}</> : null}
+                </h1>
+
+                <p
+                  className="mt-7 text-[17px] lg:text-[19px] text-white/85 leading-relaxed max-w-2xl"
+                  style={{ textShadow: "0 1px 10px rgba(0,0,0,0.55)" }}
+                >
+                  {slide.subhead}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            <ul className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-white/85 text-[13px] font-medium">
+              <FeaturePill icon={<Wifi className="w-3.5 h-3.5" strokeWidth={2} />}>
+                High-Speed Internet
+              </FeaturePill>
+              <FeaturePill icon={<MapPin className="w-3.5 h-3.5" strokeWidth={2} />}>
+                Prime Locations
+              </FeaturePill>
+              <FeaturePill icon={<Building2 className="w-3.5 h-3.5" strokeWidth={2} />}>
+                Flexible Plans
+              </FeaturePill>
+            </ul>
+
+            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+              <Link
+                href="/bookings"
+                className="group inline-flex items-center justify-center gap-2 h-12 px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-gold-deep)] hover:text-white hover:scale-[1.02] shadow-[var(--shadow-cta)]"
+              >
+                Book Now
+                <ArrowRight
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  strokeWidth={2.25}
+                />
+              </Link>
+              <Link
+                href="/locations"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 border border-white/30 text-white text-[14px] font-semibold rounded-full hover:bg-white/10 active:bg-white/15 transition-colors"
+              >
+                Explore centres
+              </Link>
+            </div>
+          </div>
+
+          {/* Right — floating glass cards (desktop only) */}
           <motion.div
-            key={`content-${active}`}
-            initial={{ opacity: 0, y: direction * 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: direction * -14 }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="flex flex-col items-center"
+            className="hidden lg:flex flex-col gap-4 w-full max-w-[360px] ml-auto"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: EASE }}
           >
-            <div className="inline-flex items-center gap-2 h-7 px-3 rounded-full bg-white/[0.08] backdrop-blur border border-white/15 text-white text-[12px] font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--color-gold-300)]" strokeWidth={2.25} />
-              {slide.eyebrow}
+            {/* Rating card */}
+            <div
+              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-5 text-white"
+              style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                  {[0, 1, 2, 3, 4].map((k) => (
+                    <Star
+                      key={k}
+                      className="w-3.5 h-3.5"
+                      fill="var(--color-gold-300)"
+                      stroke="var(--color-gold-300)"
+                      strokeWidth={1}
+                    />
+                  ))}
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.16em] text-white/60">
+                  Verified
+                </span>
+              </div>
+              <div className="mt-3 flex items-baseline gap-2">
+                <span className="text-[32px] font-medium leading-none tabular-nums tracking-tight">
+                  4.9
+                </span>
+                <span className="text-[12px] text-white/60">/ 5 · 200+ reviews</span>
+              </div>
+              <p className="mt-3 text-[13px] leading-relaxed text-white/80">
+                &ldquo;Best workspace experience I&apos;ve had in Salem. The team feels like family.&rdquo;
+              </p>
+              <div className="mt-3 pt-3 border-t border-white/10 text-[11px] uppercase tracking-[0.14em] text-white/55">
+                Arjun K. · Founder
+              </div>
             </div>
 
-            <h1
-              className="display-xl mt-7 max-w-full md:max-w-[20ch] text-white px-2"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.45)" }}
+            {/* Live now card */}
+            <div
+              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-5 text-white"
+              style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
             >
-              {slide.headline.lead}{" "}
-              <span className="text-[var(--color-gold-300)] italic inline-block px-[0.06em]">
-                {slide.headline.emphasis}
-              </span>
-              {slide.headline.tail ? <> {slide.headline.tail}</> : null}
-            </h1>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="relative flex w-2 h-2">
+                  <span
+                    className="absolute inset-0 rounded-full animate-ping"
+                    style={{ background: "var(--color-gold-300)" }}
+                  />
+                  <span
+                    className="relative w-2 h-2 rounded-full"
+                    style={{ background: "var(--color-gold-300)" }}
+                  />
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-white/75 font-medium">
+                  Live now
+                </span>
+              </div>
+              <div className="flex items-end justify-between">
+                <div>
+                  <div className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
+                    312
+                  </div>
+                  <div className="mt-1.5 text-[12px] text-white/65">members working</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
+                    10
+                  </div>
+                  <div className="mt-1.5 text-[12px] text-white/65">centres open</div>
+                </div>
+              </div>
+            </div>
 
-            <p
-              className="mt-7 text-[17px] lg:text-[19px] text-white/85 leading-relaxed max-w-2xl"
-              style={{ textShadow: "0 1px 10px rgba(0,0,0,0.55)" }}
+            {/* Next slide preview */}
+            <button
+              onClick={() => goTo((active + 1) % SLIDES.length, 1)}
+              className="group rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-3 text-left text-white overflow-hidden hover:bg-white/[0.12] transition-colors"
+              style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
             >
-              {slide.subhead}
-            </p>
+              <div className="flex items-center gap-3">
+                <div className="relative w-20 h-16 rounded-md overflow-hidden flex-shrink-0">
+                  <Image
+                    src={SLIDES[(active + 1) % SLIDES.length].src}
+                    alt=""
+                    fill
+                    sizes="80px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-white/55 mb-1">
+                    Up next
+                  </div>
+                  <div className="text-[13px] font-medium truncate">
+                    {SLIDES[(active + 1) % SLIDES.length].eyebrow}
+                  </div>
+                </div>
+                <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+              </div>
+            </button>
           </motion.div>
-        </AnimatePresence>
-
-        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-white/85 text-[13px] font-medium">
-          <FeaturePill icon={<Wifi className="w-3.5 h-3.5" strokeWidth={2} />}>
-            High-Speed Internet
-          </FeaturePill>
-          <FeaturePill icon={<MapPin className="w-3.5 h-3.5" strokeWidth={2} />}>
-            Prime Locations
-          </FeaturePill>
-          <FeaturePill icon={<Building2 className="w-3.5 h-3.5" strokeWidth={2} />}>
-            Flexible Plans
-          </FeaturePill>
-        </ul>
-
-        <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
-          <Link
-            href="/bookings"
-            className="group inline-flex items-center justify-center gap-2 h-12 px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-gold-deep)] hover:text-white hover:scale-[1.02] shadow-[var(--shadow-cta)]"
-          >
-            Book Now
-            <ArrowRight
-              className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-              strokeWidth={2.25}
-            />
-          </Link>
-          <Link
-            href="/locations"
-            className="inline-flex items-center justify-center gap-2 h-12 px-7 border border-white/30 text-white text-[14px] font-semibold rounded-full hover:bg-white/10 active:bg-white/15 transition-colors"
-          >
-            Explore centres
-          </Link>
         </div>
       </div>
 

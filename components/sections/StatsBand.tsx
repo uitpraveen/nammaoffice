@@ -52,13 +52,10 @@ export function StatsBand() {
             <h2 className="display-lg !text-white mt-3 leading-tight">
               Built across Tamil Nadu&apos;s
               <br />
-              <span className="text-[var(--color-gold-300)] italic font-normal">
-                fastest-growing
-              </span>{" "}
-              cities.
+              <span className="display-italic">fastest-growing</span> cities.
             </h2>
             <p className="mt-5 text-[15px] text-white/65 leading-relaxed max-w-md">
-              Eight centres. Three cities. Hundreds of members building everything from textile exports to SaaS startups.
+              Ten centres across five cities — Salem, Trichy, Tirupur, Erode, and Hosur. Hundreds of members building everything from textile exports to SaaS startups.
             </p>
             <Link
               href="/about"
@@ -76,8 +73,8 @@ export function StatsBand() {
             transition={{ staggerChildren: 0.06, delayChildren: 0.15 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3"
           >
-            <Stat label="Centres" value="8" />
-            <Stat label="Cities" value="3" />
+            <Stat label="Centres" value="10" />
+            <Stat label="Cities" value="5" />
             <Stat label="Members" value="500+" />
             <Stat label="Rating" value="4.9" suffix="/5" />
           </motion.div>

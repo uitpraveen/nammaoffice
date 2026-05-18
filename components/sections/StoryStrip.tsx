@@ -2,104 +2,109 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { wix } from "@/lib/data/wix-pool";
-
-const STORY_IMAGES = [
-  { src: wix.dining, alt: "Our cafeteria and dining area, designed for breaks and conversations", caption: "Pause & refresh" },
-  { src: wix.discussion, alt: "A discussion room mid-session — daylight, whiteboards, and focus", caption: "Collaboration" },
-];
+import { fadeUp } from "@/lib/motion";
 
 /**
- * Story strip — sticky narrative panel on the left while three large
- * photographs parallax in from the right. Apple-product-page feel.
- *
- * Each ParallaxImage subtly translates -40 → 40 pixels as it crosses
- * the viewport, so the photos feel like they're "moving past" the
- * pinned text instead of just stacking.
+ * Story section — ported from Elevate. Editorial paragraph block on the
+ * left, two staggered portrait photos on the right with eyebrow captions.
  */
 export function StoryStrip() {
   return (
-    <section id="about" className="bg-[var(--color-bg)] py-20 md:py-32 border-t border-[var(--color-border)]">
-      <div className="content-width">
-        <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16">
-          {/* Left — sticky narrative */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <p className="eyebrow">Our story</p>
-            <h2 className="font-display text-4xl md:text-5xl text-[var(--color-navy)] mt-3 leading-[1.05]">
-              More than a desk.
-              <br />
-              <span className="text-[var(--color-gold-deep)] italic font-normal">
-                A community for builders.
-              </span>
-            </h2>
-            <div className="mt-6 space-y-4 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xl">
-              <p>
-                NammaOffice began with a simple observation: the entrepreneurs and professionals of tier-2 Tamil Nadu were as ambitious as their counterparts in Chennai or Bengaluru — but lacked the infrastructure to match.
-              </p>
-              <p>
-                Our first centre opened on Brindavan Road in Salem with 50 seats and a vision. Within months we had a waiting list. Today we operate <strong className="text-[var(--color-navy)]">8 centres</strong> across Salem, Trichy, and Tirupur — serving everyone from solo freelancers to 50-person teams.
-              </p>
-              <p>
-                Premium workspaces. Predictable costs. A community that supports its own.
-              </p>
-            </div>
-            <Link
-              href="/about"
-              className="mt-8 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--color-navy)] hover:text-[var(--color-gold-deep)] transition-colors"
+    <section
+      id="about"
+      className="py-24 md:py-32"
+      style={{ background: "var(--card)" }}
+    >
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+        <motion.p {...fadeUp} className="eyebrow mb-6">
+          Our story
+        </motion.p>
+        <motion.h2
+          {...fadeUp}
+          className="display text-[40px] md:text-[64px] max-w-[18ch]"
+          style={{ color: "var(--ink)" }}
+        >
+          More than a desk.{" "}
+          <span className="display-italic">A community for builders.</span>
+        </motion.h2>
+
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start">
+          <div
+            className="space-y-6 text-[17px] leading-[1.7] max-w-[52ch]"
+            style={{ color: "var(--ink-muted)" }}
+          >
+            <motion.p {...fadeUp}>
+              NammaOffice began with a simple observation: the entrepreneurs
+              and professionals of tier-2 Tamil Nadu were as ambitious as their
+              counterparts in Chennai or Bengaluru — but lacked the
+              infrastructure to match.
+            </motion.p>
+            <motion.p {...fadeUp}>
+              Our first centre opened on Brindavan Road in Salem with 50 seats
+              and a vision. Within months we had a waiting list. Today we
+              operate{" "}
+              <strong className="font-medium" style={{ color: "var(--ink)" }}>
+                10 centres
+              </strong>{" "}
+              across Salem, Trichy, Tirupur, Erode, and Hosur — serving
+              everyone from solo freelancers to 50-person teams.
+            </motion.p>
+            <motion.p
+              {...fadeUp}
+              className="font-medium"
+              style={{ color: "var(--ink)" }}
             >
-              Read the full story
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.25} />
-            </Link>
+              Premium workspaces. Predictable costs. A community that supports
+              its own.
+            </motion.p>
+            <motion.div {...fadeUp}>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-1.5 text-[14px] font-medium border-b pb-0.5 mt-2"
+                style={{ borderColor: "var(--border)", color: "var(--ink)" }}
+              >
+                Read the full story{" "}
+                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Right — stacked parallax photos */}
-          <div className="space-y-6 lg:space-y-10">
-            {STORY_IMAGES.map((img, i) => (
-              <ParallaxImage key={i} src={img.src} alt={img.alt} caption={img.caption} index={i} />
-            ))}
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
+            <motion.figure {...fadeUp} className="space-y-3">
+              <div
+                className="relative aspect-[4/5] rounded-2xl overflow-hidden border hairline"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <Image
+                  src="/images/elevate/story-cafe.jpg"
+                  alt="Our cafeteria and dining area, designed for breaks and conversations"
+                  fill
+                  sizes="(min-width: 1024px) 30vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="eyebrow">01 · Pause &amp; refresh</figcaption>
+            </motion.figure>
+            <motion.figure {...fadeUp} className="space-y-3 mt-12">
+              <div
+                className="relative aspect-[4/5] rounded-2xl overflow-hidden border hairline"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <Image
+                  src="/images/elevate/story-discussion.jpg"
+                  alt="A discussion room mid-session — daylight, whiteboards, and focus"
+                  fill
+                  sizes="(min-width: 1024px) 30vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="eyebrow">02 · Collaboration</figcaption>
+            </motion.figure>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function ParallaxImage({ src, alt, caption, index }: { src: string; alt: string; caption: string; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-15% 0px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 }}
-      className={
-        // Slightly different aspect per slot for editorial rhythm
-        index === 0
-          ? "relative aspect-[4/3] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] shadow-[var(--shadow-brand)]"
-          : index === 1
-            ? "relative aspect-[5/4] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] shadow-[var(--shadow-brand)] lg:translate-x-8"
-            : "relative aspect-[3/2] rounded-2xl overflow-hidden bg-[var(--color-surface-alt)] shadow-[var(--shadow-brand)]"
-      }
-    >
-      <motion.div style={{ y }} className="absolute -inset-y-12 inset-x-0">
-        <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-      </motion.div>
-      {/* Caption strip */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-[var(--color-charcoal)]/85 via-[var(--color-charcoal)]/30 to-transparent">
-        <p className="text-[12px] uppercase tracking-[0.18em] font-semibold text-[var(--color-gold-300)]">
-          {String(index + 1).padStart(2, "0")} · {caption}
-        </p>
-      </div>
-    </motion.div>
   );
 }

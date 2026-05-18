@@ -39,9 +39,7 @@ export function ClientLogos() {
         <p className="eyebrow">Our clients</p>
         <h2 className="display-md mt-3 text-[var(--color-navy)]">
           {clients.length} brands.{" "}
-          <span className="text-[var(--color-gold-deep)] italic font-normal">
-            One ecosystem.
-          </span>
+          <span className="display-italic">One ecosystem.</span>
         </h2>
         <p className="mt-4 text-[15px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xl mx-auto">
           From global PSUs and multinational pathology chains to Salem-born SaaS founders — every brand below builds, meets, or hosts from a NammaOffice centre.

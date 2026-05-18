@@ -10,26 +10,20 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 /**
- * Newspaper-masthead nav — Fraunces uppercase serif, generous letter
- * spacing. Active route is rendered bold + brick-gold; hover only
- * brightens the colour (no underline). Always white-on-black inside
- * the masthead bar.
+ * Desktop nav v2 — Inter sentence-case, calm spacing, gold-dot active
+ * indicator. Items with `children` open a dark dropdown panel on hover
+ * or focus.
  *
- * Hash-anchor items (`/#about`, `/#amenities`) are kept in sync via
- * the `useActiveHref` hook so they highlight when the URL hash points
- * at their target. The label text is rendered twice in each link: an
- * invisible always-bold copy reserves the slot width so toggling
- * between bold (active) and medium (idle) doesn't shift adjacent
- * items.
- *
- * Items with `children` render as a hover/focus dropdown panel.
+ * Hash-anchor items (`/#about`, `/#amenities`) sync via the
+ * `useActiveHref` hook so they highlight when the URL hash points
+ * at their target.
  */
 export function DesktopNav() {
   const pathname = usePathname();
 
   return (
     <nav
-      className="hidden lg:flex items-center gap-x-5 xl:gap-x-7"
+      className="hidden lg:flex items-center justify-between h-full w-full"
       aria-label="Main navigation"
     >
       {navigation.map((item) =>
@@ -57,26 +51,27 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="group relative inline-block py-1 whitespace-nowrap"
+      className="group relative inline-flex items-center py-2 whitespace-nowrap"
       aria-current={isActive ? "page" : undefined}
     >
       <span
-        aria-hidden
-        className="block font-[var(--font-serif)] text-[11.5px] uppercase tracking-[0.16em] font-bold invisible"
-      >
-        {label}
-      </span>
-      <span
         className={cn(
-          "absolute inset-0 flex items-center justify-center font-[var(--font-serif)] text-[11.5px] uppercase tracking-[0.16em]",
-          "transition-[color,font-weight] duration-200",
+          "text-[14px] font-medium tracking-[-0.005em]",
+          "transition-colors duration-200",
           isActive
-            ? "text-[var(--color-gold)] font-bold"
-            : "text-white/85 font-medium group-hover:text-white"
+            ? "text-[var(--color-gold-300)]"
+            : "text-white/75 group-hover:text-white"
         )}
       >
         {label}
       </span>
+      <span
+        aria-hidden
+        className={cn(
+          "absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--color-gold)] transition-opacity duration-200",
+          isActive ? "opacity-100" : "opacity-0"
+        )}
+      />
     </Link>
   );
 }
@@ -148,36 +143,38 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
     >
       <button
         type="button"
-        className="group relative inline-flex items-center gap-1 py-1 whitespace-nowrap"
+        className="group relative inline-flex items-center gap-1 py-2 whitespace-nowrap"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
       >
         <span
-          aria-hidden
-          className="block font-[var(--font-serif)] text-[11.5px] uppercase tracking-[0.16em] font-bold invisible"
-        >
-          {item.label}
-        </span>
-        <span
           className={cn(
-            "absolute inset-0 flex items-center justify-center gap-1 font-[var(--font-serif)] text-[11.5px] uppercase tracking-[0.16em]",
-            "transition-[color,font-weight] duration-200",
+            "text-[14px] font-medium tracking-[-0.005em]",
+            "transition-colors duration-200",
             isParentActive
-              ? "text-[var(--color-gold)] font-bold"
-              : "text-white/85 font-medium group-hover:text-white"
+              ? "text-[var(--color-gold-300)]"
+              : "text-white/75 group-hover:text-white"
           )}
         >
           {item.label}
-          <ChevronDown
-            className={cn(
-              "w-3 h-3 transition-transform duration-200 opacity-80",
-              open && "rotate-180"
-            )}
-            strokeWidth={2.25}
-          />
         </span>
+        <ChevronDown
+          className={cn(
+            "w-3.5 h-3.5 transition-all duration-200",
+            isParentActive ? "text-[var(--color-gold-300)]" : "text-white/55 group-hover:text-white/80",
+            open && "rotate-180"
+          )}
+          strokeWidth={2}
+        />
+        <span
+          aria-hidden
+          className={cn(
+            "absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--color-gold)] transition-opacity duration-200",
+            isParentActive ? "opacity-100" : "opacity-0"
+          )}
+        />
       </button>
 
       <div
@@ -218,10 +215,10 @@ function DropdownChild({ child, pathname }: { child: NavChild; pathname: string 
       role="menuitem"
       className={cn(
         "group/item relative flex items-center justify-between px-5 py-2.5",
-        "font-[var(--font-serif)] text-[12px] uppercase tracking-[0.16em] transition-colors",
+        "text-[13.5px] font-medium tracking-[-0.005em] transition-colors",
         isActive
-          ? "text-[var(--color-gold)] font-bold"
-          : "text-white/80 font-medium hover:text-white"
+          ? "text-[var(--color-gold-300)]"
+          : "text-white/75 hover:text-white"
       )}
     >
       <span

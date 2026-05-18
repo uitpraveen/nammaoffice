@@ -3,134 +3,105 @@
 import { motion } from "motion/react";
 import {
   Wifi,
-  Zap,
-  Wind,
+  BatteryCharging,
+  Snowflake,
   Coffee,
   Printer,
-  Car,
-  ShieldCheck,
+  ParkingSquare,
+  Shield,
   Lock,
-  Users,
+  Presentation,
   Bell,
   Armchair,
-  Sofa,
+  TreePine,
   type LucideIcon,
 } from "lucide-react";
+import { fadeUp } from "@/lib/motion";
 
 interface Item {
   icon: LucideIcon;
-  label: string;
-  hint: string;
-  color: string;
-  shadow: string;
+  title: string;
+  desc: string;
 }
 
-const ITEMS: Item[] = [
-  { icon: Wifi,        label: "Gigabit Wi-Fi",     hint: "1 Gbps fibre, redundant ISPs",   color: "#F97316", shadow: "249, 115, 22" },
-  { icon: Zap,         label: "Power backup",      hint: "Generator + UPS, zero downtime", color: "#F59E0B", shadow: "245, 158, 11" },
-  { icon: Wind,        label: "Air conditioning",  hint: "Year-round comfort",             color: "#06B6D4", shadow: "6, 182, 212"  },
-  { icon: Coffee,      label: "Cafeteria",         hint: "Tea / coffee, all day",          color: "#A16207", shadow: "161, 98, 7"   },
-  { icon: Printer,     label: "Printing & scan",   hint: "High-speed, on-demand",          color: "#6366F1", shadow: "99, 102, 241" },
-  { icon: Car,         label: "Free parking",      hint: "Cars + two-wheelers",            color: "#10B981", shadow: "16, 185, 129" },
-  { icon: ShieldCheck, label: "24/7 security",     hint: "CCTV + trained staff",           color: "#EF4444", shadow: "239, 68, 68"  },
-  { icon: Lock,        label: "Personal locker",   hint: "Secure storage",                 color: "#475569", shadow: "71, 85, 105"  },
-  { icon: Users,       label: "Conference rooms",  hint: "AV-ready, bookable",             color: "#8B5CF6", shadow: "139, 92, 246" },
-  { icon: Bell,        label: "Reception",         hint: "Mail, calls, visitors",          color: "#EC4899", shadow: "236, 72, 153" },
-  { icon: Armchair,    label: "Ergonomic seating", hint: "Premium chairs + desks",         color: "#14B8A6", shadow: "20, 184, 166" },
-  { icon: Sofa,        label: "Breakout zones",    hint: "Quiet relaxation areas",         color: "#E11D48", shadow: "225, 29, 72"  },
+const items: Item[] = [
+  { icon: Wifi,             title: "Gigabit",    desc: "1 Gbps fibre, redundant ISPs" },
+  { icon: BatteryCharging,  title: "Backup",     desc: "Generator + UPS, zero downtime" },
+  { icon: Snowflake,        title: "Climate",    desc: "Year-round comfort" },
+  { icon: Coffee,           title: "Cafeteria",  desc: "Tea / coffee, all day" },
+  { icon: Printer,          title: "Print",      desc: "High-speed, on-demand" },
+  { icon: ParkingSquare,    title: "Parking",    desc: "Cars + two-wheelers" },
+  { icon: Shield,           title: "Security",   desc: "CCTV + trained staff" },
+  { icon: Lock,             title: "Locker",     desc: "Secure storage" },
+  { icon: Presentation,     title: "Conference", desc: "AV-ready, bookable" },
+  { icon: Bell,             title: "Reception",  desc: "Mail, calls, visitors" },
+  { icon: Armchair,         title: "Seating",    desc: "Premium chairs + desks" },
+  { icon: TreePine,         title: "Breakout",   desc: "Quiet relaxation areas" },
 ];
 
-/**
- * Amenities showcase — anchored at id="amenities" so the nav menu
- * scrolls here instead of routing to a separate page. Each tile gets
- * its own vibrant accent so the section reads colourful against the
- * otherwise restrained matt-black + brick palette.
- */
 export function AmenitiesShowcase() {
   return (
     <section
       id="amenities"
-      className="relative overflow-hidden bg-[var(--color-surface-alt)] py-20 md:py-28"
+      className="py-24 md:py-32"
+      style={{ background: "var(--card)" }}
     >
-      {/* Soft, blurred colour orbs — give the section a confetti glow without competing with the cards. */}
-      <div className="pointer-events-none absolute inset-0 -z-0">
-        <div className="absolute -top-24 -left-24 w-[26rem] h-[26rem] rounded-full bg-[#F97316] opacity-[0.18] blur-[120px]" />
-        <div className="absolute top-1/3 -right-20 w-[24rem] h-[24rem] rounded-full bg-[#06B6D4] opacity-[0.18] blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[26rem] h-[26rem] rounded-full bg-[#10B981] opacity-[0.16] blur-[120px]" />
-        <div className="absolute -bottom-16 right-1/3 w-[22rem] h-[22rem] rounded-full bg-[#8B5CF6] opacity-[0.16] blur-[120px]" />
-      </div>
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-end mb-16">
+          <motion.div {...fadeUp}>
+            <p className="eyebrow mb-6">Amenities</p>
+            <h2 className="display text-[40px] md:text-[64px]">
+              Everything you need.{" "}
+              <span className="display-italic">Already included.</span>
+            </h2>
+          </motion.div>
+          <motion.p
+            {...fadeUp}
+            className="text-[17px] leading-[1.65] max-w-[52ch]"
+            style={{ color: "var(--ink-muted)" }}
+          >
+            From fibre internet to ergonomic seating — every detail is on every
+            floor, at every centre.
+          </motion.p>
+        </div>
 
-      <div className="content-width relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
+        <div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px border hairline rounded-2xl overflow-hidden"
+          style={{ background: "var(--border)" }}
         >
-          <p className="eyebrow">Amenities</p>
-          <h2 className="display-lg mt-3 text-[var(--color-navy)]">
-            Everything you need.{" "}
-            <span className="text-[var(--color-gold-deep)] italic font-normal">
-              Already included.
-            </span>
-          </h2>
-          <p className="mt-4 text-[16px] text-[var(--color-ink-secondary)] leading-relaxed">
-            From fibre internet to ergonomic seating — every detail is on every floor, at every centre.
-          </p>
-        </motion.div>
-
-        <motion.ul
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ staggerChildren: 0.05, delayChildren: 0.05 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"
-        >
-          {ITEMS.map(({ icon: Icon, label, hint, color, shadow }) => (
-            <motion.li
-              key={label}
-              variants={{
-                hidden: { opacity: 0, y: 24, scale: 0.94 },
-                visible: { opacity: 1, y: 0, scale: 1 },
-              }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6 }}
-              style={
-                {
-                  "--tile-rgb": shadow,
-                } as React.CSSProperties
+          {items.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: (i % 4) * 0.05 }}
+              className="bg-card p-7 md:p-8 group transition-colors duration-300"
+              style={{ background: "var(--card)" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "var(--accent-bg)")
               }
-              className="group relative flex flex-col gap-4 p-5 md:p-6 rounded-2xl bg-white/90 backdrop-blur-sm border border-[var(--color-border)] transition-all duration-300 hover:border-transparent hover:shadow-[0_18px_40px_-12px_rgba(var(--tile-rgb),0.45)]"
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "var(--card)")
+              }
             >
-              {/* Top tinted ribbon — subtle wash of the tile colour at the top of the card. */}
-              <span
-                aria-hidden
-                style={{ background: `linear-gradient(180deg, rgba(${shadow},0.14) 0%, transparent 100%)` }}
-                className="pointer-events-none absolute inset-x-0 top-0 h-16 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              <item.icon
+                className="w-5 h-5 mb-6"
+                strokeWidth={1.5}
+                style={{ color: "var(--accent)" }}
               />
-
-              <span
-                style={{
-                  backgroundColor: color,
-                  boxShadow: `0 10px 24px -8px rgba(${shadow},0.55), inset 0 1px 0 rgba(255,255,255,0.25)`,
-                }}
-                className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl text-white transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+              <h3 className="display text-[22px] md:text-[26px]" style={{ color: "var(--ink)" }}>
+                {item.title}
+              </h3>
+              <p
+                className="mt-2 text-[13px] leading-[1.55]"
+                style={{ color: "var(--ink-muted)" }}
               >
-                <Icon className="w-5 h-5" strokeWidth={2.25} />
-              </span>
-
-              <div className="relative">
-                <p className="text-[14.5px] font-semibold text-[var(--color-navy)] leading-tight">
-                  {label}
-                </p>
-                <p className="text-[12.5px] text-[var(--color-ink-secondary)] mt-1 leading-relaxed">
-                  {hint}
-                </p>
-              </div>
-            </motion.li>
+                {item.desc}
+              </p>
+            </motion.div>
           ))}
-        </motion.ul>
+        </div>
       </div>
     </section>
   );
