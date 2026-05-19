@@ -389,6 +389,116 @@
     font-feature-settings: "tnum", "zero";
   }
 
+  /* Premium grid + drifting ambient glows. Three layers stack on the
+     sandal surfaces (canvas / canvas-alt) so they read as luminous:
+       1. A faint brick-tinted line grid (paper texture).
+       2. A warm glow drifting slowly across diagonally.
+       3. A second brick-tinted glow drifting in the opposite direction.
+     Both glows respect `prefers-reduced-motion`. */
+
+  /* Premium grid + drifting luminous orbs.
+       1. A whisper-faint brick-tinted line grid (paper texture only).
+       2. A bright warm orb that drifts diagonally across the section.
+       3. A second brick-tinted orb drifting counter-direction.
+     Both orbs are blurred and oversized so they read as ambient room
+     lighting, not balls. They sit between the grid and the content,
+     in natural stacking order (no z-index hacks).
+     Animations honour `prefers-reduced-motion`. */
+
+  @keyframes glow-drift-a {
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(40vw, 28vh, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes glow-drift-b {
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(-38vw, -22vh, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+
+  .bg-canvas-grid,
+  .bg-canvas-alt-grid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-canvas-grid {
+    background-color: var(--canvas);
+    background-image:
+      linear-gradient(rgba(168, 72, 46, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 72, 46, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-canvas-alt-grid {
+    background-color: var(--canvas-alt);
+    background-image:
+      linear-gradient(rgba(168, 72, 46, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 72, 46, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* All direct children of the grid section sit above the orbs. */
+  .bg-canvas-grid > *,
+  .bg-canvas-alt-grid > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Orb 1 — warm cream highlight, big and softly blurred. */
+  .bg-canvas-grid::before,
+  .bg-canvas-alt-grid::before {
+    content: "";
+    position: absolute;
+    top: -15%;
+    left: -10%;
+    width: 60vmin;
+    height: 60vmin;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle,
+      rgba(255, 220, 180, 0.85) 0%,
+      rgba(255, 220, 180, 0.35) 30%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    animation: glow-drift-a 24s ease-in-out infinite;
+    will-change: transform;
+    z-index: 1;
+  }
+
+  /* Orb 2 — brick-tinted, smaller, drifts the other way. */
+  .bg-canvas-grid::after,
+  .bg-canvas-alt-grid::after {
+    content: "";
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 50vmin;
+    height: 50vmin;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle,
+      rgba(199, 90, 58, 0.38) 0%,
+      rgba(199, 90, 58, 0.15) 35%,
+      transparent 70%
+    );
+    filter: blur(70px);
+    animation: glow-drift-b 32s ease-in-out infinite;
+    will-change: transform;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-canvas-grid::before,
+    .bg-canvas-grid::after,
+    .bg-canvas-alt-grid::before,
+    .bg-canvas-alt-grid::after {
+      animation: none !important;
+    }
+  }
+
   .grain { position: relative; }
   .grain::after {
     content: "";
@@ -434,7 +544,53 @@
   }
   .marquee-track { animation: marquee 60s linear infinite; }
 
+  /* Traveling neon line for the navbar bottom edge. A faint base hairline
+     stays static; a brighter brick glow continuously sweeps left to right.
+     Note: no `position: relative` on the host — the header is already
+     `position: fixed`, which establishes the positioning context for these
+     pseudo-elements. Adding relative here would override Tailwind's
+     `fixed` utility and break stickiness. */
+  .nav-neon-border::before,
+  .nav-neon-border::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+  }
+  .nav-neon-border::before {
+    /* Static maroon rail — gold-700 (#6E311F). Reads as a deep brick-maroon
+       hairline against the charcoal navbar. */
+    background: #6E311F;
+  }
+  .nav-neon-border::after {
+    /* Traveling pulse — a wide dark eclipse glides over the maroon rail.
+       Center goes near-black so the dark sweep is unmistakable; flanks
+       fade gently through deeper maroon so the motion has a soft tail
+       at both ends rather than a hard cut. */
+    background: linear-gradient(
+      90deg,
+      rgba(42, 16, 10, 0)  0%,
+      rgba(42, 16, 10, 0)  20%,
+      rgba(42, 16, 10, 0.6) 38%,
+      rgba(10, 5, 3, 1)    50%,
+      rgba(42, 16, 10, 0.6) 62%,
+      rgba(42, 16, 10, 0)  80%,
+      rgba(42, 16, 10, 0) 100%
+    );
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    animation: nav-neon-sweep 5s linear infinite;
+  }
+  @keyframes nav-neon-sweep {
+    0%   { background-position: -60% 0; }
+    100% { background-position: 160% 0; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .kenburns, .marquee-track, .pulse-dot::before { animation: none !important; }
+    .nav-neon-border::after { animation: none !important; opacity: 0.4; background-position: 50% 0; }
   }
 }

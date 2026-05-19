@@ -101,17 +101,16 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main solid nav */}
+      {/* Main solid nav — charcoal with traveling neon border */}
       <header
-        className="fixed left-0 right-0 z-40 transition-all duration-300"
+        className="nav-neon-border fixed left-0 right-0 z-40 transition-all duration-300"
         style={{
           top: 36,
-          background: "rgba(255,255,255,0.96)",
+          background: "rgba(26,26,26,0.96)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
           boxShadow: scrolled
-            ? "0 1px 0 rgba(0,0,0,0.02), 0 8px 24px -16px rgba(0,0,0,0.08)"
+            ? "0 1px 0 rgba(0,0,0,0.4), 0 8px 24px -16px rgba(0,0,0,0.5)"
             : "none",
         }}
       >
@@ -131,6 +130,7 @@ export function Header() {
                 height={137}
                 priority
                 className="h-7 md:h-8 w-auto"
+                style={{ filter: "brightness(0) invert(1)" }}
               />
             </Link>
 
@@ -150,17 +150,19 @@ export function Header() {
               <Link
                 href="/contact"
                 className="hidden md:inline-flex h-9 items-center px-3 text-[13px] font-medium transition-colors"
-                style={{ color: "var(--ink-muted)" }}
+                style={{ color: "rgba(255,255,255,0.75)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.75)")}
               >
                 Contact
               </Link>
-              <span className="hidden md:block h-5 w-px" style={{ background: "var(--border)" }} />
+              <span className="hidden md:block h-5 w-px" style={{ background: "rgba(255,255,255,0.12)" }} />
               <Link
                 href="/bookings"
                 className="inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold text-white transition-all rounded-md"
                 style={{
                   background: "var(--accent)",
-                  boxShadow: "0 1px 0 rgba(0,0,0,0.05), 0 4px 14px -4px rgba(168,72,46,0.45)",
+                  boxShadow: "0 1px 0 rgba(0,0,0,0.2), 0 6px 18px -4px rgba(168,72,46,0.65)",
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-soft)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
@@ -170,8 +172,12 @@ export function Header() {
               </Link>
               <button
                 onClick={() => setOpen(true)}
-                className="lg:hidden w-10 h-10 rounded-md flex items-center justify-center bg-white"
-                style={{ border: "1px solid var(--border)" }}
+                className="lg:hidden w-10 h-10 rounded-md flex items-center justify-center"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  color: "#fff",
+                }}
                 aria-label="Open menu"
               >
                 <Menu className="w-4 h-4" strokeWidth={1.75} />
@@ -270,22 +276,15 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
   return (
     <Link
       href={item.href}
-      className="relative h-full flex items-center px-4 text-[14px] font-medium transition-colors"
-      style={{ color: isActive ? "var(--ink)" : "var(--ink-muted)" }}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ink)")}
-      onMouseLeave={(e) =>
-        !isActive && (e.currentTarget.style.color = "var(--ink-muted)")
-      }
+      className="relative h-full flex items-center px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] transition-colors"
+      style={{ color: isActive ? "var(--accent)" : "rgba(255,255,255,0.65)" }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+      onMouseLeave={(e) => {
+        if (!isActive) e.currentTarget.style.color = "rgba(255,255,255,0.65)";
+        else e.currentTarget.style.color = "var(--accent)";
+      }}
     >
       {item.label}
-      {isActive && (
-        <motion.span
-          layoutId="nav-underline"
-          className="absolute left-3 right-3 -bottom-px h-[2px]"
-          style={{ background: "var(--accent)" }}
-          transition={{ type: "spring", stiffness: 380, damping: 32 }}
-        />
-      )}
     </Link>
   );
 }
@@ -322,27 +321,24 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
     >
       <button
         type="button"
-        className="relative h-full flex items-center gap-1 px-4 text-[14px] font-medium transition-colors"
-        style={{ color: isParentActive ? "var(--ink)" : "var(--ink-muted)" }}
+        className="relative h-full flex items-center gap-1.5 px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] transition-colors"
+        style={{ color: isParentActive ? "var(--accent)" : "rgba(255,255,255,0.65)" }}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+        onMouseLeave={(e) => {
+          if (!isParentActive) e.currentTarget.style.color = "rgba(255,255,255,0.65)";
+          else e.currentTarget.style.color = "var(--accent)";
+        }}
         aria-haspopup="menu"
         aria-expanded={open}
       >
         {item.label}
         <ChevronDown
           className={cn(
-            "w-3 h-3 opacity-60 transition-transform duration-200",
+            "w-3 h-3 opacity-70 transition-transform duration-200",
             open && "rotate-180"
           )}
-          strokeWidth={2}
+          strokeWidth={2.5}
         />
-        {isParentActive && (
-          <motion.span
-            layoutId="nav-underline"
-            className="absolute left-3 right-3 -bottom-px h-[2px]"
-            style={{ background: "var(--accent)" }}
-            transition={{ type: "spring", stiffness: 380, damping: 32 }}
-          />
-        )}
       </button>
 
       <AnimatePresence>

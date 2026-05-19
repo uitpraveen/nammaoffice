@@ -48,12 +48,8 @@ const cityLabel: Record<string, string> = {
 
 export function LocationsShowcase() {
   return (
-    <section
-      id="centres"
-      className="py-24 md:py-32"
-      style={{ background: "var(--canvas-alt)" }}
-    >
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+    <section id="centres" className="bg-canvas-alt-grid py-24 md:py-32">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
           <div>
             <motion.p {...fadeUp} className="eyebrow mb-6">

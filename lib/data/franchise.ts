@@ -37,7 +37,7 @@ export const franchiseBenefits: FranchiseBenefit[] = [
     icon: "/icons/roi.svg",
     title: "Strong ROI",
     description:
-      "Projected 40% return on investment with an average payback period of 2.5 years, backed by our proven business model.",
+      "Predictable returns backed by a proven business model — detailed unit economics shared in your discovery call.",
   },
   {
     icon: "/icons/support.svg",
