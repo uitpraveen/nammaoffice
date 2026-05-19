@@ -78,6 +78,7 @@ export function Header() {
   const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -91,6 +92,27 @@ export function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  /**
+   * SmoothScroll attaches a *document* capture-phase click listener that
+   * calls `stopImmediatePropagation()` once it identifies a hash anchor,
+   * which prevents React's `onClick` (where we'd normally close the
+   * overlay) from ever firing. A *window* capture-phase listener runs
+   * before document-capture, so we close the overlay there for any
+   * anchor click inside the overlay — hash or otherwise.
+   */
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      const anchor = (e.target as HTMLElement | null)?.closest("a[href]");
+      if (!anchor) return;
+      if (!overlayRef.current?.contains(anchor)) return;
+      setOpen(false);
+    };
+    window.addEventListener("click", close, { capture: true });
+    return () => window.removeEventListener("click", close, { capture: true });
   }, [open]);
 
   // Close overlay on route change.
@@ -264,75 +286,136 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — charcoal sheet, numbered nav, brick accent */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[60]"
-            style={{ background: "var(--canvas)" }}
+            ref={overlayRef}
+            className="fixed inset-0 z-[60] flex flex-col"
+            style={{ background: "#0E0E0E", color: "#fff" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.22 }}
           >
-            <div className="h-full flex flex-col px-6 py-6">
-              <div className="flex items-center justify-between">
-                <Link
-                  href="/"
-                  onClick={() => setOpen(false)}
-                  className="inline-flex items-center"
-                  aria-label="NammaOffice — home"
-                >
-                  <Image
-                    src="/images/logo.png"
-                    alt="NammaOffice"
-                    width={1000}
-                    height={137}
-                    className="h-7 w-auto"
+            {/* Top bar */}
+            <div
+              className="flex items-center justify-between px-6 h-[64px] shrink-0"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              <Link href="/" className="inline-flex items-center" aria-label="NammaOffice — home">
+                <Image
+                  src="/images/logo.png"
+                  alt="NammaOffice"
+                  width={1000}
+                  height={137}
+                  className="h-7 w-auto"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
+              </Link>
+              <button
+                onClick={() => setOpen(false)}
+                className="w-10 h-10 rounded-md flex items-center justify-center"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  color: "#fff",
+                }}
+                aria-label="Close menu"
+              >
+                <X className="w-4 h-4" strokeWidth={2} />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 overflow-y-auto px-6 pt-7 pb-8">
+              <p
+                className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                Navigation
+              </p>
+              <div
+                className="flex flex-col"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                {navigation.map((item, i) => (
+                  <MobileMenuRow
+                    key={item.href}
+                    item={item}
+                    pathname={pathname}
+                    index={i}
                   />
-                </Link>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="w-10 h-10 rounded-md flex items-center justify-center bg-white"
-                  style={{ border: "1px solid var(--border)" }}
-                  aria-label="Close menu"
-                >
-                  <X className="w-4 h-4" strokeWidth={1.75} />
-                </button>
+                ))}
               </div>
-              <div className="flex-1 flex flex-col justify-center overflow-y-auto py-8">
-                <p className="eyebrow mb-5">Menu</p>
-                <div
-                  className="flex flex-col border-y"
-                  style={{ borderColor: "var(--border)" }}
+
+              <p
+                className="text-[10.5px] font-bold uppercase tracking-[0.18em] mt-9 mb-3"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                Get in touch
+              </p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={`tel:${formatPhone(BRAND.phone)}`}
+                  className="flex items-center gap-2.5 text-[14px]"
+                  style={{ color: "rgba(255,255,255,0.85)" }}
                 >
-                  {navigation.map((item, i) => (
-                    <MobileMenuRow
-                      key={item.href}
-                      item={item}
-                      pathname={pathname}
-                      index={i}
-                      onClose={() => setOpen(false)}
-                    />
-                  ))}
-                </div>
-                <div className="mt-8 space-y-2 text-[13px] text-ink-muted">
+                  <Phone className="w-4 h-4" strokeWidth={1.75} style={{ color: "var(--accent-soft)" }} />
+                  <span className="mono">{BRAND.phone}</span>
+                </a>
+                <a
+                  href={`mailto:${BRAND.email}`}
+                  className="flex items-center gap-2.5 text-[14px]"
+                  style={{ color: "rgba(255,255,255,0.85)" }}
+                >
+                  <Mail className="w-4 h-4" strokeWidth={1.75} style={{ color: "var(--accent-soft)" }} />
+                  <span>{BRAND.email}</span>
+                </a>
+                <div className="flex items-center gap-3 mt-3">
                   <a
-                    href={`tel:${formatPhone(BRAND.phone)}`}
-                    className="flex items-center gap-2"
+                    href={BRAND.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="w-9 h-9 rounded-md flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
                   >
-                    <Phone className="w-3.5 h-3.5" strokeWidth={1.75} />{" "}
-                    <span className="mono">{BRAND.phone}</span>
+                    <InstagramIcon className="w-4 h-4" />
                   </a>
-                  <a href={`mailto:${BRAND.email}`} className="flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5" strokeWidth={1.75} /> {BRAND.email}
+                  <a
+                    href={BRAND.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="w-9 h-9 rounded-md flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    <LinkedinIcon className="w-4 h-4" />
                   </a>
                 </div>
               </div>
+            </div>
+
+            {/* Sticky CTA */}
+            <div
+              className="px-6 pt-4 pb-6 shrink-0"
+              style={{
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+                background: "#0E0E0E",
+              }}
+            >
               <Link
                 href="/bookings"
-                onClick={() => setOpen(false)}
-                className="btn-glow-border inline-flex items-center justify-center gap-2 h-12 py-4 rounded-md text-[14px] font-semibold text-white"
+                className="btn-glow-border inline-flex w-full items-center justify-center gap-2 h-12 rounded-md text-[14px] font-semibold text-white"
               >
                 <span className="inline-flex items-center gap-2">
                   Book Now <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
@@ -483,41 +566,60 @@ function MobileMenuRow({
   item,
   pathname,
   index,
-  onClose,
 }: {
   item: NavItem;
   pathname: string;
   index: number;
-  onClose: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const isActive =
-    pathname === item.href ||
-    (item.children?.some((c) => pathname === c.href || pathname.startsWith(c.href + "/")) ??
-      false);
+  // useActiveHref handles hash anchors (`/#about`, `/#amenities`) and
+  // subscribes to hashchange/popstate so scroll-spy updates re-light
+  // the right row. Combined with a children-path check for dropdowns.
+  const isHrefActive = useActiveHref(item.href, pathname);
+  const hasActiveChild = !!item.children?.some(
+    (c) => pathname === c.href || pathname.startsWith(c.href + "/")
+  );
+  const isActive = isHrefActive || hasActiveChild;
+
+  const num = String(index + 1).padStart(2, "0");
+  const rowBorder = { borderBottom: "1px solid rgba(255,255,255,0.08)" };
+  const numColor = isActive ? "var(--accent-soft)" : "rgba(255,255,255,0.35)";
+  const labelColor = isActive ? "#fff" : "rgba(255,255,255,0.92)";
 
   if (item.children?.length) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.06 + index * 0.04, duration: 0.4 }}
-        className="border-b"
-        style={{ borderColor: "var(--border)" }}
+        transition={{ delay: 0.04 + index * 0.035, duration: 0.32 }}
+        style={rowBorder}
       >
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="w-full text-left display text-[28px] py-5 flex items-center justify-between"
-          style={{ color: isActive ? "var(--accent)" : "var(--ink)" }}
+          className="w-full text-left py-4 flex items-center justify-between gap-4"
+          aria-expanded={expanded}
         >
-          {item.label}
+          <span className="flex items-baseline gap-3">
+            <span
+              className="text-[11px] font-mono tabular-nums tracking-wider"
+              style={{ color: numColor }}
+            >
+              {num}
+            </span>
+            <span
+              className="text-[20px] font-bold uppercase tracking-[0.04em]"
+              style={{ color: labelColor }}
+            >
+              {item.label}
+            </span>
+          </span>
           <ChevronDown
             className={cn(
               "w-5 h-5 transition-transform duration-200",
               expanded && "rotate-180"
             )}
-            style={{ color: "var(--ink-dim)" }}
-            strokeWidth={1.5}
+            style={{ color: "rgba(255,255,255,0.5)" }}
+            strokeWidth={2}
           />
         </button>
         <AnimatePresence initial={false}>
@@ -526,17 +628,19 @@ function MobileMenuRow({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.22 }}
               className="overflow-hidden"
             >
-              <div className="pb-5 space-y-1">
+              <div
+                className="pb-4 pl-9 space-y-1 -mt-1"
+                style={{ borderLeft: "1px solid rgba(255,255,255,0.08)", marginLeft: "0.7rem" }}
+              >
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
                     href={child.href}
-                    onClick={onClose}
-                    className="block px-4 py-2.5 rounded-md text-[15px]"
-                    style={{ color: "var(--ink-muted)" }}
+                    className="block py-2 text-[14px]"
+                    style={{ color: "rgba(255,255,255,0.7)" }}
                   >
                     {child.label}
                   </Link>
@@ -551,23 +655,33 @@ function MobileMenuRow({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.06 + index * 0.04, duration: 0.4 }}
-      className="border-b"
-      style={{ borderColor: "var(--border)" }}
+      transition={{ delay: 0.04 + index * 0.035, duration: 0.32 }}
+      style={rowBorder}
     >
       <Link
         href={item.href}
-        onClick={onClose}
-        className="display text-[28px] py-5 flex items-center justify-between"
-        style={{ color: isActive ? "var(--accent)" : "var(--ink)" }}
+        className="py-4 flex items-center justify-between gap-4"
       >
-        {item.label}
+        <span className="flex items-baseline gap-3">
+          <span
+            className="text-[11px] font-mono tabular-nums tracking-wider"
+            style={{ color: numColor }}
+          >
+            {num}
+          </span>
+          <span
+            className="text-[20px] font-bold uppercase tracking-[0.04em]"
+            style={{ color: labelColor }}
+          >
+            {item.label}
+          </span>
+        </span>
         <ArrowUpRight
-          className="w-5 h-5"
-          style={{ color: "var(--ink-dim)" }}
-          strokeWidth={1.5}
+          className="w-4 h-4"
+          style={{ color: isActive ? "var(--accent-soft)" : "rgba(255,255,255,0.5)" }}
+          strokeWidth={2}
         />
       </Link>
     </motion.div>
