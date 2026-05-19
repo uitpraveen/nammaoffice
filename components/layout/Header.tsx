@@ -17,8 +17,47 @@ import {
   MapPin,
   Menu,
   Phone,
+  Star,
   X,
 } from "lucide-react";
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-6a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="11" rx="0.5" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 import type { NavChild, NavItem } from "@/lib/types";
 
 /**
@@ -69,7 +108,16 @@ export function Header() {
         <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-5 lg:px-10">
           <div className="flex items-center divide-x divide-white/10">
             <div className="flex items-center gap-2 pr-4">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--accent-soft)" }} />
+              <span className="relative flex w-1.5 h-1.5">
+                <span
+                  className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping"
+                  style={{ background: "var(--accent-soft)" }}
+                />
+                <span
+                  className="relative inline-flex w-1.5 h-1.5 rounded-full"
+                  style={{ background: "var(--accent-soft)" }}
+                />
+              </span>
               <span>Open now</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 px-4">
@@ -77,8 +125,32 @@ export function Header() {
               <span>Mon–Sat · 8 AM – 9 PM</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 px-4">
+              <Star
+                className="w-3 h-3"
+                strokeWidth={0}
+                style={{ fill: "var(--accent-soft)" }}
+              />
+              <span>
+                <span className="text-white font-semibold">4.9</span>
+                <span className="opacity-60"> · 500+ Members</span>
+              </span>
+            </div>
+            <div className="hidden lg:flex items-center gap-1.5 px-4">
               <MapPin className="w-3 h-3" strokeWidth={1.75} />
               <span>10 centres · 5 cities</span>
+            </div>
+            <div className="hidden xl:flex items-center gap-1.5 px-4">
+              <span
+                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10.5px] uppercase tracking-[0.12em] font-semibold"
+                style={{
+                  background: "rgba(184, 85, 58, 0.18)",
+                  color: "var(--accent-soft)",
+                  border: "1px solid rgba(184, 85, 58, 0.3)",
+                }}
+              >
+                New
+              </span>
+              <span>Book a free centre tour · 30 mins</span>
             </div>
           </div>
           <div className="flex items-center divide-x divide-white/10">
@@ -96,7 +168,26 @@ export function Header() {
               <Mail className="w-3 h-3" strokeWidth={1.75} />
               <span>{BRAND.email}</span>
             </a>
-            <button className="pl-4 hover:text-white transition-colors">EN</button>
+            <div className="flex items-center gap-2 pl-4">
+              <a
+                href={BRAND.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="hover:text-white transition-colors"
+              >
+                <InstagramIcon className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={BRAND.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="hover:text-white transition-colors"
+              >
+                <LinkedinIcon className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -148,39 +239,25 @@ export function Header() {
             {/* Right cluster */}
             <div className="flex items-center gap-2 shrink-0">
               <Link
-                href="/contact"
-                className="hidden md:inline-flex h-9 items-center px-3 text-[13px] font-medium transition-colors"
-                style={{ color: "rgba(255,255,255,0.75)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.75)")}
-              >
-                Contact
-              </Link>
-              <span className="hidden md:block h-5 w-px" style={{ background: "rgba(255,255,255,0.12)" }} />
-              <Link
                 href="/bookings"
-                className="inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold text-white transition-all rounded-md"
-                style={{
-                  background: "var(--accent)",
-                  boxShadow: "0 1px 0 rgba(0,0,0,0.2), 0 6px 18px -4px rgba(168,72,46,0.65)",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-soft)")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
+                className="btn-glow-border hidden md:inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold text-white rounded-md"
               >
-                Reserve a Tour
-                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+                <span className="inline-flex items-center gap-1.5">
+                  Book Now
+                  <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+                </span>
               </Link>
               <button
                 onClick={() => setOpen(true)}
-                className="lg:hidden w-10 h-10 rounded-md flex items-center justify-center"
+                className="lg:hidden w-11 h-11 rounded-md flex items-center justify-center"
                 style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.14)",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.25)",
                   color: "#fff",
                 }}
                 aria-label="Open menu"
               >
-                <Menu className="w-4 h-4" strokeWidth={1.75} />
+                <Menu className="w-5 h-5" strokeWidth={2} />
               </button>
             </div>
           </div>
@@ -255,10 +332,11 @@ export function Header() {
               <Link
                 href="/bookings"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center gap-2 h-12 py-4 rounded-md text-[14px] font-semibold text-white"
-                style={{ background: "var(--accent)" }}
+                className="btn-glow-border inline-flex items-center justify-center gap-2 h-12 py-4 rounded-md text-[14px] font-semibold text-white"
               >
-                Reserve a Tour <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
+                <span className="inline-flex items-center gap-2">
+                  Book Now <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
+                </span>
               </Link>
             </div>
           </motion.div>

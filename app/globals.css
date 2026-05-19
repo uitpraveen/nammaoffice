@@ -589,6 +589,19 @@
     100% { background-position: 160% 0; }
   }
 
+  /* Primary CTA — flat brick pill. No gradient, no sheen, no glow.
+     Solid #B8553A fill, white text, subtle hover-brighten only. */
+  .btn-glow-border {
+    background: #B8553A;
+    transition: background-color 160ms ease;
+  }
+  .btn-glow-border:hover {
+    background: #C76145;
+  }
+  .btn-glow-border:active {
+    background: #8E3F29;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .kenburns, .marquee-track, .pulse-dot::before { animation: none !important; }
     .nav-neon-border::after { animation: none !important; opacity: 0.4; background-position: 50% 0; }
