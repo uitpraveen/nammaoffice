@@ -120,6 +120,7 @@ export function SmoothScroll() {
     const SECTION_TO_HASH: Record<string, string> = {
       hero: "",
       about: "#about",
+      centres: "#centres",
       amenities: "#amenities",
     };
 

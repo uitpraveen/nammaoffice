@@ -46,34 +46,49 @@ const cityLabel: Record<string, string> = {
   hosur: "Hosur",
 };
 
-export function LocationsShowcase() {
+interface LocationsShowcaseProps {
+  /** Hide the "View all centres" affordance — useful when the bento is
+   * itself the /locations page and the link would loop back. */
+  hideViewAll?: boolean;
+  /** Override the eyebrow text above the headline. */
+  eyebrow?: string;
+}
+
+export function LocationsShowcase({
+  hideViewAll = false,
+  eyebrow = "Centres",
+}: LocationsShowcaseProps = {}) {
+  const totalCities = new Set(locations.map((l) => l.city)).size;
   return (
     <section id="centres" className="bg-canvas-alt-grid py-24 md:py-32">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
           <div>
             <motion.p {...fadeUp} className="eyebrow mb-6">
-              Centres
+              {eyebrow}
             </motion.p>
             <motion.h2
               {...fadeUp}
               className="display text-[40px] md:text-[64px] max-w-[18ch]"
               style={{ color: "var(--ink)" }}
             >
-              Ten centres. Five cities.{" "}
+              {locations.length === 10 ? "Ten" : locations.length} centres.{" "}
+              {totalCities === 5 ? "Five" : totalCities} cities.{" "}
               <span className="display-italic">One ecosystem.</span>
             </motion.h2>
           </div>
-          <motion.div {...fadeUp}>
-            <Link
-              href="/locations"
-              className="inline-flex items-center gap-1.5 text-[14px] font-medium border-b pb-0.5"
-              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-            >
-              View all centres{" "}
-              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
-            </Link>
-          </motion.div>
+          {!hideViewAll && (
+            <motion.div {...fadeUp}>
+              <Link
+                href="/locations"
+                className="inline-flex items-center gap-1.5 text-[14px] font-medium border-b pb-0.5"
+                style={{ borderColor: "var(--border)", color: "var(--ink)" }}
+              >
+                View all centres{" "}
+                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
+              </Link>
+            </motion.div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
