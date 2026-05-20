@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import { BRAND } from "@/lib/constants";
+import { cities, locations } from "@/lib/data/locations";
 
 /**
  * Mid-page dark accent strip — a single dark moment that breaks up the
@@ -55,15 +57,24 @@ export function StatsBand() {
               <span className="display-italic">fastest-growing</span> cities.
             </h2>
             <p className="mt-5 text-[15px] text-white/65 leading-relaxed max-w-md">
-              Ten centres across five cities — Salem, Trichy, Tirupur, Erode, and Hosur. Hundreds of members building everything from textile exports to SaaS startups.
+              {locations.length} centres across {cities.length} cities — {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}. Hundreds of members building everything from textile exports to SaaS startups.
             </p>
-            <Link
-              href="/about"
-              className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[var(--color-gold-300)] hover:text-[var(--color-gold)] transition-colors"
-            >
-              About NammaOffice
-              <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
-            </Link>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[var(--color-gold-300)] hover:text-[var(--color-gold)] transition-colors"
+              >
+                About NammaOffice
+                <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+              </Link>
+              <Link
+                href="/contact?intent=managed-office"
+                className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-white/85 hover:text-white transition-colors"
+              >
+                Managed offices &amp; BOT
+                <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+              </Link>
+            </div>
           </motion.div>
 
           <motion.div
@@ -73,10 +84,16 @@ export function StatsBand() {
             transition={{ staggerChildren: 0.06, delayChildren: 0.15 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3"
           >
-            <Stat label="Centres" value="10" />
-            <Stat label="Cities" value="5" />
+            <Stat label="Centres" value={String(locations.length)} />
+            <Stat label="Cities" value={String(cities.length)} />
             <Stat label="Members" value="500+" />
-            <Stat label="Rating" value="4.9" suffix="/5" />
+            <Stat
+              label="Rating"
+              value="4.9"
+              suffix="/5"
+              href={BRAND.googleReviewsUrl}
+              hint="Google reviews"
+            />
           </motion.div>
         </div>
       </div>
@@ -88,26 +105,17 @@ function Stat({
   label,
   value,
   suffix,
+  href,
+  hint,
 }: {
   label: string;
   value: string;
   suffix?: string;
+  href?: string;
+  hint?: string;
 }) {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 22, scale: 0.96 },
-        visible: { opacity: 1, y: 0, scale: 1 },
-      }}
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(184,85,58,0.6),0_0_24px_rgba(184,85,58,0.30)]"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
-        border: "1px solid rgba(255,255,255,0.10)",
-        backdropFilter: "blur(12px)",
-      }}
-    >
+  const body = (
+    <>
       <p className="font-display text-3xl md:text-4xl text-white tabular-nums leading-none">
         {value}
         {suffix && <span className="text-[var(--color-gold-300)] text-2xl">{suffix}</span>}
@@ -115,6 +123,44 @@ function Stat({
       <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
         {label}
       </p>
+      {hint && (
+        <p className="mt-1 text-[10.5px] text-white/40">{hint}</p>
+      )}
+    </>
+  );
+
+  const cardStyle: React.CSSProperties = {
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+    border: "1px solid rgba(255,255,255,0.10)",
+    backdropFilter: "blur(12px)",
+  };
+  const cardClass =
+    "relative rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(184,85,58,0.6),0_0_24px_rgba(184,85,58,0.30)]";
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 22, scale: 0.96 },
+        visible: { opacity: 1, y: 0, scale: 1 },
+      }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cardClass + " block"}
+          style={cardStyle}
+        >
+          {body}
+        </a>
+      ) : (
+        <div className={cardClass} style={cardStyle}>
+          {body}
+        </div>
+      )}
     </motion.div>
   );
 }

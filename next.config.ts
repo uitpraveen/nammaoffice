@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       // Old book-tour collapsed into the unified bookings flow
       { source: "/book-tour", destination: "/bookings", permanent: true },
 
+      // Anchor-only sections — direct URL hits should land on the anchor.
+      { source: "/amenities", destination: "/#amenities", permanent: false },
+      { source: "/about-us", destination: "/#about", permanent: false },
+
       // Old marketing pages removed in the strict-parity revamp.
       // Redirect to the closest equivalent rather than 404 to preserve any
       // external SEO juice or live links the client may have shared.

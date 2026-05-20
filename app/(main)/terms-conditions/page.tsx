@@ -18,7 +18,7 @@ These terms apply to all visitors, members, and others who access or use our ser
   {
     id: "services",
     title: "Services",
-    content: `NammaOffice provides coworking spaces, private offices, meeting room facilities, virtual office services, and related business services across our centres in Salem, Trichy, and Tirupur.
+    content: `NammaOffice provides coworking spaces, private offices, meeting room facilities, virtual office services, and related business services across our centres in Salem, Trichy, Tirupur, Erode and Hosur.
 
 Access to specific services depends on your membership plan. We reserve the right to modify, suspend, or discontinue any service at any time with reasonable notice to members. Service availability may vary by location.`,
   },

@@ -359,10 +359,21 @@ export function VendorForm() {
           accept=".pdf,.jpg,.jpeg,.png"
           maxSizeMB={10}
           required
+          helperText="Used only for vendor payouts. Transmitted over TLS, stored encrypted, and accessed only by NammaOffice finance. See our privacy policy for retention details."
           value={bankPassbook}
           onChange={setBankPassbook}
           error={errors.bankPassbook}
         />
+        <p className="text-xs text-[var(--color-ink-secondary)] -mt-2">
+          By uploading you accept our{" "}
+          <a
+            href="/privacy-policy"
+            className="underline text-[var(--color-gold-deep)] hover:text-[var(--color-gold)]"
+          >
+            privacy policy
+          </a>
+          . Your banking details are never shared with third parties.
+        </p>
       </FormSection>
 
       {/* Section: Other */}

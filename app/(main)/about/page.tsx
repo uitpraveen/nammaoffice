@@ -3,15 +3,29 @@ import Link from "next/link";
 import { ArrowRight, Compass, Heart, Telescope } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 import { Reveal } from "@/components/ui/Reveal";
+import { cities, locations } from "@/lib/data/locations";
+
+// Pre-computed counts so JSX stays terse and metadata sees the same source of truth.
+const totalCentres = locations.length;
+const totalCities = cities.length;
+const cityListAnd = cities
+  .map((c) => c.name)
+  .join(", ")
+  .replace(/, ([^,]*)$/, " and $1");
+const centreBreakdown = cities
+  .map((c) => {
+    const n = locations.filter((l) => l.city === c.slug).length;
+    return `${n} in ${c.name}`;
+  })
+  .join(", ");
 
 export const metadata: Metadata = {
   title: "About NammaOffice — Our Story & Mission",
-  description:
-    "How NammaOffice grew from a single Salem centre to 8 premium workspaces across Tamil Nadu — built for tier-2 entrepreneurs, freelancers, and growing teams.",
+  description: `How NammaOffice grew from a single Salem centre to ${totalCentres} premium workspaces across Tamil Nadu — built for tier-2 entrepreneurs, freelancers, and growing teams.`,
   keywords: ["about NammaOffice", "NammaOffice history", "coworking Tamil Nadu story"],
   openGraph: {
     title: "About NammaOffice — Our Story & Mission",
-    description: "From a single Brindavan Road centre to 8 locations across Tamil Nadu.",
+    description: `From a single Brindavan Road centre to ${totalCentres} locations across Tamil Nadu.`,
   },
 };
 
@@ -42,17 +56,17 @@ export default function AboutPage() {
       <HeroBanner
         eyebrow="Our story"
         title="Born in Salem. Built for Tamil Nadu."
-        subtitle="NammaOffice is more than a coworking space — it's a community of builders, freelancers, and growing businesses across Salem, Trichy, and Tirupur."
+        subtitle={`NammaOffice is more than a coworking space — it's a community of builders, freelancers, and growing businesses across ${cityListAnd}.`}
       />
 
       {/* Story */}
       <section className="content-width py-16 md:py-24">
         <Reveal className="max-w-3xl mx-auto space-y-6 text-[15.5px] text-[var(--color-ink-secondary)] leading-relaxed">
           <p>
-            NammaOffice began with a simple observation: the entrepreneurs and professionals of Salem, Trichy, and Tirupur were as ambitious as their counterparts in Chennai or Bengaluru — but lacked the infrastructure to match. Premium coworking was a metropolitan luxury. We set out to change that.
+            NammaOffice began with a simple observation: the entrepreneurs and professionals of {cityListAnd} were as ambitious as their counterparts in Chennai or Bengaluru — but lacked the infrastructure to match. Premium coworking was a metropolitan luxury. We set out to change that.
           </p>
           <p>
-            Our first centre opened on Brindavan Road, in the Fairlands area of Salem, with 50 seats and a vision. The response was overwhelming. Within months, we had a waiting list. Within a year, we were expanding. Today, NammaOffice operates <strong className="text-[var(--color-navy)]">8 centres</strong> — 6 in Salem, 1 in Trichy, and 1 in Tirupur — serving members ranging from solo freelancers to 50-person teams.
+            Our first centre opened on Brindavan Road, in the Fairlands area of Salem, with 50 seats and a vision. The response was overwhelming. Within months, we had a waiting list. Within a year, we were expanding. Today, NammaOffice operates <strong className="text-[var(--color-navy)]">{totalCentres} centres</strong> — {centreBreakdown} — serving members ranging from solo freelancers to 50-person teams.
           </p>
           <p>
             Our philosophy has never changed: build spaces professionals are proud to work from, foster communities that support each other&apos;s growth, and keep quality high while keeping costs predictable. Every NammaOffice centre is designed with the same commitment to ergonomics, connectivity, and community that made our first centre a success.
@@ -95,8 +109,8 @@ export default function AboutPage() {
       {/* Quick stats */}
       <section className="content-width py-14 md:py-20">
         <Reveal className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <Stat number="8" label="Centres" />
-          <Stat number="3" label="Cities" />
+          <Stat number={String(totalCentres)} label="Centres" />
+          <Stat number={String(totalCities)} label="Cities" />
           <Stat number="500+" label="Members" />
           <Stat number="4.9" label="Rating" />
         </Reveal>

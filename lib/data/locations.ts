@@ -23,12 +23,12 @@ export const cities: City[] = [
     description:
       "Tiruchirappalli (Trichy) is a major educational and industrial hub in Tamil Nadu. With strong connectivity, a growing startup ecosystem, and proximity to top engineering colleges, Trichy offers immense opportunity for coworking and managed office solutions.",
     seoContent:
-      "Looking for coworking space in Trichy? NammaOffice TIDEL NEO is Trichy's premium coworking destination, offering private cabins, open desks, meeting halls, and managed offices in the heart of the city. Flexible plans for individuals and teams.",
+      "Looking for coworking space in Trichy? NammaOffice Asha Grand on Ramanathapuram Road, Gundur is Trichy's premium coworking destination — private cabins, open desks, meeting halls, and managed offices well-placed for businesses across the city's southern corridor. Flexible plans for individuals and teams.",
     image: wix.g,
     centreCount: 1,
-    seoTitle: "Coworking Space in Trichy | NammaOffice — TIDEL NEO",
+    seoTitle: "Coworking Space in Trichy | NammaOffice — Asha Grand",
     seoDescription:
-      "Premium coworking space in Trichy at TIDEL NEO. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Trichy today.",
+      "Premium coworking space in Trichy at Asha Grand, Ramanathapuram Road, Gundur. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Trichy today.",
   },
   {
     slug: "tirupur",
@@ -432,17 +432,17 @@ export const locations: Location[] = [
       "NammaOffice IPOD — 1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem. Premium coworking inside a vibrant mall. Book today.",
   },
   {
-    slug: "tidel-neo",
-    name: "TIDEL NEO",
+    slug: "asha-grand",
+    name: "Asha Grand",
     city: "trichy",
     address:
-      "TIDEL NEO, 2nd Floor, 424/4, Palaniyappa Nagar, Rakkiyapalayam Road, Thirumuruganpoondi, Trichy — 641 652",
+      "TS No 13, 1, Ramanathapuram Road, Thiruvalarchi Patti, Gundur, Tiruchirappalli, Tamil Nadu — 620 007",
     phone: "+91 9092109213",
     email: "trichy@nammaoffice.com",
-    coordinates: { lat: 11.1085, lng: 77.3411 },
+    coordinates: { lat: 10.7397, lng: 78.7553 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "NammaOffice TIDEL NEO Trichy is the city's premium technology-park workspace, serving the growing community of entrepreneurs, IT professionals, and businesses across central Tamil Nadu. World-class amenities inside a government-backed tech-park ecosystem.",
+      "NammaOffice Asha Grand is Trichy's flagship coworking address on Ramanathapuram Road, Gundur — well-placed for businesses across the city's southern corridor and for teams travelling between Trichy, Pudukkottai and Madurai. Premium private cabins, open desks, meeting halls and managed offices, with the airport and railway junction both within easy reach.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -478,20 +478,21 @@ export const locations: Location[] = [
       wix.discussion,
     ],
     nearbyLandmarks: [
-      "Palaniyappa Nagar",
-      "Rakkiyapalayam Road",
-      "Trichy Junction Railway Station",
       "Trichy International Airport",
+      "Trichy Junction Railway Station",
+      "Rockfort Temple",
+      "BHEL Township",
+      "Anna University Regional Campus",
     ],
     nearbyFacilities: [
-      { icon: "💻", label: "TIDEL tech park ecosystem" },
-      { icon: "🏦", label: "Banking facilities within the campus" },
-      { icon: "🍽️", label: "Food court within the campus" },
-      { icon: "🏨", label: "Business hotels nearby" },
+      { icon: "✈️", label: "Trichy International Airport ~5 km" },
+      { icon: "🚆", label: "Trichy Junction ~6 km" },
+      { icon: "🍽️", label: "Restaurants and hotels on Ramanathapuram Road" },
+      { icon: "🏦", label: "Banks and ATMs nearby" },
     ],
-    seoTitle: "Coworking Space at TIDEL NEO Trichy | NammaOffice",
+    seoTitle: "Coworking Space at Asha Grand Trichy | NammaOffice",
     seoDescription:
-      "NammaOffice TIDEL NEO Trichy — premium tech-park coworking. Private cabins, open desks, meeting halls, managed offices. Book today.",
+      "NammaOffice Asha Grand Trichy — premium coworking on Ramanathapuram Road, Gundur. Private cabins, open desks, meeting halls, managed offices. Book today.",
   },
   {
     slug: "tidel-neo",

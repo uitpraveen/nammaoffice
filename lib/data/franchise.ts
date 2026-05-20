@@ -81,9 +81,9 @@ export const franchiseInvestment: FranchiseInvestment = {
   minSize: 2000,
   maxSize: 20000,
   unit: "sq ft",
-  agreementTerm: "5+5 years",
-  projectedROI: "40%",
-  paybackPeriod: "2.5 years",
+  agreementTerm: "Long-term agreement",
+  projectedROI: "Shared in discovery call",
+  paybackPeriod: "Shared in discovery call",
   investmentRange: "Contact us for a personalised investment estimate",
 };
 

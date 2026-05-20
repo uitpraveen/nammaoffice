@@ -2,7 +2,7 @@ export const BRAND = {
   name: "NammaOffice",
   tagline: "Your Workspace, Your City, Your Community",
   description:
-    "Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur.",
+    "Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, Tirupur, Erode and Hosur.",
   phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "+91 9092109213",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919092109213",
   email: "info@nammaoffice.com",
@@ -12,6 +12,11 @@ export const BRAND = {
     facebook: "https://facebook.com/nammaoffice",
     youtube: "https://youtube.com/@nammaoffice",
   },
+  // TODO: swap with the canonical Google Business reviews URL once
+  // confirmed (e.g. https://g.page/r/<id>/review). The search fallback
+  // lands every visitor on the GMB knowledge panel for now.
+  googleReviewsUrl:
+    "https://www.google.com/search?q=NammaOffice+coworking+reviews",
 } as const;
 
 export const COLORS = {

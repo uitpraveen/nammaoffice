@@ -5,10 +5,22 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 import { cities, locations } from "@/lib/data/locations";
 
+const totalCentres = locations.length;
+const totalCities = cities.length;
+const cityListAnd = cities
+  .map((c) => c.name)
+  .join(", ")
+  .replace(/, ([^,]*)$/, " and $1");
+const centreBreakdown = cities
+  .map((c) => {
+    const n = locations.filter((l) => l.city === c.slug).length;
+    return `${c.name} (${n})`;
+  })
+  .join(", ");
+
 export const metadata: Metadata = {
-  title: "All Locations — 8 Centres Across Salem, Trichy & Tirupur",
-  description:
-    "NammaOffice has 8 centres across 3 cities — Salem (6), Trichy (1), and Tirupur (1). Find your nearest premium coworking space.",
+  title: `All Locations — ${totalCentres} Centres Across ${cityListAnd}`,
+  description: `NammaOffice has ${totalCentres} centres across ${totalCities} cities — ${centreBreakdown}. Find your nearest premium coworking space.`,
 };
 
 export default function LocationsPage() {
@@ -16,8 +28,8 @@ export default function LocationsPage() {
     <>
       <HeroBanner
         eyebrow="Our Centres"
-        title="8 centres. 3 cities."
-        subtitle="Find the NammaOffice nearest to you. Premium workspaces across Salem, Trichy, and Tirupur."
+        title={`${totalCentres} centres. ${totalCities} cities.`}
+        subtitle={`Find the NammaOffice nearest to you. Premium workspaces across ${cityListAnd}.`}
       />
 
       {cities.map((city) => {

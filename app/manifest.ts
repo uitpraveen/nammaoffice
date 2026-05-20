@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "NammaOffice — Premium Coworking Spaces",
     short_name: "NammaOffice",
-    description: "Premium coworking spaces in Salem, Trichy & Tirupur",
+    description: "Premium coworking spaces in Salem, Trichy, Tirupur, Erode & Hosur",
     start_url: "/",
     display: "standalone",
     background_color: "#FEF6E6",

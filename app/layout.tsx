@@ -38,11 +38,11 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nammaoffice.com"),
   title: {
-    default: "NammaOffice — Premium Coworking Spaces in Salem, Trichy & Tirupur",
+    default: "NammaOffice — Premium Coworking Spaces in Salem, Trichy, Tirupur, Erode & Hosur",
     template: "%s | NammaOffice",
   },
   description:
-    "Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, and Tirupur. Book a tour today.",
+    "Premium coworking spaces, private cabins, managed offices, and meeting halls across Salem, Trichy, Tirupur, Erode and Hosur. Book a tour today.",
   openGraph: {
     type: "website",
     locale: "en_IN",

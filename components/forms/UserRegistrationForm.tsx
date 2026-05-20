@@ -205,10 +205,20 @@ export function UserRegistrationForm() {
         name="aadhaar"
         accept=".jpg,.jpeg,.png,.pdf"
         maxSizeMB={15}
-        helperText="Upload a scan or photo. Used only for membership KYC."
+        helperText="Upload a scan or photo. Used only for membership KYC. Transmitted over TLS, stored encrypted, and accessed only by the NammaOffice onboarding team. See our privacy policy for retention details."
         value={aadhaar}
         onChange={setAadhaar}
       />
+      <p className="text-xs text-[var(--color-ink-secondary)] -mt-3">
+        By uploading you accept our{" "}
+        <a
+          href="/privacy-policy"
+          className="underline text-[var(--color-gold-deep)] hover:text-[var(--color-gold)]"
+        >
+          privacy policy
+        </a>
+        . We never share your Aadhaar with third parties.
+      </p>
 
       <Textarea
         label="Any additional facilities required"

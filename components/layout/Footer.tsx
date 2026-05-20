@@ -13,6 +13,8 @@ const formsLinks = [
 ];
 
 const serviceLinks = [
+  { label: "Managed Offices & BOT", href: "/contact?intent=managed-office" },
+  { label: "Meeting Halls & Gate Pass", href: "/bookings" },
   { label: "Gate Pass — Salem TIDEL", href: "/gate-pass/tidel-neo-salem" },
   { label: "Gate Pass — Tirupur TIDEL", href: "/gate-pass/tidel-neo-tirupur" },
   { label: "Franchise", href: "/franchise" },
@@ -118,7 +120,7 @@ export function Footer() {
             />
           </Link>
           <p className="text-[14px] text-white/60 leading-relaxed max-w-xs">
-            Premium coworking spaces across Salem, Trichy, and Tirupur.
+            Premium coworking spaces across {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}.
           </p>
 
           {/* Contact blocks — labelled, larger so phone & email read as
@@ -205,7 +207,7 @@ export function Footer() {
             ))}
             <span className="hidden md:inline-flex items-center gap-1.5 text-white/45">
               <MapPin className="w-3 h-3" strokeWidth={2} />
-              8 centres · 3 cities
+              {locations.length} centres · {cities.length} cities
             </span>
           </div>
         </div>

@@ -31,10 +31,18 @@ const DURATIONS = [
   { value: "full-day", label: "Full day (8 hrs)" },
 ];
 
-const VENUE_OPTIONS = locations.map((l) => ({
+const ALL_VENUE_OPTIONS = locations.map((l) => ({
   value: `${l.city}/${l.slug}`,
   label: `${l.name} — ${l.city.charAt(0).toUpperCase() + l.city.slice(1)}`,
 }));
+
+// Gate-pass is a TIDEL-park-only service. The Wix legacy site and the
+// physical workflow both restrict it to TIDEL NEO Salem + TIDEL NEO
+// Tirupur, so we mirror that constraint instead of letting customers
+// pick a non-TIDEL centre and getting confused at reception.
+const GATE_PASS_VENUE_OPTIONS = ALL_VENUE_OPTIONS.filter((o) =>
+  o.value.endsWith("/tidel-neo")
+);
 
 interface FormState {
   requestType: "booking" | "gate-pass";
@@ -56,11 +64,18 @@ interface FormState {
 interface BookingsFormProps {
   defaultRequestType?: "booking" | "gate-pass";
   defaultVenue?: string;
+  /**
+   * When true (used by city-specific gate-pass routes), the Venue
+   * dropdown is locked to defaultVenue so customers can't accidentally
+   * pick the wrong centre and end up at the wrong reception desk.
+   */
+  lockVenue?: boolean;
 }
 
 export function BookingsForm({
   defaultRequestType = "booking",
   defaultVenue = "",
+  lockVenue = false,
 }: BookingsFormProps) {
   const [form, setForm] = useState<FormState>({
     requestType: defaultRequestType,
@@ -188,11 +203,27 @@ export function BookingsForm({
         <Select
           label="Venue"
           required
-          options={VENUE_OPTIONS}
-          placeholder="Select a centre"
+          options={
+            form.requestType === "gate-pass"
+              ? GATE_PASS_VENUE_OPTIONS
+              : ALL_VENUE_OPTIONS
+          }
+          placeholder={
+            form.requestType === "gate-pass"
+              ? "Select a TIDEL park"
+              : "Select a centre"
+          }
           value={form.venue}
           onChange={(e) => update("venue", e.target.value)}
           error={errors.venue}
+          disabled={lockVenue}
+          hint={
+            lockVenue
+              ? "Pre-selected for this centre — submit a request from another centre's page to change venue."
+              : form.requestType === "gate-pass"
+                ? "Gate pass is available only at TIDEL NEO Salem and TIDEL NEO Tirupur."
+                : undefined
+          }
         />
       </div>
 
@@ -272,13 +303,16 @@ export function BookingsForm({
         onChange={(e) => update("guestNames", e.target.value)}
       />
 
-      <Select
-        label="Meeting Duration"
-        options={DURATIONS}
-        placeholder="Select duration"
-        value={form.duration}
-        onChange={(e) => update("duration", e.target.value)}
-      />
+      {/* Meeting Duration is a meeting-hall concept; hide it on gate-pass requests. */}
+      {form.requestType === "booking" && (
+        <Select
+          label="Meeting Duration"
+          options={DURATIONS}
+          placeholder="Select duration"
+          value={form.duration}
+          onChange={(e) => update("duration", e.target.value)}
+        />
+      )}
 
       <div className="flex flex-col gap-1">
         <Checkbox

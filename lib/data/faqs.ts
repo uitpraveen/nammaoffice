@@ -93,7 +93,7 @@ export const faqs: FAQItem[] = [
   {
     question: "Does NammaOffice offer franchise opportunities?",
     answer:
-      "Yes! We offer a comprehensive franchise programme for entrepreneurs who want to own and operate a NammaOffice centre. Our franchise model comes with proven systems, brand support, and operational guidance. Centres range from 2,000 to 20,000 sq ft with a 5+5 year agreement and projected ROI of 40% with payback in 2.5 years.",
+      "Yes! We offer a comprehensive franchise programme for entrepreneurs who want to own and operate a NammaOffice centre. Our franchise model comes with proven systems, brand support, and operational guidance. Centres range from 2,000 to 20,000 sq ft with a long-term agreement. Detailed unit economics and projected returns are shared confidentially during your discovery call.",
     category: "franchise",
   },
   {

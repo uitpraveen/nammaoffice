@@ -1,6 +1,7 @@
 "use client";
 
 import { BRAND } from "@/lib/constants";
+import { cities, locations } from "@/lib/data/locations";
 import { navigation } from "@/lib/data/navigation";
 import { cn, formatPhone } from "@/lib/utils";
 import { useActiveHref } from "@/lib/hooks/use-active-href";
@@ -55,6 +56,32 @@ function LinkedinIcon({ className }: { className?: string }) {
       <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-6a6 6 0 0 1 6-6z" />
       <rect x="2" y="9" width="4" height="11" rx="0.5" />
       <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.17 8.44 9.93v-7.02H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.09 22 12.07z" />
+    </svg>
+  );
+}
+
+function YoutubeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14c.5-1.88.5-5.81.5-5.81s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
     </svg>
   );
 }
@@ -146,7 +173,13 @@ export function Header() {
               <Clock className="w-3 h-3" strokeWidth={1.75} />
               <span>Mon–Sat · 8 AM – 9 PM</span>
             </div>
-            <div className="hidden md:flex items-center gap-1.5 px-4">
+            <a
+              href={BRAND.googleReviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="See our 4.9 Google reviews"
+              className="hidden md:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+            >
               <Star
                 className="w-3 h-3"
                 strokeWidth={0}
@@ -156,12 +189,15 @@ export function Header() {
                 <span className="text-white font-semibold">4.9</span>
                 <span className="opacity-60"> · 500+ Members</span>
               </span>
-            </div>
+            </a>
             <div className="hidden lg:flex items-center gap-1.5 px-4">
               <MapPin className="w-3 h-3" strokeWidth={1.75} />
-              <span>10 centres · 5 cities</span>
+              <span>{locations.length} centres · {cities.length} cities</span>
             </div>
-            <div className="hidden xl:flex items-center gap-1.5 px-4">
+            <Link
+              href="/contact?intent=tour"
+              className="hidden xl:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+            >
               <span
                 className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10.5px] uppercase tracking-[0.12em] font-semibold"
                 style={{
@@ -173,7 +209,7 @@ export function Header() {
                 New
               </span>
               <span>Book a free centre tour · 30 mins</span>
-            </div>
+            </Link>
           </div>
           <div className="flex items-center divide-x divide-white/10">
             <a
@@ -208,6 +244,24 @@ export function Header() {
                 className="hover:text-white transition-colors"
               >
                 <LinkedinIcon className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={BRAND.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="hidden sm:inline-flex hover:text-white transition-colors"
+              >
+                <FacebookIcon className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={BRAND.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="hidden sm:inline-flex hover:text-white transition-colors"
+              >
+                <YoutubeIcon className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -261,7 +315,7 @@ export function Header() {
             {/* Right cluster */}
             <div className="flex items-center gap-2 shrink-0">
               <Link
-                href="/bookings"
+                href="/contact?intent=tour"
                 className="btn-glow-border hidden md:inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold text-white rounded-md"
               >
                 <span className="inline-flex items-center gap-1.5">
@@ -401,6 +455,34 @@ export function Header() {
                   >
                     <LinkedinIcon className="w-4 h-4" />
                   </a>
+                  <a
+                    href={BRAND.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="w-9 h-9 rounded-md flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    <FacebookIcon className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={BRAND.social.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    className="w-9 h-9 rounded-md flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    <YoutubeIcon className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -414,7 +496,7 @@ export function Header() {
               }}
             >
               <Link
-                href="/bookings"
+                href="/contact?intent=tour"
                 className="btn-glow-border inline-flex w-full items-center justify-center gap-2 h-12 rounded-md text-[14px] font-semibold text-white"
               >
                 <span className="inline-flex items-center gap-2">

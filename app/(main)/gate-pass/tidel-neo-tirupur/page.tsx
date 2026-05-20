@@ -16,7 +16,7 @@ export default function TirupurTidelGatePassPage() {
       subtitle="Request a visitor pass for the Tirupur TIDEL park."
       intro="TIDEL NEO Tirupur requires a visitor pass for entry. Submit the request below and our centre team will arrange a pass and notify the host company. Allow at least 30 minutes during peak hours."
     >
-      <BookingsForm defaultRequestType="gate-pass" defaultVenue="tirupur/tidel-neo" />
+      <BookingsForm defaultRequestType="gate-pass" defaultVenue="tirupur/tidel-neo" lockVenue />
     </FormPageShell>
   );
 }

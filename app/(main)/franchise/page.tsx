@@ -917,7 +917,7 @@ function CTA() {
                     Talk to our team
                   </span>
                   <span className="mono text-[12.5px] opacity-80">
-                    +91 9092 109 213
+                    +91 9092109213
                   </span>
                 </a>
                 <a

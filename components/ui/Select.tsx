@@ -11,6 +11,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectOption[];
   placeholder?: string;
   error?: string;
+  hint?: string;
   className?: string;
 }
 
@@ -19,6 +20,7 @@ export function Select({
   options,
   placeholder,
   error,
+  hint,
   className,
   id,
   ...props
@@ -39,6 +41,7 @@ export function Select({
           "rounded-brand border border-warm-border bg-white px-4 py-2.5 text-base font-sans text-warm-charcoal",
           "focus:outline-none focus:ring-2 focus:ring-terracotta focus:border-terracotta",
           "transition-colors duration-200 cursor-pointer",
+          props.disabled && "opacity-70 cursor-not-allowed bg-warm-cream/40",
           error && "border-red-500 focus:ring-red-500 focus:border-red-500",
           className
         )}
@@ -55,6 +58,9 @@ export function Select({
           </option>
         ))}
       </select>
+      {hint && !error && (
+        <p className="text-xs text-warm-charcoal/60 font-sans">{hint}</p>
+      )}
       {error && (
         <p className="text-sm text-red-500 font-sans">{error}</p>
       )}

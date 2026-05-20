@@ -314,7 +314,7 @@ export function HeroSection() {
                 <div className="relative w-20 h-16 rounded-md overflow-hidden flex-shrink-0">
                   <Image
                     src={SLIDES[(active + 1) % SLIDES.length].src}
-                    alt=""
+                    alt={SLIDES[(active + 1) % SLIDES.length].caption}
                     fill
                     sizes="80px"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -380,7 +380,7 @@ export function HeroSection() {
                     : "border-white/30 hover:border-white/60"
                 )}
               >
-                <Image src={s.src} alt="" fill sizes="96px" quality={50} className="object-cover" />
+                <Image src={s.src} alt={s.caption} fill sizes="96px" quality={50} className="object-cover" />
                 {isActive && (
                   <motion.span
                     key={`progress-${active}-${paused ? "p" : "r"}`}
