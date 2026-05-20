@@ -383,25 +383,71 @@ export function Header() {
 
             {/* Body */}
             <div className="flex-1 overflow-y-auto px-6 pt-7 pb-8">
-              <p
-                className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-              >
-                Navigation
-              </p>
-              <div
-                className="flex flex-col"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-              >
-                {navigation.map((item, i) => (
-                  <MobileMenuRow
-                    key={item.href}
-                    item={item}
-                    pathname={pathname}
-                    index={i}
-                  />
-                ))}
-              </div>
+              {(() => {
+                // Group nav into primary (frequent paths) and services
+                // (lower-frequency conversion paths) so the mobile menu
+                // reads as 5 + 3 instead of one 8-row stack. Pure presentation
+                // — desktop nav still iterates the same `navigation` array.
+                const primaryHrefs = new Set([
+                  "/",
+                  "/#about",
+                  "/locations",
+                  "/#amenities",
+                  "/contact",
+                ]);
+                const primary = navigation.filter((n) =>
+                  primaryHrefs.has(n.href)
+                );
+                const services = navigation.filter(
+                  (n) => !primaryHrefs.has(n.href)
+                );
+                return (
+                  <>
+                    <p
+                      className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2"
+                      style={{ color: "rgba(255,255,255,0.45)" }}
+                    >
+                      Navigation
+                    </p>
+                    <div
+                      className="flex flex-col"
+                      style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                    >
+                      {primary.map((item, i) => (
+                        <MobileMenuRow
+                          key={item.href}
+                          item={item}
+                          pathname={pathname}
+                          index={i}
+                        />
+                      ))}
+                    </div>
+                    {services.length > 0 && (
+                      <>
+                        <p
+                          className="text-[10.5px] font-bold uppercase tracking-[0.18em] mt-9 mb-2"
+                          style={{ color: "rgba(255,255,255,0.45)" }}
+                        >
+                          Services
+                        </p>
+                        <div
+                          className="flex flex-col"
+                          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                        >
+                          {services.map((item, i) => (
+                            <MobileMenuRow
+                              key={item.href}
+                              item={item}
+                              pathname={pathname}
+                              index={primary.length + i}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </>
+                );
+              })()}
 
               <p
                 className="text-[10.5px] font-bold uppercase tracking-[0.18em] mt-9 mb-3"

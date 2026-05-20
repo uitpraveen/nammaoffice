@@ -190,6 +190,39 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Spacer for the mobile sticky CTA bar so the last centre card is
+          not hidden behind it. */}
+      <div aria-hidden className="lg:hidden h-[80px]" />
+
+      {/* Mobile-only sticky action bar — Call + WhatsApp always reachable. */}
+      <div
+        className="fixed bottom-0 inset-x-0 z-40 lg:hidden px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.85rem)]"
+        style={{
+          background: "rgba(14,14,14,0.94)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <div className="grid grid-cols-2 gap-2.5 max-w-[640px] mx-auto">
+          <a
+            href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
+            className="inline-flex items-center justify-center gap-2 h-11 rounded-full bg-[var(--color-gold)] text-white text-[13.5px] font-semibold hover:bg-[var(--color-gold-deep)] transition-colors"
+          >
+            <Phone className="w-4 h-4" strokeWidth={2.25} />
+            Call us
+          </a>
+          <a
+            href={`https://wa.me/${BRAND.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 h-11 rounded-full bg-[#25D366] text-white text-[13.5px] font-semibold hover:bg-[#1ebe5a] transition-colors"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </div>
     </>
   );
 }

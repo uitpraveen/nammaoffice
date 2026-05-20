@@ -6,9 +6,19 @@ interface SelectOption {
   label: string;
 }
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectOptionGroup {
   label: string;
   options: SelectOption[];
+}
+
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  label: string;
+  /**
+   * Either a flat list of options or a list of grouped options. Groups
+   * render as native <optgroup>, which on iOS/Android shows the group
+   * label as a non-selectable separator — nicer than padding labels.
+   */
+  options: SelectOption[] | SelectOptionGroup[];
   placeholder?: string;
   error?: string;
   hint?: string;
@@ -52,11 +62,24 @@ export function Select({
             {placeholder}
           </option>
         )}
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
+        {options.map((entry) => {
+          if ("options" in entry) {
+            return (
+              <optgroup key={entry.label} label={entry.label}>
+                {entry.options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </optgroup>
+            );
+          }
+          return (
+            <option key={entry.value} value={entry.value}>
+              {entry.label}
+            </option>
+          );
+        })}
       </select>
       {hint && !error && (
         <p className="text-xs text-warm-charcoal/60 font-sans">{hint}</p>

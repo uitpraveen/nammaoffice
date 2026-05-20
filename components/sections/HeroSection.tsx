@@ -17,6 +17,15 @@ import {
 } from "lucide-react";
 import { HeroParticles } from "@/components/ui/HeroParticles";
 import { cn } from "@/lib/utils";
+import { cities, locations } from "@/lib/data/locations";
+
+// Pre-computed once at module load — same numbers the MobileCitySelector
+// renders under the hero. Saves a recompute on every paint.
+const citiesSelector = cities.map((c) => ({
+  slug: c.slug,
+  name: c.name,
+  centres: locations.filter((l) => l.city === c.slug).length,
+}));
 
 interface Slide {
   src: string;
@@ -101,6 +110,7 @@ export function HeroSection() {
   const slide = SLIDES[active];
 
   return (
+    <>
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--color-charcoal)]"
@@ -434,6 +444,46 @@ export function HeroSection() {
             className="h-1 rounded-full bg-white"
           />
         ))}
+      </div>
+    </section>
+    <MobileCitySelector />
+    </>
+  );
+}
+
+/**
+ * Mobile-only horizontally-scrollable city chip row, sitting directly
+ * under the hero. Lets visitors on small screens pick their city without
+ * scrolling past the hero or hunting in the menu. Hidden on lg+ — the
+ * desktop hero already has the "Explore centres" CTA on the right cluster.
+ */
+function MobileCitySelector() {
+  return (
+    <section
+      aria-label="Pick your city"
+      className="lg:hidden bg-[var(--color-bg)] border-b border-[var(--color-border)] py-3"
+    >
+      <div className="content-width">
+        <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[var(--color-ink-secondary)] mb-2">
+          Pick your city
+        </p>
+        <div
+          className="flex gap-2 overflow-x-auto pb-1"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {citiesSelector.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/locations/${c.slug}`}
+              className="shrink-0 inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full bg-white border border-[var(--color-border)] text-[13px] font-semibold text-[var(--color-navy)] hover:border-[var(--color-gold-300)] hover:text-[var(--color-gold-deep)] transition-colors"
+            >
+              {c.name}
+              <span className="text-[11px] font-normal text-[var(--color-ink-secondary)]">
+                · {c.centres}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

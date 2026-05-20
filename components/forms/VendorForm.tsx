@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { FileUpload } from "@/components/ui/FileUpload";
+import { FormSection } from "@/components/ui/FormSection";
 import { CheckCircle2 } from "lucide-react";
 
 const CATEGORIES = [
@@ -414,24 +415,3 @@ export function VendorForm() {
   );
 }
 
-function FormSection({
-  title,
-  description,
-  children,
-}: {
-  title: string;
-  description?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <fieldset className="space-y-4">
-      <div>
-        <h3 className="font-display text-xl text-[var(--color-navy)]">{title}</h3>
-        {description && (
-          <p className="text-[13px] text-[var(--color-ink-secondary)] mt-1">{description}</p>
-        )}
-      </div>
-      {children}
-    </fieldset>
-  );
-}

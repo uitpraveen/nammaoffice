@@ -3,7 +3,7 @@ import { cities, locations } from "@/lib/data/locations";
 import { formatPhone } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 
 const formsLinks = [
   { label: "Company Registration", href: "/registration/company" },
@@ -222,12 +222,43 @@ export function Footer() {
  * the centres list under it sits behind a subtle vertical rule so the
  * grouping reads at a glance.
  */
+/**
+ * Footer columns use a native <details>/<summary> accordion pattern so
+ * mobile readers can collapse long link clusters without any client JS.
+ * On md+ the columns are pinned open: pointer-events on the summary are
+ * disabled so a user can't accidentally collapse them, and the chevron
+ * is hidden. The bottom border under each summary on mobile gives the
+ * accordion a clean divided look.
+ */
+function FooterAccordion({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <details
+      open
+      className="group md:open border-b border-white/8 md:border-0 pb-2 md:pb-0"
+    >
+      <summary className="flex items-center justify-between py-3 md:py-0 md:mb-4 md:cursor-default list-none [&::-webkit-details-marker]:hidden md:pointer-events-none">
+        <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-300)]">
+          {title}
+        </h3>
+        <ChevronDown
+          className="md:hidden w-4 h-4 text-white/55 transition-transform duration-200 group-open:rotate-180"
+          strokeWidth={2}
+        />
+      </summary>
+      <div className="pt-1 md:pt-0">{children}</div>
+    </details>
+  );
+}
+
 function FooterLocations() {
   return (
-    <div>
-      <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-300)] mb-4">
-        Locations
-      </h3>
+    <FooterAccordion title="Locations">
       <div className="flex flex-col gap-5">
         {cities.map((city) => {
           const centres = locations.filter((l) => l.city === city.slug);
@@ -260,7 +291,7 @@ function FooterLocations() {
           );
         })}
       </div>
-    </div>
+    </FooterAccordion>
   );
 }
 
@@ -272,10 +303,7 @@ function FooterColumn({
   links: { label: string; href: string; sub?: string }[];
 }) {
   return (
-    <div>
-      <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-300)] mb-4">
-        {title}
-      </h3>
+    <FooterAccordion title={title}>
       <ul className="space-y-2.5">
         {links.map((link) => (
           <li key={link.href + link.label}>
@@ -293,7 +321,7 @@ function FooterColumn({
           </li>
         ))}
       </ul>
-    </div>
+    </FooterAccordion>
   );
 }
 
