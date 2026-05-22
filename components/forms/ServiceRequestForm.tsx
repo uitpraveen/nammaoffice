@@ -275,10 +275,10 @@ export function ServiceRequestForm() {
           label="Issue Description"
           required
           rows={5}
+          placeholder="Steps to reproduce, when it started, anything that helps the centre team triage faster."
           value={form.description}
           onChange={(e) => update("description", e.target.value)}
           error={errors.description}
-          hint="Steps to reproduce, when it started, anything that helps the centre team triage faster."
         />
         <FileUpload
           label="Attachments (Optional)"
