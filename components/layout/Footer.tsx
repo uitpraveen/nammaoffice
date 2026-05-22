@@ -15,8 +15,7 @@ const formsLinks = [
 const serviceLinks = [
   { label: "Managed Offices & BOT", href: "/contact?intent=managed-office" },
   { label: "Meeting Halls & Gate Pass", href: "/bookings" },
-  { label: "Gate Pass — Salem TIDEL", href: "/gate-pass/tidel-neo-salem" },
-  { label: "Gate Pass — Tirupur TIDEL", href: "/gate-pass/tidel-neo-tirupur" },
+  { label: "Service Desk", href: "/service-request" },
   { label: "Franchise", href: "/franchise" },
   { label: "Amenities", href: "/#amenities" },
   { label: "About", href: "/#about" },
