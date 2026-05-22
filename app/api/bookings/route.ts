@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
-import { locations } from "@/lib/data/locations";
-import { submitToZohoForm } from "@/lib/zoho";
+import { submitToZohoFormJson, type ZohoJsonValue } from "@/lib/zoho";
+import {
+  getBookingRooms,
+  getGatePassZohoVenue,
+} from "@/lib/data/zoho-venues";
 
 export const runtime = "nodejs";
 
@@ -10,7 +13,11 @@ interface BookingPayload {
   bookingPersonName: string;
   bookingPersonContact: string;
   bookingPersonEmail: string;
+  /** `${city}/${slug}` — our internal centre identifier. */
   venue: string;
+  /** Room id from `BOOKING_ROOMS_BY_CENTRE[venue]`. Required for booking
+   *  mode, ignored for gate-pass (auto-mapped to the park's gate-pass venue). */
+  room?: string;
   companyToVisit?: string;
   purpose: string;
   numParticipants: string;
@@ -33,12 +40,51 @@ const REQUIRED: (keyof BookingPayload)[] = [
   "bookingDateTime",
 ];
 
-function venueLabel(venue: string): string {
-  const [city, slug] = venue.split("/");
-  const loc = locations.find((l) => l.city === city && l.slug === slug);
-  if (!loc) return venue;
-  const cityName = city.charAt(0).toUpperCase() + city.slice(1);
-  return `${loc.name} — ${cityName}`;
+/**
+ * Translate our (centre, room) selection to the exact Zoho `Dropdown2`
+ * value. Returns undefined if the combination isn't in the Zoho form yet
+ * — the caller rejects the submission with a clear error so we never
+ * fire-and-forget bad data into Zoho.
+ */
+function resolveZohoVenue(
+  requestType: "booking" | "gate-pass",
+  venue: string,
+  room: string | undefined,
+): string | undefined {
+  if (requestType === "gate-pass") return getGatePassZohoVenue(venue);
+  const rooms = getBookingRooms(venue);
+  if (!room) return undefined;
+  return rooms.find((r) => r.id === room)?.zohoValue;
+}
+
+/**
+ * Format a JS Date string into Zoho's dd-MMM-yyyy hh:mm AM/PM format,
+ * pinned to Asia/Kolkata so the dashboard column reads cleanly.
+ */
+function formatZohoDateTime(input: string): string {
+  try {
+    const d = new Date(input);
+    const datePart = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
+      .format(d)
+      .replace(/ /g, "-");
+    const timePart = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+      .format(d)
+      .toUpperCase()
+      .replace(/\s+/g, " ");
+    return `${datePart} ${timePart}`;
+  } catch {
+    return input;
+  }
 }
 
 export async function POST(request: Request) {
@@ -46,7 +92,6 @@ export async function POST(request: Request) {
     const body = (await request.json()) as BookingPayload;
 
     if (body.honeypot) {
-      // Bot — pretend success to not signal detection.
       return NextResponse.json({ success: true });
     }
 
@@ -67,41 +112,70 @@ export async function POST(request: Request) {
 
     const isGatePass = body.requestType === "gate-pass";
 
-    const formattedDateTime = (() => {
-      try {
-        return new Date(body.bookingDateTime).toLocaleString("en-IN", {
-          timeZone: "Asia/Kolkata",
-          dateStyle: "medium",
-          timeStyle: "short",
-        });
-      } catch {
-        return body.bookingDateTime;
-      }
-    })();
+    if (!isGatePass && !body.room) {
+      return NextResponse.json({ error: "Missing field: room" }, { status: 400 });
+    }
 
-    // Forward to Zoho Forms. Set ZOHO_FORM_URL_BOOKINGS and replace the
-    // placeholder keys below with the actual Zoho field IDs from the
-    // published Bookings/Gate-Pass form.
-    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_BOOKINGS, {
-      // TODO: replace each key below with the matching Zoho field name.
-      Radio: isGatePass ? "Gate Pass" : "Meeting Hall Booking",
-      Dropdown: venueLabel(body.venue),
-      SingleLine: body.companyToVisit,
+    const zohoVenue = resolveZohoVenue(body.requestType, body.venue, body.room);
+    if (!zohoVenue) {
+      return NextResponse.json(
+        {
+          error:
+            "Selected centre/room is not yet available for online booking. Please call +91 9092109213.",
+        },
+        { status: 400 },
+      );
+    }
+
+    const formattedDateTime = formatZohoDateTime(body.bookingDateTime);
+
+    // Build the JSON record. Field IDs were captured from the live
+    // NammaofficeBookings form. TermsConditions is sent as boolean true
+    // because the JSON endpoint expects a real bool for checkbox-style
+    // accept fields (the htmlRecords endpoint wanted "on", but that
+    // endpoint silently drops records — see lib/zoho.ts).
+    // Zoho's PhoneNumber field rejects any non-digit chars (Zoho error:
+    // "Enter only numbers"). Strip + and spaces.
+    const phoneDigits = body.bookingPersonContact.replace(/\D/g, "");
+
+    // Zoho marks MultiLine (Guest Names) as Required even though our UI
+    // treats it as optional. Fall back to a sensible placeholder so the
+    // record isn't rejected.
+    const guestNamesValue =
+      body.guestNames && body.guestNames.trim()
+        ? body.guestNames
+        : isGatePass
+          ? "(Single visitor)"
+          : "(Not provided)";
+
+    const record: Record<string, ZohoJsonValue> = {
+      Checkbox: [isGatePass ? "Gate Pass Request" : "Booking Request"],
+      SingleLine: body.companyName,
+      SingleLine1: body.bookingPersonName,
+      PhoneNumber: phoneDigits,
+      Email1: body.bookingPersonEmail,
+      Dropdown2: zohoVenue,
+      // Company to Visit only meaningful for gate-pass requests.
+      SingleLine2: isGatePass ? body.companyToVisit || "" : "",
+      SingleLine4: body.purpose,
+      SingleLine5: body.numParticipants,
+      MultiLine: guestNamesValue,
       DateTime: formattedDateTime,
-      SingleLine1: body.duration,
-      Number: body.numParticipants,
-      MultiLine: body.guestNames,
-      MultiLine1: body.purpose,
-      SingleLine2: body.companyName,
-      Name_First: body.bookingPersonName,
-      PhoneNumber_countrycodeval: body.bookingPersonContact,
-      Email: body.bookingPersonEmail,
-    });
+      // Duration is meeting-hall only; gate-pass mode hides this field
+      // and sends empty so Zoho doesn't store stale data.
+      Dropdown1: !isGatePass ? body.duration || "" : "",
+      TermsConditions: true,
+    };
+
+    const ok = await submitToZohoFormJson(
+      process.env.ZOHO_FORM_URL_BOOKINGS,
+      record,
+    );
 
     if (!ok) {
       return NextResponse.json(
         { error: "Submission could not be delivered" },
-        { status: 502 }
+        { status: 502 },
       );
     }
 

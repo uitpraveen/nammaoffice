@@ -10,10 +10,14 @@ import {
   TrendingUp,
   Users,
   Building2,
+  Calendar,
   GraduationCap,
   Headphones,
+  HandCoins,
+  LandPlot,
   Mail,
   Megaphone,
+  Ruler,
   ShieldCheck,
   Wrench,
   MapPin,
@@ -22,10 +26,12 @@ import {
   Plus,
   Quote,
   Sparkles,
+  Timer,
 } from "lucide-react";
 import { FranchiseForm } from "@/components/forms/FranchiseForm";
 import {
   franchiseBenefits,
+  franchiseInvestment,
   franchiseProcess,
   franchiseSupportPhases,
 } from "@/lib/data/franchise";
@@ -50,7 +56,9 @@ export default function FranchisePage() {
       <Hero />
       <StatsBand />
       <WhyPartner />
+      <WhoCanApply />
       <Inclusions />
+      <InvestmentTerms />
       <Process />
       <Support />
       <Testimonial />
@@ -509,6 +517,169 @@ function Inclusions() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── WHO CAN APPLY ───────────────────────── */
+function WhoCanApply() {
+  const profiles = [
+    {
+      icon: HandCoins,
+      title: "Entrepreneurs",
+      description:
+        "Operators with space and investment ready, looking to launch a premium coworking centre in their city.",
+    },
+    {
+      icon: LandPlot,
+      title: "Landowners",
+      description:
+        "Owners of underutilized commercial land or buildings at prime urban locations seeking productive returns.",
+    },
+    {
+      icon: Building2,
+      title: "Real-estate developers",
+      description:
+        "Developers wanting to add a flexible-workspace floor or wing to a new or existing commercial project.",
+    },
+  ];
+
+  return (
+    <section className="py-20 lg:py-24" style={{ background: "var(--canvas-alt)" }}>
+      <div className="content-width">
+        <div className="max-w-2xl mb-12">
+          <p className="eyebrow">Who should apply</p>
+          <h2
+            className="display mt-3 text-[34px] lg:text-[48px]"
+            style={{ color: "var(--ink)" }}
+          >
+            Built for three kinds of{" "}
+            <span className="display-italic">partners.</span>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {profiles.map(({ icon: Icon, title, description }, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              transition={{ delay: i * 0.08, duration: 0.6 }}
+              className="rounded-xl border hairline p-7"
+              style={{ background: "var(--card)", borderColor: "var(--border)" }}
+            >
+              <div
+                className="w-11 h-11 rounded-lg flex items-center justify-center mb-5"
+                style={{ background: "var(--accent-bg)", color: "var(--accent)" }}
+              >
+                <Icon className="w-5 h-5" strokeWidth={1.75} />
+              </div>
+              <h3
+                className="display text-[22px] leading-tight"
+                style={{ color: "var(--ink)" }}
+              >
+                {title}
+              </h3>
+              <p
+                className="text-[14.5px] mt-3 leading-[1.6]"
+                style={{ color: "var(--ink-muted)" }}
+              >
+                {description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── INVESTMENT & TERMS ───────────────────────── */
+function InvestmentTerms() {
+  const items = [
+    {
+      icon: Ruler,
+      label: "Area required",
+      value: `${franchiseInvestment.minSize.toLocaleString()}–${franchiseInvestment.maxSize.toLocaleString()}`,
+      unit: franchiseInvestment.unit,
+    },
+    {
+      icon: Calendar,
+      label: "Agreement term",
+      value: "5 + 5",
+      unit: "years",
+    },
+    {
+      icon: HandCoins,
+      label: "Investment",
+      value: "On call",
+      unit: "personalised estimate",
+    },
+    {
+      icon: Timer,
+      label: "Payback period",
+      value: "On call",
+      unit: "based on city + format",
+    },
+  ];
+
+  return (
+    <section className="py-20 lg:py-24">
+      <div className="content-width">
+        <div className="max-w-2xl mb-12">
+          <p className="eyebrow">Investment &amp; terms</p>
+          <h2
+            className="display mt-3 text-[34px] lg:text-[48px]"
+            style={{ color: "var(--ink)" }}
+          >
+            Honest numbers,{" "}
+            <span className="display-italic">discussed openly.</span>
+          </h2>
+          <p
+            className="mt-5 text-[16px] leading-[1.6] max-w-[560px]"
+            style={{ color: "var(--ink-muted)" }}
+          >
+            Headline parameters below — unit economics, investment range and
+            payback projections are walked through in your discovery call so
+            the numbers match your city, building, and target format.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {items.map(({ icon: Icon, label, value, unit }, i) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              transition={{ delay: i * 0.06, duration: 0.55 }}
+              className="rounded-xl border hairline p-6"
+              style={{ background: "var(--card)", borderColor: "var(--border)" }}
+            >
+              <div
+                className="w-9 h-9 rounded-md flex items-center justify-center mb-4"
+                style={{ background: "var(--accent-bg)", color: "var(--accent)" }}
+              >
+                <Icon className="w-4 h-4" strokeWidth={1.75} />
+              </div>
+              <p
+                className="text-[11px] uppercase tracking-[0.16em]"
+                style={{ color: "var(--ink-dim)" }}
+              >
+                {label}
+              </p>
+              <div
+                className="display text-[28px] lg:text-[32px] leading-none mt-2"
+                style={{ color: "var(--ink)" }}
+              >
+                {value}
+              </div>
+              <p className="text-[12.5px] mt-2" style={{ color: "var(--ink-muted)" }}>
+                {unit}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

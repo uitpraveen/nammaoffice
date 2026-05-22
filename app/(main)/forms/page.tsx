@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Briefcase, Building2, CalendarCheck, UserPlus, type LucideIcon } from "lucide-react";
+import { ArrowRight, Briefcase, Building2, CalendarCheck, LifeBuoy, UserPlus, type LucideIcon } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 
 export const metadata: Metadata = {
@@ -49,6 +49,14 @@ const FORMS: FormCard[] = [
       "Book a meeting hall or boardroom at any centre, or request a TIDEL gate pass for a visitor — same form, two purposes.",
     icon: CalendarCheck,
     cta: "Open booking form",
+  },
+  {
+    href: "/service-request",
+    title: "Service Desk Request",
+    description:
+      "Raise a ticket with the centre team for facilities, IT, housekeeping, or any issue at your branch. Attach a photo or PDF to help triage.",
+    icon: LifeBuoy,
+    cta: "Raise a ticket",
   },
 ];
 

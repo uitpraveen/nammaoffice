@@ -10,6 +10,10 @@ import { Radio } from "@/components/ui/Radio";
 import { FormSection } from "@/components/ui/FormSection";
 import { CheckCircle2 } from "lucide-react";
 import { cities, locations } from "@/lib/data/locations";
+import {
+  BOOKING_CENTRES_NOT_IN_ZOHO,
+  getBookingRooms,
+} from "@/lib/data/zoho-venues";
 
 const REQUEST_TYPES = [
   {
@@ -24,21 +28,31 @@ const REQUEST_TYPES = [
   },
 ];
 
+// Values are the exact strings the Zoho `Dropdown1` field expects — keep
+// them in sync with the Zoho form's Meeting Duration options.
 const DURATIONS = [
-  { value: "30-min", label: "30 minutes" },
-  { value: "1-hr", label: "1 hour" },
-  { value: "2-hr", label: "2 hours" },
-  { value: "half-day", label: "Half day (4 hrs)" },
-  { value: "full-day", label: "Full day (8 hrs)" },
+  { value: "30mins", label: "30 minutes" },
+  { value: "1:00 Hrs", label: "1 hour" },
+  { value: "1:30 Hrs", label: "1 hr 30 min" },
+  { value: "2:00 Hrs", label: "2 hours" },
+  { value: "3:00 Hrs", label: "3 hours" },
+  { value: "4:00 Hrs", label: "Half day (4 hrs)" },
+  { value: "8:00 Hrs", label: "Full day (8 hrs)" },
 ];
 
 // Booking-mode venues are grouped by city (one <optgroup> per city) so
-// long centre lists read scannably on mobile.
+// long centre lists read scannably on mobile. Centres not yet present in
+// the Zoho Bookings form are filtered out — adding them in Zoho admin and
+// in lib/data/zoho-venues.ts will surface them here automatically.
 const ALL_VENUE_GROUPS = cities
   .map((c) => ({
     label: c.name,
     options: locations
-      .filter((l) => l.city === c.slug)
+      .filter(
+        (l) =>
+          l.city === c.slug &&
+          !BOOKING_CENTRES_NOT_IN_ZOHO.has(`${l.city}/${l.slug}`),
+      )
       .map((l) => ({
         value: `${l.city}/${l.slug}`,
         label: l.name,
@@ -74,6 +88,8 @@ interface FormState {
   bookingPersonContact: string;
   bookingPersonEmail: string;
   venue: string;
+  /** Room id from `lib/data/zoho-venues.ts`. Required when requestType is "booking". */
+  room: string;
   companyToVisit: string;
   purpose: string;
   numParticipants: string;
@@ -107,6 +123,7 @@ export function BookingsForm({
     bookingPersonContact: "",
     bookingPersonEmail: "",
     venue: defaultVenue,
+    room: "",
     companyToVisit: "",
     purpose: "",
     numParticipants: "",
@@ -141,6 +158,9 @@ export function BookingsForm({
     });
     if (form.bookingPersonEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.bookingPersonEmail)) {
       errs.bookingPersonEmail = "Enter a valid email";
+    }
+    if (form.requestType === "booking" && !form.room) {
+      errs.room = "Pick a room";
     }
     if (form.requestType === "gate-pass" && !form.companyToVisit.trim()) {
       errs.companyToVisit = "Tell us which company you're visiting";
@@ -237,7 +257,11 @@ export function BookingsForm({
                 : "Select a centre"
             }
             value={form.venue}
-            onChange={(e) => update("venue", e.target.value)}
+            onChange={(e) => {
+              update("venue", e.target.value);
+              // Reset room — its options depend on the centre.
+              update("room", "");
+            }}
             error={errors.venue}
             disabled={lockVenue}
             hint={
@@ -249,6 +273,23 @@ export function BookingsForm({
             }
           />
         </div>
+        {/* Room is meeting-hall booking only — gate pass maps to a fixed
+            venue value per TIDEL park, no room choice needed. */}
+        {form.requestType === "booking" && form.venue && (
+          <Select
+            label="Room"
+            required
+            options={getBookingRooms(form.venue).map((r) => ({
+              value: r.id,
+              label: r.label,
+            }))}
+            placeholder="Select a room"
+            value={form.room}
+            onChange={(e) => update("room", e.target.value)}
+            error={errors.room}
+            hint="Available rooms vary by centre."
+          />
+        )}
       </FormSection>
 
       <FormSection title="Contact details">

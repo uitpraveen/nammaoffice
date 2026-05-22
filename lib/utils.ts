@@ -18,6 +18,9 @@ export function googleMapsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 }
 
+// The classic `maps.google.com/maps?q=lat,lng&output=embed` form auto-drops
+// a red marker on the coordinate (the `/maps/embed?pb=...` form only centers
+// the viewport without a pin, so locations looked unmarked before).
 export function googleMapsEmbedUrl(lat: number, lng: number): string {
-  return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3000!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin`;
+  return `https://maps.google.com/maps?q=${lat},${lng}&z=16&hl=en&output=embed`;
 }

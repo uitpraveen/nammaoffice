@@ -50,6 +50,12 @@ export const navigation: NavItem[] = [
         description: "Request a visitor pass for the Salem or Tirupur TIDEL parks.",
         icon: "TicketCheck",
       },
+      {
+        label: "Service Request",
+        href: "/service-request",
+        description: "Raise a service-desk ticket — facilities, IT, housekeeping.",
+        icon: "LifeBuoy",
+      },
     ],
   },
 ];

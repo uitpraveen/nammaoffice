@@ -17,6 +17,7 @@ import {
   CalendarCheck,
   ChevronDown,
   FileText,
+  LifeBuoy,
   Mail,
   MapPin,
   Menu,
@@ -36,6 +37,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   Briefcase,
   CalendarCheck,
   TicketCheck,
+  LifeBuoy,
 };
 const DEFAULT_NAV_ICON: LucideIcon = FileText;
 
