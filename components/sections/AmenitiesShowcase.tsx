@@ -46,24 +46,21 @@ export function AmenitiesShowcase() {
       className="py-24 md:py-32"
       style={{ background: "var(--card)" }}
     >
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-end mb-16">
-          <motion.div {...fadeUp}>
-            <p className="eyebrow mb-6">Amenities</p>
-            <h2 className="display text-[40px] md:text-[64px]">
-              Everything you need.{" "}
-              <span className="display-italic">Already included.</span>
-            </h2>
-          </motion.div>
-          <motion.p
-            {...fadeUp}
-            className="text-[17px] leading-[1.65] max-w-[52ch]"
+      <div className="content-width">
+        <motion.div {...fadeUp} className="mb-16 max-w-[64ch]">
+          <p className="eyebrow mb-6">Amenities</p>
+          <h2 className="display text-[40px] md:text-[64px]">
+            Everything you need.{" "}
+            <span className="display-italic">Already included.</span>
+          </h2>
+          <p
+            className="mt-6 text-[17px] leading-[1.65] max-w-[52ch]"
             style={{ color: "var(--ink-muted)" }}
           >
             From fibre internet to ergonomic seating — every detail is on every
             floor, at every centre.
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         <div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px border hairline rounded-2xl overflow-hidden"

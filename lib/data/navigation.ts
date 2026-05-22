@@ -2,10 +2,12 @@ import type { NavItem } from "@/lib/types";
 
 /**
  * Top nav order chosen by client:
- *   Home · About · Amenities · Contact · Franchise · Registration Forms · Gate Pass
+ *   Home · About · Locations · Amenities · Contact · Franchise · Forms
  *
- * "Registration Forms" is a dropdown with four leaves: Company, User,
- * Vendor, Bookings. Amenities scrolls to the home-page #amenities anchor.
+ * "Forms" is the single dropdown — houses the four registration forms,
+ * the bookings form, and the TIDEL gate-pass request. Keeps the top
+ * bar to 7 items so it doesn't run wide on shorter desktops.
+ * Amenities scrolls to the home-page #amenities anchor.
  */
 export const navigation: NavItem[] = [
   { label: "Home", href: "/" },
@@ -15,7 +17,7 @@ export const navigation: NavItem[] = [
   { label: "Contact", href: "/contact" },
   { label: "Franchise", href: "/franchise" },
   {
-    label: "Registration Forms",
+    label: "Forms",
     href: "/forms",
     children: [
       {
@@ -42,7 +44,12 @@ export const navigation: NavItem[] = [
         description: "Book a meeting hall or request a TIDEL gate pass.",
         icon: "CalendarCheck",
       },
+      {
+        label: "Gate Pass",
+        href: "/gate-pass",
+        description: "Request a visitor pass for the Salem or Tirupur TIDEL parks.",
+        icon: "TicketCheck",
+      },
     ],
   },
-  { label: "Gate Pass", href: "/gate-pass" },
 ];

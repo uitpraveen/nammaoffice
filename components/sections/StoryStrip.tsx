@@ -17,7 +17,7 @@ export function StoryStrip() {
       className="py-24 md:py-32"
       style={{ background: "var(--card)" }}
     >
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+      <div className="content-width">
         <motion.p {...fadeUp} className="eyebrow mb-6">
           Our story
         </motion.p>

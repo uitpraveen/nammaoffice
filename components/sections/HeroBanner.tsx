@@ -21,8 +21,7 @@ export function HeroBanner({
   return (
     <section
       className={cn(
-        "relative h-[340px] md:h-[400px] flex items-center justify-center overflow-hidden",
-        "bg-[var(--color-navy-deep)]",
+        "relative overflow-hidden bg-[var(--color-navy-deep)]",
         className
       )}
       style={
@@ -35,35 +34,52 @@ export function HeroBanner({
           : undefined
       }
     >
-      {/* Soft gold radial glow + dark overlay */}
+      {/* Soft brick glow tucked top-right, plus a subtle gold underline accent
+          along the bottom edge so the band visually rhymes with the navbar. */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(circle at 70% 20%, rgba(184,85,58,0.16), transparent 55%)",
+            "radial-gradient(circle at 85% -10%, rgba(184,85,58,0.22), transparent 50%)",
         }}
       />
-      {backgroundImage && <div className="absolute inset-0 bg-[var(--color-navy-deep)]/65" aria-hidden="true" />}
+      {backgroundImage && (
+        <div className="absolute inset-0 bg-[var(--color-navy-deep)]/70" aria-hidden="true" />
+      )}
+      <span
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--color-gold-300)]/40 to-transparent"
+      />
 
-      <div className="relative z-10 content-width w-full flex flex-col items-center text-center gap-3">
-        {decorated && (
-          <span
-            className="block w-10 h-[2px] bg-[var(--color-gold)] rounded-full"
-            aria-hidden="true"
-          />
-        )}
-        {eyebrow && (
-          <p className="eyebrow !text-[var(--color-gold-300)]">{eyebrow}</p>
-        )}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-white leading-tight max-w-3xl">
-          {title}
-        </h1>
-        {subtitle && (
-          <p className="text-base md:text-lg text-white/75 max-w-2xl leading-relaxed">
-            {subtitle}
-          </p>
-        )}
+      {/* Compact two-line layout. Decorative tick rendered inline next to
+          the eyebrow so we don't burn vertical space on a separate row.
+          Top nav clearance is already handled by Header's 112px spacer on
+          non-home routes, so we only need a small breathing pad here. */}
+      <div className="relative z-10 content-width py-10 md:py-12">
+        <div className="flex flex-col gap-2.5 max-w-3xl">
+          {(decorated || eyebrow) && (
+            <div className="flex items-center gap-3">
+              {decorated && (
+                <span
+                  aria-hidden
+                  className="block w-6 h-[2px] bg-[var(--color-gold)] rounded-full"
+                />
+              )}
+              {eyebrow && (
+                <p className="eyebrow !text-[var(--color-gold-300)]">{eyebrow}</p>
+              )}
+            </div>
+          )}
+          <h1 className="font-display text-[28px] sm:text-3xl md:text-4xl text-white leading-[1.15] tracking-tight">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="text-[14.5px] md:text-[15.5px] text-white/70 max-w-2xl leading-relaxed">
+              {subtitle}
+            </p>
+          )}
+        </div>
       </div>
     </section>
   );

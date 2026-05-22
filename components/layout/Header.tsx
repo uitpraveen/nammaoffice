@@ -12,15 +12,32 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
+  Briefcase,
+  Building2,
+  CalendarCheck,
   ChevronDown,
-  Clock,
+  FileText,
   Mail,
   MapPin,
   Menu,
   Phone,
   Star,
+  TicketCheck,
+  UserPlus,
   X,
+  type LucideIcon,
 } from "lucide-react";
+
+// Icon registry for nav-child icon strings. Add new entries here when a
+// navigation.ts entry introduces a new `icon` value.
+const NAV_ICONS: Record<string, LucideIcon> = {
+  Building2,
+  UserPlus,
+  Briefcase,
+  CalendarCheck,
+  TicketCheck,
+};
+const DEFAULT_NAV_ICON: LucideIcon = FileText;
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -154,9 +171,9 @@ export function Header() {
         className="fixed top-0 inset-x-0 z-50 h-9 text-[12px]"
         style={{ background: "var(--ink-band)", color: "rgba(255,255,255,0.78)" }}
       >
-        <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-5 lg:px-10">
+        <div className="content-width h-full flex items-center justify-between">
           <div className="flex items-center divide-x divide-white/10">
-            <div className="flex items-center gap-2 pr-4">
+            <div className="flex items-center gap-2 pr-3 whitespace-nowrap">
               <span className="relative flex w-1.5 h-1.5">
                 <span
                   className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping"
@@ -169,16 +186,12 @@ export function Header() {
               </span>
               <span>Open now</span>
             </div>
-            <div className="hidden sm:flex items-center gap-1.5 px-4">
-              <Clock className="w-3 h-3" strokeWidth={1.75} />
-              <span>Mon–Sat · 8 AM – 9 PM</span>
-            </div>
             <a
               href={BRAND.googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="See our 4.9 Google reviews"
-              className="hidden md:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+              className="hidden md:flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
             >
               <Star
                 className="w-3 h-3"
@@ -190,13 +203,13 @@ export function Header() {
                 <span className="opacity-60"> · 500+ Members</span>
               </span>
             </a>
-            <div className="hidden lg:flex items-center gap-1.5 px-4">
+            <div className="hidden lg:flex items-center gap-1.5 px-3 whitespace-nowrap">
               <MapPin className="w-3 h-3" strokeWidth={1.75} />
               <span>{locations.length} centres · {cities.length} cities</span>
             </div>
             <Link
               href="/contact?intent=tour"
-              className="hidden xl:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+              className="hidden xl:flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
             >
               <span
                 className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10.5px] uppercase tracking-[0.12em] font-semibold"
@@ -214,19 +227,19 @@ export function Header() {
           <div className="flex items-center divide-x divide-white/10">
             <a
               href={`tel:${formatPhone(BRAND.phone)}`}
-              className="hidden sm:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
             >
               <Phone className="w-3 h-3" strokeWidth={1.75} />
               <span className="mono">{BRAND.phone}</span>
             </a>
             <a
               href={`mailto:${BRAND.email}`}
-              className="hidden md:flex items-center gap-1.5 px-4 hover:text-white transition-colors"
+              className="hidden md:flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
             >
               <Mail className="w-3 h-3" strokeWidth={1.75} />
               <span>{BRAND.email}</span>
             </a>
-            <div className="flex items-center gap-2 pl-4">
+            <div className="flex items-center gap-2 pl-3">
               <a
                 href={BRAND.social.instagram}
                 target="_blank"
@@ -281,7 +294,7 @@ export function Header() {
             : "none",
         }}
       >
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-10">
+        <div className="content-width">
           <div
             className={cn(
               "flex items-center justify-between transition-all duration-300",
@@ -565,7 +578,7 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
   return (
     <Link
       href={item.href}
-      className="relative h-full flex items-center px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] transition-colors"
+      className="relative h-full flex items-center px-3 xl:px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] whitespace-nowrap transition-colors"
       style={{ color: isActive ? "var(--accent)" : "rgba(255,255,255,0.65)" }}
       onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
       onMouseLeave={(e) => {
@@ -610,7 +623,7 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
     >
       <button
         type="button"
-        className="relative h-full flex items-center gap-1.5 px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] transition-colors"
+        className="relative h-full flex items-center gap-1.5 px-3 xl:px-4 text-[12.5px] font-bold uppercase tracking-[0.12em] whitespace-nowrap transition-colors"
         style={{ color: isParentActive ? "var(--accent)" : "rgba(255,255,255,0.65)" }}
         onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
         onMouseLeave={(e) => {
@@ -637,16 +650,28 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 top-full pt-2 min-w-[280px] z-50"
+            className="absolute left-0 top-full pt-1 w-[240px] z-50"
           >
             <div
-              className="rounded-xl bg-white border p-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.25)]"
-              style={{ borderColor: "var(--border)" }}
+              className="rounded-xl overflow-hidden shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55),0_8px_20px_-12px_rgba(0,0,0,0.35)]"
+              style={{
+                background: "rgba(20,20,22,0.98)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+              }}
               role="menu"
             >
-              {children.map((child) => (
-                <DropdownChild key={child.href} child={child} pathname={pathname} />
-              ))}
+              <div className="p-1.5">
+                {children.map((child) => (
+                  <DropdownChild
+                    key={child.href}
+                    child={child}
+                    pathname={pathname}
+                    onSelect={() => setOpen(false)}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
@@ -655,37 +680,51 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
   );
 }
 
-function DropdownChild({ child, pathname }: { child: NavChild; pathname: string }) {
+function DropdownChild({
+  child,
+  pathname,
+  onSelect,
+}: {
+  child: NavChild;
+  pathname: string;
+  onSelect: () => void;
+}) {
   const isActive = useActiveHref(child.href, pathname);
+  const Icon = (child.icon && NAV_ICONS[child.icon]) || DEFAULT_NAV_ICON;
   return (
     <Link
       href={child.href}
       role="menuitem"
-      className="block rounded-lg px-3 py-2.5 group/item transition-colors"
-      style={{ background: isActive ? "var(--accent-bg)" : "transparent" }}
+      onClick={onSelect}
+      className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 group/item transition-colors"
+      style={{ background: isActive ? "rgba(184,85,58,0.18)" : "transparent" }}
       onMouseEnter={(e) =>
-        !isActive && (e.currentTarget.style.background = "var(--canvas-alt)")
+        !isActive && (e.currentTarget.style.background = "rgba(255,255,255,0.06)")
       }
-      onMouseLeave={(e) => (e.currentTarget.style.background = isActive ? "var(--accent-bg)" : "transparent")}
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.background = isActive ? "rgba(184,85,58,0.18)" : "transparent")
+      }
     >
-      <div className="flex items-center justify-between gap-3">
-        <span
-          className="text-[13.5px] font-medium leading-tight"
-          style={{ color: isActive ? "var(--accent)" : "var(--ink)" }}
-        >
-          {child.label}
-        </span>
-        <ArrowUpRight
-          className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all"
-          style={{ color: "var(--accent)" }}
-          strokeWidth={1.75}
-        />
-      </div>
-      {child.description && (
-        <p className="mt-0.5 text-[11.5px] leading-snug" style={{ color: "var(--ink-dim)" }}>
-          {child.description}
-        </p>
-      )}
+      <span
+        className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-md transition-colors"
+        style={{
+          background: isActive ? "var(--accent)" : "rgba(255,255,255,0.08)",
+          color: isActive ? "#fff" : "var(--accent-soft)",
+        }}
+      >
+        <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
+      </span>
+      <span
+        className="flex-1 text-[13px] font-semibold leading-tight"
+        style={{ color: isActive ? "var(--accent-soft)" : "rgba(255,255,255,0.85)" }}
+      >
+        {child.label}
+      </span>
+      <ArrowUpRight
+        className="w-3.5 h-3.5 shrink-0 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all"
+        style={{ color: "var(--accent-soft)" }}
+        strokeWidth={2}
+      />
     </Link>
   );
 }

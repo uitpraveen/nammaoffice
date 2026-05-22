@@ -15,7 +15,7 @@ export interface Client {
 }
 
 export const clients: Client[] = [
-  { id: "sierra-digital",      name: "Sierra Digital",          logo: "/images/clients/sierra-digital.png",      darkBg: true },
+  { id: "sierra-digital",      name: "Sierra Digital",          logo: "/images/clients/sierra-digital.png" },
   { id: "payagri",             name: "payAgri",                 logo: "/images/clients/payagri.png" },
   { id: "farm-connect",        name: "Farm Connect",            logo: "/images/clients/farm-connect.png" },
   { id: "fixocare",            name: "FixoCare",                logo: "/images/clients/fixocare.png" },
@@ -28,7 +28,7 @@ export const clients: Client[] = [
   { id: "vee-healthtek",       name: "Vee Healthtek",           logo: "/images/clients/vee-healthtek.png" },
   { id: "indecomm",            name: "Indecomm",                logo: "/images/clients/indecomm.png" },
   { id: "vi",                  name: "Vi",                      logo: "/images/clients/vi.png",                  darkBg: true },
-  { id: "eyal",                name: "EYAL",                    logo: "/images/clients/eyal.png" },
+  { id: "eyal",                name: "EYAL",                    logo: "/images/clients/eyal.jpg" },
   { id: "asian-holiday",       name: "Asian Holiday Resorts",   logo: "/images/clients/asian-holiday.png" },
   { id: "gail",                name: "GAIL",                    logo: "/images/clients/gail.png" },
   { id: "spantag",             name: "Spantag Technologies",    logo: "/images/clients/spantag.png" },
@@ -36,5 +36,9 @@ export const clients: Client[] = [
   { id: "vulture-lines",       name: "Vulture Lines",           logo: "/images/clients/vulture-lines.png" },
   { id: "ovr",                 name: "OVR",                     logo: "/images/clients/ovr.png" },
   { id: "deecodes",            name: "Deecodes.io",             logo: "/images/clients/deecodes.png" },
-  { id: "strader",             name: "Strader",                 logo: "/images/clients/strader.png" },
+  { id: "strader",             name: "Strader",                 logo: "/images/clients/strader.jpg" },
+  { id: "legal-brothers",      name: "Legal Brothers Salem",    logo: "/images/clients/legal-brothers.jpg" },
+  { id: "zentropy",            name: "Zentropy",                logo: "/images/clients/zentropy.jpg",            darkBg: true },
+  { id: "dialmia",             name: "Dialmia",                 logo: "/images/clients/dialmia.jpg",             darkBg: true },
+  { id: "octadigi",            name: "OctaDigi",                logo: "/images/clients/octadigi.png" },
 ];

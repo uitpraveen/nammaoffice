@@ -55,7 +55,7 @@ export const faqs: FAQItem[] = [
   {
     question: "How many NammaOffice centres are there?",
     answer:
-      "We have 10 centres across 5 cities — 6 in Salem (Anushka Tower / Fairlands, Balaji Tower / Ramakrishna Road, Rajeshwari Towers, New Bus Stand / Meyyanur, TIDEL NEO / Karuppur, and IPOD / Reliance Mega Mall), 1 in Trichy (TIDEL NEO), 1 in Tirupur (TIDEL NEO / Thirumuruganpoondi), 1 in Erode (Texvalley, NH-544), and 1 in Hosur (Sipcot Phase II).",
+      "We have 10 centres across 5 cities — 6 in Salem (Anushka Tower / Fairlands, Balaji Tower / Ramakrishna Road, Rajeshwari Towers, New Bus Stand / Meyyanur, TIDEL NEO / Karuppur, and IPOD / Reliance Mega Mall), 1 in Trichy (Asha Grand, Ramanathapuram Road, Gundur), 1 in Tirupur (TIDEL NEO / Thirumuruganpoondi), 1 in Erode (Texvalley, NH-544), and 1 in Hosur (Sipcot Phase II).",
     category: "locations",
   },
   {

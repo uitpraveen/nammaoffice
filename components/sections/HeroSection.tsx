@@ -53,7 +53,7 @@ const SLIDES: Slide[] = [
     alt: "NammaOffice premium workspace — Trichy",
     eyebrow: "Coworking · Trichy",
     caption: "Where teams come together",
-    location: "TIDEL NEO · Trichy",
+    location: "Asha Grand · Trichy",
     headline: { lead: "Where Founders Find Their", emphasis: "People" },
     subhead:
       "Join a community of entrepreneurs, freelancers, and remote teams across Tamil Nadu.",
@@ -113,7 +113,7 @@ export function HeroSection() {
     <>
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--color-charcoal)]"
+      className="relative h-[100svh] min-h-[560px] flex flex-col overflow-hidden bg-[var(--color-charcoal)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
@@ -165,9 +165,16 @@ export function HeroSection() {
       {/* Particle field */}
       <HeroParticles />
 
-      {/* Content — left text column + right glass cards column (lg+) */}
-      <div className="relative z-10 content-width w-full pt-[110px] md:pt-[130px] pb-36 md:pb-32 lg:pb-40">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-16 items-center">
+      {/* Nav clearance — keeps content from drifting under the fixed header on
+          short viewports where flex centering would overflow upward. */}
+      <div aria-hidden className="h-[132px] md:h-[148px] shrink-0 relative z-10" />
+
+      {/* Content — `safe center` alignment centers when content fits but falls
+          back to top-aligned when content would overflow upward, so the
+          eyebrow never gets pushed under the navbar. */}
+      <div className="relative z-10 flex-1 min-h-0 flex w-full [align-items:safe_center]">
+        <div className="content-width w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-6 md:gap-10 lg:gap-16 items-center">
           {/* Left — copy */}
           <div className="text-left flex flex-col items-start max-w-[720px]">
             <AnimatePresence initial={false} mode="wait">
@@ -185,7 +192,7 @@ export function HeroSection() {
                 </div>
 
                 <h1
-                  className="display-xl mt-7 max-w-full md:max-w-[20ch] text-white"
+                  className="display-xl mt-4 md:mt-5 lg:mt-6 max-w-full md:max-w-[20ch] text-white"
                   style={{ textShadow: "0 2px 16px rgba(0,0,0,0.45)" }}
                 >
                   {slide.headline.lead}{" "}
@@ -196,7 +203,7 @@ export function HeroSection() {
                 </h1>
 
                 <p
-                  className="mt-7 text-[17px] lg:text-[19px] text-white/85 leading-relaxed max-w-2xl"
+                  className="mt-4 md:mt-5 lg:mt-6 text-[15px] md:text-[16px] lg:text-[18px] text-white/85 leading-relaxed max-w-2xl"
                   style={{ textShadow: "0 1px 10px rgba(0,0,0,0.55)" }}
                 >
                   {slide.subhead}
@@ -204,7 +211,7 @@ export function HeroSection() {
               </motion.div>
             </AnimatePresence>
 
-            <ul className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-white/85 text-[13px] font-medium">
+            <ul className="mt-5 md:mt-6 lg:mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-2 text-white/85 text-[12px] md:text-[13px] font-medium">
               <FeaturePill icon={<Wifi className="w-3.5 h-3.5" strokeWidth={2} />}>
                 High-Speed Internet
               </FeaturePill>
@@ -216,10 +223,10 @@ export function HeroSection() {
               </FeaturePill>
             </ul>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            <div className="mt-6 md:mt-7 lg:mt-8 flex flex-row items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
               <Link
                 href="/bookings"
-                className="group inline-flex items-center justify-center gap-2 h-12 px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-gold-deep)] hover:text-white hover:scale-[1.02] shadow-[var(--shadow-cta)]"
+                className="group inline-flex items-center justify-center gap-2 h-11 md:h-12 px-5 md:px-7 bg-[var(--color-gold)] text-[var(--color-navy-deep)] text-[13px] md:text-[14px] font-semibold rounded-full transition-all active:scale-[0.98] hover:bg-[var(--color-gold-deep)] hover:text-white hover:scale-[1.02] shadow-[var(--shadow-cta)] flex-1 sm:flex-none"
               >
                 Book Now
                 <ArrowRight
@@ -229,23 +236,26 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/locations"
-                className="inline-flex items-center justify-center gap-2 h-12 px-7 border border-white/30 text-white text-[14px] font-semibold rounded-full hover:bg-white/10 active:bg-white/15 transition-colors"
+                className="inline-flex items-center justify-center gap-2 h-11 md:h-12 px-5 md:px-7 border border-white/30 text-white text-[13px] md:text-[14px] font-semibold rounded-full hover:bg-white/10 active:bg-white/15 transition-colors flex-1 sm:flex-none"
               >
                 Explore centres
               </Link>
             </div>
           </div>
 
-          {/* Right — floating glass cards (desktop only) */}
+          {/* Right — floating glass cards (desktop only).
+              Opacity-only fade (no transform) — `backdrop-filter` flickers /
+              snaps in late when its container is being translated, so we keep
+              the parent static and just fade the cards in. */}
           <motion.div
-            className="hidden lg:flex flex-col gap-4 w-full max-w-[360px] ml-auto"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: EASE }}
+            className="hidden lg:flex flex-col gap-3 w-full max-w-[360px] ml-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           >
             {/* Rating card */}
             <div
-              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-5 text-white"
+              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
               style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
             >
               <div className="flex items-center justify-between">
@@ -264,26 +274,26 @@ export function HeroSection() {
                   Verified
                 </span>
               </div>
-              <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-[32px] font-medium leading-none tabular-nums tracking-tight">
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
                   4.9
                 </span>
                 <span className="text-[12px] text-white/60">/ 5 · 200+ reviews</span>
               </div>
-              <p className="mt-3 text-[13px] leading-relaxed text-white/80">
+              <p className="mt-2 text-[12.5px] leading-snug text-white/80 line-clamp-2">
                 &ldquo;Best workspace experience I&apos;ve had in Salem. The team feels like family.&rdquo;
               </p>
-              <div className="mt-3 pt-3 border-t border-white/10 text-[11px] uppercase tracking-[0.14em] text-white/55">
+              <div className="mt-2 pt-2 border-t border-white/10 text-[11px] uppercase tracking-[0.14em] text-white/55">
                 Arjun K. · Founder
               </div>
             </div>
 
             {/* Live now card */}
             <div
-              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-5 text-white"
+              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
               style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
             >
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-2">
                 <span className="relative flex w-2 h-2">
                   <span
                     className="absolute inset-0 rounded-full animate-ping"
@@ -300,16 +310,16 @@ export function HeroSection() {
               </div>
               <div className="flex items-end justify-between">
                 <div>
-                  <div className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
+                  <div className="text-[24px] font-medium leading-none tabular-nums tracking-tight">
                     312
                   </div>
-                  <div className="mt-1.5 text-[12px] text-white/65">members working</div>
+                  <div className="mt-1 text-[12px] text-white/65">members working</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
+                  <div className="text-[24px] font-medium leading-none tabular-nums tracking-tight">
                     10
                   </div>
-                  <div className="mt-1.5 text-[12px] text-white/65">centres open</div>
+                  <div className="mt-1 text-[12px] text-white/65">centres open</div>
                 </div>
               </div>
             </div>
@@ -343,10 +353,15 @@ export function HeroSection() {
             </button>
           </motion.div>
         </div>
+        </div>
       </div>
 
+      {/* Bottom space reservation — keeps content (esp. CTAs) clear of the
+          absolutely-positioned carousel controls / mobile dots below. */}
+      <div aria-hidden className="h-[56px] md:h-[150px] lg:h-[160px] shrink-0 relative z-10" />
+
       {/* Carousel controls */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex items-end gap-5 max-w-[calc(100vw-2rem)]">
+      <div className="absolute bottom-14 lg:bottom-16 left-1/2 -translate-x-1/2 z-20 hidden md:flex items-end gap-5 max-w-[calc(100vw-2rem)]">
         <div className="text-left mr-4 min-w-[200px]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
             <span className="text-white">{String(active + 1).padStart(2, "0")}</span>
@@ -430,7 +445,7 @@ export function HeroSection() {
       </div>
 
       {/* Mobile dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex md:hidden items-center gap-1.5">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex md:hidden items-center gap-1.5">
         {SLIDES.map((_, i) => (
           <motion.button
             key={i}
