@@ -7,9 +7,9 @@ export const BRAND = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919092109213",
   email: "info@nammaoffice.com",
   social: {
-    instagram: "https://instagram.com/nammaoffice",
-    linkedin: "https://linkedin.com/company/nammaoffice",
-    facebook: "https://facebook.com/nammaoffice",
+    instagram: "https://www.instagram.com/namma_office/",
+    linkedin: "https://www.linkedin.com/company/namma-office/",
+    facebook: "https://www.facebook.com/profile.php?id=61563468869673",
     youtube: "https://youtube.com/@nammaoffice",
   },
   // TODO: swap with the canonical Google Business reviews URL once
