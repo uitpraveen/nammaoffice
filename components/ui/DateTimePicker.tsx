@@ -33,6 +33,18 @@ interface DateTimePickerProps {
   dayEndHour?: number;
   /** Slot granularity in minutes. Defaults to 15. */
   timeStep?: number;
+  /**
+   * "label" (default) renders the month/year as plain text with chevron
+   * nav. "dropdown" turns them into clickable selects — use this for
+   * DOB-style pickers where users need to jump back many years.
+   */
+  captionLayout?: "label" | "dropdown";
+  /** Earliest month the dropdown lets users navigate to. Defaults to ~100 years before max. */
+  startMonth?: Date;
+  /** Latest month the dropdown lets users navigate to. Defaults to today. */
+  endMonth?: Date;
+  /** Which month the calendar opens to when no value is set. */
+  defaultMonth?: Date;
   placeholder?: string;
   id?: string;
 }
@@ -66,6 +78,10 @@ export function DateTimePicker({
   dayStartHour = 8,
   dayEndHour = 21,
   timeStep = 15,
+  captionLayout = "label",
+  startMonth,
+  endMonth,
+  defaultMonth,
   placeholder,
   id,
 }: DateTimePickerProps) {
@@ -77,9 +93,9 @@ export function DateTimePicker({
   const parsed = value ? parseLocal(value) : null;
 
   // viewingDate = the day whose time slots are shown in the right column.
-  // It starts at parsed's date, falls back to min, then today.
+  // It starts at parsed's date, falls back to defaultMonth, min, then today.
   const [viewingDate, setViewingDate] = useState<Date>(() =>
-    stripTime(parsed ?? min ?? new Date()),
+    stripTime(parsed ?? defaultMonth ?? min ?? new Date()),
   );
 
   // Re-sync viewingDate when the controlled value changes externally
@@ -274,9 +290,16 @@ export function DateTimePicker({
                   month={viewingDate}
                   onMonthChange={(m) => setViewingDate(m)}
                   disabled={disabledDays.length ? disabledDays : undefined}
-                  showOutsideDays
+                  showOutsideDays={captionLayout !== "dropdown"}
                   weekStartsOn={1}
-                  classNames={DAY_PICKER_CLASSES}
+                  captionLayout={captionLayout}
+                  startMonth={startMonth}
+                  endMonth={endMonth}
+                  classNames={
+                    captionLayout === "dropdown"
+                      ? DAY_PICKER_CLASSES_DROPDOWN
+                      : DAY_PICKER_CLASSES
+                  }
                   components={{
                     Chevron: ({ orientation }) =>
                       orientation === "left" ? (
@@ -401,6 +424,13 @@ const DAY_PICKER_CLASSES = {
   month: "space-y-3",
   month_caption: "relative flex items-center justify-center h-9 mb-1",
   caption_label: "text-[14px] font-semibold text-warm-charcoal tracking-tight",
+  /* Year + month dropdown caption (captionLayout="dropdown") */
+  dropdowns: "flex items-center justify-center gap-2 px-9",
+  dropdown_root: "relative inline-flex items-center",
+  dropdown:
+    "appearance-none bg-[#fbfaf6] hover:bg-white border border-warm-border rounded-md py-1.5 pl-3 pr-7 text-[13px] font-semibold text-warm-charcoal cursor-pointer focus:outline-none focus:border-warm-charcoal/35 focus:shadow-[0_0_0_3px_rgba(184,85,58,0.10)] transition-colors bg-no-repeat bg-[length:12px_12px] bg-[position:right_8px_center] bg-[image:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235C5852%22%20stroke-width%3D%222.25%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E')]",
+  months_dropdown: "",
+  years_dropdown: "",
   nav: "absolute inset-x-0 top-0 flex items-center justify-between h-9 pointer-events-none",
   button_previous:
     "pointer-events-auto inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-[var(--color-gold-50)] text-warm-charcoal/60 hover:text-[var(--color-gold-deep)] transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-warm-charcoal/60 disabled:cursor-not-allowed",
@@ -422,4 +452,14 @@ const DAY_PICKER_CLASSES = {
   disabled:
     "[&_button]:!text-warm-charcoal/20 [&_button]:cursor-not-allowed [&_button]:hover:!bg-transparent [&_button]:hover:!text-warm-charcoal/20",
   hidden: "invisible",
+};
+
+/* Dropdown caption variant — hides the static caption_label since the
+   <select> dropdowns provide the visible month/year, and hides the
+   chevron nav since the dropdowns make it redundant. */
+const DAY_PICKER_CLASSES_DROPDOWN = {
+  ...DAY_PICKER_CLASSES,
+  caption_label: "sr-only",
+  nav: "hidden",
+  month_caption: "relative flex items-center justify-center h-9 mb-2",
 };

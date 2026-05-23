@@ -128,6 +128,10 @@ export function UserRegistrationForm() {
           mode="date"
           required
           max={new Date()}
+          startMonth={new Date(1925, 0)}
+          endMonth={new Date()}
+          defaultMonth={new Date(new Date().getFullYear() - 25, 0)}
+          captionLayout="dropdown"
           value={form.dob}
           onChange={(v) => update("dob", v)}
           error={errors.dob}
