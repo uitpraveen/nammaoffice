@@ -4,6 +4,15 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
+/** The global `html { scroll-padding-top: 124px }` rule leaves a 24px
+ *  gap below the nav (nav is ~100px scrolled) — but that gap shows the
+ *  previous section's bottom edge bleeding through. Positive offset
+ *  here pulls the scroll a touch further so the target section's top
+ *  edge sits flush with the nav bottom, no previous-section bleed.
+ *  The section's own internal `py-*` padding provides the breathing
+ *  room between the nav and the eyebrow/heading. */
+const SECTION_SCROLL_OFFSET = 24;
+
 /**
  * Mounts Lenis once at the app root so all page scrolling is eased,
  * intercepts in-page anchor clicks so the URL never gets a doubled
@@ -55,8 +64,26 @@ export function SmoothScroll() {
 
     const scrollToHash = (hash: string) => {
       const target = document.querySelector(hash);
-      if (target) lenis.scrollTo(target as HTMLElement);
+      if (target) {
+        lenis.scrollTo(target as HTMLElement, {
+          offset: SECTION_SCROLL_OFFSET,
+        });
+      }
     };
+
+    // Defensive guard: if anything (Next.js Link same-path push, scroll-spy
+    // race, browser oddity) produces a URL with nested fragments like
+    // `/#about#about`, collapse it to the last fragment.
+    const normalizeHash = () => {
+      const raw = window.location.hash;
+      if (!raw || raw.indexOf("#", 1) < 0) return;
+      // Take only the last `#…` portion
+      const last = raw.lastIndexOf("#");
+      const clean = raw.slice(last);
+      history.replaceState(null, "", clean || "/");
+    };
+    normalizeHash();
+    window.addEventListener("hashchange", normalizeHash);
 
     // On first paint, if URL already has a hash, scroll to that
     // section (Lenis controls scroll, so the browser's native anchor
@@ -171,6 +198,7 @@ export function SmoothScroll() {
       lenisRef.current = null;
       document.removeEventListener("click", onAnchorClick, { capture: true });
       document.removeEventListener("click", onClickToSuppress, { capture: true });
+      window.removeEventListener("hashchange", normalizeHash);
       observer.disconnect();
     };
   }, []);
@@ -216,7 +244,10 @@ export function SmoothScroll() {
       if (hash) {
         const target = document.querySelector(hash);
         if (target) {
-          lenis.scrollTo(target as HTMLElement, { immediate: true });
+          lenis.scrollTo(target as HTMLElement, {
+            immediate: true,
+            offset: SECTION_SCROLL_OFFSET,
+          });
           return;
         }
       }

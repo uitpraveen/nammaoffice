@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Radio } from "@/components/ui/Radio";
 import { FormSection } from "@/components/ui/FormSection";
+import { DateTimePicker } from "@/components/ui/DateTimePicker";
 import { CheckCircle2 } from "lucide-react";
 import { cities, locations } from "@/lib/data/locations";
 import {
@@ -69,17 +70,6 @@ const GATE_PASS_VENUE_OPTIONS = locations
     value: `${l.city}/${l.slug}`,
     label: `${l.name} — ${l.city.charAt(0).toUpperCase() + l.city.slice(1)}`,
   }));
-
-/**
- * Earliest datetime the input will accept — now + 30 minutes, formatted
- * for the native <input type="datetime-local"> in the browser's local
- * timezone (slice trims seconds and timezone suffix).
- */
-function minLeadTimeIso(): string {
-  const d = new Date(Date.now() + 30 * 60 * 1000);
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-  return d.toISOString().slice(0, 16);
-}
 
 interface FormState {
   requestType: "booking" | "gate-pass";
@@ -211,7 +201,7 @@ export function BookingsForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
       {/* Honeypot — hidden from real users, visible to bots */}
       <input
         type="text"
@@ -351,13 +341,12 @@ export function BookingsForm({
             onChange={(e) => update("numParticipants", e.target.value)}
             error={errors.numParticipants}
           />
-          <Input
+          <DateTimePicker
             label="Booking Date-Time"
-            type="datetime-local"
             required
-            min={minLeadTimeIso()}
+            min={new Date(Date.now() + 30 * 60 * 1000)}
             value={form.bookingDateTime}
-            onChange={(e) => update("bookingDateTime", e.target.value)}
+            onChange={(v) => update("bookingDateTime", v)}
             error={errors.bookingDateTime}
             hint="Centre hours 8 AM – 9 PM, Mon–Sat. Same-day or after-hours? Call +91 9092109213 for fastest confirmation."
           />

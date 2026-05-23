@@ -18,13 +18,15 @@ export function FormSection({
       open
       className="group md:open border border-[var(--color-border)] md:border-0 rounded-2xl md:rounded-none p-4 md:p-0 bg-white md:bg-transparent"
     >
-      <summary className="flex items-center justify-between md:cursor-default list-none [&::-webkit-details-marker]:hidden md:pointer-events-none">
+      <summary
+        className="flex items-center justify-between md:cursor-default list-none [&::-webkit-details-marker]:hidden md:pointer-events-none md:pb-4 md:border-b md:border-[var(--color-border)]"
+      >
         <div>
-          <h3 className="font-display text-lg md:text-xl text-[var(--color-navy)]">
+          <h3 className="font-display text-[18px] md:text-[22px] text-[var(--color-navy)] tracking-[-0.01em] leading-tight">
             {title}
           </h3>
           {description && (
-            <p className="text-[13px] text-[var(--color-ink-secondary)] mt-1">
+            <p className="text-[13px] text-[var(--color-ink-secondary)] mt-1.5 leading-relaxed">
               {description}
             </p>
           )}
@@ -42,7 +44,7 @@ export function FormSection({
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </summary>
-      <fieldset className="space-y-4 mt-4 md:mt-3">{children}</fieldset>
+      <fieldset className="space-y-5 mt-5 md:mt-6">{children}</fieldset>
     </details>
   );
 }

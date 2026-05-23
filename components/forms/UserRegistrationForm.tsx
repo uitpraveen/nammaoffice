@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Radio } from "@/components/ui/Radio";
 import { FileUpload } from "@/components/ui/FileUpload";
+import { DateTimePicker } from "@/components/ui/DateTimePicker";
 import { CheckCircle2 } from "lucide-react";
 
 const TSHIRT_SIZES = [
@@ -122,13 +123,15 @@ export function UserRegistrationForm() {
           value={form.name}
           onChange={(e) => update("name", e.target.value)}
         />
-        <Input
+        <DateTimePicker
           label="D.O.B"
-          type="date"
+          mode="date"
           required
+          max={new Date()}
           value={form.dob}
-          onChange={(e) => update("dob", e.target.value)}
+          onChange={(v) => update("dob", v)}
           error={errors.dob}
+          placeholder="Select your date of birth"
         />
       </div>
 

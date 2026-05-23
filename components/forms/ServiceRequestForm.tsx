@@ -136,7 +136,7 @@ export function ServiceRequestForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
       {/* Honeypot — hidden from real users, visible to bots */}
       <input
         type="text"

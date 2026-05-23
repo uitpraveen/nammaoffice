@@ -558,6 +558,12 @@
   }
   .marquee-track { animation: marquee 60s linear infinite; }
 
+  /* DateTimePicker popover entrance — used in components/ui/DateTimePicker.tsx */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* Traveling neon line for the navbar bottom edge. A faint base hairline
      stays static; a brighter brick glow continuously sweeps left to right.
      Note: no `position: relative` on the host — the header is already
