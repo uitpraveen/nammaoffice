@@ -2,7 +2,12 @@ import type { NavItem } from "@/lib/types";
 
 /**
  * Top nav order chosen by client:
- *   Home · About · Locations · Amenities · Contact · Franchise · Forms
+ *   Home · About · Locations · Amenities · Franchise · Forms
+ *
+ * Contact is intentionally NOT a top-level page — the live Wix site
+ * doesn't have one either. Phone, email and WhatsApp in the header /
+ * footer / floating button are the contact funnels; visitors who want
+ * a tour book one via the Bookings form.
  *
  * "Forms" is the single dropdown — houses the four registration forms
  * (Company / User / Vendor), the combined Bookings + Gate Pass form,
@@ -16,7 +21,6 @@ export const navigation: NavItem[] = [
   { label: "About", href: "/#about" },
   { label: "Locations", href: "/#centres" },
   { label: "Amenities", href: "/#amenities" },
-  { label: "Contact", href: "/contact" },
   { label: "Franchise", href: "/franchise" },
   {
     label: "Forms",

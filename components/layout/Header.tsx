@@ -210,7 +210,7 @@ export function Header() {
               <span>{locations.length} centres · {cities.length} cities</span>
             </div>
             <Link
-              href="/contact?intent=tour"
+              href="/bookings"
               className="hidden xl:flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
             >
               <span
@@ -330,7 +330,7 @@ export function Header() {
             {/* Right cluster */}
             <div className="flex items-center gap-2 shrink-0">
               <Link
-                href="/contact?intent=tour"
+                href="/bookings"
                 className="btn-glow-border hidden md:inline-flex items-center gap-1.5 h-10 px-5 text-[13px] font-semibold text-white rounded-md"
               >
                 <span className="inline-flex items-center gap-1.5">
@@ -408,7 +408,6 @@ export function Header() {
                   "/#about",
                   "/locations",
                   "/#amenities",
-                  "/contact",
                 ]);
                 const primary = navigation.filter((n) =>
                   primaryHrefs.has(n.href)
@@ -557,7 +556,7 @@ export function Header() {
               }}
             >
               <Link
-                href="/contact?intent=tour"
+                href="/bookings"
                 className="btn-glow-border inline-flex w-full items-center justify-center gap-2 h-12 rounded-md text-[14px] font-semibold text-white"
               >
                 <span className="inline-flex items-center gap-2">

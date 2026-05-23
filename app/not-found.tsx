@@ -48,10 +48,10 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="/contact"
+            href="/#centres"
             className="rounded-brand border-2 border-olive text-olive hover:bg-olive hover:text-white transition-all duration-200 font-sans font-medium inline-flex items-center justify-center px-8 py-4 text-lg"
           >
-            Contact Us
+            Browse Centres
           </Link>
         </div>
       </div>

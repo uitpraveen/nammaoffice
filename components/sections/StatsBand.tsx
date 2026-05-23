@@ -68,7 +68,7 @@ export function StatsBand() {
                 <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
               </Link>
               <Link
-                href="/contact?intent=managed-office"
+                href="/bookings"
                 className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-white/85 hover:text-white transition-colors"
               >
                 Managed offices &amp; BOT
