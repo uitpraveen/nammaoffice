@@ -116,3 +116,87 @@ export async function submitToZohoFormJson(
     return false;
   }
 }
+
+/**
+ * Upload one file to Zoho Forms' public file-staging host and return the
+ * server-side filepath string to reference in the /records submission.
+ *
+ * Zoho public forms upload files in TWO steps, NOT as multipart on /records:
+ *   1. Stream the raw file bytes to
+ *        <uploadEndpoint>/forms/v2/stream/publicupload
+ *      with x-* headers. The host is datacenter-specific (IN forms use
+ *      https://in2-files.zohopublic.in). It returns {"filepath":"/…"}.
+ *   2. Put that filepath into the /records JSON under "<FieldLinkName>-v2"
+ *      as an array of strings (e.g. "FileUpload2-v2": ["/…/…png"]).
+ *
+ * This function does step 1. `formUrl` is the public form page URL (same one
+ * passed to submitToZohoFormJson); portal + form link name are parsed from it.
+ * `fieldLinkName` is the Zoho field link name (e.g. "FileUpload2"). The
+ * upload-id's middle segment (historically the numeric form id) is NOT
+ * validated by Zoho, so a placeholder is used. Returns the filepath, or null
+ * on any failure so the caller can decide whether the file was required.
+ */
+export async function uploadZohoFile(
+  file: File,
+  opts: { formUrl: string; fieldLinkName: string; uploadEndpoint?: string }
+): Promise<string | null> {
+  try {
+    const url = new URL(opts.formUrl);
+    // pathname: /<portal>/form/<formLinkName>/formperma/<perma>
+    const parts = url.pathname.split("/").filter(Boolean);
+    const portalName = parts[0];
+    const formLinkName = parts[2];
+    const endpoint = (
+      opts.uploadEndpoint ||
+      process.env.ZOHO_UPLOAD_ENDPOINT ||
+      "https://in2-files.zohopublic.in"
+    ).replace(/\/$/, "");
+    const uploadUrl = `${endpoint}/forms/v2/stream/publicupload`;
+    const bytes = Buffer.from(await file.arrayBuffer());
+
+    const res = await fetch(uploadUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": file.type || "application/octet-stream",
+        "x-service": "forms",
+        "x-streammode": "1",
+        "x-fclient-version": "2",
+        "x-assured-response": "true",
+        "x-live_form_upload": "true",
+        "x-portalname": portalName,
+        "x-formlinkname": formLinkName,
+        "x-fieldlinkname": opts.fieldLinkName,
+        "x-filename": encodeURIComponent(file.name),
+        "upload-id": `${portalName}_0_${Date.now()}`,
+        Origin: url.origin,
+        Referer: opts.formUrl,
+      },
+      body: bytes,
+    });
+    const text = await res.text();
+    if (!res.ok) {
+      console.error(
+        `[zoho-upload] ${opts.fieldLinkName} failed (${res.status}): ${text.slice(0, 200)}`
+      );
+      return null;
+    }
+    let filepath: string | undefined;
+    try {
+      filepath = JSON.parse(text)?.filepath;
+    } catch {
+      /* fall through to header */
+    }
+    if (!filepath) {
+      const xmsg = res.headers.get("x-msg");
+      if (xmsg) filepath = decodeURIComponent(xmsg);
+    }
+    if (!filepath) {
+      console.error(`[zoho-upload] no filepath in response: ${text.slice(0, 200)}`);
+      return null;
+    }
+    return filepath;
+  } catch (err) {
+    console.error("[zoho-upload] threw:", err);
+    return null;
+  }
+}

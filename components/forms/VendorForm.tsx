@@ -11,14 +11,15 @@ import { FormSection } from "@/components/ui/FormSection";
 import { CheckCircle2 } from "lucide-react";
 
 const CATEGORIES = [
-  { value: "cleaning", label: "Cleaning" },
-  { value: "security", label: "Security" },
-  { value: "pantry", label: "Pantry & Food" },
-  { value: "it-av", label: "IT / AV" },
-  { value: "maintenance", label: "Maintenance" },
-  { value: "stationery", label: "Stationery" },
-  { value: "furniture", label: "Furniture" },
-  { value: "other", label: "Other" },
+  { value: "Interior & Fit-out", label: "Interior & Fit-out" },
+  { value: "Electrical", label: "Electrical" },
+  { value: "Air Conditioning (AC / HVAC)", label: "Air Conditioning (AC / HVAC)" },
+  { value: "Networking & WiFi Setup", label: "Networking & WiFi Setup" },
+  { value: "CCTV & Security Systems", label: "CCTV & Security Systems" },
+  { value: "RO Water & Plumbing", label: "RO Water & Plumbing" },
+  { value: "Furniture & Fixtures", label: "Furniture & Fixtures" },
+  { value: "Cleaning & Housekeeping Services", label: "Cleaning & Housekeeping Services" },
+  { value: "Other Services", label: "Other Services" },
 ];
 
 interface FormState {
@@ -271,7 +272,7 @@ export function VendorForm() {
             label="GST Documents"
             name="gstDoc"
             accept=".pdf,.jpg,.jpeg,.png"
-            maxSizeMB={10}
+            maxSizeMB={15}
             value={gstDoc}
             onChange={setGstDoc}
           />
@@ -299,7 +300,7 @@ export function VendorForm() {
           label="PAN card"
           name="panCard"
           accept=".pdf,.jpg,.jpeg,.png"
-          maxSizeMB={10}
+          maxSizeMB={15}
           value={panCard}
           onChange={setPanCard}
         />
@@ -358,7 +359,7 @@ export function VendorForm() {
           label="Bank passbook"
           name="bankPassbook"
           accept=".pdf,.jpg,.jpeg,.png"
-          maxSizeMB={10}
+          maxSizeMB={15}
           required
           helperText="Used only for vendor payouts. Transmitted over TLS, stored encrypted, and accessed only by NammaOffice finance. See our privacy policy for retention details."
           value={bankPassbook}

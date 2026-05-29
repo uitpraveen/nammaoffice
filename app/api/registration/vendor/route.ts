@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { submitToZohoForm } from "@/lib/zoho";
+import { submitToZohoFormJson, uploadZohoFile } from "@/lib/zoho";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -47,35 +47,61 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Bank passbook is required" }, { status: 400 });
     }
 
-    // Forward to Zoho Forms. Set ZOHO_FORM_URL_VENDOR and replace the
-    // placeholder keys below with the actual Zoho field IDs from the
-    // published Vendor Onboarding form.
-    const ok = await submitToZohoForm(process.env.ZOHO_FORM_URL_VENDOR, {
-      // TODO: replace each key below with the matching Zoho field name.
-      Name_First: data.vendorName,
-      Dropdown: data.category,
-      SingleLine: data.companyName,
-      Website: data.website,
-      MultiLine: data.companyAddress,
-      MultiLine1: data.serviceSpecialization,
-      PhoneNumber_countrycodeval: data.contactPersonPhone,
-      Email: data.contactPersonEmail,
-      PhoneNumber1_countrycodeval: data.companyPhone,
-      Email1: data.companyEmail,
-      SingleLine1: data.gstNumber,
-      SingleLine2: data.panName,
-      SingleLine3: data.panNumber,
-      SingleLine4: data.bankName,
-      SingleLine5: data.accountHolderName,
-      Number: data.accountNumber,
-      SingleLine6: data.ifscCode,
-      SingleLine7: data.branchCity,
-      MultiLine2: data.comments,
-      FileUpload:
-        gstFile instanceof File && gstFile.size > 0 ? gstFile : undefined,
-      FileUpload1:
-        panFile instanceof File && panFile.size > 0 ? panFile : undefined,
-      FileUpload2: bankFile,
+    const formUrl = process.env.ZOHO_FORM_URL_VENDOR;
+    if (!formUrl) {
+      console.error("Vendor onboarding: ZOHO_FORM_URL_VENDOR is not set");
+      return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
+    }
+
+    // Zoho public forms upload files in TWO steps: stream each file to the
+    // staging host first (uploadZohoFile → filepath), then reference those
+    // paths in the /records JSON under "<FieldLinkName>-v2" arrays.
+    const upload = (file: File, field: string) =>
+      uploadZohoFile(file, { formUrl, fieldLinkName: field });
+
+    const bankPath = await upload(bankFile, "FileUpload2");
+    if (!bankPath) {
+      return NextResponse.json(
+        { error: "Bank passbook upload failed" },
+        { status: 502 }
+      );
+    }
+    const gstPath =
+      gstFile instanceof File && gstFile.size > 0
+        ? await upload(gstFile, "FileUpload")
+        : null;
+    const panPath =
+      panFile instanceof File && panFile.size > 0
+        ? await upload(panFile, "FileUpload1")
+        : null;
+
+    // Submit the record via the JSON /records endpoint. Field keys are the
+    // exact Zoho field link names read from the published "Namma office Vendor
+    // form". File fields use the "<FieldLinkName>-v2" array convention.
+    const ok = await submitToZohoFormJson(formUrl, {
+      SingleLine: data.vendorName, // Vendor Name
+      Dropdown: data.category, // Category of service
+      SingleLine1: data.gstNumber, // GST Number (if applicable)
+      Website: data.website, // Website
+      SingleLine2: data.companyName, // Company Name
+      PhoneNumber: data.contactPersonPhone, // Contact Person's Phone
+      Email: data.contactPersonEmail, // Contact Person's Email
+      PhoneNumber1: data.companyPhone, // Company Phone
+      Email1: data.companyEmail, // Company Email
+      SingleLine3: data.ifscCode, // IFSC Code
+      SingleLine4: data.accountNumber, // Account number
+      SingleLine5: data.branchCity, // Branch & City
+      SingleLine6: data.panName, // Company PAN card name
+      SingleLine7: data.panNumber, // PAN number
+      SingleLine8: data.bankName, // Bank name
+      SingleLine9: data.accountHolderName, // Account holder name
+      SingleLine10: data.companyAddress, // Company Address
+      MultiLine: data.serviceSpecialization, // Service & specialization
+      MultiLine1: data.comments, // Additional Inquiries or Comments
+      TermsConditions: data.agreeTerms === "true" ? "true" : "false", // Terms
+      "FileUpload2-v2": [bankPath], // Bank passbook (required)
+      ...(gstPath ? { "FileUpload-v2": [gstPath] } : {}), // GST Documents
+      ...(panPath ? { "FileUpload1-v2": [panPath] } : {}), // PAN card
     });
 
     if (!ok) {
