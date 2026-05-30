@@ -13,6 +13,8 @@ import {
   SERVICE_REQUEST_BRANCHES,
   SERVICE_REQUEST_FLOORS,
 } from "@/lib/data/zoho-service-request";
+import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
+import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
 interface FormState {
   companyName: string;
@@ -50,15 +52,20 @@ const initialState: FormState = {
   honeypot: "",
 };
 
-const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export function ServiceRequestForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => {
+      if (!e[key as string]) return e;
+      const n = { ...e };
+      delete n[key as string];
+      return n;
+    });
   }
 
   function validate(): Record<string, string> {
@@ -66,10 +73,11 @@ export function ServiceRequestForm() {
     if (!form.companyName.trim()) errs.companyName = "Required";
     if (!form.personName.trim()) errs.personName = "Required";
     if (!form.phone.trim()) errs.phone = "Required";
+    else if (!isValidPhone(form.phone)) errs.phone = "Enter a valid phone number";
     if (!form.email.trim()) errs.email = "Required";
-    else if (!EMAIL_RX.test(form.email)) errs.email = "Enter a valid email";
-    if (form.ccEmail1 && !EMAIL_RX.test(form.ccEmail1)) errs.ccEmail1 = "Enter a valid email";
-    if (form.ccEmail2 && !EMAIL_RX.test(form.ccEmail2)) errs.ccEmail2 = "Enter a valid email";
+    else if (!isValidEmail(form.email)) errs.email = "Enter a valid email";
+    if (form.ccEmail1 && !isValidEmail(form.ccEmail1)) errs.ccEmail1 = "Enter a valid email";
+    if (form.ccEmail2 && !isValidEmail(form.ccEmail2)) errs.ccEmail2 = "Enter a valid email";
     if (!form.ticketTitle.trim()) errs.ticketTitle = "Required";
     if (!form.branch) errs.branch = "Required";
     if (!form.area) errs.area = "Required";
@@ -89,9 +97,11 @@ export function ServiceRequestForm() {
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      scrollToFirstError();
       return;
     }
     setErrors({});
+    setServerError(null);
     setStatus("loading");
 
     try {
@@ -112,7 +122,14 @@ export function ServiceRequestForm() {
       if (form.attachment) fd.append("attachment", form.attachment);
 
       const res = await fetch("/api/service-request", { method: "POST", body: fd });
-      if (!res.ok) throw new Error("Server error");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setServerError(
+          data?.error ?? "Something went wrong. Please try again, or call +91 9092109213."
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -140,7 +157,7 @@ export function ServiceRequestForm() {
       {/* Honeypot — hidden from real users, visible to bots */}
       <input
         type="text"
-        name="company"
+        name="company_url"
         value={form.honeypot}
         onChange={(e) => update("honeypot", e.target.value)}
         tabIndex={-1}
@@ -232,7 +249,15 @@ export function ServiceRequestForm() {
             value={form.floor}
             onChange={(e) => {
               update("floor", e.target.value);
-              if (e.target.value !== "Other") update("floorOther", "");
+              if (e.target.value !== "Other") {
+                update("floorOther", "");
+                setErrors((errs) => {
+                  if (!errs.floorOther) return errs;
+                  const n = { ...errs };
+                  delete n.floorOther;
+                  return n;
+                });
+              }
             }}
             error={errors.floor}
           />
@@ -256,7 +281,15 @@ export function ServiceRequestForm() {
           value={form.area}
           onChange={(e) => {
             update("area", e.target.value);
-            if (e.target.value !== "Other") update("areaOther", "");
+            if (e.target.value !== "Other") {
+              update("areaOther", "");
+              setErrors((errs) => {
+                if (!errs.areaOther) return errs;
+                const n = { ...errs };
+                delete n.areaOther;
+                return n;
+              });
+            }
           }}
           error={errors.area}
         />
@@ -287,6 +320,7 @@ export function ServiceRequestForm() {
           maxSizeMB={15}
           value={form.attachment}
           onChange={(file) => update("attachment", file)}
+          error={errors.attachment}
           helperText="A photo or PDF makes triage faster. JPG, PNG, or PDF up to 15 MB."
         />
       </FormSection>
@@ -303,7 +337,7 @@ export function ServiceRequestForm() {
 
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
-          Something went wrong. Please try again, or call +91 9092109213.
+          {serverError ?? "Something went wrong. Please try again, or call +91 9092109213."}
         </p>
       )}
     </form>

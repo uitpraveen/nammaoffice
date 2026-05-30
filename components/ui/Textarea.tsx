@@ -31,6 +31,7 @@ export function Textarea({
       <textarea
         id={textareaId}
         required={required}
+        aria-invalid={error ? true : undefined}
         className={cn(
           "rounded-brand border border-warm-border bg-[#fbfaf6] px-4 py-3.5 text-[15px] font-sans text-warm-charcoal leading-relaxed",
           "placeholder:text-warm-charcoal/40",

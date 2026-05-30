@@ -9,6 +9,8 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { FormSection } from "@/components/ui/FormSection";
 import { CheckCircle2 } from "lucide-react";
+import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
+import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
 const CATEGORIES = [
   { value: "Interior & Fit-out", label: "Interior & Fit-out" },
@@ -93,10 +95,21 @@ export function VendorForm() {
   const [panCard, setPanCard] = useState<File | null>(null);
   const [bankPassbook, setBankPassbook] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  function clearError(key: string) {
+    setErrors((e) => {
+      if (!e[key]) return e;
+      const n = { ...e };
+      delete n[key];
+      return n;
+    });
+  }
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    clearError(key as string);
   }
 
   function validate(): Record<string, string> {
@@ -106,11 +119,26 @@ export function VendorForm() {
       if (typeof v === "string" && !v.trim()) errs[f] = "Required";
     });
     if (!form.agreeTerms) errs.agreeTerms = "Please accept the terms & conditions";
-    if (form.contactPersonEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contactPersonEmail)) {
+    if (form.contactPersonEmail && !isValidEmail(form.contactPersonEmail)) {
       errs.contactPersonEmail = "Enter a valid email";
     }
-    if (form.companyEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.companyEmail)) {
+    if (form.companyEmail && !isValidEmail(form.companyEmail)) {
       errs.companyEmail = "Enter a valid email";
+    }
+    if (form.contactPersonPhone && !isValidPhone(form.contactPersonPhone)) {
+      errs.contactPersonPhone = "Enter a valid phone number";
+    }
+    if (form.companyPhone && !isValidPhone(form.companyPhone)) {
+      errs.companyPhone = "Enter a valid phone number";
+    }
+    if (
+      form.gstNumber &&
+      !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/i.test(form.gstNumber.trim())
+    ) {
+      errs.gstNumber = "Enter a valid 15-character GSTIN";
+    }
+    if (form.website && !/^https?:\/\/.+\..+/.test(form.website.trim())) {
+      errs.website = "Enter a valid URL (https://…)";
     }
     if (form.panNumber && !/^[A-Z]{5}[0-9]{4}[A-Z]$/i.test(form.panNumber.trim())) {
       errs.panNumber = "PAN format should be ABCDE1234F";
@@ -124,10 +152,11 @@ export function VendorForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setServerError(null);
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToFirstError();
       return;
     }
     setErrors({});
@@ -141,7 +170,15 @@ export function VendorForm() {
 
     try {
       const res = await fetch("/api/registration/vendor", { method: "POST", body: fd });
-      if (!res.ok) throw new Error("Server error");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setServerError(
+          data?.error ??
+            "Something went wrong. Please try again, or email procurement@nammaoffice.com."
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -201,6 +238,7 @@ export function VendorForm() {
             placeholder="https://example.com"
             value={form.website}
             onChange={(e) => update("website", e.target.value)}
+            error={errors.website}
           />
         </div>
         <Textarea
@@ -267,6 +305,7 @@ export function VendorForm() {
             placeholder="If applicable"
             value={form.gstNumber}
             onChange={(e) => update("gstNumber", e.target.value)}
+            error={errors.gstNumber}
           />
           <FileUpload
             label="GST Documents"
@@ -274,7 +313,11 @@ export function VendorForm() {
             accept=".pdf,.jpg,.jpeg,.png"
             maxSizeMB={15}
             value={gstDoc}
-            onChange={setGstDoc}
+            onChange={(f) => {
+              setGstDoc(f);
+              clearError("gstDoc");
+            }}
+            error={errors.gstDoc}
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -302,7 +345,11 @@ export function VendorForm() {
           accept=".pdf,.jpg,.jpeg,.png"
           maxSizeMB={15}
           value={panCard}
-          onChange={setPanCard}
+          onChange={(f) => {
+            setPanCard(f);
+            clearError("panCard");
+          }}
+          error={errors.panCard}
         />
       </FormSection>
 
@@ -363,7 +410,10 @@ export function VendorForm() {
           required
           helperText="Used only for vendor payouts. Transmitted over TLS, stored encrypted, and accessed only by NammaOffice finance. See our privacy policy for retention details."
           value={bankPassbook}
-          onChange={setBankPassbook}
+          onChange={(f) => {
+            setBankPassbook(f);
+            clearError("bankPassbook");
+          }}
           error={errors.bankPassbook}
         />
         <p className="text-xs text-[var(--color-ink-secondary)] -mt-2">
@@ -384,16 +434,15 @@ export function VendorForm() {
           label="Additional Inquiries or Comments"
           value={form.comments}
           onChange={(e) => update("comments", e.target.value)}
+          error={errors.comments}
         />
         <div className="flex flex-col gap-1">
           <Checkbox
             label="I agree to the terms & conditions"
             checked={form.agreeTerms}
             onChange={(e) => update("agreeTerms", e.target.checked)}
+            error={errors.agreeTerms}
           />
-          {errors.agreeTerms && (
-            <p className="text-sm text-red-500 font-sans">{errors.agreeTerms}</p>
-          )}
         </div>
       </FormSection>
 
@@ -409,7 +458,8 @@ export function VendorForm() {
 
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
-          Something went wrong. Please try again, or email procurement@nammaoffice.com.
+          {serverError ??
+            "Something went wrong. Please try again, or email procurement@nammaoffice.com."}
         </p>
       )}
     </form>

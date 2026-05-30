@@ -30,7 +30,7 @@ export function Radio({
 }: RadioProps) {
   const groupId = `${name}-label`;
   return (
-    <div role="group" aria-labelledby={groupId}>
+    <div role="group" aria-labelledby={groupId} aria-invalid={error ? true : undefined}>
       <p
         id={groupId}
         className="text-[13px] font-semibold font-sans text-warm-charcoal tracking-[-0.005em] mb-3"

@@ -66,6 +66,7 @@ export function FileUpload({
         name={name}
         type="file"
         accept={accept}
+        aria-invalid={showError ? true : undefined}
         className="sr-only"
         onChange={(e) => handleSelect(e.target.files?.[0] ?? null)}
       />

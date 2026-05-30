@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
+import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
+import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
 const COMPANY_TYPES = [
   { value: "private-limited", label: "Private Limited" },
@@ -17,6 +19,7 @@ const COMPANY_TYPES = [
 export function CompanyRegistrationForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [form, setForm] = useState({
     companyName: "",
     companyType: "",
@@ -27,21 +30,37 @@ export function CompanyRegistrationForm() {
     message: "",
   });
 
+  function update<K extends keyof typeof form>(key: K, value: string) {
+    setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => {
+      if (!e[key as string]) return e;
+      const n = { ...e };
+      delete n[key as string];
+      return n;
+    });
+  }
+
   function validate() {
     const errs: Record<string, string> = {};
     if (!form.companyName.trim()) errs.companyName = "Company name is required";
     if (!form.companyType) errs.companyType = "Company type is required";
     if (!form.name.trim()) errs.name = "Contact name is required";
     if (!form.phone.trim()) errs.phone = "Phone is required";
+    else if (!isValidPhone(form.phone)) errs.phone = "Enter a valid phone number";
     if (!form.email.trim()) errs.email = "Email is required";
+    else if (!isValidEmail(form.email)) errs.email = "Enter a valid email";
+    if (form.numberOfDirectors && Number(form.numberOfDirectors) < 1)
+      errs.numberOfDirectors = "Must be at least 1";
     return errs;
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setServerError(null);
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      scrollToFirstError();
       return;
     }
     setErrors({});
@@ -52,7 +71,12 @@ export function CompanyRegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("Server error");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setServerError(data?.error ?? "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -76,7 +100,7 @@ export function CompanyRegistrationForm() {
         type="text"
         placeholder="Your proposed company name"
         value={form.companyName}
-        onChange={(e) => setForm({ ...form, companyName: e.target.value })}
+        onChange={(e) => update("companyName", e.target.value)}
         error={errors.companyName}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -85,7 +109,7 @@ export function CompanyRegistrationForm() {
           options={COMPANY_TYPES}
           placeholder="Select type"
           value={form.companyType}
-          onChange={(e) => setForm({ ...form, companyType: e.target.value })}
+          onChange={(e) => update("companyType", e.target.value)}
           error={errors.companyType}
         />
         <Input
@@ -94,7 +118,8 @@ export function CompanyRegistrationForm() {
           placeholder="e.g., 2"
           min="1"
           value={form.numberOfDirectors}
-          onChange={(e) => setForm({ ...form, numberOfDirectors: e.target.value })}
+          onChange={(e) => update("numberOfDirectors", e.target.value)}
+          error={errors.numberOfDirectors}
         />
       </div>
       <Input
@@ -102,7 +127,7 @@ export function CompanyRegistrationForm() {
         type="text"
         placeholder="Your name"
         value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
+        onChange={(e) => update("name", e.target.value)}
         error={errors.name}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -111,7 +136,7 @@ export function CompanyRegistrationForm() {
           type="tel"
           placeholder="+91 9000000000"
           value={form.phone}
-          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          onChange={(e) => update("phone", e.target.value)}
           error={errors.phone}
         />
         <Input
@@ -119,7 +144,7 @@ export function CompanyRegistrationForm() {
           type="email"
           placeholder="you@example.com"
           value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          onChange={(e) => update("email", e.target.value)}
           error={errors.email}
         />
       </div>
@@ -127,14 +152,14 @@ export function CompanyRegistrationForm() {
         label="Message (optional)"
         placeholder="Any specific requirements or questions..."
         value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
+        onChange={(e) => update("message", e.target.value)}
       />
       <Button type="submit" variant="primary" disabled={status === "loading"} className="w-full">
         {status === "loading" ? "Sending..." : "Submit Registration Enquiry"}
       </Button>
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
-          Something went wrong. Please try again.
+          {serverError ?? "Something went wrong. Please try again."}
         </p>
       )}
     </form>

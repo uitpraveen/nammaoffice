@@ -224,6 +224,7 @@ export function DateTimePicker({
           onClick={() => setOpen((o) => !o)}
           aria-haspopup="dialog"
           aria-expanded={open}
+          aria-invalid={error ? true : undefined}
           className={cn(
             "w-full flex items-center justify-between gap-3 rounded-brand border bg-[#fbfaf6] px-4 py-3.5 text-left text-[15px] font-sans transition-all duration-200",
             "hover:bg-white hover:border-warm-charcoal/25",

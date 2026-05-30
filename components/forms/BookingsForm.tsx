@@ -15,6 +15,8 @@ import {
   BOOKING_CENTRES_NOT_IN_ZOHO,
   getBookingRooms,
 } from "@/lib/data/zoho-venues";
+import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
+import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
 const REQUEST_TYPES = [
   {
@@ -52,7 +54,8 @@ const ALL_VENUE_GROUPS = cities
       .filter(
         (l) =>
           l.city === c.slug &&
-          !BOOKING_CENTRES_NOT_IN_ZOHO.has(`${l.city}/${l.slug}`),
+          !BOOKING_CENTRES_NOT_IN_ZOHO.has(`${l.city}/${l.slug}`) &&
+          getBookingRooms(`${l.city}/${l.slug}`).length > 0,
       )
       .map((l) => ({
         value: `${l.city}/${l.slug}`,
@@ -125,9 +128,16 @@ export function BookingsForm({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [serverError, setServerError] = useState<string | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => {
+      if (!e[key as string]) return e;
+      const n = { ...e };
+      delete n[key as string];
+      return n;
+    });
   }
 
   function validate(): Record<string, string> {
@@ -146,10 +156,24 @@ export function BookingsForm({
       const v = form[f];
       if (typeof v === "string" && !v.trim()) errs[f] = "Required";
     });
-    if (form.bookingPersonEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.bookingPersonEmail)) {
+    if (form.bookingPersonEmail && !isValidEmail(form.bookingPersonEmail)) {
       errs.bookingPersonEmail = "Enter a valid email";
     }
-    if (form.requestType === "booking" && !form.room) {
+    if (form.bookingPersonContact && !isValidPhone(form.bookingPersonContact)) {
+      errs.bookingPersonContact = "Enter a valid phone number";
+    }
+    if (
+      form.numParticipants &&
+      (!/^\d+$/.test(form.numParticipants) || parseInt(form.numParticipants, 10) < 1)
+    ) {
+      errs.numParticipants = "Enter a number of 1 or more";
+    }
+    if (
+      form.requestType === "booking" &&
+      form.venue &&
+      getBookingRooms(form.venue).length > 0 &&
+      !form.room
+    ) {
       errs.room = "Pick a room";
     }
     if (form.requestType === "gate-pass" && !form.companyToVisit.trim()) {
@@ -162,9 +186,11 @@ export function BookingsForm({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (form.honeypot) return; // Bot submission — silently drop.
+    setServerError(null);
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      scrollToFirstError();
       return;
     }
     setErrors({});
@@ -176,7 +202,14 @@ export function BookingsForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("Server error");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setServerError(
+          data?.error ?? "Something went wrong. Please try again, or call +91 9092109213.",
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -367,16 +400,12 @@ export function BookingsForm({
             onChange={(e) => update("duration", e.target.value)}
           />
         )}
-        <div className="flex flex-col gap-1">
-          <Checkbox
-            label="I agree to the terms & conditions"
-            checked={form.agreeTerms}
-            onChange={(e) => update("agreeTerms", e.target.checked)}
-          />
-          {errors.agreeTerms && (
-            <p className="text-sm text-red-500 font-sans">{errors.agreeTerms}</p>
-          )}
-        </div>
+        <Checkbox
+          label="I agree to the terms & conditions"
+          checked={form.agreeTerms}
+          onChange={(e) => update("agreeTerms", e.target.checked)}
+          error={errors.agreeTerms}
+        />
       </FormSection>
 
       <Button
@@ -395,7 +424,7 @@ export function BookingsForm({
 
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
-          Something went wrong. Please try again, or call +91 9092109213.
+          {serverError ?? "Something went wrong. Please try again, or call +91 9092109213."}
         </p>
       )}
     </form>

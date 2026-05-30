@@ -40,6 +40,7 @@ export function Input({
         <input
           id={inputId}
           required={required}
+          aria-invalid={error ? true : undefined}
           className={cn(
             "w-full rounded-brand border border-warm-border bg-[#fbfaf6] py-3.5 text-[15px] font-sans text-warm-charcoal",
             leftIcon ? "pl-10 pr-4" : "px-4",

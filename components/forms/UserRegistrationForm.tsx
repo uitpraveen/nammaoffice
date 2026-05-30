@@ -10,6 +10,8 @@ import { Radio } from "@/components/ui/Radio";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { DateTimePicker } from "@/components/ui/DateTimePicker";
 import { CheckCircle2 } from "lucide-react";
+import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
+import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
 const TSHIRT_SIZES = [
   { value: "XS", label: "XS" },
@@ -62,17 +64,30 @@ export function UserRegistrationForm() {
   const [form, setForm] = useState<FormState>(INITIAL);
   const [aadhaar, setAadhaar] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => {
+      if (!e[key as string]) return e;
+      const n = { ...e };
+      delete n[key as string];
+      return n;
+    });
   }
 
   function validate(): Record<string, string> {
     const errs: Record<string, string> = {};
+    if (!form.name.trim()) errs.name = "Name is required";
+    if (!form.phone.trim()) {
+      errs.phone = "Phone is required";
+    } else if (!isValidPhone(form.phone)) {
+      errs.phone = "Enter a valid phone number";
+    }
     if (!form.dob) errs.dob = "Date of birth is required";
     if (!form.agreeTerms) errs.agreeTerms = "Please accept the terms & conditions";
-    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    if (form.email && !isValidEmail(form.email)) {
       errs.email = "Enter a valid email";
     }
     return errs;
@@ -80,9 +95,11 @@ export function UserRegistrationForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setServerError(null);
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      scrollToFirstError();
       return;
     }
     setErrors({});
@@ -94,7 +111,15 @@ export function UserRegistrationForm() {
 
     try {
       const res = await fetch("/api/registration/user", { method: "POST", body: fd });
-      if (!res.ok) throw new Error("Server error");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setServerError(
+          data?.error ??
+            "Something went wrong. Please try again, or call us at +91 9092109213.",
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -122,6 +147,7 @@ export function UserRegistrationForm() {
           placeholder="Your full name"
           value={form.name}
           onChange={(e) => update("name", e.target.value)}
+          error={errors.name}
         />
         <DateTimePicker
           label="D.O.B"
@@ -146,6 +172,7 @@ export function UserRegistrationForm() {
           placeholder="+91 9000000000"
           value={form.phone}
           onChange={(e) => update("phone", e.target.value)}
+          error={errors.phone}
         />
         <Input
           label="Email"
@@ -163,6 +190,7 @@ export function UserRegistrationForm() {
         placeholder="Your company"
         value={form.companyName}
         onChange={(e) => update("companyName", e.target.value)}
+        error={errors.companyName}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -205,6 +233,7 @@ export function UserRegistrationForm() {
         placeholder="Your address"
         value={form.address}
         onChange={(e) => update("address", e.target.value)}
+        error={errors.address}
       />
 
       <FileUpload
@@ -241,16 +270,12 @@ export function UserRegistrationForm() {
         onChange={(e) => update("comments", e.target.value)}
       />
 
-      <div className="flex flex-col gap-1">
-        <Checkbox
-          label="I agree to the terms & conditions"
-          checked={form.agreeTerms}
-          onChange={(e) => update("agreeTerms", e.target.checked)}
-        />
-        {errors.agreeTerms && (
-          <p className="text-sm text-red-500 font-sans">{errors.agreeTerms}</p>
-        )}
-      </div>
+      <Checkbox
+        label="I agree to the terms & conditions"
+        checked={form.agreeTerms}
+        onChange={(e) => update("agreeTerms", e.target.checked)}
+        error={errors.agreeTerms}
+      />
 
       <Button
         type="submit"
@@ -264,7 +289,8 @@ export function UserRegistrationForm() {
 
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
-          Something went wrong. Please try again, or call us at +91 9092109213.
+          {serverError ??
+            "Something went wrong. Please try again, or call us at +91 9092109213."}
         </p>
       )}
     </form>

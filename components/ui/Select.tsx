@@ -47,6 +47,7 @@ export function Select({
         <select
           id={selectId}
           required={required}
+          aria-invalid={error ? true : undefined}
           className={cn(
             "w-full appearance-none rounded-brand border border-warm-border bg-[#fbfaf6] px-4 pr-11 py-3.5 text-[15px] font-sans text-warm-charcoal",
             "hover:bg-white hover:border-warm-charcoal/25",
