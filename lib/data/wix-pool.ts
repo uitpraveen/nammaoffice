@@ -1,17 +1,24 @@
 /**
- * All real photographs hosted on the live nammaoffice.com (Wix CDN).
- * Used as the single source of truth for image paths in data files.
+ * All real photographs originally sourced from the live nammaoffice.com
+ * (Wix CDN). They are now downloaded and self-hosted inside the app at
+ * `public/images/wix/` — we no longer hot-link static.wixstatic.com.
+ * This file is the single source of truth for image paths in data files.
  *
  * Inventory snapshot 2026-05-06: 109 unique image URLs were found in
  * the static HTML across the public site (home + franchise + plans +
  * private/open/meeting + 8 location detail pages + workation + events
- * + newsinsights + every form/registration page). Every one of those
- * 109 is referenced below — split into a hand-curated `wix` map of
- * scenes that components want by name, plus per-page pools that
- * components can index into when they need a page-appropriate photo.
+ * + newsinsights + every form/registration page). Three were dropped as
+ * stray vector/non-photo assets (wheelchair + reception icons) and one
+ * team group-photo on request, leaving the set referenced below — split
+ * into a hand-curated `wix` map of scenes that components want by name,
+ * plus per-page pools that components can index into for a page-
+ * appropriate photo.
+ *
+ * To localize a new image: drop the file in `public/images/wix/` and
+ * reference it as `W + "<filename>"`. `W` is the local public path.
  */
 
-const W = "https://static.wixstatic.com/media/";
+const W = "/images/wix/";
 
 /**
  * Hand-curated semantic shortcuts. Existing components import from
@@ -19,7 +26,6 @@ const W = "https://static.wixstatic.com/media/";
  */
 export const wix = {
   // Distinctive, named scenes
-  team: W + "04fb8d_58b6bcab18c046aea219db1257f02bcb~mv2.jpeg",
   cabin: W + "04fb8d_67a613cf39c24e66be711bcba4a3a90b~mv2.jpeg",
   discussion: W + "04fb8d_d183ca1e783b4e7497f94e69d1a101d0~mv2.jpeg",
   ramakrishna: W + "04fb8d_d2ed9c2723e144a1805e5fa96960be20~mv2.jpeg",
@@ -32,13 +38,8 @@ export const wix = {
 
   // Named scene photos surfaced via `alt` text on the live home page.
   dining: W + "04fb8d_0cdcbc70cb5d4268acdf338a42520dc4~mv2.jpeg",
-  reception: W + "fd8c76_b97e419c0359462fbd795408baec0f0a~mv2.jpg",
   ac: W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
-  lift: W + "fd8c76_e5768ce548d84ad4b6ef049ccaa525ed~mv2.jpg",
-  cctv: W + "fd8c76_238a25e901974236abbfa5aa87224b84~mv2.jpg",
-  refreshments: W + "fd8c76_1c5665f24a4041629ef75d3004181123~mv2.jpg",
   support: W + "fd8c76_fa955e4cc935490780b1dde5b533b076~mv2.jpg",
-  security: W + "fd8c76_a2f39f4f323846b58bf41a5b7195217c~mv2.jpg",
 
   // General-purpose pool (interior shots, workstations, lounges)
   a: W + "fd8c76_f9722489d56d48b18c7dd9ec02c629bc~mv2.jpeg",
@@ -89,35 +90,28 @@ export const homePool: readonly string[] = [
   W + "fd8c76_1512758b68ae45f6a2d38dadff42c714~mv2.jpeg",
   W + "fd8c76_1a37645f42f64958885201f6c872f5eb~mv2.jpeg",
   W + "fd8c76_1b35ae9393464d56abe9e584c5667368~mv2.jpeg",
-  W + "fd8c76_1bb9f47211d84b609c15ee0629e79df6~mv2.jpg",
-  W + "fd8c76_1c5665f24a4041629ef75d3004181123~mv2.jpg",
   W + "fd8c76_23431451d3dc42068a03733a5698184c~mv2.jpeg",
-  W + "fd8c76_238a25e901974236abbfa5aa87224b84~mv2.jpg",
   W + "fd8c76_27bba0481c644ed49b3933e0d6a3a644~mv2.jpeg",
   W + "fd8c76_2b57a8b6f1b248c780d207cee189b0d6~mv2.jpeg",
   W + "fd8c76_4328959acf804e2084a580910d3db65b~mv2.jpeg",
   W + "fd8c76_5320a5d0f9cc404dac8a5397fbb0a8d9~mv2.jpeg",
   W + "fd8c76_69053cc670a84bf2b6b9748086a6c192~mv2.jpeg",
-  W + "fd8c76_714830b256fe45dbb3016a4f3df1faaa~mv2.jpg",
   W + "fd8c76_7188fafbb93b4b83b0edbf11ac365783~mv2.jpeg",
   W + "fd8c76_74a6d33639f946c8b5b5a0f34dda4056~mv2.jpeg",
   W + "fd8c76_7fdc3def9cfc4c828726f23deec5b7ba~mv2.jpeg",
   W + "fd8c76_856492ca2cc0460f9d569385dcd37096~mv2.jpeg",
   W + "fd8c76_99f59ffc2fcf450b80da4d7ed86f8874~mv2.jpeg",
-  W + "fd8c76_a2f39f4f323846b58bf41a5b7195217c~mv2.jpg",
   W + "fd8c76_a567df2dc08942fd94eb8b5cc16292a8~mv2.jpg",
   W + "fd8c76_a989392be7a148d78a8e7e34d8a25b36~mv2.jpeg",
   W + "fd8c76_a98eeeeb02e74cf29ae8be2ad8a0ed79~mv2.jpeg",
   W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
   W + "fd8c76_adfce44807574a80854621331513bb54~mv2.jpeg",
   W + "fd8c76_b063e87299be428e987bdb30d5bdd0dc~mv2.jpeg",
-  W + "fd8c76_b97e419c0359462fbd795408baec0f0a~mv2.jpg",
   W + "fd8c76_cc103dd727914e0281de78da9f3367ee~mv2.jpeg",
   W + "fd8c76_d016f9a45737481e8356ce4a6160e8f4~mv2.jpeg",
   W + "fd8c76_d52103781e3b4471baf59da33069f7ea~mv2.jpeg",
   W + "fd8c76_d83ef70381da4450bb512f9d15a09362~mv2.jpeg",
   W + "fd8c76_da9ba4ed2c194c8b8d35bbcfadcea51c~mv2.jpeg",
-  W + "fd8c76_e5768ce548d84ad4b6ef049ccaa525ed~mv2.jpg",
   W + "fd8c76_e9ba12135fff4004b1536c9f75aa762c~mv2.jpeg",
   W + "fd8c76_ec51171939344a288b02c17146419e92~mv2.jpeg",
   W + "fd8c76_efcbd8c72a154ce8be5263e11e3d59eb~mv2.jpeg",
@@ -230,36 +224,29 @@ export const interiorPool: readonly string[] = [
   W + "fd8c76_1512758b68ae45f6a2d38dadff42c714~mv2.jpeg",
   W + "fd8c76_1a37645f42f64958885201f6c872f5eb~mv2.jpeg",
   W + "fd8c76_1b35ae9393464d56abe9e584c5667368~mv2.jpeg",
-  W + "fd8c76_1bb9f47211d84b609c15ee0629e79df6~mv2.jpg",
-  W + "fd8c76_1c5665f24a4041629ef75d3004181123~mv2.jpg",
   W + "fd8c76_23431451d3dc42068a03733a5698184c~mv2.jpeg",
-  W + "fd8c76_238a25e901974236abbfa5aa87224b84~mv2.jpg",
   W + "fd8c76_27bba0481c644ed49b3933e0d6a3a644~mv2.jpeg",
   W + "fd8c76_2b57a8b6f1b248c780d207cee189b0d6~mv2.jpeg",
   W + "fd8c76_4328959acf804e2084a580910d3db65b~mv2.jpeg",
   W + "fd8c76_5320a5d0f9cc404dac8a5397fbb0a8d9~mv2.jpeg",
   W + "fd8c76_69053cc670a84bf2b6b9748086a6c192~mv2.jpeg",
-  W + "fd8c76_714830b256fe45dbb3016a4f3df1faaa~mv2.jpg",
   W + "fd8c76_7188fafbb93b4b83b0edbf11ac365783~mv2.jpeg",
   W + "fd8c76_74a6d33639f946c8b5b5a0f34dda4056~mv2.jpeg",
   W + "fd8c76_7fdc3def9cfc4c828726f23deec5b7ba~mv2.jpeg",
   W + "fd8c76_852a9f8695cf42cdbf9851bf34a5eeb6~mv2.jpeg",
   W + "fd8c76_856492ca2cc0460f9d569385dcd37096~mv2.jpeg",
   W + "fd8c76_99f59ffc2fcf450b80da4d7ed86f8874~mv2.jpeg",
-  W + "fd8c76_a2f39f4f323846b58bf41a5b7195217c~mv2.jpg",
   W + "fd8c76_a567df2dc08942fd94eb8b5cc16292a8~mv2.jpg",
   W + "fd8c76_a989392be7a148d78a8e7e34d8a25b36~mv2.jpeg",
   W + "fd8c76_a98eeeeb02e74cf29ae8be2ad8a0ed79~mv2.jpeg",
   W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
   W + "fd8c76_adfce44807574a80854621331513bb54~mv2.jpeg",
   W + "fd8c76_b063e87299be428e987bdb30d5bdd0dc~mv2.jpeg",
-  W + "fd8c76_b97e419c0359462fbd795408baec0f0a~mv2.jpg",
   W + "fd8c76_cc103dd727914e0281de78da9f3367ee~mv2.jpeg",
   W + "fd8c76_d016f9a45737481e8356ce4a6160e8f4~mv2.jpeg",
   W + "fd8c76_d52103781e3b4471baf59da33069f7ea~mv2.jpeg",
   W + "fd8c76_d83ef70381da4450bb512f9d15a09362~mv2.jpeg",
   W + "fd8c76_da9ba4ed2c194c8b8d35bbcfadcea51c~mv2.jpeg",
-  W + "fd8c76_e5768ce548d84ad4b6ef049ccaa525ed~mv2.jpg",
   W + "fd8c76_e9ba12135fff4004b1536c9f75aa762c~mv2.jpeg",
   W + "fd8c76_ec51171939344a288b02c17146419e92~mv2.jpeg",
   W + "fd8c76_efcbd8c72a154ce8be5263e11e3d59eb~mv2.jpeg",

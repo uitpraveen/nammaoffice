@@ -26,11 +26,15 @@ function buildSlides({ images, locationName, cityName }: BaseProps) {
  * full gallery from inside the viewer).
  */
 export function LocationHeroStrip(props: BaseProps) {
-  const { images, locationName, cityName } = props;
+  const { locationName, cityName } = props;
+  // Drop any falsy entries: galleries are built from absolute indices into a
+  // curated image pool, so culling a pool item can leave an out-of-range
+  // `undefined`. Filtering keeps `<Image>` from receiving an empty src.
+  const images = props.images.filter(Boolean);
   const [openAt, setOpenAt] = useState<number | null>(null);
   const open = useCallback((i: number) => setOpenAt(i), []);
   const close = useCallback(() => setOpenAt(null), []);
-  const slides = buildSlides(props);
+  const slides = buildSlides({ images, locationName, cityName });
 
   return (
     <>
@@ -87,11 +91,14 @@ export function LocationHeroStrip(props: BaseProps) {
  * the global image index (offset +3 to skip the hero photos).
  */
 export function LocationInsideGallery(props: BaseProps) {
-  const { images, locationName, cityName } = props;
+  const { locationName, cityName } = props;
+  // See LocationHeroStrip: filter falsy entries so a culled pool item can't
+  // surface as an empty <Image> src.
+  const images = props.images.filter(Boolean);
   const [openAt, setOpenAt] = useState<number | null>(null);
   const open = useCallback((i: number) => setOpenAt(i), []);
   const close = useCallback(() => setOpenAt(null), []);
-  const slides = buildSlides(props);
+  const slides = buildSlides({ images, locationName, cityName });
   const rest = images.slice(3);
 
   if (rest.length === 0) return null;
