@@ -38,8 +38,6 @@ export const wix = {
 
   // Named scene photos surfaced via `alt` text on the live home page.
   dining: W + "04fb8d_0cdcbc70cb5d4268acdf338a42520dc4~mv2.jpeg",
-  ac: W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
-  support: W + "fd8c76_fa955e4cc935490780b1dde5b533b076~mv2.jpg",
 
   // General-purpose pool (interior shots, workstations, lounges)
   a: W + "fd8c76_f9722489d56d48b18c7dd9ec02c629bc~mv2.jpeg",
@@ -104,7 +102,6 @@ export const homePool: readonly string[] = [
   W + "fd8c76_a567df2dc08942fd94eb8b5cc16292a8~mv2.jpg",
   W + "fd8c76_a989392be7a148d78a8e7e34d8a25b36~mv2.jpeg",
   W + "fd8c76_a98eeeeb02e74cf29ae8be2ad8a0ed79~mv2.jpeg",
-  W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
   W + "fd8c76_adfce44807574a80854621331513bb54~mv2.jpeg",
   W + "fd8c76_b063e87299be428e987bdb30d5bdd0dc~mv2.jpeg",
   W + "fd8c76_cc103dd727914e0281de78da9f3367ee~mv2.jpeg",
@@ -119,7 +116,6 @@ export const homePool: readonly string[] = [
   W + "fd8c76_f5aef83229954645ba42733ee99d5f65~mv2.jpeg",
   W + "fd8c76_f70beedfdb6f4c6dabf49d4d6c2b4ba4~mv2.jpeg",
   W + "fd8c76_f74a00e95a5f44e298fb5e8fd11b4fd1~mv2.jpeg",
-  W + "fd8c76_fa955e4cc935490780b1dde5b533b076~mv2.jpg",
   W + "fd8c76_fccea0b54ba44cc58e0175725c69b6a2~mv2.jpeg",
   W + "fd8c76_fcfdb77631f947948f359da459f15793~mv2.jpeg",
   W + "fd8c76_fe7bcc0459834ff6b6746fb16f261770~mv2.jpeg",
@@ -239,7 +235,6 @@ export const interiorPool: readonly string[] = [
   W + "fd8c76_a567df2dc08942fd94eb8b5cc16292a8~mv2.jpg",
   W + "fd8c76_a989392be7a148d78a8e7e34d8a25b36~mv2.jpeg",
   W + "fd8c76_a98eeeeb02e74cf29ae8be2ad8a0ed79~mv2.jpeg",
-  W + "fd8c76_a9fdc741a1aa4b23b53013e4efee552e~mv2.jpg",
   W + "fd8c76_adfce44807574a80854621331513bb54~mv2.jpeg",
   W + "fd8c76_b063e87299be428e987bdb30d5bdd0dc~mv2.jpeg",
   W + "fd8c76_cc103dd727914e0281de78da9f3367ee~mv2.jpeg",
@@ -254,7 +249,6 @@ export const interiorPool: readonly string[] = [
   W + "fd8c76_f5aef83229954645ba42733ee99d5f65~mv2.jpeg",
   W + "fd8c76_f70beedfdb6f4c6dabf49d4d6c2b4ba4~mv2.jpeg",
   W + "fd8c76_f74a00e95a5f44e298fb5e8fd11b4fd1~mv2.jpeg",
-  W + "fd8c76_fa955e4cc935490780b1dde5b533b076~mv2.jpg",
   W + "fd8c76_fccea0b54ba44cc58e0175725c69b6a2~mv2.jpeg",
   W + "fd8c76_fcfdb77631f947948f359da459f15793~mv2.jpeg",
   W + "fd8c76_fe7bcc0459834ff6b6746fb16f261770~mv2.jpeg",
