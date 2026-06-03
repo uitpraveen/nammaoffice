@@ -85,8 +85,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <Image
               src="/images/logo.png"
               alt="NammaOffice"
-              width={1000}
-              height={137}
+              width={2102}
+              height={358}
               className="h-7 w-auto"
             />
           </Link>

@@ -112,8 +112,8 @@ export function Footer() {
             <Image
               src="/images/logo.png"
               alt="NammaOffice"
-              width={1000}
-              height={137}
+              width={2102}
+              height={358}
               className="h-9 w-auto brightness-0 invert"
             />
           </Link>
