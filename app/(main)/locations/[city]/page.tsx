@@ -34,13 +34,6 @@ export default async function CityPage({ params }: Props) {
 
   const cityLocations = getLocationsByCity(city.slug as CitySlug);
 
-  const avgLat =
-    cityLocations.reduce((sum, l) => sum + l.coordinates.lat, 0) /
-    (cityLocations.length || 1);
-  const avgLng =
-    cityLocations.reduce((sum, l) => sum + l.coordinates.lng, 0) /
-    (cityLocations.length || 1);
-
   return (
     <>
       <HeroBanner eyebrow={`${cityLocations.length} centres in`} title={city.name} subtitle={city.tagline} />
@@ -106,8 +99,7 @@ export default async function CityPage({ params }: Props) {
           Find us in {city.name}
         </h2>
         <GoogleMap
-          lat={avgLat}
-          lng={avgLng}
+          query={`${city.name}, Tamil Nadu`}
           title={`NammaOffice ${city.name} centres`}
           className="h-80 rounded-2xl overflow-hidden"
         />

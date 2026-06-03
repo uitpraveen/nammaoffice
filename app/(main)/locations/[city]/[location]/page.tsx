@@ -61,7 +61,7 @@ export default async function LocationPage({ params }: Props) {
   if (!city || !location || location.city !== citySlug) notFound();
 
   const amenityList = getAmenities(location.amenities);
-  const directionsUrl = googleMapsUrl(location.coordinates.lat, location.coordinates.lng);
+  const directionsUrl = googleMapsUrl(location.address);
   const waUrl = whatsappUrl(
     formatPhone(location.phone),
     `Hi, I'm interested in booking a workspace at NammaOffice ${location.name}, ${city.name}.`
@@ -227,8 +227,7 @@ export default async function LocationPage({ params }: Props) {
           <aside className="lg:w-[38%]">
             <div className="sticky top-32 flex flex-col gap-5">
               <GoogleMap
-                lat={location.coordinates.lat}
-                lng={location.coordinates.lng}
+                query={location.address}
                 title={`${location.name}, ${city.name}`}
                 className="h-56 rounded-2xl overflow-hidden"
               />

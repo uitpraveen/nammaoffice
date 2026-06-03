@@ -2,14 +2,14 @@ import { cn } from "@/lib/utils";
 import { googleMapsEmbedUrl } from "@/lib/utils";
 
 interface GoogleMapProps {
-  lat: number;
-  lng: number;
+  /** Full street address (preferred) or a "lat,lng" string. */
+  query: string;
   title: string;
   className?: string;
 }
 
-export function GoogleMap({ lat, lng, title, className }: GoogleMapProps) {
-  const src = googleMapsEmbedUrl(lat, lng);
+export function GoogleMap({ query, title, className }: GoogleMapProps) {
+  const src = googleMapsEmbedUrl(query);
 
   return (
     <div className={cn("w-full overflow-hidden rounded-brand", className)}>

@@ -12,7 +12,6 @@ import {
   Pause,
   Play,
   Sparkles,
-  Star,
   Wifi,
 } from "lucide-react";
 import { HeroParticles } from "@/components/ui/HeroParticles";
@@ -75,7 +74,12 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HeroSection() {
   const [[active, direction], setActiveDir] = useState<[number, number]>([0, 1]);
-  const [paused, setPaused] = useState(false);
+  // Two independent pause sources so they don't clobber each other: the manual
+  // play/pause button owns `userPaused`; hovering the hero owns `hovering`.
+  // Autoplay runs only when neither is set. (Sharing one flag made the button
+  // need multiple clicks — hover events kept flipping it.)
+  const [userPaused, setUserPaused] = useState(false);
+  const [hovering, setHovering] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const goTo = useCallback((idx: number, dir: number = 1) => {
@@ -91,12 +95,12 @@ export function HeroSection() {
   }, []);
 
   useEffect(() => {
-    if (paused) return;
+    if (userPaused || hovering) return;
     timerRef.current = setTimeout(next, SLIDE_MS);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [active, paused, next]);
+  }, [active, userPaused, hovering, next]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -108,14 +112,16 @@ export function HeroSection() {
   }, [next, prev]);
 
   const slide = SLIDES[active];
+  // Carousel is visually paused (progress bar frozen) when either source pauses.
+  const isPaused = userPaused || hovering;
 
   return (
     <>
     <section
       id="hero"
       className="relative h-[100svh] min-h-[560px] flex flex-col overflow-hidden bg-[var(--color-charcoal)]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
       aria-roledescription="carousel"
     >
       {/* Slide images — pre-mounted siblings, opacity-only crossfade */}
@@ -167,7 +173,7 @@ export function HeroSection() {
 
       {/* Nav clearance — keeps content from drifting under the fixed header on
           short viewports where flex centering would overflow upward. */}
-      <div aria-hidden className="h-[132px] md:h-[148px] shrink-0 relative z-10" />
+      <div aria-hidden className="h-[132px] md:h-[148px] shrink-0 relative z-10 pointer-events-none" />
 
       {/* Content — `safe center` alignment centers when content fits but falls
           back to top-aligned when content would overflow upward, so the
@@ -253,74 +259,63 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           >
-            {/* Rating card */}
+            {/* Coverage stats — real figures + the actual city list, from data */}
             <div
               className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
               style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1">
-                  {[0, 1, 2, 3, 4].map((k) => (
-                    <Star
-                      key={k}
-                      className="w-3.5 h-3.5"
-                      fill="var(--color-gold-300)"
-                      stroke="var(--color-gold-300)"
-                      strokeWidth={1}
-                    />
-                  ))}
-                </div>
-                <span className="text-[10px] uppercase tracking-[0.16em] text-white/60">
-                  Verified
-                </span>
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-[28px] font-medium leading-none tabular-nums tracking-tight">
-                  4.9
-                </span>
-                <span className="text-[12px] text-white/60">/ 5 · 200+ reviews</span>
-              </div>
-              <p className="mt-2 text-[12.5px] leading-snug text-white/80 line-clamp-2">
-                &ldquo;Best workspace experience I&apos;ve had in Salem. The team feels like family.&rdquo;
-              </p>
-              <div className="mt-2 pt-2 border-t border-white/10 text-[11px] uppercase tracking-[0.14em] text-white/55">
-                Arjun K. · Founder
-              </div>
-            </div>
-
-            {/* Live now card */}
-            <div
-              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
-              style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <span className="relative flex w-2 h-2">
-                  <span
-                    className="absolute inset-0 rounded-full animate-ping"
-                    style={{ background: "var(--color-gold-300)" }}
-                  />
-                  <span
-                    className="relative w-2 h-2 rounded-full"
-                    style={{ background: "var(--color-gold-300)" }}
-                  />
-                </span>
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin className="w-3.5 h-3.5 text-white/70" strokeWidth={1.75} />
                 <span className="text-[10px] uppercase tracking-[0.18em] text-white/75 font-medium">
-                  Live now
+                  Across Tamil Nadu
                 </span>
               </div>
               <div className="flex items-end justify-between">
                 <div>
                   <div className="text-[24px] font-medium leading-none tabular-nums tracking-tight">
-                    312
+                    {locations.length}
                   </div>
-                  <div className="mt-1 text-[12px] text-white/65">members working</div>
+                  <div className="mt-1 text-[12px] text-white/65">centres</div>
                 </div>
                 <div className="text-right">
                   <div className="text-[24px] font-medium leading-none tabular-nums tracking-tight">
-                    10
+                    {cities.length}
                   </div>
-                  <div className="mt-1 text-[12px] text-white/65">centres open</div>
+                  <div className="mt-1 text-[12px] text-white/65">cities</div>
                 </div>
+              </div>
+              <div className="mt-3 pt-3 border-t border-white/10 text-[11.5px] leading-relaxed text-white/70">
+                {cities.map((c) => c.name).join(" · ")}
+              </div>
+            </div>
+
+            {/* What we offer — genuine workspace types from the locations data */}
+            <div
+              className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
+              style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
+            >
+              <div className="flex items-center gap-2 mb-2.5">
+                <Building2 className="w-3.5 h-3.5 text-white/70" strokeWidth={1.75} />
+                <span className="text-[10px] uppercase tracking-[0.18em] text-white/75 font-medium">
+                  Workspaces
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  "Private cabins",
+                  "Open desks",
+                  "Cubicles",
+                  "Meeting halls",
+                  "Managed offices",
+                  "Business lounge",
+                ].map((w) => (
+                  <span
+                    key={w}
+                    className="text-[11px] px-2 py-0.5 rounded-full bg-white/[0.07] border border-white/10 text-white/75"
+                  >
+                    {w}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -358,7 +353,7 @@ export function HeroSection() {
 
       {/* Bottom space reservation — keeps content (esp. CTAs) clear of the
           absolutely-positioned carousel controls / mobile dots below. */}
-      <div aria-hidden className="h-[56px] md:h-[150px] lg:h-[160px] shrink-0 relative z-10" />
+      <div aria-hidden className="h-[56px] md:h-[150px] lg:h-[160px] shrink-0 relative z-10 pointer-events-none" />
 
       {/* Carousel controls */}
       <div className="absolute bottom-14 lg:bottom-16 left-1/2 -translate-x-1/2 z-20 hidden md:flex items-end gap-5 max-w-[calc(100vw-2rem)]">
@@ -408,12 +403,12 @@ export function HeroSection() {
                 <Image src={s.src} alt={s.caption} fill sizes="96px" quality={50} className="object-cover" />
                 {isActive && (
                   <motion.span
-                    key={`progress-${active}-${paused ? "p" : "r"}`}
+                    key={`progress-${active}-${isPaused ? "p" : "r"}`}
                     aria-hidden
                     initial={{ scaleX: 0 }}
-                    animate={{ scaleX: paused ? 0 : 1 }}
+                    animate={{ scaleX: isPaused ? 0 : 1 }}
                     transition={{
-                      duration: paused ? 0 : SLIDE_MS / 1000,
+                      duration: isPaused ? 0 : SLIDE_MS / 1000,
                       ease: "linear",
                     }}
                     className="absolute bottom-0 left-0 h-[3px] w-full bg-[var(--color-gold)] origin-left"
@@ -429,10 +424,10 @@ export function HeroSection() {
             <ArrowLeft className="w-4 h-4" strokeWidth={2.25} />
           </ControlButton>
           <ControlButton
-            onClick={() => setPaused((p) => !p)}
-            label={paused ? "Resume autoplay" : "Pause autoplay"}
+            onClick={() => setUserPaused((p) => !p)}
+            label={userPaused ? "Resume autoplay" : "Pause autoplay"}
           >
-            {paused ? (
+            {userPaused ? (
               <Play className="w-3.5 h-3.5" strokeWidth={2.25} />
             ) : (
               <Pause className="w-3.5 h-3.5" strokeWidth={2.25} />
