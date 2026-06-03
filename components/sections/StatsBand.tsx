@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { BRAND } from "@/lib/constants";
 import { cities, locations } from "@/lib/data/locations";
 
 /**
@@ -57,11 +56,11 @@ export function StatsBand() {
               <span className="display-italic">fastest-growing</span> cities.
             </h2>
             <p className="mt-5 text-[15px] text-white/65 leading-relaxed max-w-md">
-              {locations.length} centres across {cities.length} cities — {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}. Hundreds of members building everything from textile exports to SaaS startups.
+              {locations.length} centres across {cities.length} cities — {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}. Premium workspaces for founders, freelancers, and growing teams.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
-                href="/about"
+                href="/#about"
                 className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[var(--color-gold-300)] hover:text-[var(--color-gold)] transition-colors"
               >
                 About NammaOffice
@@ -82,18 +81,10 @@ export function StatsBand() {
             whileInView="visible"
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ staggerChildren: 0.06, delayChildren: 0.15 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3"
+            className="grid grid-cols-2 gap-3"
           >
             <Stat label="Centres" value={String(locations.length)} />
             <Stat label="Cities" value={String(cities.length)} />
-            <Stat label="Members" value="500+" />
-            <Stat
-              label="Rating"
-              value="4.9"
-              suffix="/5"
-              href={BRAND.googleReviewsUrl}
-              hint="Google reviews"
-            />
           </motion.div>
         </div>
       </div>

@@ -5,7 +5,7 @@ export const amenities: Amenity[] = [
     id: "high-speed-wifi",
     name: "High-Speed Wi-Fi",
     icon: "/icons/wifi.svg",
-    description: "Dedicated 1 Gbps fibre connection with failover backup",
+    description: "Fast, reliable Wi-Fi at every centre",
   },
   {
     id: "power-backup",

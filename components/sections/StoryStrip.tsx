@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
 import { fadeUp } from "@/lib/motion";
 
 /**
@@ -59,16 +57,6 @@ export function StoryStrip() {
               Premium workspaces. Predictable costs. A community that supports
               its own.
             </motion.p>
-            <motion.div {...fadeUp}>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-1.5 text-[14px] font-medium border-b pb-0.5 mt-2"
-                style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-              >
-                Read the full story{" "}
-                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
-              </Link>
-            </motion.div>
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:gap-6">

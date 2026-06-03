@@ -25,7 +25,7 @@ interface Item {
 }
 
 const items: Item[] = [
-  { icon: Wifi,             title: "Gigabit",    desc: "1 Gbps fibre, redundant ISPs" },
+  { icon: Wifi,             title: "High-speed internet", desc: "Fast, reliable Wi-Fi" },
   { icon: BatteryCharging,  title: "Backup",     desc: "Generator + UPS, zero downtime" },
   { icon: Snowflake,        title: "Climate",    desc: "Year-round comfort" },
   { icon: Coffee,           title: "Cafeteria",  desc: "Tea / coffee, all day" },

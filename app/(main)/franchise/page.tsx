@@ -242,12 +242,10 @@ function StatsBand() {
   const stats = [
     { k: "10", l: "Operating centres" },
     { k: "5", l: "Cities live" },
-    { k: "500+", l: "Active members" },
-    { k: "8+", l: "Years operating" },
   ];
   return (
     <section className="relative" style={{ background: "var(--ink-band)", color: "#fff" }}>
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-10 py-12 grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+      <div className="max-w-[1440px] mx-auto px-5 lg:px-10 py-12 grid grid-cols-2 divide-x divide-white/10">
         {stats.map((s, i) => (
           <motion.div
             key={s.l}
@@ -468,7 +466,7 @@ function Inclusions() {
               >
                 Salem · Trichy · Tirupur · Erode · Hosur
               </div>
-              <div className="grid grid-cols-3 gap-3 mt-4 text-center">
+              <div className="grid grid-cols-2 gap-3 mt-4 text-center">
                 <div>
                   <div
                     className="display text-[28px]"
@@ -484,34 +482,20 @@ function Inclusions() {
                   </div>
                 </div>
                 <div
-                  className="border-x hairline"
+                  className="border-l hairline"
                   style={{ borderColor: "var(--border)" }}
                 >
                   <div
                     className="display text-[28px]"
                     style={{ color: "var(--ink)" }}
                   >
-                    5+
+                    5
                   </div>
                   <div
                     className="text-[11px] uppercase tracking-[0.14em] mt-1"
                     style={{ color: "var(--ink-dim)" }}
                   >
-                    Years
-                  </div>
-                </div>
-                <div>
-                  <div
-                    className="display text-[28px]"
-                    style={{ color: "var(--ink)" }}
-                  >
-                    500+
-                  </div>
-                  <div
-                    className="text-[11px] uppercase tracking-[0.14em] mt-1"
-                    style={{ color: "var(--ink-dim)" }}
-                  >
-                    Members
+                    Cities
                   </div>
                 </div>
               </div>

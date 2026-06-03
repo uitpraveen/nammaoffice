@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
       // Anchor-only sections — direct URL hits should land on the anchor.
       { source: "/amenities", destination: "/#amenities", permanent: false },
       { source: "/about-us", destination: "/#about", permanent: false },
+      // Standalone /about page folded into the homepage story section.
+      { source: "/about", destination: "/#about", permanent: true },
 
       // Old marketing pages removed in the strict-parity revamp.
       // Redirect to the closest equivalent rather than 404 to preserve any

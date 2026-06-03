@@ -22,7 +22,6 @@ import {
   MapPin,
   Menu,
   Phone,
-  Star,
   TicketCheck,
   UserPlus,
   X,
@@ -175,14 +174,12 @@ export function Header() {
       >
         <div className="content-width h-full flex items-center justify-between">
           <div className="flex items-center divide-x divide-white/10">
-            {/* Open + tap-to-call combo. On mobile this also shows the
-                number so visitors get a one-tap action instead of a
-                static "Open now" label. From sm+ we drop the number
-                here (it surfaces on the right cluster). */}
+            {/* Mobile-only tap-to-call. On sm+ the number surfaces in the
+                right cluster, so this is hidden there. */}
             <a
               href={`tel:${formatPhone(BRAND.phone)}`}
-              className="flex items-center gap-2 pr-3 whitespace-nowrap hover:text-white transition-colors"
-              aria-label={`Call ${BRAND.phone} — we're open now`}
+              className="flex sm:hidden items-center gap-2 pr-3 whitespace-nowrap hover:text-white transition-colors"
+              aria-label={`Call ${BRAND.phone}`}
             >
               <span className="relative flex w-1.5 h-1.5">
                 <span
@@ -194,29 +191,11 @@ export function Header() {
                   style={{ background: "var(--accent-soft)" }}
                 />
               </span>
-              <span className="sm:hidden mono text-white font-medium">
+              <span className="mono text-white font-medium">
                 {BRAND.phone}
               </span>
-              <span className="hidden sm:inline">Open now</span>
             </a>
-            <a
-              href={BRAND.googleReviewsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="See our 4.9 Google reviews"
-              className="flex items-center gap-1.5 px-3 whitespace-nowrap hover:text-white transition-colors"
-            >
-              <Star
-                className="w-3 h-3"
-                strokeWidth={0}
-                style={{ fill: "var(--accent-soft)" }}
-              />
-              <span>
-                <span className="text-white font-semibold">4.9</span>
-                <span className="hidden md:inline opacity-60"> · 500+ Members</span>
-              </span>
-            </a>
-            <div className="hidden lg:flex items-center gap-1.5 px-3 whitespace-nowrap">
+            <div className="hidden sm:flex items-center gap-1.5 pr-3 whitespace-nowrap">
               <MapPin className="w-3 h-3" strokeWidth={1.75} />
               <span>{locations.length} centres · {cities.length} cities</span>
             </div>
