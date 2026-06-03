@@ -16,7 +16,7 @@ import {
   getBookingRooms,
 } from "@/lib/data/zoho-venues";
 import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
-import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
+import { isValidEmail, phoneDigits } from "@/lib/forms/validators";
 
 const REQUEST_TYPES = [
   {
@@ -129,6 +129,9 @@ export function BookingsForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [serverError, setServerError] = useState<string | null>(null);
+  // Earliest selectable slot: 30 min from when the form mounted. Computed once
+  // in a lazy initializer so render stays pure (no Date.now() during render).
+  const [minDateTime] = useState(() => new Date(Date.now() + 30 * 60 * 1000));
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -159,8 +162,11 @@ export function BookingsForm({
     if (form.bookingPersonEmail && !isValidEmail(form.bookingPersonEmail)) {
       errs.bookingPersonEmail = "Enter a valid email";
     }
-    if (form.bookingPersonContact && !isValidPhone(form.bookingPersonContact)) {
-      errs.bookingPersonContact = "Enter a valid phone number";
+    if (form.bookingPersonContact) {
+      const digits = phoneDigits(form.bookingPersonContact);
+      if (digits.length < 10 || digits.length > 12) {
+        errs.bookingPersonContact = "Enter a valid phone number (10–12 digits)";
+      }
     }
     if (
       form.numParticipants &&
@@ -377,7 +383,7 @@ export function BookingsForm({
           <DateTimePicker
             label="Booking Date-Time"
             required
-            min={new Date(Date.now() + 30 * 60 * 1000)}
+            min={minDateTime}
             value={form.bookingDateTime}
             onChange={(v) => update("bookingDateTime", v)}
             error={errors.bookingDateTime}

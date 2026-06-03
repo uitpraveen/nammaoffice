@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { FormPageShell } from "@/components/sections/FormPageShell";
 import { ServiceRequestForm } from "@/components/forms/ServiceRequestForm";
+import { ZohoFormEmbed } from "@/components/forms/ZohoFormEmbed";
+import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
   title: "Service Request",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function ServiceRequestPage() {
+  const embed = embedUrlFor("serviceRequest");
   return (
     <FormPageShell
       eyebrow="Service desk"
@@ -16,7 +19,11 @@ export default function ServiceRequestPage() {
       subtitle="Tell us what's not working and the centre team will pick it up."
       intro="Tickets land with the centre manager for your branch and the central facilities team. Add a photo or PDF if it helps explain the issue — JPG, PNG or PDF up to 15 MB."
     >
-      <ServiceRequestForm />
+      {embed ? (
+        <ZohoFormEmbed url={embed} title="Namma Office Service Request" />
+      ) : (
+        <ServiceRequestForm />
+      )}
     </FormPageShell>
   );
 }

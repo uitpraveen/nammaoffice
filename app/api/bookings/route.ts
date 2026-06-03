@@ -134,36 +134,44 @@ export async function POST(request: Request) {
     // because the JSON endpoint expects a real bool for checkbox-style
     // accept fields (the htmlRecords endpoint wanted "on", but that
     // endpoint silently drops records — see lib/zoho.ts).
-    // Zoho's PhoneNumber field rejects any non-digit chars (Zoho error:
-    // "Enter only numbers"). Strip + and spaces.
-    const phoneDigits = body.bookingPersonContact.replace(/\D/g, "");
+    // Zoho's PhoneNumber field here is configured min 10 / max 12 digits and
+    // rejects any non-digit char (Zoho error: "Enter only numbers"). Strip +
+    // and spaces, and bound the length so Zoho never rejects the record.
+    const phone = body.bookingPersonContact.replace(/\D/g, "");
+    if (phone.length < 10 || phone.length > 12) {
+      return NextResponse.json(
+        { error: "Enter a valid phone number (10–12 digits, optionally with +91)." },
+        { status: 400 },
+      );
+    }
 
-    // Zoho marks MultiLine (Guest Names) as Required even though our UI
-    // treats it as optional. Fall back to a sensible placeholder so the
-    // record isn't rejected.
-    const guestNamesValue =
-      body.guestNames && body.guestNames.trim()
-        ? body.guestNames
-        : isGatePass
-          ? "(Single visitor)"
-          : "(Not provided)";
+    // MultiLine (Guest Names) is REQUIRED by Zoho (verified live: omitting it
+    // returns {"MultiLine":"Enter a value for this field."}) even though our UI
+    // treats it as optional — so fall back to a sensible placeholder when the
+    // visitor leaves it blank. Dropdown1 (Duration) and SingleLine2 (Company to
+    // Visit) ARE optional, so omit them when blank (submitToZohoFormJson strips
+    // undefined, not "") to avoid pushing "" into a dropdown.
+    const guestNamesValue = body.guestNames?.trim()
+      ? body.guestNames.trim()
+      : isGatePass
+        ? "(Single visitor)"
+        : "(Not provided)";
 
     const record: Record<string, ZohoJsonValue> = {
       Checkbox: [isGatePass ? "Gate Pass Request" : "Booking Request"],
       SingleLine: body.companyName,
       SingleLine1: body.bookingPersonName,
-      PhoneNumber: phoneDigits,
+      PhoneNumber: phone,
       Email1: body.bookingPersonEmail,
       Dropdown2: zohoVenue,
       // Company to Visit only meaningful for gate-pass requests.
-      SingleLine2: isGatePass ? body.companyToVisit || "" : "",
+      SingleLine2: isGatePass ? body.companyToVisit?.trim() || undefined : undefined,
       SingleLine4: body.purpose,
       SingleLine5: body.numParticipants,
       MultiLine: guestNamesValue,
       DateTime: formattedDateTime,
-      // Duration is meeting-hall only; gate-pass mode hides this field
-      // and sends empty so Zoho doesn't store stale data.
-      Dropdown1: !isGatePass ? body.duration || "" : "",
+      // Duration is meeting-hall only; gate-pass hides it. Omit when unset.
+      Dropdown1: !isGatePass ? body.duration || undefined : undefined,
       TermsConditions: true,
     };
 

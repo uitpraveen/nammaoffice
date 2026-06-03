@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BookingsForm } from "@/components/forms/BookingsForm";
+import { ZohoFormEmbed } from "@/components/forms/ZohoFormEmbed";
 import { FormPageShell } from "@/components/sections/FormPageShell";
+import { embedUrlFor } from "@/lib/forms/mode";
 import { Phone } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function BookingsPage() {
+  const embed = embedUrlFor("bookings");
   return (
     <FormPageShell
       eyebrow="Bookings"
@@ -34,7 +37,11 @@ export default function BookingsPage() {
         </div>
       }
     >
-      <BookingsForm />
+      {embed ? (
+        <ZohoFormEmbed url={embed} title="Meeting Hall & Gate Pass Bookings" />
+      ) : (
+        <BookingsForm />
+      )}
     </FormPageShell>
   );
 }

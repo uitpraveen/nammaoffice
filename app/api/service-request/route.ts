@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
-import { submitToZohoFormJson, type ZohoJsonValue } from "@/lib/zoho";
+import {
+  submitToZohoFormJson,
+  uploadZohoFile,
+  type ZohoJsonValue,
+} from "@/lib/zoho";
 import {
   SERVICE_REQUEST_AREAS,
   SERVICE_REQUEST_BRANCHES,
   SERVICE_REQUEST_FLOORS,
 } from "@/lib/data/zoho-service-request";
+import { phoneDigits } from "@/lib/forms/validators";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -82,42 +88,58 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Floor (other) is required" }, { status: 400 });
     }
 
+    const formUrl = process.env.ZOHO_FORM_URL_SERVICE_REQUEST;
+    if (!formUrl) {
+      console.error("Service request: ZOHO_FORM_URL_SERVICE_REQUEST is not set");
+      return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
+    }
+
+    // Attachment (optional): two-step upload (stream → filepath), then
+    // reference by path under "FileUpload-v2". Link name is "FileUpload".
+    const attachment = fd.get("attachment");
+    let attachmentPath: string | null = null;
+    if (attachment instanceof File && attachment.size > 0) {
+      attachmentPath = await uploadZohoFile(attachment, {
+        formUrl,
+        fieldLinkName: "FileUpload",
+      });
+    }
+
+    // Area & Floor share one hidden "other-text" input in Zoho, so the public
+    // JSON endpoint can't disambiguate them. Append any "Other" free-text to
+    // the description so it's never lost (the dropdown still carries "Other").
+    const otherNotes: string[] = [];
+    if (area === "Other" && areaOther) otherNotes.push(`[Area — Other]: ${areaOther}`);
+    if (floor === "Other" && floorOther) otherNotes.push(`[Floor — Other]: ${floorOther}`);
+    const fullDescription = otherNotes.length
+      ? `${description}\n\n${otherNotes.join("\n")}`
+      : description;
+
     // Build the JSON record. Field names + hidden auto-default values were
     // captured from the live form's own XHR submit — see the dev notes in
-    // `lib/zoho.ts`.
+    // `lib/zoho.ts`. Zoho PhoneNumber rejects "+"/spaces, so send digits only.
     const record: Record<string, ZohoJsonValue> = {
       SingleLine: companyName,
       SingleLine1: personName,
-      PhoneNumber: phone,
+      PhoneNumber: phoneDigits(phone),
       Email: email,
-      Email1: ccEmail1 || "",
-      Email2: ccEmail2 || "",
+      Email1: ccEmail1 || undefined,
+      Email2: ccEmail2 || undefined,
       SingleLine2: ticketTitle,
       Dropdown: branch,
       Dropdown1: area,
-      Dropdown2: floor || "",
-      MultiLine:
-        floor === "Other" && floorOther
-          ? `${description}\n\n[Floor — Other]: ${floorOther}`
-          : description,
-      // Hidden default fields the form auto-attaches. Without these the
-      // record is silently rejected.
+      Dropdown2: floor || undefined,
+      MultiLine: fullDescription,
+      // Hidden default fields the live form pre-fills (priority/status/etc.).
       Date: todayIST(),
       SingleLine3: "Medium",
       SingleLine4: "UN AVAILABLE",
       SingleLine5: "",
       SingleLine6: "CLIENT",
-      "FileUpload-v2": [],
+      ...(attachmentPath ? { "FileUpload-v2": [attachmentPath] } : {}),
     };
-    // Zoho expands "Other" for the Area dropdown via this hidden text field.
-    if (area === "Other" && areaOther) {
-      record["allow-others-text"] = areaOther;
-    }
 
-    const ok = await submitToZohoFormJson(
-      process.env.ZOHO_FORM_URL_SERVICE_REQUEST,
-      record,
-    );
+    const ok = await submitToZohoFormJson(formUrl, record);
 
     if (!ok) {
       return NextResponse.json(

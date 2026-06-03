@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { submitToZohoFormJson, uploadZohoFile } from "@/lib/zoho";
+import { phoneDigits } from "@/lib/forms/validators";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -78,15 +79,16 @@ export async function POST(request: Request) {
     // Submit the record via the JSON /records endpoint. Field keys are the
     // exact Zoho field link names read from the published "Namma office Vendor
     // form". File fields use the "<FieldLinkName>-v2" array convention.
+    // Zoho PhoneNumber fields reject "+"/spaces — send digits only.
     const ok = await submitToZohoFormJson(formUrl, {
       SingleLine: data.vendorName, // Vendor Name
       Dropdown: data.category, // Category of service
-      SingleLine1: data.gstNumber, // GST Number (if applicable)
-      Website: data.website, // Website
+      SingleLine1: data.gstNumber || undefined, // GST Number (if applicable)
+      Website: data.website || undefined, // Website
       SingleLine2: data.companyName, // Company Name
-      PhoneNumber: data.contactPersonPhone, // Contact Person's Phone
+      PhoneNumber: phoneDigits(data.contactPersonPhone), // Contact Person's Phone
       Email: data.contactPersonEmail, // Contact Person's Email
-      PhoneNumber1: data.companyPhone, // Company Phone
+      PhoneNumber1: phoneDigits(data.companyPhone), // Company Phone
       Email1: data.companyEmail, // Company Email
       SingleLine3: data.ifscCode, // IFSC Code
       SingleLine4: data.accountNumber, // Account number
@@ -97,7 +99,7 @@ export async function POST(request: Request) {
       SingleLine9: data.accountHolderName, // Account holder name
       SingleLine10: data.companyAddress, // Company Address
       MultiLine: data.serviceSpecialization, // Service & specialization
-      MultiLine1: data.comments, // Additional Inquiries or Comments
+      MultiLine1: data.comments || undefined, // Additional Inquiries or Comments
       TermsConditions: data.agreeTerms === "true" ? "true" : "false", // Terms
       "FileUpload2-v2": [bankPath], // Bank passbook (required)
       ...(gstPath ? { "FileUpload-v2": [gstPath] } : {}), // GST Documents

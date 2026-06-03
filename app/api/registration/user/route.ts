@@ -5,6 +5,7 @@ import {
   uploadZohoFile,
   type ZohoJsonValue,
 } from "@/lib/zoho";
+import { phoneDigits } from "@/lib/forms/validators";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -55,15 +56,30 @@ export async function POST(request: Request) {
     }
 
     // Confirmed Zoho link-name mapping for the User Registration form.
-    // NOTE: "Name" (composite First/Last) and "Address" (composite) are
-    // intentionally omitted — the JSON /records API rejects composite fields,
-    // so they stay out until those two are flattened to Single Line / Multi
-    // Line in the Zoho builder. All fields here are optional in Zoho.
+    // "Name" and "Address" ARE composite fields and the JSON /records API
+    // DOES accept them as nested objects (proven against the live form):
+    //   Name    -> { Name_First, Name_Last }
+    //   Address -> { Address_AddressLine1, ... } (no Country sub-field)
+    // The single "full name" input is split on whitespace; the single
+    // free-text address maps to AddressLine1 (Zoho accepts a partial
+    // composite). All fields here are optional in Zoho.
+    const fullName = (data.name || "").trim();
+    const [firstName, ...restName] = fullName.split(/\s+/);
+    const nameComposite = fullName
+      ? { Name_First: firstName, Name_Last: restName.join(" ") }
+      : undefined;
+    const addressLine = (data.address || "").trim();
+
+    // Zoho PhoneNumber rejects "+"/spaces; send digits only (min 5, max 15).
+    const phone = phoneDigits(data.phone || "");
+
     const fields: Record<string, ZohoJsonValue> = {
+      Name: nameComposite, // composite First/Last
       Email: data.email || undefined,
       Date: dob,
       Dropdown: GENDER_TO_ZOHO[data.gender] || undefined, // Gender
-      PhoneNumber: data.phone || undefined,
+      PhoneNumber: phone || undefined,
+      Address: addressLine ? { Address_AddressLine1: addressLine } : undefined,
       SingleLine2: data.companyName || undefined, // Company Name
       SingleLine4: data.bikeNumber || undefined, // Bike Number
       SingleLine3: data.carNumber || undefined, // Car Number

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BookingsForm } from "@/components/forms/BookingsForm";
+import { ZohoFormEmbed } from "@/components/forms/ZohoFormEmbed";
 import { FormPageShell } from "@/components/sections/FormPageShell";
+import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
   title: "Gate Pass — Tirupur TIDEL NEO",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function TirupurTidelGatePassPage() {
+  const embed = embedUrlFor("bookings");
   return (
     <FormPageShell
       eyebrow="Service Desk"
@@ -16,7 +19,11 @@ export default function TirupurTidelGatePassPage() {
       subtitle="Request a visitor pass for the Tirupur TIDEL park."
       intro="TIDEL NEO Tirupur requires a visitor pass for entry. Submit the request below and our centre team will arrange a pass and notify the host company. Allow at least 30 minutes during peak hours."
     >
-      <BookingsForm defaultRequestType="gate-pass" defaultVenue="tirupur/tidel-neo" lockVenue />
+      {embed ? (
+        <ZohoFormEmbed url={embed} title="Gate Pass — Tirupur TIDEL NEO" />
+      ) : (
+        <BookingsForm defaultRequestType="gate-pass" defaultVenue="tirupur/tidel-neo" lockVenue />
+      )}
     </FormPageShell>
   );
 }

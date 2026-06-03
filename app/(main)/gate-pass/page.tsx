@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BookingsForm } from "@/components/forms/BookingsForm";
+import { ZohoFormEmbed } from "@/components/forms/ZohoFormEmbed";
 import { FormPageShell } from "@/components/sections/FormPageShell";
+import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
   title: "Gate Pass",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function GatePassPage() {
+  const embed = embedUrlFor("bookings");
   return (
     <FormPageShell
       eyebrow="Service Desk"
@@ -16,7 +19,11 @@ export default function GatePassPage() {
       subtitle="Request a visitor pass for the Salem or Tirupur TIDEL parks."
       intro="TIDEL parks require a visitor pass for entry. Submit the form below and our centre team will arrange a pass and notify the host company. Allow at least 30 minutes during peak hours."
     >
-      <BookingsForm defaultRequestType="gate-pass" />
+      {embed ? (
+        <ZohoFormEmbed url={embed} title="Gate Pass" />
+      ) : (
+        <BookingsForm defaultRequestType="gate-pass" />
+      )}
     </FormPageShell>
   );
 }

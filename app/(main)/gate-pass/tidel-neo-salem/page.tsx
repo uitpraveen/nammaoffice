@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BookingsForm } from "@/components/forms/BookingsForm";
+import { ZohoFormEmbed } from "@/components/forms/ZohoFormEmbed";
 import { FormPageShell } from "@/components/sections/FormPageShell";
+import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
   title: "Gate Pass — Salem TIDEL NEO",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function SalemTidelGatePassPage() {
+  const embed = embedUrlFor("bookings");
   return (
     <FormPageShell
       eyebrow="Service Desk"
@@ -16,7 +19,11 @@ export default function SalemTidelGatePassPage() {
       subtitle="Request a visitor pass for the Salem TIDEL park."
       intro="TIDEL NEO Salem requires a visitor pass for entry. Submit the request below and our centre team will arrange a pass and notify the host company. Allow at least 30 minutes during peak hours."
     >
-      <BookingsForm defaultRequestType="gate-pass" defaultVenue="salem/tidel-neo" lockVenue />
+      {embed ? (
+        <ZohoFormEmbed url={embed} title="Gate Pass — Salem TIDEL NEO" />
+      ) : (
+        <BookingsForm defaultRequestType="gate-pass" defaultVenue="salem/tidel-neo" lockVenue />
+      )}
     </FormPageShell>
   );
 }
