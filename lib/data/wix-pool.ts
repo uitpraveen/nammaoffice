@@ -253,3 +253,48 @@ export const interiorPool: readonly string[] = [
   W + "fd8c76_fcfdb77631f947948f359da459f15793~mv2.jpeg",
   W + "fd8c76_fe7bcc0459834ff6b6746fb16f261770~mv2.jpeg",
 ];
+
+
+/**
+ * TIDEL NEO Salem — real centre photographs supplied by the client
+ * (1st / 2nd / 3rd floor), resized + optimized and self-hosted. This is the
+ * dedicated Salem TIDEL gallery (Tirupur keeps using `tidelGallery`).
+ */
+export const tidelSalemGallery: readonly string[] = [
+  W + "tidel-salem/tidel-salem-01.jpg",
+  W + "tidel-salem/tidel-salem-02.jpg",
+  W + "tidel-salem/tidel-salem-03.jpg",
+  W + "tidel-salem/tidel-salem-04.jpg",
+  W + "tidel-salem/tidel-salem-05.jpg",
+  W + "tidel-salem/tidel-salem-06.jpg",
+  W + "tidel-salem/tidel-salem-07.jpg",
+  W + "tidel-salem/tidel-salem-08.jpg",
+  W + "tidel-salem/tidel-salem-09.jpg",
+  W + "tidel-salem/tidel-salem-10.jpg",
+  W + "tidel-salem/tidel-salem-11.jpg",
+  W + "tidel-salem/tidel-salem-12.jpg",
+  W + "tidel-salem/tidel-salem-13.jpg",
+  W + "tidel-salem/tidel-salem-14.jpg",
+  W + "tidel-salem/tidel-salem-15.jpg",
+  W + "tidel-salem/tidel-salem-16.jpg",
+  W + "tidel-salem/tidel-salem-17.jpg",
+  W + "tidel-salem/tidel-salem-18.jpg",
+  W + "tidel-salem/tidel-salem-19.jpg",
+  W + "tidel-salem/tidel-salem-20.jpg",
+  W + "tidel-salem/tidel-salem-21.jpg",
+  W + "tidel-salem/tidel-salem-22.jpg",
+  W + "tidel-salem/tidel-salem-23.jpg",
+  W + "tidel-salem/tidel-salem-24.jpg",
+  W + "tidel-salem/tidel-salem-25.jpg",
+  W + "tidel-salem/tidel-salem-26.jpg",
+  W + "tidel-salem/tidel-salem-27.jpg",
+  W + "tidel-salem/tidel-salem-28.jpg",
+  W + "tidel-salem/tidel-salem-29.jpg",
+  W + "tidel-salem/tidel-salem-30.jpg",
+  W + "tidel-salem/tidel-salem-31.jpg",
+  W + "tidel-salem/tidel-salem-32.jpg",
+  W + "tidel-salem/tidel-salem-33.jpg",
+  W + "tidel-salem/tidel-salem-34.jpg",
+  W + "tidel-salem/tidel-salem-35.jpg",
+  W + "tidel-salem/tidel-salem-36.jpg",
+];

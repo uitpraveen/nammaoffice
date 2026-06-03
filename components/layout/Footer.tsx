@@ -278,7 +278,7 @@ function FooterLocations() {
                   <li key={`${l.city}-${l.slug}`}>
                     <Link
                       href={`/locations/${l.city}/${l.slug}`}
-                      className="block text-[12.5px] text-white/55 hover:text-white/95 hover:translate-x-0.5 transition-all"
+                      className="block text-[12.5px] text-white/80 hover:text-white hover:translate-x-0.5 transition-all"
                     >
                       {l.name}
                     </Link>

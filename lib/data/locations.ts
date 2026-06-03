@@ -1,5 +1,5 @@
 import type { City, CitySlug, Location } from "@/lib/types";
-import { wix, tidelGallery, interiorPool } from "@/lib/data/wix-pool";
+import { wix, tidelGallery, tidelSalemGallery, interiorPool } from "@/lib/data/wix-pool";
 
 export const cities: City[] = [
   {
@@ -302,19 +302,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      tidelGallery[0],
-      tidelGallery[1],
-      tidelGallery[2],
-      tidelGallery[3],
-      tidelGallery[4],
-      tidelGallery[5],
-      tidelGallery[6],
-      tidelGallery[7],
-      wix.cabin,
-      wix.discussion,
-      wix.dining,
-    ],
+    images: [...tidelSalemGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space at TIDEL NEO Salem | NammaOffice",
@@ -337,15 +325,9 @@ export const locations: Location[] = [
       "high-speed-wifi",
       "power-backup",
       "air-conditioning",
-      "cafeteria",
-      "printing",
       "parking",
       "security",
-      "locker",
-      "conference-room",
-      "reception",
       "ergonomic-furniture",
-      "breakout-zone",
     ],
     workspaceTypes: [
       "private-cabin",

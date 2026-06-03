@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -27,7 +26,6 @@ import {
   Sparkles,
   Timer,
 } from "lucide-react";
-import { FranchiseForm } from "@/components/forms/FranchiseForm";
 import {
   franchiseBenefits,
   franchiseInvestment,
@@ -37,6 +35,14 @@ import {
 import { getFaqsByCategory } from "@/lib/data/faqs";
 
 const franchiseFaqs = getFaqsByCategory("franchise");
+
+// Franchise enquiries go to the team on WhatsApp (the on-page form was
+// removed). Uses the brand line.
+const FRANCHISE_WHATSAPP =
+  "https://wa.me/919092109213?text=" +
+  encodeURIComponent(
+    "Hi, I am interested in a NammaOffice franchise. Please share the details.",
+  );
 
 const benefitIcons = [
   ShieldCheck,    // Proven Brand
@@ -60,7 +66,6 @@ export default function FranchisePage() {
       <InvestmentTerms />
       <Process />
       <Support />
-      <ApplicationForm />
       <FAQSection />
       <CTA />
     </div>
@@ -106,14 +111,16 @@ function Hero() {
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
-                href="#apply"
+                href={FRANCHISE_WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-md text-[14px] font-semibold text-white"
                 style={{
                   background: "var(--accent)",
                   boxShadow: "0 8px 24px -10px rgba(168,72,46,0.55)",
                 }}
               >
-                Apply for a franchise
+                Talk to our franchise team
                 <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
               </a>
               <a
@@ -788,38 +795,6 @@ function Support() {
   );
 }
 
-/* ───────────────────────── APPLICATION FORM ───────────────────────── */
-function ApplicationForm() {
-  return (
-    <section id="apply" className="py-24 lg:py-32">
-      <div className="max-w-[1040px] mx-auto px-5 lg:px-10">
-        <div className="text-center max-w-[640px] mx-auto mb-12">
-          <p className="eyebrow">Apply</p>
-          <h2 className="display mt-3 text-[36px] lg:text-[52px]" style={{ color: "var(--ink)" }}>
-            Apply for a <span className="display-italic">franchise.</span>
-          </h2>
-          <p
-            className="mt-5 text-[16px] leading-[1.6]"
-            style={{ color: "var(--ink-muted)" }}
-          >
-            Fill in your details and our franchise development team will reach
-            out within 48 hours.
-          </p>
-        </div>
-        <div
-          className="rounded-2xl border hairline p-6 md:p-8"
-          style={{
-            background: "var(--card)",
-            borderColor: "var(--border)",
-            boxShadow: "0 1px 0 rgba(0,0,0,0.02), 0 30px 60px -30px rgba(0,0,0,0.10)",
-          }}
-        >
-          <FranchiseForm />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ───────────────────────── FAQ ───────────────────────── */
 function FAQSection() {
@@ -998,8 +973,10 @@ function CTA() {
 
               {/* Right column — CTA stack */}
               <div className="flex flex-col gap-3">
-                <Link
-                  href="#apply"
+                <a
+                  href={FRANCHISE_WHATSAPP}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center justify-between h-14 px-6 rounded-xl text-[15px] font-semibold transition-all hover:scale-[1.02]"
                   style={{
                     background: "#fff",
@@ -1007,12 +984,12 @@ function CTA() {
                     boxShadow: "0 12px 28px -10px rgba(0,0,0,0.25)",
                   }}
                 >
-                  Apply for a franchise
+                  WhatsApp our franchise team
                   <ArrowUpRight
                     className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     strokeWidth={2}
                   />
-                </Link>
+                </a>
                 <a
                   href="tel:+919092109213"
                   className="inline-flex items-center justify-between h-14 px-6 rounded-xl text-[15px] font-semibold border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-colors"

@@ -375,7 +375,7 @@ export function HeroSection() {
               {slide.caption}
             </motion.p>
           </AnimatePresence>
-          <p className="text-[12px] text-white/55">{slide.location}</p>
+          <p className="text-[12px] text-white/80">{slide.location}</p>
         </div>
 
         <div className="flex items-end gap-2">
