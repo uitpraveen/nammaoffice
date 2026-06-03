@@ -24,7 +24,6 @@ import {
   Minus,
   Phone,
   Plus,
-  Quote,
   Sparkles,
   Timer,
 } from "lucide-react";
@@ -61,7 +60,6 @@ export default function FranchisePage() {
       <InvestmentTerms />
       <Process />
       <Support />
-      <Testimonial />
       <ApplicationForm />
       <FAQSection />
       <CTA />
@@ -790,54 +788,6 @@ function Support() {
   );
 }
 
-/* ───────────────────────── TESTIMONIAL ───────────────────────── */
-function Testimonial() {
-  return (
-    <section
-      className="py-24 lg:py-32 relative overflow-hidden"
-      style={{ background: "var(--ink-band)", color: "#fff" }}
-    >
-      <div className="max-w-[1280px] mx-auto px-5 lg:px-10 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-14 items-center">
-        <div className="relative rounded-2xl overflow-hidden border border-white/10 order-2 lg:order-1 aspect-[4/5] lg:aspect-auto lg:h-[520px]">
-          <Image
-            src="/images/elevate/franchise-handshake.jpg"
-            alt="Franchise partners"
-            fill
-            sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="order-1 lg:order-2">
-          <Quote
-            className="w-10 h-10 mb-6"
-            style={{ color: "var(--accent-soft)" }}
-            strokeWidth={1.25}
-          />
-          <p className="display text-[28px] lg:text-[40px] leading-[1.15]">
-            We hit strong occupancy{" "}
-            <span className="display-italic">within months.</span> The playbook is real
-            — and the support team treats your centre like their own.
-          </p>
-          <div className="mt-8 flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-full flex items-center justify-center display text-[18px]"
-              style={{ background: "var(--accent)" }}
-            >
-              KR
-            </div>
-            <div>
-              <div className="font-semibold">Karthik R.</div>
-              <div className="text-white/60 text-[13px]">
-                Franchise Partner · Trichy Centre
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ───────────────────────── APPLICATION FORM ───────────────────────── */
 function ApplicationForm() {
   return (
@@ -1076,7 +1026,7 @@ function CTA() {
                   </span>
                 </a>
                 <a
-                  href="mailto:franchise@nammaoffice.com"
+                  href="mailto:info@nammaoffice.com"
                   className="inline-flex items-center justify-between h-14 px-6 rounded-xl text-[15px] font-semibold border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-colors"
                 >
                   <span className="inline-flex items-center gap-2">

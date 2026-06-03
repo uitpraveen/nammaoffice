@@ -40,14 +40,13 @@ export function StoryStrip() {
               infrastructure to match.
             </motion.p>
             <motion.p {...fadeUp}>
-              Our first centre opened on Brindavan Road in Salem with 50 seats
-              and a vision. Within months we had a waiting list. Today we
+              Our first centre opened on Brindavan Road in Salem. Today we
               operate{" "}
               <strong className="font-medium" style={{ color: "var(--ink)" }}>
                 10 centres
               </strong>{" "}
               across Salem, Trichy, Tirupur, Erode, and Hosur — serving
-              everyone from solo freelancers to 50-person teams.
+              everyone from solo freelancers to growing teams.
             </motion.p>
             <motion.p
               {...fadeUp}

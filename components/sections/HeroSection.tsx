@@ -119,7 +119,7 @@ export function HeroSection() {
     <>
     <section
       id="hero"
-      className="relative h-[100svh] min-h-[560px] flex flex-col overflow-hidden bg-[var(--color-charcoal)]"
+      className="relative min-h-[100svh] flex flex-col overflow-hidden bg-[var(--color-charcoal)]"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       aria-roledescription="carousel"

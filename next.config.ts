@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
       // ---- Old Wix URL → new route map (TC-064) -----------------------
       // Centres
       { source: "/newbustandsalem", destination: "/locations/salem/new-bus-stand", permanent: true },
-      { source: "/salembalajitowers", destination: "/locations/salem/balaji-tower", permanent: true },
+      { source: "/salembalajitowers", destination: "/locations/salem/ramakrishna-road", permanent: true },
       { source: "/salemrajeshwaritowers", destination: "/locations/salem/rajeshwari-towers", permanent: true },
       { source: "/trichyashagrand-servicerequestform", destination: "/locations/trichy/asha-grand", permanent: true },
 
@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
       { source: "/vendor-form", destination: "/registration/vendor", permanent: true },
       { source: "/bookings-form", destination: "/bookings", permanent: true },
       { source: "/registration-forms", destination: "/forms", permanent: true },
-      { source: "/walkinenquiryform", destination: "/contact", permanent: true },
+      { source: "/walkinenquiryform", destination: "/forms", permanent: true },
 
       // Service request forms — these were per-centre on Wix; route to bookings.
       { source: "/salemtidelneo-servicerequestform", destination: "/bookings", permanent: true },
@@ -85,19 +85,19 @@ const nextConfig: NextConfig = {
       { source: "/events", destination: "/", permanent: false },
       { source: "/challenges", destination: "/", permanent: false },
 
-      // Internal/portal pages on the old site — funnel to contact so a
-      // legacy bookmark still reaches a human.
-      { source: "/support-page", destination: "/contact", permanent: false },
-      { source: "/my-service-request", destination: "/contact", permanent: false },
-      { source: "/management-portal", destination: "/contact", permanent: false },
-      { source: "/nammaoffice-feedback", destination: "/contact", permanent: false },
-      { source: "/eyal-leadmanagement", destination: "/contact", permanent: false },
-      { source: "/nammaoffice-visitor-declarationform", destination: "/contact", permanent: false },
-      { source: "/employee-declarationform", destination: "/contact", permanent: false },
-      { source: "/employeedeclarationform", destination: "/contact", permanent: false },
-      { source: "/nondisclosureaggrementform", destination: "/contact", permanent: false },
-      { source: "/userexperiencenondisclosureform", destination: "/contact", permanent: false },
-      { source: "/oath-page", destination: "/contact", permanent: false },
+      // Internal/portal/form pages from the old site — the Contact page was
+      // removed, so route these to the closest live page (service desk / forms / home).
+      { source: "/support-page", destination: "/service-request", permanent: false },
+      { source: "/my-service-request", destination: "/service-request", permanent: false },
+      { source: "/management-portal", destination: "/", permanent: false },
+      { source: "/nammaoffice-feedback", destination: "/service-request", permanent: false },
+      { source: "/eyal-leadmanagement", destination: "/", permanent: false },
+      { source: "/nammaoffice-visitor-declarationform", destination: "/forms", permanent: false },
+      { source: "/employee-declarationform", destination: "/forms", permanent: false },
+      { source: "/employeedeclarationform", destination: "/forms", permanent: false },
+      { source: "/nondisclosureaggrementform", destination: "/forms", permanent: false },
+      { source: "/userexperiencenondisclosureform", destination: "/forms", permanent: false },
+      { source: "/oath-page", destination: "/", permanent: false },
       { source: "/thank-u-page", destination: "/", permanent: false },
       { source: "/ipod-usage-booking", destination: "/bookings", permanent: true },
       { source: "/tidel-neo-salem-aggrement-form", destination: "/locations/salem/tidel-neo", permanent: false },

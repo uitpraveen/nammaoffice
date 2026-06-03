@@ -174,7 +174,7 @@ export function VendorForm() {
       if (!res.ok) {
         setServerError(
           data?.error ??
-            "Something went wrong. Please try again, or email procurement@nammaoffice.com."
+            "Something went wrong. Please try again, or email info@nammaoffice.com."
         );
         setStatus("error");
         return;
@@ -459,7 +459,7 @@ export function VendorForm() {
       {status === "error" && (
         <p className="text-sm text-red-500 font-sans text-center">
           {serverError ??
-            "Something went wrong. Please try again, or email procurement@nammaoffice.com."}
+            "Something went wrong. Please try again, or email info@nammaoffice.com."}
         </p>
       )}
     </form>
