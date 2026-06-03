@@ -31,7 +31,7 @@ export const franchiseBenefits: FranchiseBenefit[] = [
     icon: "/icons/brand.svg",
     title: "Proven Brand",
     description:
-      "Leverage the NammaOffice brand with 5+ years of operational excellence and 500+ satisfied members across Tamil Nadu.",
+      "Leverage the established NammaOffice brand and operating model — proven across 10 centres in 5 Tamil Nadu cities.",
   },
   {
     icon: "/icons/roi.svg",
