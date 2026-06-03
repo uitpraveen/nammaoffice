@@ -22,7 +22,7 @@ export async function sendNotificationEmail({ subject, html, replyTo }: EmailOpt
 /* ---------------- HTML helpers ---------------- */
 
 function escape(value: unknown): string {
-  if (value === null || value === undefined || value === "") return "—";
+  if (value === null || value === undefined || value === "") return "-";
   return String(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -61,7 +61,7 @@ export function emailShell(heading: string, sublabel: string, bodyHtml: string):
       </table>
     </div>
     <div style="padding:16px 28px;background:#F2EDE0;border-top:1px solid #E5E1D6;">
-      <p style="margin:0;font-size:12px;color:#475569;">Submitted via nammaoffice.com — please follow up within 24 hours.</p>
+      <p style="margin:0;font-size:12px;color:#475569;">Submitted via nammaoffice.com - please follow up within 24 hours.</p>
     </div>
   </div>
 </body></html>`;

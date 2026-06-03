@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | NammaOffice",
+  title: "Terms & Conditions",
+  alternates: { canonical: "/terms-conditions" },
   description:
-    "NammaOffice Terms and Conditions — the rules governing use of our workspaces and services.",
+    "NammaOffice Terms and Conditions - the rules governing use of our workspaces and services.",
 };
 
 const sections = [

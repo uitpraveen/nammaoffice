@@ -57,7 +57,7 @@ export function AmenitiesShowcase() {
             className="mt-6 text-[17px] leading-[1.65] max-w-[52ch]"
             style={{ color: "var(--ink-muted)" }}
           >
-            From fibre internet to ergonomic seating — every detail is on every
+            From fibre internet to ergonomic seating - every detail is on every
             floor, at every centre.
           </p>
         </motion.div>

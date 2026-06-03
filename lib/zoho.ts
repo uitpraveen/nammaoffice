@@ -41,7 +41,7 @@ export async function submitToZohoForm(
     // Zoho returns the ShowError page (HTTP 200) when the submission URL or
     // a required field is wrong. Anything else is treated as success.
     if (title === "ShowError") {
-      console.error("[zoho] response is ShowError page — submission rejected");
+      console.error("[zoho] response is ShowError page - submission rejected");
       console.error(
         `[zoho] body-head=${bodyText.slice(0, 1000).replace(/\s+/g, " ")}`
       );
@@ -73,7 +73,7 @@ export type ZohoJsonValue =
  * `Content-Type: application/json`, `X-Requested-With: XMLHttpRequest`,
  * and an `Origin`/`Referer` pair matching the form host).
  *
- * Returns `true` only when Zoho responds with 2xx — the JSON endpoint
+ * Returns `true` only when Zoho responds with 2xx - the JSON endpoint
  * returns proper status codes, unlike the htmlRecords fallback which
  * lies with a 200 + generic info page on most failures.
  */

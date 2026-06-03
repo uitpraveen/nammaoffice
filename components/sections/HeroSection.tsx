@@ -18,7 +18,7 @@ import { HeroParticles } from "@/components/ui/HeroParticles";
 import { cn } from "@/lib/utils";
 import { cities, locations } from "@/lib/data/locations";
 
-// Pre-computed once at module load — same numbers the MobileCitySelector
+// Pre-computed once at module load - same numbers the MobileCitySelector
 // renders under the hero. Saves a recompute on every paint.
 const citiesSelector = cities.map((c) => ({
   slug: c.slug,
@@ -39,7 +39,7 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     src: "/images/elevate/hero-slide-1.jpg",
-    alt: "NammaOffice modern coworking interior — Salem",
+    alt: "NammaOffice modern coworking interior - Salem",
     eyebrow: "Coworking · Salem",
     caption: "Designed for focused work",
     location: "Fairlands · Salem",
@@ -49,7 +49,7 @@ const SLIDES: Slide[] = [
   },
   {
     src: "/images/elevate/hero-slide-2.jpg",
-    alt: "NammaOffice premium workspace — Trichy",
+    alt: "NammaOffice premium workspace - Trichy",
     eyebrow: "Coworking · Trichy",
     caption: "Where teams come together",
     location: "Asha Grand · Trichy",
@@ -59,13 +59,13 @@ const SLIDES: Slide[] = [
   },
   {
     src: "/images/elevate/hero-slide-3.jpg",
-    alt: "NammaOffice managed office — Tirupur",
+    alt: "NammaOffice managed office - Tirupur",
     eyebrow: "Coworking · Tirupur",
     caption: "Built for ambitious businesses",
     location: "TIDEL NEO · Tirupur",
     headline: { lead: "Workspaces That", emphasis: "Grow", tail: "With You" },
     subhead:
-      "From hot desks to managed offices — flexible plans that scale as your team does.",
+      "From hot desks to managed offices - flexible plans that scale as your team does.",
   },
 ];
 
@@ -77,7 +77,7 @@ export function HeroSection() {
   // Two independent pause sources so they don't clobber each other: the manual
   // play/pause button owns `userPaused`; hovering the hero owns `hovering`.
   // Autoplay runs only when neither is set. (Sharing one flag made the button
-  // need multiple clicks — hover events kept flipping it.)
+  // need multiple clicks - hover events kept flipping it.)
   const [userPaused, setUserPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -124,7 +124,7 @@ export function HeroSection() {
       onMouseLeave={() => setHovering(false)}
       aria-roledescription="carousel"
     >
-      {/* Slide images — pre-mounted siblings, opacity-only crossfade */}
+      {/* Slide images - pre-mounted siblings, opacity-only crossfade */}
       {SLIDES.map((s, i) => (
         <motion.div
           key={`img-${s.src}`}
@@ -171,17 +171,17 @@ export function HeroSection() {
       {/* Particle field */}
       <HeroParticles />
 
-      {/* Nav clearance — keeps content from drifting under the fixed header on
+      {/* Nav clearance - keeps content from drifting under the fixed header on
           short viewports where flex centering would overflow upward. */}
       <div aria-hidden className="h-[132px] md:h-[148px] shrink-0 relative z-10 pointer-events-none" />
 
-      {/* Content — `safe center` alignment centers when content fits but falls
+      {/* Content - `safe center` alignment centers when content fits but falls
           back to top-aligned when content would overflow upward, so the
           eyebrow never gets pushed under the navbar. */}
       <div className="relative z-10 flex-1 min-h-0 flex w-full [align-items:safe_center]">
         <div className="content-width w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-6 md:gap-10 lg:gap-16 items-center">
-          {/* Left — copy */}
+          {/* Left - copy */}
           <div className="text-left flex flex-col items-start max-w-[720px]">
             <AnimatePresence initial={false} mode="wait">
               <motion.div
@@ -249,8 +249,8 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right — floating glass cards (desktop only).
-              Opacity-only fade (no transform) — `backdrop-filter` flickers /
+          {/* Right - floating glass cards (desktop only).
+              Opacity-only fade (no transform) - `backdrop-filter` flickers /
               snaps in late when its container is being translated, so we keep
               the parent static and just fade the cards in. */}
           <motion.div
@@ -259,7 +259,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           >
-            {/* Coverage stats — real figures + the actual city list, from data */}
+            {/* Coverage stats - real figures + the actual city list, from data */}
             <div
               className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
               style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
@@ -289,7 +289,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* What we offer — genuine workspace types from the locations data */}
+            {/* What we offer - genuine workspace types from the locations data */}
             <div
               className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl p-4 text-white"
               style={{ boxShadow: "0 20px 50px -20px rgba(0,0,0,0.5)" }}
@@ -351,7 +351,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom space reservation — keeps content (esp. CTAs) clear of the
+      {/* Bottom space reservation - keeps content (esp. CTAs) clear of the
           absolutely-positioned carousel controls / mobile dots below. */}
       <div aria-hidden className="h-[56px] md:h-[150px] lg:h-[160px] shrink-0 relative z-10 pointer-events-none" />
 
@@ -464,7 +464,7 @@ export function HeroSection() {
 /**
  * Mobile-only horizontally-scrollable city chip row, sitting directly
  * under the hero. Lets visitors on small screens pick their city without
- * scrolling past the hero or hunting in the menu. Hidden on lg+ — the
+ * scrolling past the hero or hunting in the menu. Hidden on lg+ - the
  * desktop hero already has the "Explore centres" CTA on the right cluster.
  */
 function MobileCitySelector() {

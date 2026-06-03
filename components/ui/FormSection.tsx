@@ -1,7 +1,7 @@
 /**
  * Mobile-collapsible form section. On <md the section renders as a
  * native <details> accordion so long forms scan better; on md+ it pins
- * open and renders like a regular fieldset. No client JS — works inside
+ * open and renders like a regular fieldset. No client JS - works inside
  * server components too.
  */
 export function FormSection({

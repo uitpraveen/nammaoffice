@@ -79,7 +79,7 @@ export async function POST(request: Request) {
     // Submit the record via the JSON /records endpoint. Field keys are the
     // exact Zoho field link names read from the published "Namma office Vendor
     // form". File fields use the "<FieldLinkName>-v2" array convention.
-    // Zoho PhoneNumber fields reject "+"/spaces — send digits only.
+    // Zoho PhoneNumber fields reject "+"/spaces - send digits only.
     const ok = await submitToZohoFormJson(formUrl, {
       SingleLine: data.vendorName, // Vendor Name
       Dropdown: data.category, // Category of service

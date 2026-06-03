@@ -5,6 +5,7 @@ import { FormPageShell } from "@/components/sections/FormPageShell";
 import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/gate-pass" },
   title: "Gate Pass",
   description:
     "Request a visitor gate pass for any NammaOffice TIDEL park. Pick your venue (Salem or Tirupur) and we'll arrange the pass with the host company.",

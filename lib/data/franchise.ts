@@ -31,25 +31,25 @@ export const franchiseBenefits: FranchiseBenefit[] = [
     icon: "/icons/brand.svg",
     title: "Proven Brand",
     description:
-      "Leverage the established NammaOffice brand and operating model — proven across 10 centres in 5 Tamil Nadu cities.",
+      "Leverage the established NammaOffice brand and operating model - proven across 10 centres in 5 Tamil Nadu cities.",
   },
   {
     icon: "/icons/roi.svg",
     title: "Strong ROI",
     description:
-      "Predictable returns backed by a proven business model — detailed unit economics shared in your discovery call.",
+      "Predictable returns backed by a proven business model - detailed unit economics shared in your discovery call.",
   },
   {
     icon: "/icons/support.svg",
     title: "Full Operational Support",
     description:
-      "From site selection to launch and beyond — our team guides you through every step of building and running your centre.",
+      "From site selection to launch and beyond - our team guides you through every step of building and running your centre.",
   },
   {
     icon: "/icons/technology.svg",
     title: "Technology Platform",
     description:
-      "Access our proprietary booking, billing, and member management platform — no tech investment required.",
+      "Access our proprietary booking, billing, and member management platform - no tech investment required.",
   },
   {
     icon: "/icons/training.svg",
@@ -73,7 +73,7 @@ export const franchiseBenefits: FranchiseBenefit[] = [
     icon: "/icons/community.svg",
     title: "Exclusive Territory",
     description:
-      "Operate with confidence in your designated territory — no NammaOffice-owned or franchised competition within your zone.",
+      "Operate with confidence in your designated territory - no NammaOffice-owned or franchised competition within your zone.",
   },
 ];
 
@@ -104,13 +104,13 @@ export const franchiseProcess: FranchiseStep[] = [
     step: 3,
     title: "Franchise Agreement",
     description:
-      "Once the site is approved, we'll walk you through the franchise agreement — a 5+5 year term with clear terms on fees, support, and mutual obligations.",
+      "Once the site is approved, we'll walk you through the franchise agreement - a 5+5 year term with clear terms on fees, support, and mutual obligations.",
   },
   {
     step: 4,
     title: "Design & Fitout",
     description:
-      "Our design team takes over — creating floor plans, managing the fitout, sourcing furniture, and installing IT infrastructure. Your job: watch your centre come to life.",
+      "Our design team takes over - creating floor plans, managing the fitout, sourcing furniture, and installing IT infrastructure. Your job: watch your centre come to life.",
   },
   {
     step: 5,

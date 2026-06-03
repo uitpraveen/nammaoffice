@@ -36,7 +36,7 @@ export default function NotFound() {
         {/* Description */}
         <p className="font-sans text-base text-warm-gray leading-relaxed mb-8">
           The page you&apos;re looking for has packed its bags and headed somewhere
-          sunny. Don&apos;t worry — our best workspaces are still right here.
+          sunny. Don&apos;t worry - our best workspaces are still right here.
         </p>
 
         {/* Buttons */}

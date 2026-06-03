@@ -13,7 +13,7 @@ import { CheckCircle2 } from "lucide-react";
 import { scrollToFirstError } from "@/lib/forms/scrollToFirstError";
 import { isValidEmail, isValidPhone } from "@/lib/forms/validators";
 
-// Must mirror the Zoho "TShirt Size" (Dropdown1) options EXACTLY — Zoho
+// Must mirror the Zoho "TShirt Size" (Dropdown1) options EXACTLY - Zoho
 // rejects any value that isn't one of its options. Zoho offers S…XXXL (no XS).
 const TSHIRT_SIZES = [
   { value: "S", label: "S" },

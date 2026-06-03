@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     try {
       dob = format(parseISO(data.dob), "dd-MMM-yyyy");
     } catch {
-      /* leave as-is — Zoho will reject only if truly malformed */
+      /* leave as-is - Zoho will reject only if truly malformed */
     }
 
     // Aadhaar: two-step upload (stream to publicupload, then reference by path),

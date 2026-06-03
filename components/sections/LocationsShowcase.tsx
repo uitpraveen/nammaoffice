@@ -23,10 +23,10 @@ const bentoImages = [
   "/images/elevate/bento-facade.jpg",
 ];
 
-// 10 layout slots in 12-col grid order — sums per row to 12 where possible.
+// 10 layout slots in 12-col grid order - sums per row to 12 where possible.
 // Designed so the largest "anchor" card breaks the rhythm on row 1.
 const layoutSlots: { span: string; aspect: string }[] = [
-  { span: "md:col-span-7", aspect: "aspect-[16/10]" }, // 0 — flagship
+  { span: "md:col-span-7", aspect: "aspect-[16/10]" }, // 0 - flagship
   { span: "md:col-span-5", aspect: "aspect-[4/3]" },   // 1
   { span: "md:col-span-5", aspect: "aspect-[4/3]" },   // 2
   { span: "md:col-span-4", aspect: "aspect-square" },  // 3
@@ -34,7 +34,7 @@ const layoutSlots: { span: string; aspect: string }[] = [
   { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 5
   { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 6
   { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 7
-  { span: "md:col-span-8", aspect: "aspect-[16/9]" },  // 8 — wide
+  { span: "md:col-span-8", aspect: "aspect-[16/9]" },  // 8 - wide
   { span: "md:col-span-4", aspect: "aspect-[4/3]" },   // 9
 ];
 
@@ -47,7 +47,7 @@ const cityLabel: Record<string, string> = {
 };
 
 interface LocationsShowcaseProps {
-  /** Hide the "View all centres" affordance — useful when the bento is
+  /** Hide the "View all centres" affordance - useful when the bento is
    * itself the /locations page and the link would loop back. */
   hideViewAll?: boolean;
   /** Override the eyebrow text above the headline. */
@@ -113,7 +113,7 @@ export function LocationsShowcase({
                 <Link
                   href={`/locations/${loc.city}/${loc.slug}`}
                   className="block"
-                  aria-label={`${loc.name} — ${cityLabel[loc.city] ?? loc.city}`}
+                  aria-label={`${loc.name} - ${cityLabel[loc.city] ?? loc.city}`}
                 >
                   <div className={`relative ${slot.aspect} overflow-hidden`}>
                     <Image
@@ -131,10 +131,11 @@ export function LocationsShowcase({
                       }}
                     />
                     <div
-                      className="absolute top-4 left-4 eyebrow text-white/85 px-2.5 py-1 rounded-full"
+                      className="absolute top-4 left-4 eyebrow px-2.5 py-1 rounded-full border border-white/15"
                       style={{
-                        background: "rgba(14,14,14,0.45)",
+                        background: "rgba(14,14,14,0.62)",
                         backdropFilter: "blur(8px)",
+                        color: "#ffffff",
                       }}
                     >
                       {cityLabel[loc.city] ?? loc.city}

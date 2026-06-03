@@ -93,7 +93,7 @@ export function ServiceRequestForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (form.honeypot) return; // Bot — silently drop.
+    if (form.honeypot) return; // Bot - silently drop.
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
@@ -145,7 +145,7 @@ export function ServiceRequestForm() {
         </h2>
         <p className="text-[14.5px] text-[var(--color-ink-secondary)] max-w-md">
           Your service request has been logged. The centre team will reach out
-          on the contact details provided — usually within an hour during
+          on the contact details provided - usually within an hour during
           operating hours.
         </p>
       </div>
@@ -154,7 +154,7 @@ export function ServiceRequestForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-8">
-      {/* Honeypot — hidden from real users, visible to bots */}
+      {/* Honeypot - hidden from real users, visible to bots */}
       <input
         type="text"
         name="company_url"
@@ -230,7 +230,7 @@ export function ServiceRequestForm() {
           value={form.ticketTitle}
           onChange={(e) => update("ticketTitle", e.target.value)}
           error={errors.ticketTitle}
-          hint="A short summary of the issue — e.g. ‘AC not cooling — Discussion Room 3’."
+          hint="A short summary of the issue - e.g. ‘AC not cooling - Discussion Room 3’."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Select

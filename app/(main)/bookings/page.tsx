@@ -6,6 +6,7 @@ import { embedUrlFor } from "@/lib/forms/mode";
 import { Phone } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/bookings" },
   title: "Meeting Hall & Gate Pass Bookings",
   description:
     "Book a meeting hall, boardroom, or request a gate pass at any NammaOffice centre across Salem, Trichy, and Tirupur.",
@@ -17,7 +18,7 @@ export default function BookingsPage() {
     <FormPageShell
       eyebrow="Bookings"
       title="Meeting Hall & Gate Pass Bookings"
-      subtitle="One form for all bookings — meeting halls, boardrooms, and TIDEL gate passes."
+      subtitle="One form for all bookings - meeting halls, boardrooms, and TIDEL gate passes."
       intro="Pick whether you're booking a meeting hall or requesting a visitor gate pass, choose your venue, and tell us when. Our centre team confirms availability within an hour during operating hours."
       aside={
         <div className="rounded-2xl bg-[var(--color-navy)] text-white p-6">

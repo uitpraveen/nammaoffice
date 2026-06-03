@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | NammaOffice",
+  title: "Privacy Policy",
+  alternates: { canonical: "/privacy-policy" },
   description:
-    "NammaOffice Privacy Policy — how we collect, use, and protect your personal information.",
+    "NammaOffice Privacy Policy - how we collect, use, and protect your personal information.",
 };
 
 const sections = [
@@ -34,7 +35,7 @@ While we strive to protect your personal information, no method of transmission 
   {
     id: "cookies",
     title: "Cookies",
-    content: `Our website uses cookies — small text files stored on your device — to enhance your browsing experience and analyse website traffic. We use session cookies (which expire when you close your browser) and persistent cookies (which remain until deleted or expired).
+    content: `Our website uses cookies - small text files stored on your device - to enhance your browsing experience and analyse website traffic. We use session cookies (which expire when you close your browser) and persistent cookies (which remain until deleted or expired).
 
 You can control cookie settings through your browser preferences. Note that disabling cookies may affect the functionality of certain features of our website. We use Google Analytics and similar analytics tools to understand website usage; these tools may set their own cookies.`,
   },

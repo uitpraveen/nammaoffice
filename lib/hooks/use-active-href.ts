@@ -29,7 +29,7 @@ export function useActiveHref(href: string, pathname: string) {
 
   // Re-sync after a Next.js Link navigation. `pushState`/`replaceState`
   // don't fire `hashchange`, so without this the previous page's hash
-  // would linger in state — e.g. /#amenities → /franchise → / would
+  // would linger in state - e.g. /#amenities → /franchise → / would
   // leave Amenities highlighted because the hook still saw "#amenities".
   useEffect(() => {
     if (typeof window === "undefined") return;

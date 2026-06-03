@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 
 export const metadata: Metadata = {
-  title: "Refund Policy | NammaOffice",
+  title: "Refund Policy",
+  alternates: { canonical: "/refund-policy" },
   description:
-    "NammaOffice Refund Policy — eligibility, process, and timelines for membership and service refunds.",
+    "NammaOffice Refund Policy - eligibility, process, and timelines for membership and service refunds.",
 };
 
 const sections = [
@@ -26,7 +27,7 @@ Non-refundable items include setup fees, registration fees, day passes (once act
     title: "Refund Process",
     content: `To request a refund, please contact us through one of the following channels:
 
-Email: info@nammaoffice.com with subject line "Refund Request — [Your Name/Membership ID]"
+Email: info@nammaoffice.com with subject line "Refund Request - [Your Name/Membership ID]"
 Phone: +91 9092109213
 In person at your NammaOffice centre
 

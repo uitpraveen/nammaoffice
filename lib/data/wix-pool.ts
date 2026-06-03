@@ -1,7 +1,7 @@
 /**
  * All real photographs originally sourced from the live nammaoffice.com
  * (Wix CDN). They are now downloaded and self-hosted inside the app at
- * `public/images/wix/` — we no longer hot-link static.wixstatic.com.
+ * `public/images/wix/` - we no longer hot-link static.wixstatic.com.
  * This file is the single source of truth for image paths in data files.
  *
  * Inventory snapshot 2026-05-06: 109 unique image URLs were found in
@@ -9,7 +9,7 @@
  * private/open/meeting + 8 location detail pages + workation + events
  * + newsinsights + every form/registration page). Three were dropped as
  * stray vector/non-photo assets (wheelchair + reception icons) and one
- * team group-photo on request, leaving the set referenced below — split
+ * team group-photo on request, leaving the set referenced below - split
  * into a hand-curated `wix` map of scenes that components want by name,
  * plus per-page pools that components can index into for a page-
  * appropriate photo.
@@ -22,7 +22,7 @@ const W = "/images/wix/";
 
 /**
  * Hand-curated semantic shortcuts. Existing components import from
- * here by name (`wix.team`, `wix.cabin`, etc.) — keep these stable.
+ * here by name (`wix.team`, `wix.cabin`, etc.) - keep these stable.
  */
 export const wix = {
   // Distinctive, named scenes
@@ -58,7 +58,7 @@ export const wix = {
 } as const;
 
 /**
- * Home-page imagery — heroes, gallery rolls, lifestyle shots,
+ * Home-page imagery - heroes, gallery rolls, lifestyle shots,
  * cafeteria, lounges, badges. 74 entries.
  *
  * Includes 3 GIF accents and several PNG transparencies (logos /
@@ -135,7 +135,7 @@ export const homePool: readonly string[] = [
   W + "fd8c76_6c914d5f2d2e4a45b601a4af36bcad93~mv2.gif",
 ];
 
-/** Franchise-page graphics — partner logos, hero photos, info badges. 8 entries. */
+/** Franchise-page graphics - partner logos, hero photos, info badges. 8 entries. */
 export const franchisePool: readonly string[] = [
   W + "11062b_45f8b560a8b54c2396c4cdfc4c01992a~mv2.jpg",
   W + "11062b_f7afc017def84e5ba9a6ca14916bdd9c~mv2.jpg",
@@ -170,7 +170,7 @@ export const eventsPool: readonly string[] = [
 ];
 
 /**
- * Every unique image hosted on nammaoffice.com — flat-listed for
+ * Every unique image hosted on nammaoffice.com - flat-listed for
  * galleries that need to cycle. Stable order: hand-curated semantic
  * shortcuts first, then per-page pools.
  */
@@ -208,7 +208,7 @@ export const tidelGallery: readonly string[] = [
 ];
 
 /**
- * General interior pool — workstations, lounges, hallways, pantries,
+ * General interior pool - workstations, lounges, hallways, pantries,
  * meeting rooms drawn from the `fd8c76_*` Wix bucket. Cropped to
  * real photographs only (JPEG/JPG); the small PNG/GIF amenity icons
  * are excluded.
@@ -256,7 +256,7 @@ export const interiorPool: readonly string[] = [
 
 
 /**
- * TIDEL NEO Salem — real centre photographs supplied by the client
+ * TIDEL NEO Salem - real centre photographs supplied by the client
  * (1st / 2nd / 3rd floor), resized + optimized and self-hosted. This is the
  * dedicated Salem TIDEL gallery (Tirupur keeps using `tidelGallery`).
  */

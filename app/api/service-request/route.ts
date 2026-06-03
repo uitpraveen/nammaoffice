@@ -109,14 +109,14 @@ export async function POST(request: Request) {
     // JSON endpoint can't disambiguate them. Append any "Other" free-text to
     // the description so it's never lost (the dropdown still carries "Other").
     const otherNotes: string[] = [];
-    if (area === "Other" && areaOther) otherNotes.push(`[Area — Other]: ${areaOther}`);
-    if (floor === "Other" && floorOther) otherNotes.push(`[Floor — Other]: ${floorOther}`);
+    if (area === "Other" && areaOther) otherNotes.push(`[Area - Other]: ${areaOther}`);
+    if (floor === "Other" && floorOther) otherNotes.push(`[Floor - Other]: ${floorOther}`);
     const fullDescription = otherNotes.length
       ? `${description}\n\n${otherNotes.join("\n")}`
       : description;
 
     // Build the JSON record. Field names + hidden auto-default values were
-    // captured from the live form's own XHR submit — see the dev notes in
+    // captured from the live form's own XHR submit - see the dev notes in
     // `lib/zoho.ts`. Zoho PhoneNumber rejects "+"/spaces, so send digits only.
     const record: Record<string, ZohoJsonValue> = {
       SingleLine: companyName,

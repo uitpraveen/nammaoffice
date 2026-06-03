@@ -16,7 +16,7 @@ const inter = Inter({
 /**
  * Satoshi from Indian Type Foundry / Fontshare. Self-hosted: .woff2
  * files live in `public/fonts/`. The CSS variable is named `--font-serif`
- * for historical compatibility — every component reads from it.
+ * for historical compatibility - every component reads from it.
  */
 const satoshi = localFont({
   src: [
@@ -38,7 +38,7 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nammaoffice.com"),
   title: {
-    default: "NammaOffice — Premium Coworking Spaces in Salem, Trichy, Tirupur, Erode & Hosur",
+    default: "NammaOffice - Premium Coworking Spaces in Salem, Trichy, Tirupur, Erode & Hosur",
     template: "%s | NammaOffice",
   },
   description:

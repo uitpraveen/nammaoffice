@@ -9,10 +9,10 @@ export const cities: City[] = [
     description:
       "Salem is one of Tamil Nadu's fastest-growing tier-2 cities, home to a thriving MSME ecosystem, textile industry, and a rapidly expanding IT corridor. NammaOffice has 6 centres strategically located across Salem's key business districts.",
     seoContent:
-      "Looking for coworking space in Salem? NammaOffice offers premium coworking spaces, private cabins, meeting halls, and managed offices at 6 locations across Salem — Fairlands, Ramakrishna Road, Rajeshwari Towers, New Bus Stand, TIDEL NEO, and IPOD (Reliance Mega Mall). Flexible daily, monthly, and annual plans available.",
+      "Looking for coworking space in Salem? NammaOffice offers premium coworking spaces, private cabins, meeting halls, and managed offices at 6 locations across Salem - Fairlands, Ramakrishna Road, Rajeshwari Towers, New Bus Stand, TIDEL NEO, and IPOD (Reliance Mega Mall). Flexible daily, monthly, and annual plans available.",
     image: wix.ramakrishna,
     centreCount: 6,
-    seoTitle: "Coworking Space in Salem | NammaOffice — 6 Centres",
+    seoTitle: "Coworking Space in Salem | NammaOffice - 6 Centres",
     seoDescription:
       "Premium coworking spaces in Salem at 6 locations. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Salem today.",
   },
@@ -23,10 +23,10 @@ export const cities: City[] = [
     description:
       "Tiruchirappalli (Trichy) is a major educational and industrial hub in Tamil Nadu. With strong connectivity, a growing startup ecosystem, and proximity to top engineering colleges, Trichy offers immense opportunity for coworking and managed office solutions.",
     seoContent:
-      "Looking for coworking space in Trichy? NammaOffice Asha Grand on Ramanathapuram Road, Gundur is Trichy's premium coworking destination — private cabins, open desks, meeting halls, and managed offices well-placed for businesses across the city's southern corridor. Flexible plans for individuals and teams.",
+      "Looking for coworking space in Trichy? NammaOffice Asha Grand on Ramanathapuram Road, Gundur is Trichy's premium coworking destination - private cabins, open desks, meeting halls, and managed offices well-placed for businesses across the city's southern corridor. Flexible plans for individuals and teams.",
     image: wix.g,
     centreCount: 1,
-    seoTitle: "Coworking Space in Trichy | NammaOffice — Asha Grand",
+    seoTitle: "Coworking Space in Trichy | NammaOffice - Asha Grand",
     seoDescription:
       "Premium coworking space in Trichy at Asha Grand, Ramanathapuram Road, Gundur. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Trichy today.",
   },
@@ -40,7 +40,7 @@ export const cities: City[] = [
       "Looking for coworking space in Tirupur? NammaOffice TIDEL NEO is Tirupur's premium coworking destination, offering private cabins, open desks, meeting halls, and managed offices. Ideal for textile exporters, MSMEs, and growing businesses.",
     image: wix.newbus,
     centreCount: 1,
-    seoTitle: "Coworking Space in Tirupur | NammaOffice — TIDEL NEO",
+    seoTitle: "Coworking Space in Tirupur | NammaOffice - TIDEL NEO",
     seoDescription:
       "Premium coworking space in Tirupur at TIDEL NEO. Private cabins, open desks, meeting halls, and managed offices. Book your workspace at NammaOffice Tirupur today.",
   },
@@ -54,7 +54,7 @@ export const cities: City[] = [
       "Looking for coworking space in Erode? NammaOffice Texvalley is Erode's premium business address, offering private cabins, open desks, meeting halls, and managed offices on the Salem–Kochi highway. Ideal for textile exporters, traders, and MSMEs.",
     image: wix.ramakrishna,
     centreCount: 1,
-    seoTitle: "Coworking Space in Erode | NammaOffice — Texvalley",
+    seoTitle: "Coworking Space in Erode | NammaOffice - Texvalley",
     seoDescription:
       "Premium coworking space in Erode at Texvalley, NH-544. Private cabins, meeting halls, and managed offices. Book your workspace at NammaOffice Erode today.",
   },
@@ -68,7 +68,7 @@ export const cities: City[] = [
       "Looking for coworking space in Hosur? NammaOffice Sipcot Phase II is Hosur's premium workspace, offering private cabins, open desks, meeting halls, and managed offices inside the Sipcot industrial complex. Ideal for manufacturers, exporters, and Bengaluru-adjacent teams.",
     image: wix.newbus,
     centreCount: 1,
-    seoTitle: "Coworking Space in Hosur | NammaOffice — Sipcot Phase II",
+    seoTitle: "Coworking Space in Hosur | NammaOffice - Sipcot Phase II",
     seoDescription:
       "Premium coworking space in Hosur at Sipcot Phase II Industrial Complex. Private cabins, managed offices, meeting halls. Book your workspace at NammaOffice Hosur today.",
   },
@@ -80,7 +80,7 @@ export const locations: Location[] = [
     name: "Anushka Tower (Fairlands)",
     city: "salem",
     address:
-      "5th Floor, Anushka Tower, Brindavan Road, above LIC, opposite IBACO Icecream, Salem, Tamil Nadu — 636 016",
+      "5th Floor, Anushka Tower, Brindavan Road, above LIC, opposite IBACO Icecream, Salem, Tamil Nadu - 636 016",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6643, lng: 78.146 },
@@ -123,14 +123,14 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Anushka Tower, Fairlands, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice Fairlands — 5th Floor, Anushka Tower, Brindavan Road, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
+      "NammaOffice Fairlands - 5th Floor, Anushka Tower, Brindavan Road, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
   },
   {
     slug: "ramakrishna-road",
     name: "Balaji Tower (Ramakrishna Road)",
     city: "salem",
     address:
-      "3rd Floor, Balaji Towers, 11, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu — 636 007",
+      "3rd Floor, Balaji Towers, 11, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu - 636 007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6712, lng: 78.1558 },
@@ -168,20 +168,20 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Balaji Towers, Ramakrishna Road, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice Ramakrishna Road — Balaji Towers, 3rd Floor, Seerangapalayam, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
+      "NammaOffice Ramakrishna Road - Balaji Towers, 3rd Floor, Seerangapalayam, Salem. Premium coworking with private cabins, open desks, and meeting halls. Book today.",
   },
   {
     slug: "rajeshwari-towers",
     name: "Rajeshwari Towers",
     city: "salem",
     address:
-      "4th Floor, Rajeshwari Towers, 69/4, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu — 636 007",
+      "4th Floor, Rajeshwari Towers, 69/4, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu - 636 007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6735, lng: 78.1503 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "NammaOffice Rajeshwari Towers brings premium coworking to a landmark address in central Salem. Spacious cabins, well-appointed meeting halls, and a quiet business-lounge atmosphere — designed for professionals who value calm focus alongside on-demand collaboration spaces.",
+      "NammaOffice Rajeshwari Towers brings premium coworking to a landmark address in central Salem. Spacious cabins, well-appointed meeting halls, and a quiet business-lounge atmosphere - designed for professionals who value calm focus alongside on-demand collaboration spaces.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -218,14 +218,14 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Rajeshwari Towers, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice Rajeshwari Towers — 4th Floor, 69/4 Ramakrishna Road, Salem. Premium coworking with private cabins, meeting halls, and business lounge. Book today.",
+      "NammaOffice Rajeshwari Towers - 4th Floor, 69/4 Ramakrishna Road, Salem. Premium coworking with private cabins, meeting halls, and business lounge. Book today.",
   },
   {
     slug: "new-bus-stand",
     name: "New Bus Stand",
     city: "salem",
     address:
-      "Bus Stand, 24, West, New Bus Stand Road, opp. ATC, Meyyanur, Salem, Tamil Nadu — 636 004",
+      "Bus Stand, 24, West, New Bus Stand Road, opp. ATC, Meyyanur, Salem, Tamil Nadu - 636 004",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6777, lng: 78.1424 },
@@ -267,14 +267,14 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space near New Bus Stand, Meyyanur, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice New Bus Stand, Meyyanur, Salem — coworking opposite ATC with excellent transport links. Private cabins, open desks, managed offices. Book today.",
+      "NammaOffice New Bus Stand, Meyyanur, Salem - coworking opposite ATC with excellent transport links. Private cabins, open desks, managed offices. Book today.",
   },
   {
     slug: "tidel-neo",
     name: "TIDEL NEO",
     city: "salem",
     address:
-      "P36Q+CJH TIDEL NEO, Kullagoundanoor, Karuppur, Salem, Tamil Nadu — 636 011",
+      "P36Q+CJH TIDEL NEO, Kullagoundanoor, Karuppur, Salem, Tamil Nadu - 636 011",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.5667, lng: 78.1989 },
@@ -307,20 +307,20 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at TIDEL NEO Salem | NammaOffice",
     seoDescription:
-      "NammaOffice TIDEL NEO Salem — premium IT park coworking in Karuppur for tech companies and startups. Managed offices, private cabins, business lounge. Book today.",
+      "NammaOffice TIDEL NEO Salem - premium IT park coworking in Karuppur for tech companies and startups. Managed offices, private cabins, business lounge. Book today.",
   },
   {
     slug: "ipod",
     name: "IPOD (Reliance Mega Mall)",
     city: "salem",
     address:
-      "1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem, Tamil Nadu — 636 004",
+      "1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem, Tamil Nadu - 636 004",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.647, lng: 78.1577 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "NammaOffice IPOD sits inside Reliance Mega Mall at the 5 Road Junction in Meyyanur — one of Salem's busiest commercial nodes. With a mall ecosystem of retail, dining, and entertainment downstairs, this centre is built for teams that want vibrancy on tap.",
+      "NammaOffice IPOD sits inside Reliance Mega Mall at the 5 Road Junction in Meyyanur - one of Salem's busiest commercial nodes. With a mall ecosystem of retail, dining, and entertainment downstairs, this centre is built for teams that want vibrancy on tap.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -351,20 +351,20 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Reliance Mega Mall, Meyyanur, Salem | NammaOffice",
     seoDescription:
-      "NammaOffice IPOD — 1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem. Premium coworking inside a vibrant mall. Book today.",
+      "NammaOffice IPOD - 1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem. Premium coworking inside a vibrant mall. Book today.",
   },
   {
     slug: "asha-grand",
     name: "Asha Grand",
     city: "trichy",
     address:
-      "TS No 13, 1, Ramanathapuram Road, Thiruvalarchi Patti, Gundur, Tiruchirappalli, Tamil Nadu — 620 007",
+      "TS No 13, 1, Ramanathapuram Road, Thiruvalarchi Patti, Gundur, Tiruchirappalli, Tamil Nadu - 620 007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 10.7397, lng: 78.7553 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "NammaOffice Asha Grand is Trichy's flagship coworking address on Ramanathapuram Road, Gundur — well-placed for businesses across the city's southern corridor and for teams travelling between Trichy, Pudukkottai and Madurai. Premium private cabins, open desks, meeting halls and managed offices, with the airport and railway junction both within easy reach.",
+      "NammaOffice Asha Grand is Trichy's flagship coworking address on Ramanathapuram Road, Gundur - well-placed for businesses across the city's southern corridor and for teams travelling between Trichy, Pudukkottai and Madurai. Premium private cabins, open desks, meeting halls and managed offices, with the airport and railway junction both within easy reach.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -402,14 +402,14 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Asha Grand Trichy | NammaOffice",
     seoDescription:
-      "NammaOffice Asha Grand Trichy — premium coworking on Ramanathapuram Road, Gundur. Private cabins, open desks, meeting halls, managed offices. Book today.",
+      "NammaOffice Asha Grand Trichy - premium coworking on Ramanathapuram Road, Gundur. Private cabins, open desks, meeting halls, managed offices. Book today.",
   },
   {
     slug: "tidel-neo",
     name: "TIDEL NEO",
     city: "tirupur",
     address:
-      "TIDEL NEO, 2nd Floor, 424/4, Palaniyappa Nagar, Rakkiyapalayam Road, Thirumuruganpoondi, Tirupur — 641 652",
+      "TIDEL NEO, 2nd Floor, 424/4, Palaniyappa Nagar, Rakkiyapalayam Road, Thirumuruganpoondi, Tirupur - 641 652",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.1085, lng: 77.3411 },
@@ -455,20 +455,20 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space in Tirupur | NammaOffice TIDEL NEO",
     seoDescription:
-      "NammaOffice TIDEL NEO Tirupur — premium coworking for textile exporters, MSMEs, and startups. Private cabins, managed offices, meeting halls. Book today.",
+      "NammaOffice TIDEL NEO Tirupur - premium coworking for textile exporters, MSMEs, and startups. Private cabins, managed offices, meeting halls. Book today.",
   },
   {
     slug: "texvalley",
     name: "Texvalley",
     city: "erode",
     address:
-      "Texvalley, NH-544, Salem–Kochi Highway, Gangapuram (P.O), Chithode, Erode, Tamil Nadu — 638 102",
+      "Texvalley, NH-544, Salem–Kochi Highway, Gangapuram (P.O), Chithode, Erode, Tamil Nadu - 638 102",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.365, lng: 77.7 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
-      "NammaOffice Texvalley sits on NH-544 (the Salem–Kochi highway) at Chithode — ideal for traders and textile exporters who run between Erode, Coimbatore, and Tirupur. Easy highway access, plenty of parking, and a calm professional environment removed from city traffic.",
+      "NammaOffice Texvalley sits on NH-544 (the Salem–Kochi highway) at Chithode - ideal for traders and textile exporters who run between Erode, Coimbatore, and Tirupur. Easy highway access, plenty of parking, and a calm professional environment removed from city traffic.",
     amenities: [
       "high-speed-wifi",
       "power-backup",
@@ -502,14 +502,14 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Texvalley, Erode | NammaOffice",
     seoDescription:
-      "NammaOffice Texvalley — coworking on NH-544 (Salem–Kochi Highway) at Chithode, Erode. Private cabins, meeting halls, managed offices. Book today.",
+      "NammaOffice Texvalley - coworking on NH-544 (Salem–Kochi Highway) at Chithode, Erode. Private cabins, meeting halls, managed offices. Book today.",
   },
   {
     slug: "sipcot-phase-2",
     name: "Sipcot Phase II",
     city: "hosur",
     address:
-      "Plot CP-3 & CP-4, near TVS Academy, Sipcot Phase II Industrial Complex, Moranapalli, Hosur, Tamil Nadu — 635 109",
+      "Plot CP-3 & CP-4, near TVS Academy, Sipcot Phase II Industrial Complex, Moranapalli, Hosur, Tamil Nadu - 635 109",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 12.7409, lng: 77.8253 },
@@ -552,7 +552,7 @@ export const locations: Location[] = [
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Sipcot Phase II, Hosur | NammaOffice",
     seoDescription:
-      "NammaOffice Sipcot Phase II — coworking inside Hosur's flagship industrial complex, near TVS Academy. Managed offices, private cabins, meeting halls. Book today.",
+      "NammaOffice Sipcot Phase II - coworking inside Hosur's flagship industrial complex, near TVS Academy. Managed offices, private cabins, meeting halls. Book today.",
   },
 ];
 
@@ -571,7 +571,7 @@ export function getLocationsByCity(citySlug: CitySlug): Location[] {
   return locations.filter((l) => l.city === citySlug);
 }
 
-/** All centres in display order — used by nav, locations index, and footer. */
+/** All centres in display order - used by nav, locations index, and footer. */
 export function getAllLocations(): Location[] {
   return locations;
 }

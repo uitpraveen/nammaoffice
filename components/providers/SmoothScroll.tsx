@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 /** The global `html { scroll-padding-top: 124px }` rule leaves a 24px
- *  gap below the nav (nav is ~100px scrolled) — but that gap shows the
+ *  gap below the nav (nav is ~100px scrolled) - but that gap shows the
  *  previous section's bottom edge bleeding through. Positive offset
  *  here pulls the scroll a touch further so the target section's top
  *  edge sits flush with the nav bottom, no previous-section bleed.
@@ -20,16 +20,16 @@ const SECTION_SCROLL_OFFSET = 24;
  * resets scroll on every Next.js navigation.
  *
  * Three href shapes get special handling for in-page anchors:
- *   - "#section"  — same-page anchor; always intercepted
- *   - "/#section" — home-page anchor; intercepted only when we're
+ *   - "#section"  - same-page anchor; always intercepted
+ *   - "/#section" - home-page anchor; intercepted only when we're
  *                   already on `/` so cross-page links still navigate
- *   - "/" on `/`  — clears any hash and slides back to the top
+ *   - "/" on `/`  - clears any hash and slides back to the top
  *
  * Capture-phase listening makes us run before Next.js `Link`'s
  * onClick, and `history.replaceState` updates the URL without nesting
  * hashes (the bug `/#x#x` came from Next.js Link's same-path push).
  *
- * Respects `prefers-reduced-motion` — falls back to native scrolling.
+ * Respects `prefers-reduced-motion` - falls back to native scrolling.
  */
 export function SmoothScroll() {
   const pathname = usePathname();
@@ -137,7 +137,7 @@ export function SmoothScroll() {
     document.addEventListener("click", onAnchorClick, { capture: true });
 
     // ---------- Scroll spy ---------------------------------------
-    // Observe only navigable anchors — Hero (Home), About and Amenities.
+    // Observe only navigable anchors - Hero (Home), About and Amenities.
     // Other sections (Centres, Clients, Stats) sit *between* these
     // navigable ones and intentionally leave the URL alone, so the
     // highlight on the last navigable section persists while the user
@@ -212,7 +212,7 @@ export function SmoothScroll() {
   // The new home page mounts with images and reveal animations still
   // settling, so a single scroll on the next animation frame lands at
   // a stale offsetTop. We watch body height for ~1.5s after the
-  // navigation and re-snap to the target every time it changes —
+  // navigation and re-snap to the target every time it changes -
   // images finishing decode, viewport-reveal animations resolving, etc.
   // We bail out early if the user starts scrolling manually.
   useEffect(() => {
@@ -226,7 +226,7 @@ export function SmoothScroll() {
     let canceled = false;
     let userInterrupted = false;
 
-    // Only count REAL user input as an interruption — synthetic events
+    // Only count REAL user input as an interruption - synthetic events
     // dispatched internally by Lenis or by us (`new Event("hashchange")`)
     // have `isTrusted: false` and shouldn't bail out the re-snap loop.
     const onUserScroll = (e: Event) => {

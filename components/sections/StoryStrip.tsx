@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion";
 
 /**
- * Story section — ported from Elevate. Editorial paragraph block on the
+ * Story section - ported from Elevate. Editorial paragraph block on the
  * left, two staggered portrait photos on the right with eyebrow captions.
  */
 export function StoryStrip() {
@@ -36,7 +36,7 @@ export function StoryStrip() {
             <motion.p {...fadeUp}>
               NammaOffice began with a simple observation: the entrepreneurs
               and professionals of tier-2 Tamil Nadu were as ambitious as their
-              counterparts in Chennai or Bengaluru — but lacked the
+              counterparts in Chennai or Bengaluru - but lacked the
               infrastructure to match.
             </motion.p>
             <motion.p {...fadeUp}>
@@ -45,7 +45,7 @@ export function StoryStrip() {
               <strong className="font-medium" style={{ color: "var(--ink)" }}>
                 10 centres
               </strong>{" "}
-              across Salem, Trichy, Tirupur, Erode, and Hosur — serving
+              across Salem, Trichy, Tirupur, Erode, and Hosur - serving
               everyone from solo freelancers to growing teams.
             </motion.p>
             <motion.p
@@ -81,7 +81,7 @@ export function StoryStrip() {
               >
                 <Image
                   src="/images/elevate/story-discussion.jpg"
-                  alt="A discussion room mid-session — daylight, whiteboards, and focus"
+                  alt="A discussion room mid-session - daylight, whiteboards, and focus"
                   fill
                   sizes="(min-width: 1024px) 30vw, 50vw"
                   className="object-cover"

@@ -35,7 +35,7 @@ interface DateTimePickerProps {
   timeStep?: number;
   /**
    * "label" (default) renders the month/year as plain text with chevron
-   * nav. "dropdown" turns them into clickable selects — use this for
+   * nav. "dropdown" turns them into clickable selects - use this for
    * DOB-style pickers where users need to jump back many years.
    */
   captionLayout?: "label" | "dropdown";
@@ -50,7 +50,7 @@ interface DateTimePickerProps {
 }
 
 /**
- * Premium date / date-time picker — Cal.com style.
+ * Premium date / date-time picker - Cal.com style.
  *
  *   ┌──────────────┬────────┐
  *   │   Calendar   │  Time  │
@@ -257,7 +257,7 @@ export function DateTimePicker({
 
         {open && (
           <>
-            {/* Mobile backdrop — taps dismiss the picker */}
+            {/* Mobile backdrop - taps dismiss the picker */}
             <div
               className="fixed inset-0 z-40 bg-black/35 sm:hidden"
               onClick={() => setOpen(false)}
@@ -455,7 +455,7 @@ const DAY_PICKER_CLASSES = {
   hidden: "invisible",
 };
 
-/* Dropdown caption variant — hides the static caption_label since the
+/* Dropdown caption variant - hides the static caption_label since the
    <select> dropdowns provide the visible month/year, and hides the
    chevron nav since the dropdowns make it redundant. */
 const DAY_PICKER_CLASSES_DROPDOWN = {

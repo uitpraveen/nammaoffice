@@ -6,6 +6,8 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { HeroBanner } from "@/components/sections/HeroBanner";
 import { GoogleMap } from "@/components/ui/GoogleMap";
 import { cities, getCity, getLocationsByCity } from "@/lib/data/locations";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schemas";
 import type { CitySlug } from "@/lib/types";
 
 type Props = {
@@ -20,10 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city: citySlug } = await params;
   const city = getCity(citySlug as CitySlug);
   if (!city) return {};
+  const canonical = `/locations/${city.slug}`;
   return {
-    title: city.seoTitle,
+    title: { absolute: city.seoTitle },
     description: city.seoDescription,
-    openGraph: { title: city.seoTitle, description: city.seoDescription },
+    alternates: { canonical },
+    openGraph: {
+      title: city.seoTitle,
+      description: city.seoDescription,
+      url: canonical,
+      images: city.image ? [city.image] : undefined,
+    },
   };
 }
 
@@ -36,6 +45,13 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Locations", href: "/locations" },
+          { name: city.name, href: `/locations/${city.slug}` },
+        ])}
+      />
       <HeroBanner eyebrow={`${cityLocations.length} centres in`} title={city.name} subtitle={city.tagline} />
 
       <section className="content-width py-14 md:py-20">

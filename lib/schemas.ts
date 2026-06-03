@@ -1,4 +1,31 @@
 import type { Location } from "@/lib/types";
+import { BRAND } from "@/lib/constants";
+
+/** Brand-level Organization schema for the site root (home page). */
+export function organizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: BRAND.name,
+    url: "https://nammaoffice.com",
+    logo: "https://nammaoffice.com/images/logo.png",
+    description: BRAND.description,
+    telephone: BRAND.phone,
+    email: BRAND.email,
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN",
+    },
+    areaServed: ["Salem", "Trichy", "Tirupur", "Erode", "Hosur"],
+    sameAs: [
+      BRAND.social.instagram,
+      BRAND.social.linkedin,
+      BRAND.social.facebook,
+      BRAND.social.youtube,
+    ],
+  };
+}
 
 export function localBusinessSchema(location: Location) {
   return {

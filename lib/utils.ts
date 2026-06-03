@@ -14,7 +14,7 @@ export function whatsappUrl(number: string, message?: string): string {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-// `query` is either a full street address (preferred — Google geocodes it to
+// `query` is either a full street address (preferred - Google geocodes it to
 // the real place) or a "lat,lng" string. Driving directions to the address are
 // far more accurate than hand-typed coordinates.
 export function googleMapsUrl(query: string): string {

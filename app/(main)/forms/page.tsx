@@ -4,9 +4,10 @@ import { ArrowRight, Briefcase, Building2, CalendarCheck, LifeBuoy, UserPlus, ty
 import { HeroBanner } from "@/components/sections/HeroBanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/forms" },
   title: "Forms",
   description:
-    "All NammaOffice forms in one place — Company Registration, User Registration, Vendor Onboarding, and Bookings.",
+    "All NammaOffice forms in one place - Company Registration, User Registration, Vendor Onboarding, and Bookings.",
 };
 
 interface FormCard {
@@ -46,7 +47,7 @@ const FORMS: FormCard[] = [
     href: "/bookings",
     title: "Meeting Hall & Gate Pass Bookings",
     description:
-      "Book a meeting hall or boardroom at any centre, or request a TIDEL gate pass for a visitor — same form, two purposes.",
+      "Book a meeting hall or boardroom at any centre, or request a TIDEL gate pass for a visitor - same form, two purposes.",
     icon: CalendarCheck,
     cta: "Open booking form",
   },
@@ -66,7 +67,7 @@ export default function FormsPage() {
       <HeroBanner
         eyebrow="Forms"
         title="All forms, one page."
-        subtitle="Pick the form you need — registration, onboarding, or bookings — and we'll route it to the right team."
+        subtitle="Pick the form you need - registration, onboarding, or bookings - and we'll route it to the right team."
       />
 
       <section className="content-width py-14 md:py-20">

@@ -104,9 +104,9 @@ export interface NavChild {
   label: string;
   href: string;
   description: string;
-  /** Lucide icon name (PascalCase). Optional — falls back to a default. */
+  /** Lucide icon name (PascalCase). Optional - falls back to a default. */
   icon?: string;
-  /** Optional city tag — shown as a small chip next to the label in the locations dropdown. */
+  /** Optional city tag - shown as a small chip next to the label in the locations dropdown. */
   cityTag?: string;
 }
 

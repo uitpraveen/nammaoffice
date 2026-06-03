@@ -106,7 +106,7 @@ function YoutubeIcon({ className }: { className?: string }) {
 import type { NavChild, NavItem } from "@/lib/types";
 
 /**
- * Header v8 — Elevate-style dual-tier light navbar.
+ * Header v8 - Elevate-style dual-tier light navbar.
  *
  *   Row 1 (utility strip, 36px): dark ink band with rating, hours, centres,
  *                                 phone, email, language toggle.
@@ -145,7 +145,7 @@ export function Header() {
    * which prevents React's `onClick` (where we'd normally close the
    * overlay) from ever firing. A *window* capture-phase listener runs
    * before document-capture, so we close the overlay there for any
-   * anchor click inside the overlay — hash or otherwise.
+   * anchor click inside the overlay - hash or otherwise.
    */
   useEffect(() => {
     if (!open) return;
@@ -273,7 +273,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main solid nav — charcoal with traveling neon border */}
+      {/* Main solid nav - charcoal with traveling neon border */}
       <header
         className="nav-neon-border fixed left-0 right-0 z-40 transition-all duration-300"
         style={{
@@ -294,7 +294,7 @@ export function Header() {
             )}
           >
             {/* Logo */}
-            <Link href="/" className="inline-flex items-center shrink-0" aria-label="NammaOffice — home">
+            <Link href="/" className="inline-flex items-center shrink-0" aria-label="NammaOffice - home">
               <Image
                 src="/images/logo.png"
                 alt="NammaOffice"
@@ -345,7 +345,7 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile overlay — charcoal sheet, numbered nav, brick accent */}
+      {/* Mobile overlay - charcoal sheet, numbered nav, brick accent */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -362,7 +362,7 @@ export function Header() {
               className="flex items-center justify-between px-6 h-[64px] shrink-0"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
             >
-              <Link href="/" className="inline-flex items-center" aria-label="NammaOffice — home">
+              <Link href="/" className="inline-flex items-center" aria-label="NammaOffice - home">
                 <Image
                   src="/images/logo.png"
                   alt="NammaOffice"
@@ -392,7 +392,7 @@ export function Header() {
                 // Group nav into primary (frequent paths) and services
                 // (lower-frequency conversion paths) so the mobile menu
                 // reads as 5 + 3 instead of one 8-row stack. Pure presentation
-                // — desktop nav still iterates the same `navigation` array.
+                // - desktop nav still iterates the same `navigation` array.
                 const primaryHrefs = new Set([
                   "/",
                   "/#about",
@@ -558,7 +558,7 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      {/* Spacer for non-home pages — utility strip (36) + nav (76 expanded). */}
+      {/* Spacer for non-home pages - utility strip (36) + nav (76 expanded). */}
       {!isHome && <div className="h-[112px]" aria-hidden />}
     </>
   );

@@ -10,7 +10,7 @@
      repaint without code edits.
      ------------------------------------------------------------------ */
 
-  /* Primary — deep matt black, slight warmth so it reads matte not
+  /* Primary - deep matt black, slight warmth so it reads matte not
      digital. Used for masthead, footer, dark CTAs, headlines. */
   --color-navy: #0E0E0E;
   --color-navy-50: #F5F5F4;
@@ -26,7 +26,7 @@
   --color-navy-deep: #050505;
   --color-navy-soft: #1A1A1A;
 
-  /* Aliases — kept so any old `--color-purple-*` reference still
+  /* Aliases - kept so any old `--color-purple-*` reference still
      resolves to the new charcoal value. */
   --color-purple: var(--color-navy);
   --color-purple-50: var(--color-navy-50);
@@ -41,7 +41,7 @@
   --color-purple-900: var(--color-navy-900);
   --color-purple-deep: var(--color-navy-deep);
 
-  /* Brick Red — restrained warm accent. Used SPARINGLY: primary CTAs,
+  /* Brick Red - restrained warm accent. Used SPARINGLY: primary CTAs,
      italic emphasis, link underlines. Warm enough to ground the matt
      black, restrained enough to read architectural rather than busy. */
   --color-gold: #B8553A;
@@ -64,18 +64,18 @@
   --color-border: #E5E1D6;
   --color-border-strong: #D6CFBE;
 
-  /* Ink (text) — warm-grey neutrals (very slight brown tint) so type
+  /* Ink (text) - warm-grey neutrals (very slight brown tint) so type
      reads matte, not icy. */
   --color-ink: #1A1817;
   --color-ink-secondary: #5C5852;
   --color-ink-muted: #9C988F;
 
-  /* "Charcoal" / dark surfaces — pure matt black scale. */
+  /* "Charcoal" / dark surfaces - pure matt black scale. */
   --color-charcoal: #050505;
   --color-charcoal-soft: #0E0E0E;
 
   /* ----- Active brand semantic aliases ----- */
-  /* "accent" used to be cyan; it is now gold — primary CTA colour. */
+  /* "accent" used to be cyan; it is now gold - primary CTA colour. */
   --color-accent: var(--color-gold);
   --color-accent-50: var(--color-gold-50);
   --color-accent-100: var(--color-gold-100);
@@ -88,7 +88,7 @@
   --color-accent-800: var(--color-gold-800);
   --color-accent-900: var(--color-gold-900);
 
-  /* "secondary" used to be saffron; now it points at navy — the brand
+  /* "secondary" used to be saffron; now it points at navy - the brand
      primary, used for secondary buttons and dark eyebrows. */
   --color-secondary: var(--color-navy);
   --color-secondary-50: var(--color-navy-50);
@@ -143,7 +143,7 @@
   /* ----- Typography -----
      Body: Inter (variable font, set by next/font in app/layout.tsx).
      Display/Headings: Satoshi (Indian Type Foundry, self-hosted from
-     public/fonts/) — modern geometric grotesque. Weights 500 + 700. */
+     public/fonts/) - modern geometric grotesque. Weights 500 + 700. */
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* --font-serif is injected by next/font on the html element (Satoshi). */
 
@@ -203,7 +203,7 @@
     100% { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  /* Display utility — opt-in via class for any element that should use
+  /* Display utility - opt-in via class for any element that should use
      the display typeface (Satoshi). Sets weight so non-heading tags
      (<p>, <span>) read as headlines. Body text and small UI stays Inter. */
   .font-display {
@@ -236,7 +236,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Anchor offset — clears the sticky masthead (112px desktop incl.
+    /* Anchor offset - clears the sticky masthead (112px desktop incl.
        utility strip; ~96px mobile) plus a small breathing buffer so
        section eyebrows don't hug the header. */
     scroll-padding-top: 96px;
@@ -326,7 +326,7 @@
     transform: translateY(0);
   }
 
-  /* Display sizes — Satoshi scale (Medium 500, Bold 700).
+  /* Display sizes - Satoshi scale (Medium 500, Bold 700).
      Min sizes deliberately small enough for a 320px viewport. */
   .display-xl { font-family: var(--font-serif); font-size: clamp(2.25rem, 5.5vw + 0.75rem, 5rem); line-height: 1.0; letter-spacing: -0.03em; font-weight: 700; overflow-wrap: anywhere; }
   /* On short laptop viewports (e.g. 1366×768), scale the hero headline down
@@ -349,7 +349,7 @@
 }
 
 /* ============================================================
-   Elevate design system — cream + brick. Coexists with the old
+   Elevate design system - cream + brick. Coexists with the old
    navy/gold tokens so inner pages keep rendering. New components
    reference --canvas / --ink / --accent / etc.
    ============================================================ */
@@ -387,7 +387,7 @@
     letter-spacing: -0.03em;
     line-height: 1.02;
   }
-  /* `.display-italic` is the in-headline accent class — used to colour and
+  /* `.display-italic` is the in-headline accent class - used to colour and
      emphasise one word/phrase per headline ("from your city", "fastest-
      growing", "A community for builders"). Satoshi has no italic style,
      so we differentiate via colour + Bold weight. */
@@ -458,7 +458,7 @@
     z-index: 2;
   }
 
-  /* Orb 1 — warm cream highlight, big and softly blurred. */
+  /* Orb 1 - warm cream highlight, big and softly blurred. */
   .bg-canvas-grid::before,
   .bg-canvas-alt-grid::before {
     content: "";
@@ -481,7 +481,7 @@
     z-index: 1;
   }
 
-  /* Orb 2 — brick-tinted, smaller, drifts the other way. */
+  /* Orb 2 - brick-tinted, smaller, drifts the other way. */
   .bg-canvas-grid::after,
   .bg-canvas-alt-grid::after {
     content: "";
@@ -558,7 +558,7 @@
   }
   .marquee-track { animation: marquee 60s linear infinite; }
 
-  /* DateTimePicker popover entrance — used in components/ui/DateTimePicker.tsx */
+  /* DateTimePicker popover entrance - used in components/ui/DateTimePicker.tsx */
   @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-4px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -566,7 +566,7 @@
 
   /* Traveling neon line for the navbar bottom edge. A faint base hairline
      stays static; a brighter brick glow continuously sweeps left to right.
-     Note: no `position: relative` on the host — the header is already
+     Note: no `position: relative` on the host - the header is already
      `position: fixed`, which establishes the positioning context for these
      pseudo-elements. Adding relative here would override Tailwind's
      `fixed` utility and break stickiness. */
@@ -581,12 +581,12 @@
     pointer-events: none;
   }
   .nav-neon-border::before {
-    /* Static maroon rail — gold-700 (#6E311F). Reads as a deep brick-maroon
+    /* Static maroon rail - gold-700 (#6E311F). Reads as a deep brick-maroon
        hairline against the charcoal navbar. */
     background: #6E311F;
   }
   .nav-neon-border::after {
-    /* Traveling pulse — a wide dark eclipse glides over the maroon rail.
+    /* Traveling pulse - a wide dark eclipse glides over the maroon rail.
        Center goes near-black so the dark sweep is unmistakable; flanks
        fade gently through deeper maroon so the motion has a soft tail
        at both ends rather than a hard cut. */
@@ -609,7 +609,7 @@
     100% { background-position: 160% 0; }
   }
 
-  /* Primary CTA — flat brick pill. No gradient, no sheen, no glow.
+  /* Primary CTA - flat brick pill. No gradient, no sheen, no glow.
      Solid #B8553A fill, white text, subtle hover-brighten only. */
   .btn-glow-border {
     background: #B8553A;

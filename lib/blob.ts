@@ -41,11 +41,11 @@ export async function uploadFile(
 
 /** Render an UploadedFile as an HTML link or "[file pending upload]". */
 export function fileLinkHtml(f: UploadedFile | null | undefined): string {
-  if (!f) return "—";
+  if (!f) return "-";
   if (f.url) {
     return `<a href="${f.url}" target="_blank" rel="noreferrer">${escapeHtml(f.name)}</a> (${formatBytes(f.size)})`;
   }
-  return `${escapeHtml(f.name)} (${formatBytes(f.size)}) — <em>not stored, contact submitter for the file</em>`;
+  return `${escapeHtml(f.name)} (${formatBytes(f.size)}) - <em>not stored, contact submitter for the file</em>`;
 }
 
 function escapeHtml(s: string): string {

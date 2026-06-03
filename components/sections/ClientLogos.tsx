@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { clients } from "@/lib/data/clients";
 
 /**
- * Client-logo strip — two horizontal marquees that counter-scroll past
+ * Client-logo strip - two horizontal marquees that counter-scroll past
  * each other. Logos are rendered as floating wordmarks (no card frame)
  * with a grayscale wash applied site-wide; hover (or tap on touch)
  * restores the original colour. The two opposing rows + restrained
@@ -14,7 +14,7 @@ import { clients } from "@/lib/data/clients";
  *
  * Each row's content is duplicated so when the first copy slides off
  * the left edge the second copy is already in position to take its
- * place — produces a seamless infinite loop.
+ * place - produces a seamless infinite loop.
  */
 export function ClientLogos() {
   // Split clients across two rows (alternating ids for a varied mix).
@@ -42,7 +42,7 @@ export function ClientLogos() {
           <span className="display-italic">One ecosystem.</span>
         </h2>
         <p className="mt-4 text-[15px] text-[var(--color-ink-secondary)] leading-relaxed max-w-xl mx-auto">
-          From global PSUs and multinational pathology chains to Salem-born SaaS founders — every brand below builds, meets, or hosts from a NammaOffice centre.
+          From global PSUs and multinational pathology chains to Salem-born SaaS founders - every brand below builds, meets, or hosts from a NammaOffice centre.
         </p>
       </motion.div>
 

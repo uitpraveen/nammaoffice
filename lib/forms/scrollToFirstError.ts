@@ -21,7 +21,7 @@ interface LenisLike {
  *
  * Notes from testing the live Lenis instance:
  *  - Animated `lenis.scrollTo(y)` is unreliable here (gets ignored); only
- *    `{ immediate: true, force: true }` lands consistently — an instant jump
+ *    `{ immediate: true, force: true }` lands consistently - an instant jump
  *    to the error is fine UX and always works.
  *  - We defer with setTimeout (not requestAnimationFrame): the call happens
  *    inside React's submit handler before `aria-invalid` is committed, and

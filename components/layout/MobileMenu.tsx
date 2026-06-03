@@ -39,7 +39,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   // Close the menu when any link inside it is tapped. Runs in window's
   // capture phase so it fires BEFORE SmoothScroll's document-level
-  // anchor interceptor — that handler calls `stopImmediatePropagation`
+  // anchor interceptor - that handler calls `stopImmediatePropagation`
   // for in-page hash links (/#about, /#amenities, Home-on-Home), which
   // would otherwise prevent React's onClick (and therefore onClose)
   // from ever firing.

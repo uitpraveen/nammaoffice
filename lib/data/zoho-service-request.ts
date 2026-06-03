@@ -4,7 +4,7 @@
  * preserved) so submissions land in the right column.
  */
 
-/** Branch list — copied verbatim from the live Zoho form. */
+/** Branch list - copied verbatim from the live Zoho form. */
 export const SERVICE_REQUEST_BRANCHES: readonly string[] = [
   "SALEM TIDEL NEO",
   "SALEM BRINTHAVAN RD",
@@ -19,7 +19,7 @@ export const SERVICE_REQUEST_BRANCHES: readonly string[] = [
   "HOSUR",
 ];
 
-/** Area list — Zoho's dropdown ends with "Other"; selecting it reveals a
+/** Area list - Zoho's dropdown ends with "Other"; selecting it reveals a
  *  free-text input (`allow-others-text` in Zoho). */
 export const SERVICE_REQUEST_AREAS: readonly string[] = [
   "Work Place",
@@ -30,7 +30,7 @@ export const SERVICE_REQUEST_AREAS: readonly string[] = [
   "Other",
 ];
 
-/** Floor list — optional, "Other" allowed (free-text follows in Zoho). */
+/** Floor list - optional, "Other" allowed (free-text follows in Zoho). */
 export const SERVICE_REQUEST_FLOORS: readonly string[] = [
   "Floor - 1",
   "Floor - 2",

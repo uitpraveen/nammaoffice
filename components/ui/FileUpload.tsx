@@ -39,7 +39,7 @@ export function FileUpload({
     }
     const sizeMB = file.size / (1024 * 1024);
     if (sizeMB > maxSizeMB) {
-      setLocalError(`File too large — max ${maxSizeMB} MB. Yours is ${sizeMB.toFixed(1)} MB.`);
+      setLocalError(`File too large - max ${maxSizeMB} MB. Yours is ${sizeMB.toFixed(1)} MB.`);
       return;
     }
     onChange(file);

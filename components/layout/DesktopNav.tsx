@@ -10,7 +10,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 /**
- * Desktop nav v2 — Inter sentence-case, calm spacing, gold-dot active
+ * Desktop nav v2 - Inter sentence-case, calm spacing, gold-dot active
  * indicator. Items with `children` open a dark dropdown panel on hover
  * or focus.
  *

@@ -32,7 +32,7 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-[#0E0E0E] text-white/80">
-      {/* Layered background — vertical gradient + warm brick halo radial in
+      {/* Layered background - vertical gradient + warm brick halo radial in
           the top-right and a deep ember in the bottom-left. Adds depth without
           competing with the content. */}
       <div aria-hidden className="absolute inset-0 -z-0 pointer-events-none">
@@ -74,7 +74,7 @@ export function Footer() {
         />
       </span>
 
-      {/* CTA strip — full-width bottom rule, content stays constrained. */}
+      {/* CTA strip - full-width bottom rule, content stays constrained. */}
       <div className="relative border-b border-white/8">
         <div className="content-width py-14 md:py-20 grid lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-16">
           <div>
@@ -121,7 +121,7 @@ export function Footer() {
             Premium coworking spaces across {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}.
           </p>
 
-          {/* Contact blocks — labelled, larger so phone & email read as
+          {/* Contact blocks - labelled, larger so phone & email read as
               their own cards instead of cramped inline links. */}
           <div className="flex flex-col gap-2.5 max-w-sm">
             <a
@@ -215,7 +215,7 @@ export function Footer() {
 }
 
 /**
- * Footer locations column — grouped by city instead of a flat 8-row
+ * Footer locations column - grouped by city instead of a flat 8-row
  * list. Each city heading is a clickable link to the city overview;
  * the centres list under it sits behind a subtle vertical rule so the
  * grouping reads at a glance.

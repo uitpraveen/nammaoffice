@@ -16,8 +16,9 @@ const centreBreakdown = cities
   .join(", ");
 
 export const metadata: Metadata = {
-  title: `All Locations — ${totalCentres} Centres Across ${cityListAnd}`,
-  description: `NammaOffice has ${totalCentres} centres across ${totalCities} cities — ${centreBreakdown}. Find your nearest premium coworking space.`,
+  alternates: { canonical: "/locations" },
+  title: `All Locations - ${totalCentres} Centres Across ${cityListAnd}`,
+  description: `NammaOffice has ${totalCentres} centres across ${totalCities} cities - ${centreBreakdown}. Find your nearest premium coworking space.`,
 };
 
 /**

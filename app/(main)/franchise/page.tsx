@@ -78,7 +78,7 @@ function Hero() {
     <section className="relative overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-10 pt-10 lg:pt-16 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center">
-          {/* Left — copy */}
+          {/* Left - copy */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ function Hero() {
               className="mt-6 text-[17px] lg:text-[18px] max-w-[560px]"
               style={{ color: "var(--ink-muted)" }}
             >
-              Partner with NammaOffice to launch a flagship coworking centre — backed by a proven playbook, member demand, and end-to-end support from real estate to operations.
+              Partner with NammaOffice to launch a flagship coworking centre - backed by a proven playbook, member demand, and end-to-end support from real estate to operations.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
@@ -144,7 +144,7 @@ function Hero() {
             </div>
           </motion.div>
 
-          {/* Right — image + non-financial floating cards */}
+          {/* Right - image + non-financial floating cards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -172,7 +172,7 @@ function Hero() {
               />
             </div>
 
-            {/* Floating tag — Inviting partners */}
+            {/* Floating tag - Inviting partners */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -198,7 +198,7 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Floating mini stat — centres & cities */}
+            {/* Floating mini stat - centres & cities */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -284,7 +284,7 @@ function WhyPartner() {
               <span className="display-italic">without the guesswork.</span>
             </h2>
             <p className="mt-5 max-w-[440px]" style={{ color: "var(--ink-muted)" }}>
-              We&apos;ve spent years engineering every part of the centre — from
+              We&apos;ve spent years engineering every part of the centre - from
               layout and lease negotiations to community programming. You
               inherit the entire system.
             </p>
@@ -375,7 +375,7 @@ function Inclusions() {
               style={{ color: "var(--ink-muted)" }}
             >
               Years of operating know-how, packaged into a turnkey system you
-              inherit on day one. You bring the city — we bring everything else.
+              inherit on day one. You bring the city - we bring everything else.
             </p>
 
             <div
@@ -630,7 +630,7 @@ function InvestmentTerms() {
             className="mt-5 text-[16px] leading-[1.6] max-w-[560px]"
             style={{ color: "var(--ink-muted)" }}
           >
-            Headline parameters below — unit economics, investment range and
+            Headline parameters below - unit economics, investment range and
             payback projections are walked through in your discovery call so
             the numbers match your city, building, and target format.
           </p>
@@ -944,7 +944,7 @@ function CTA() {
                 </h2>
 
                 <p className="text-white/85 mt-6 max-w-[540px] text-[16px] lg:text-[17px] leading-[1.6]">
-                  Reach out to our franchise development team — we&apos;ll walk
+                  Reach out to our franchise development team - we&apos;ll walk
                   you through the playbook, the city availability map, and the
                   path to opening day.
                 </p>
@@ -971,7 +971,7 @@ function CTA() {
                 </div>
               </div>
 
-              {/* Right column — CTA stack */}
+              {/* Right column - CTA stack */}
               <div className="flex flex-col gap-3">
                 <a
                   href={FRANCHISE_WHATSAPP}

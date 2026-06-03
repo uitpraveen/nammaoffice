@@ -1,5 +1,5 @@
 /**
- * Shared Framer Motion (motion/react) variants — ported from the Elevate
+ * Shared Framer Motion (motion/react) variants - ported from the Elevate
  * design system. Use `{...fadeUp}` on a `motion.div` to get the standard
  * fade-up reveal that fires once when the element scrolls into view.
  */

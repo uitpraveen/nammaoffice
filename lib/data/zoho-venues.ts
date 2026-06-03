@@ -3,7 +3,7 @@
  * the Zoho NammaofficeBookings form expects in its `Dropdown2` field.
  *
  * Strings here MUST match the Zoho dropdown option text verbatim (including
- * any typos and unusual spacing — Zoho stores the literal). When a venue is
+ * any typos and unusual spacing - Zoho stores the literal). When a venue is
  * added or renamed in Zoho admin, update the corresponding entry here.
  *
  * Centres that are not yet present in the Zoho form are listed in
@@ -25,45 +25,45 @@ export const BOOKING_ROOMS_BY_CENTRE: Record<string, ZohoRoom[]> = {
   "salem/ramakrishna-road": [
     {
       id: "balaji-discussion-4",
-      label: "Discussion Room — 4 seater",
+      label: "Discussion Room - 4 seater",
       zohoValue: "Salem - Balaji Towers - Discussion Room - 4 Seater",
     },
   ],
   "salem/rajeshwari-towers": [
     {
       id: "rajeshwari-discussion-8",
-      label: "Discussion Room — 8 seater",
+      label: "Discussion Room - 8 seater",
       zohoValue: "Salem - Rajeshwari Towers - Discussion Room - 8 Seater",
     },
   ],
   "salem/new-bus-stand": [
     {
       id: "newbusstand-board-20",
-      label: "Board Room — 20 seater",
+      label: "Board Room - 20 seater",
       zohoValue: "Salem - New Busstand -Board Room 20 Seater",
     },
   ],
   "salem/tidel-neo": [
     {
       id: "salem-tidel-board-30",
-      label: "Board Room — 30 seater",
+      label: "Board Room - 30 seater",
       zohoValue: "Salem - Tidel Neo - Board Room -30 Seater",
     },
     {
       id: "salem-tidel-discussion-4",
-      label: "Discussion Room — 4 seater",
+      label: "Discussion Room - 4 seater",
       zohoValue: "Salem - Tidel Neo - Discussion Room -4 Seater",
     },
   ],
   "tirupur/tidel-neo": [
     {
       id: "tirupur-tidel-board-25",
-      label: "Board Room — 25 seater",
+      label: "Board Room - 25 seater",
       zohoValue: "Tirupur-Tidel Neo-Borad Room - 25 Seater",
     },
     {
       id: "tirupur-tidel-discussion-6",
-      label: "Discussion Room — 6 seater",
+      label: "Discussion Room - 6 seater",
       zohoValue: "Tirupur-Tidel Neo-Discussion Room- 6 Seater",
     },
   ],

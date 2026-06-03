@@ -14,14 +14,14 @@ interface BaseProps {
 function buildSlides({ images, locationName, cityName }: BaseProps) {
   return images.map((src, i) => ({
     src,
-    alt: `${locationName}, ${cityName} — photo ${i + 1}`,
+    alt: `${locationName}, ${cityName} - photo ${i + 1}`,
     title: `${locationName}, ${cityName}`,
     description: `Photo ${i + 1} of ${images.length}`,
   }));
 }
 
 /**
- * Hero strip — featured 1 large + 2 smaller. Clicking any tile opens
+ * Hero strip - featured 1 large + 2 smaller. Clicking any tile opens
  * the lightbox at that index (so users can keep scrubbing through the
  * full gallery from inside the viewer).
  */
@@ -54,7 +54,7 @@ export function LocationHeroStrip(props: BaseProps) {
             >
               <Image
                 src={src}
-                alt={`${locationName}, ${cityName} — photo ${i + 1}`}
+                alt={`${locationName}, ${cityName} - photo ${i + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -86,7 +86,7 @@ export function LocationHeroStrip(props: BaseProps) {
 }
 
 /**
- * "Inside the centre" — the remaining gallery shots beyond the hero
+ * "Inside the centre" - the remaining gallery shots beyond the hero
  * strip, rendered in a 2/3-col grid. Clicking opens the lightbox at
  * the global image index (offset +3 to skip the hero photos).
  */
@@ -121,7 +121,7 @@ export function LocationInsideGallery(props: BaseProps) {
             >
               <Image
                 src={src}
-                alt={`${locationName}, ${cityName} — gallery ${idx + 1}`}
+                alt={`${locationName}, ${cityName} - gallery ${idx + 1}`}
                 fill
                 sizes="(max-width: 640px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"

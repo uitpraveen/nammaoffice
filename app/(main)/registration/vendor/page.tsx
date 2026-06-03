@@ -5,6 +5,7 @@ import { FormPageShell } from "@/components/sections/FormPageShell";
 import { embedUrlFor } from "@/lib/forms/mode";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/registration/vendor" },
   title: "Vendor Onboarding",
   description:
     "Apply to become a NammaOffice vendor. Cleaning, security, pantry, IT/AV, maintenance, stationery, furniture and more.",

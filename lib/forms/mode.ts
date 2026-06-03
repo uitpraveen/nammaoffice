@@ -1,5 +1,5 @@
 /**
- * Forms display mode — flip between the Next.js custom forms (which POST to
+ * Forms display mode - flip between the Next.js custom forms (which POST to
  * Zoho headlessly via the API routes) and embedding the Zoho form itself in an
  * iframe on the page.
  *
@@ -11,7 +11,7 @@
  * from its `ZOHO_EMBED_URL_*` env var; if that URL is missing, the form falls
  * back to the custom component so a page never renders blank.
  *
- * These are server-only env vars (not NEXT_PUBLIC) — read in the server-
+ * These are server-only env vars (not NEXT_PUBLIC) - read in the server-
  * component form pages. Changing them needs a dev-server restart (or, on
  * Vercel, a redeploy) to take effect.
  */

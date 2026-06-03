@@ -31,7 +31,7 @@ const REQUEST_TYPES = [
   },
 ];
 
-// Values are the exact strings the Zoho `Dropdown1` field expects — keep
+// Values are the exact strings the Zoho `Dropdown1` field expects - keep
 // them in sync with the Zoho form's Meeting Duration options.
 const DURATIONS = [
   { value: "30mins", label: "30 minutes" },
@@ -45,7 +45,7 @@ const DURATIONS = [
 
 // Booking-mode venues are grouped by city (one <optgroup> per city) so
 // long centre lists read scannably on mobile. Centres not yet present in
-// the Zoho Bookings form are filtered out — adding them in Zoho admin and
+// the Zoho Bookings form are filtered out - adding them in Zoho admin and
 // in lib/data/zoho-venues.ts will surface them here automatically.
 const ALL_VENUE_GROUPS = cities
   .map((c) => ({
@@ -71,7 +71,7 @@ const GATE_PASS_VENUE_OPTIONS = locations
   .filter((l) => l.slug === "tidel-neo")
   .map((l) => ({
     value: `${l.city}/${l.slug}`,
-    label: `${l.name} — ${l.city.charAt(0).toUpperCase() + l.city.slice(1)}`,
+    label: `${l.name} - ${l.city.charAt(0).toUpperCase() + l.city.slice(1)}`,
   }));
 
 interface FormState {
@@ -191,7 +191,7 @@ export function BookingsForm({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (form.honeypot) return; // Bot submission — silently drop.
+    if (form.honeypot) return; // Bot submission - silently drop.
     setServerError(null);
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -241,7 +241,7 @@ export function BookingsForm({
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-8">
-      {/* Honeypot — hidden from real users, visible to bots */}
+      {/* Honeypot - hidden from real users, visible to bots */}
       <input
         type="text"
         name="company"
@@ -288,21 +288,21 @@ export function BookingsForm({
             value={form.venue}
             onChange={(e) => {
               update("venue", e.target.value);
-              // Reset room — its options depend on the centre.
+              // Reset room - its options depend on the centre.
               update("room", "");
             }}
             error={errors.venue}
             disabled={lockVenue}
             hint={
               lockVenue
-                ? "Pre-selected for this centre — submit a request from another centre's page to change venue."
+                ? "Pre-selected for this centre - submit a request from another centre's page to change venue."
                 : form.requestType === "gate-pass"
                   ? "Gate pass is available only at TIDEL NEO Salem and TIDEL NEO Tirupur."
                   : "Centres are grouped by city."
             }
           />
         </div>
-        {/* Room is meeting-hall booking only — gate pass maps to a fixed
+        {/* Room is meeting-hall booking only - gate pass maps to a fixed
             venue value per TIDEL park, no room choice needed. */}
         {form.requestType === "booking" && form.venue && (
           <Select

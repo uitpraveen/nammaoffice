@@ -19,6 +19,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { locations, getCity, getLocation } from "@/lib/data/locations";
 import { getAmenities } from "@/lib/data/amenities";
 import { googleMapsUrl, whatsappUrl, formatPhone } from "@/lib/utils";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/schemas";
 import type { CitySlug } from "@/lib/types";
 
 const WORKSPACE_LABELS: Record<string, string> = {
@@ -45,10 +47,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city: citySlug, location: locationSlug } = await params;
   const location = getLocation(locationSlug, citySlug);
   if (!location) return {};
+  const canonical = `/locations/${location.city}/${location.slug}`;
   return {
-    title: location.seoTitle,
+    // `absolute` bypasses the "%s | NammaOffice" template - seoTitle already
+    // carries the brand, so this avoids a doubled "… | NammaOffice | NammaOffice".
+    title: { absolute: location.seoTitle },
     description: location.seoDescription,
-    openGraph: { title: location.seoTitle, description: location.seoDescription },
+    alternates: { canonical },
+    openGraph: {
+      title: location.seoTitle,
+      description: location.seoDescription,
+      url: canonical,
+      images: location.images[0] ? [location.images[0]] : undefined,
+    },
   };
 }
 
@@ -77,6 +88,15 @@ export default async function LocationPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={localBusinessSchema(location)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Locations", href: "/locations" },
+          { name: city.name, href: `/locations/${city.slug}` },
+          { name: location.name, href: `/locations/${city.slug}/${location.slug}` },
+        ])}
+      />
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },
@@ -94,7 +114,7 @@ export default async function LocationPage({ params }: Props) {
 
       <section className="content-width pb-24">
         <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left — content */}
+          {/* Left - content */}
           <div className="lg:w-[62%] flex flex-col gap-12">
             <Reveal>
               <p className="eyebrow !text-[var(--color-gold-deep)]">{city.name}</p>
@@ -223,7 +243,7 @@ export default async function LocationPage({ params }: Props) {
             )}
           </div>
 
-          {/* Right — sticky sidebar */}
+          {/* Right - sticky sidebar */}
           <aside className="lg:w-[38%]">
             <div className="sticky top-32 flex flex-col gap-5">
               <GoogleMap

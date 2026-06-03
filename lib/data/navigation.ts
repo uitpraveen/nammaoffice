@@ -4,12 +4,12 @@ import type { NavItem } from "@/lib/types";
  * Top nav order chosen by client:
  *   Home · About · Locations · Amenities · Franchise · Forms
  *
- * Contact is intentionally NOT a top-level page — the live Wix site
+ * Contact is intentionally NOT a top-level page - the live Wix site
  * doesn't have one either. Phone, email and WhatsApp in the header /
  * footer / floating button are the contact funnels; visitors who want
  * a tour book one via the Bookings form.
  *
- * "Forms" is the single dropdown — houses the four registration forms
+ * "Forms" is the single dropdown - houses the four registration forms
  * (Company / User / Vendor), the combined Bookings + Gate Pass form,
  * and the Service Desk ticket form. Bookings and Gate Pass were
  * separate menu items but they post to the same Zoho form, so the
@@ -35,7 +35,7 @@ export const navigation: NavItem[] = [
       {
         label: "User Form",
         href: "/registration/user",
-        description: "Member onboarding — KYC, vehicle and contact details.",
+        description: "Member onboarding - KYC, vehicle and contact details.",
         icon: "UserPlus",
       },
       {
@@ -53,7 +53,7 @@ export const navigation: NavItem[] = [
       {
         label: "Service Request",
         href: "/service-request",
-        description: "Raise a service-desk ticket — facilities, IT, housekeeping.",
+        description: "Raise a service-desk ticket - facilities, IT, housekeeping.",
         icon: "LifeBuoy",
       },
     ],

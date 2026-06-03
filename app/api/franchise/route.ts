@@ -18,14 +18,14 @@ export async function POST(request: Request) {
         <tr><td>Email</td><td>${email}</td></tr>
         <tr><td>Phone</td><td>${phone}</td></tr>
         <tr><td>City</td><td>${city}</td></tr>
-        <tr><td>Space Size</td><td>${spaceSize || "—"}</td></tr>
-        <tr><td>Investment Capacity</td><td>${investmentCapacity || "—"}</td></tr>
-        <tr><td>Message</td><td>${message || "—"}</td></tr>
+        <tr><td>Space Size</td><td>${spaceSize || "-"}</td></tr>
+        <tr><td>Investment Capacity</td><td>${investmentCapacity || "-"}</td></tr>
+        <tr><td>Message</td><td>${message || "-"}</td></tr>
       </table>
     `;
 
     await sendNotificationEmail({
-      subject: `Franchise Enquiry from ${name} — ${city}`,
+      subject: `Franchise Enquiry from ${name} - ${city}`,
       html,
       replyTo: email,
     });

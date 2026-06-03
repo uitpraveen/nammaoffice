@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { cities, locations } from "@/lib/data/locations";
 
 /**
- * Mid-page dark accent strip — a single dark moment that breaks up the
+ * Mid-page dark accent strip - a single dark moment that breaks up the
  * cream surfaces and gives the page visual rhythm. SaaS-style stat tiles
  * with gradient borders + soft glow. Scroll-driven reveal: text fades up
  * first, then the four stat tiles cascade in with a 60ms stagger.
@@ -14,7 +14,7 @@ import { cities, locations } from "@/lib/data/locations";
 export function StatsBand() {
   return (
     <section id="stats" className="bg-[var(--color-charcoal)] relative overflow-hidden">
-      {/* Subtle dot-grid pattern — kept ONLY here (the "Built across…"
+      {/* Subtle dot-grid pattern - kept ONLY here (the "Built across…"
           stats band) per client preference. Masthead and footer stay
           plain matt black. */}
       <div
@@ -56,7 +56,7 @@ export function StatsBand() {
               <span className="display-italic">fastest-growing</span> cities.
             </h2>
             <p className="mt-5 text-[15px] text-white/65 leading-relaxed max-w-md">
-              {locations.length} centres across {cities.length} cities — {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}. Premium workspaces for founders, freelancers, and growing teams.
+              {locations.length} centres across {cities.length} cities - {cities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}. Premium workspaces for founders, freelancers, and growing teams.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link

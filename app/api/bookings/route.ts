@@ -13,7 +13,7 @@ interface BookingPayload {
   bookingPersonName: string;
   bookingPersonContact: string;
   bookingPersonEmail: string;
-  /** `${city}/${slug}` — our internal centre identifier. */
+  /** `${city}/${slug}` - our internal centre identifier. */
   venue: string;
   /** Room id from `BOOKING_ROOMS_BY_CENTRE[venue]`. Required for booking
    *  mode, ignored for gate-pass (auto-mapped to the park's gate-pass venue). */
@@ -43,7 +43,7 @@ const REQUIRED: (keyof BookingPayload)[] = [
 /**
  * Translate our (centre, room) selection to the exact Zoho `Dropdown2`
  * value. Returns undefined if the combination isn't in the Zoho form yet
- * — the caller rejects the submission with a clear error so we never
+ * - the caller rejects the submission with a clear error so we never
  * fire-and-forget bad data into Zoho.
  */
 function resolveZohoVenue(
@@ -133,7 +133,7 @@ export async function POST(request: Request) {
     // NammaofficeBookings form. TermsConditions is sent as boolean true
     // because the JSON endpoint expects a real bool for checkbox-style
     // accept fields (the htmlRecords endpoint wanted "on", but that
-    // endpoint silently drops records — see lib/zoho.ts).
+    // endpoint silently drops records - see lib/zoho.ts).
     // Zoho's PhoneNumber field here is configured min 10 / max 12 digits and
     // rejects any non-digit char (Zoho error: "Enter only numbers"). Strip +
     // and spaces, and bound the length so Zoho never rejects the record.
@@ -147,7 +147,7 @@ export async function POST(request: Request) {
 
     // MultiLine (Guest Names) is REQUIRED by Zoho (verified live: omitting it
     // returns {"MultiLine":"Enter a value for this field."}) even though our UI
-    // treats it as optional — so fall back to a sensible placeholder when the
+    // treats it as optional - so fall back to a sensible placeholder when the
     // visitor leaves it blank. Dropdown1 (Duration) and SingleLine2 (Company to
     // Visit) ARE optional, so omit them when blank (submitToZohoFormJson strips
     // undefined, not "") to avoid pushing "" into a dropdown.
