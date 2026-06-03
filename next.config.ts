@@ -103,6 +103,17 @@ const nextConfig: NextConfig = {
       { source: "/tidel-neo-salem-aggrement-form", destination: "/locations/salem/tidel-neo", permanent: false },
     ];
   },
+  async headers() {
+    // The self-destructing service workers must never be cached, so a stale
+    // legacy (Wix) worker's update check always fetches the fresh evictor.
+    const noCache = [
+      { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+    ];
+    return [
+      { source: "/service-worker.js", headers: noCache },
+      { source: "/sw.js", headers: noCache },
+    ];
+  },
 };
 
 export default nextConfig;

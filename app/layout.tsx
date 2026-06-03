@@ -66,6 +66,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${satoshi.variable}`}>
       <body>
+        {/*
+          Post-migration cleanup: the old Wix site may have left a service
+          worker (offline-first cache) in returning visitors' browsers, which
+          would keep serving the stale Wix copy. The current site uses no
+          service worker, so on every load we unregister any that exist and
+          clear their caches. Runs only in browsers that reach this new HTML;
+          the self-destructing /service-worker.js handles the rest. Safe to
+          remove once legacy workers have cleared.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});}if(window.caches&&window.caches.keys){window.caches.keys().then(function(ks){ks.forEach(function(k){window.caches.delete(k);});}).catch(function(){});}}catch(e){}})();",
+          }}
+        />
         <SmoothScroll />
         <GoogleTagManager />
         {children}
