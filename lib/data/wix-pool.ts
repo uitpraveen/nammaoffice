@@ -400,3 +400,37 @@ export const balajiGallery: readonly string[] = [
   W + "balaji/balaji-08.webp",
   W + "balaji/balaji-09.webp",
 ];
+
+/**
+ * Erode Texvalley gallery — 27 real photos (de-duplicated from 35 originals;
+ * 8 WhatsApp re-saves / repeat shots removed).
+ */
+export const texvalleyGallery: readonly string[] = [
+  W + "texvalley/texvalley-01.jpg",
+  W + "texvalley/texvalley-02.jpg",
+  W + "texvalley/texvalley-03.jpg",
+  W + "texvalley/texvalley-04.jpg",
+  W + "texvalley/texvalley-05.jpg",
+  W + "texvalley/texvalley-06.jpg",
+  W + "texvalley/texvalley-07.jpg",
+  W + "texvalley/texvalley-08.jpg",
+  W + "texvalley/texvalley-09.jpg",
+  W + "texvalley/texvalley-10.jpg",
+  W + "texvalley/texvalley-11.jpg",
+  W + "texvalley/texvalley-12.jpg",
+  W + "texvalley/texvalley-13.jpg",
+  W + "texvalley/texvalley-14.jpg",
+  W + "texvalley/texvalley-15.jpg",
+  W + "texvalley/texvalley-16.jpg",
+  W + "texvalley/texvalley-17.jpg",
+  W + "texvalley/texvalley-18.jpg",
+  W + "texvalley/texvalley-19.jpg",
+  W + "texvalley/texvalley-20.jpg",
+  W + "texvalley/texvalley-21.jpg",
+  W + "texvalley/texvalley-22.jpg",
+  W + "texvalley/texvalley-23.jpg",
+  W + "texvalley/texvalley-24.jpg",
+  W + "texvalley/texvalley-25.jpg",
+  W + "texvalley/texvalley-26.jpg",
+  W + "texvalley/texvalley-27.jpg",
+];

@@ -1,5 +1,5 @@
 import type { City, CitySlug, Location } from "@/lib/types";
-import { wix, tidelSalemGallery, tidelTirupurGallery, ashaGrandGallery, anushkaGallery, rajeshwariGallery, balajiGallery, interiorPool } from "@/lib/data/wix-pool";
+import { wix, tidelSalemGallery, tidelTirupurGallery, ashaGrandGallery, anushkaGallery, rajeshwariGallery, balajiGallery, texvalleyGallery, interiorPool } from "@/lib/data/wix-pool";
 
 export const cities: City[] = [
   {
@@ -425,15 +425,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      interiorPool[27],
-      interiorPool[28],
-      interiorPool[29],
-      interiorPool[30],
-      interiorPool[31],
-      wix.cabin,
-      wix.discussion,
-    ],
+    images: [...texvalleyGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Texvalley, Erode | NammaOffice",
