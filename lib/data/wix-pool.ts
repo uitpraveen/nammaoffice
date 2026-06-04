@@ -306,6 +306,9 @@ export const tidelSalemGallery: readonly string[] = [
  * Dedicated Tirupur gallery (Salem uses tidelSalemGallery).
  */
 export const tidelTirupurGallery: readonly string[] = [
+  // -10 leads: it is the representative shot shown on the city-page card and as
+  // the detail-page hero.
+  W + "tidel-tirupur/tidel-tirupur-10.jpg",
   W + "tidel-tirupur/tidel-tirupur-01.jpg",
   W + "tidel-tirupur/tidel-tirupur-02.jpg",
   W + "tidel-tirupur/tidel-tirupur-03.jpg",
@@ -315,7 +318,6 @@ export const tidelTirupurGallery: readonly string[] = [
   W + "tidel-tirupur/tidel-tirupur-07.jpg",
   W + "tidel-tirupur/tidel-tirupur-08.jpg",
   W + "tidel-tirupur/tidel-tirupur-09.jpg",
-  W + "tidel-tirupur/tidel-tirupur-10.jpg",
   W + "tidel-tirupur/tidel-tirupur-11.jpg",
   W + "tidel-tirupur/tidel-tirupur-12.jpg",
   W + "tidel-tirupur/tidel-tirupur-13.jpg",
@@ -352,4 +354,49 @@ export const ashaGrandGallery: readonly string[] = [
   W + "asha-grand/asha-grand-23.jpg",
   W + "asha-grand/asha-grand-24.jpg",
   W + "asha-grand/asha-grand-25.jpg",
+];
+
+
+/**
+ * Anushka Tower (Fairlands), Salem - real centre photographs supplied by
+ * the client, self-hosted. Dedicated Fairlands gallery.
+ */
+export const anushkaGallery: readonly string[] = [
+  W + "anushka/anushka-01.webp",
+  W + "anushka/anushka-02.webp",
+  W + "anushka/anushka-03.webp",
+  W + "anushka/anushka-04.webp",
+  W + "anushka/anushka-05.webp",
+  W + "anushka/anushka-06.webp",
+];
+
+
+/**
+ * Rajeshwari Towers, Salem - real centre photographs supplied by the
+ * client, self-hosted. Dedicated Rajeshwari gallery.
+ */
+export const rajeshwariGallery: readonly string[] = [
+  W + "rajeshwari/rajeshwari-01.webp",
+  W + "rajeshwari/rajeshwari-02.webp",
+  W + "rajeshwari/rajeshwari-03.webp",
+  W + "rajeshwari/rajeshwari-04.webp",
+  W + "rajeshwari/rajeshwari-05.webp",
+  W + "rajeshwari/rajeshwari-06.webp",
+];
+
+
+/**
+ * Balaji Tower (Ramakrishna Road), Salem - real centre photographs from
+ * the client, self-hosted. Dedicated Balaji Tower gallery.
+ */
+export const balajiGallery: readonly string[] = [
+  W + "balaji/balaji-01.webp",
+  W + "balaji/balaji-02.webp",
+  W + "balaji/balaji-03.webp",
+  W + "balaji/balaji-04.webp",
+  W + "balaji/balaji-05.webp",
+  W + "balaji/balaji-06.webp",
+  W + "balaji/balaji-07.webp",
+  W + "balaji/balaji-08.webp",
+  W + "balaji/balaji-09.webp",
 ];

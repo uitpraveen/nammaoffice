@@ -48,7 +48,9 @@ export function LocationHeroStrip(props: BaseProps) {
               aria-label={`Open photo ${i + 1} in viewer`}
               className={`relative bg-[var(--color-surface-alt)] group overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] ${
                 i === 0
-                  ? "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto"
+                  ? `md:row-span-2 aspect-[4/3] md:aspect-auto ${
+                      images.length === 1 ? "md:col-span-3" : "md:col-span-2"
+                    }`
                   : "aspect-[5/3] md:aspect-auto"
               }`}
             >

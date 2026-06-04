@@ -59,6 +59,12 @@ export function LocationsShowcase({
   eyebrow = "Centres",
 }: LocationsShowcaseProps = {}) {
   const totalCities = new Set(locations.map((l) => l.city)).size;
+  // Some centres share a name across cities (e.g. TIDEL NEO in both Salem and
+  // Tirupur). Prefix those with the city so the cards are distinguishable.
+  const nameCounts = locations.reduce<Record<string, number>>((acc, l) => {
+    acc[l.name] = (acc[l.name] ?? 0) + 1;
+    return acc;
+  }, {});
   return (
     <section id="centres" className="bg-canvas-alt-grid py-24 md:py-32">
       <div className="content-width relative z-10">
@@ -95,6 +101,10 @@ export function LocationsShowcase({
           {locations.map((loc, i) => {
             const slot = layoutSlots[i] ?? layoutSlots[layoutSlots.length - 1];
             const img = bentoImages[i % bentoImages.length];
+            const displayName =
+              nameCounts[loc.name] > 1
+                ? `${cityLabel[loc.city] ?? loc.city} ${loc.name}`
+                : loc.name;
             return (
               <motion.div
                 key={`${loc.city}-${loc.slug}`}
@@ -148,7 +158,7 @@ export function LocationsShowcase({
                           className="display text-[20px] md:text-[22px] leading-tight"
                           style={{ color: "var(--ink)" }}
                         >
-                          {loc.name}
+                          {displayName}
                         </h3>
                         <p
                           className="mt-2 text-[13px] leading-[1.55] line-clamp-2"
