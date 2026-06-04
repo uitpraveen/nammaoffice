@@ -298,3 +298,58 @@ export const tidelSalemGallery: readonly string[] = [
   W + "tidel-salem/tidel-salem-35.jpg",
   W + "tidel-salem/tidel-salem-36.jpg",
 ];
+
+
+/**
+ * TIDEL NEO Tirupur - real centre photographs supplied by the client,
+ * cropped (letterbox black bars removed) + optimized and self-hosted.
+ * Dedicated Tirupur gallery (Salem uses tidelSalemGallery).
+ */
+export const tidelTirupurGallery: readonly string[] = [
+  W + "tidel-tirupur/tidel-tirupur-01.jpg",
+  W + "tidel-tirupur/tidel-tirupur-02.jpg",
+  W + "tidel-tirupur/tidel-tirupur-03.jpg",
+  W + "tidel-tirupur/tidel-tirupur-04.jpg",
+  W + "tidel-tirupur/tidel-tirupur-05.jpg",
+  W + "tidel-tirupur/tidel-tirupur-06.jpg",
+  W + "tidel-tirupur/tidel-tirupur-07.jpg",
+  W + "tidel-tirupur/tidel-tirupur-08.jpg",
+  W + "tidel-tirupur/tidel-tirupur-09.jpg",
+  W + "tidel-tirupur/tidel-tirupur-10.jpg",
+  W + "tidel-tirupur/tidel-tirupur-11.jpg",
+  W + "tidel-tirupur/tidel-tirupur-12.jpg",
+  W + "tidel-tirupur/tidel-tirupur-13.jpg",
+];
+
+
+/**
+ * Asha Grand, Trichy - real centre photographs from the client handover
+ * deck (slides 8-22), optimized and self-hosted. Dedicated Trichy gallery.
+ */
+export const ashaGrandGallery: readonly string[] = [
+  W + "asha-grand/asha-grand-01.jpg",
+  W + "asha-grand/asha-grand-02.jpg",
+  W + "asha-grand/asha-grand-03.jpg",
+  W + "asha-grand/asha-grand-04.jpg",
+  W + "asha-grand/asha-grand-05.jpg",
+  W + "asha-grand/asha-grand-06.jpg",
+  W + "asha-grand/asha-grand-07.jpg",
+  W + "asha-grand/asha-grand-08.jpg",
+  W + "asha-grand/asha-grand-09.jpg",
+  W + "asha-grand/asha-grand-10.jpg",
+  W + "asha-grand/asha-grand-11.jpg",
+  W + "asha-grand/asha-grand-12.jpg",
+  W + "asha-grand/asha-grand-13.jpg",
+  W + "asha-grand/asha-grand-14.jpg",
+  W + "asha-grand/asha-grand-15.jpg",
+  W + "asha-grand/asha-grand-16.jpg",
+  W + "asha-grand/asha-grand-17.jpg",
+  W + "asha-grand/asha-grand-18.jpg",
+  W + "asha-grand/asha-grand-19.jpg",
+  W + "asha-grand/asha-grand-20.jpg",
+  W + "asha-grand/asha-grand-21.jpg",
+  W + "asha-grand/asha-grand-22.jpg",
+  W + "asha-grand/asha-grand-23.jpg",
+  W + "asha-grand/asha-grand-24.jpg",
+  W + "asha-grand/asha-grand-25.jpg",
+];

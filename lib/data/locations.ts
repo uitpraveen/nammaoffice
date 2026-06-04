@@ -1,5 +1,5 @@
 import type { City, CitySlug, Location } from "@/lib/types";
-import { wix, tidelGallery, tidelSalemGallery, interiorPool } from "@/lib/data/wix-pool";
+import { wix, tidelSalemGallery, tidelTirupurGallery, ashaGrandGallery, interiorPool } from "@/lib/data/wix-pool";
 
 export const cities: City[] = [
   {
@@ -387,17 +387,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      interiorPool[34],
-      interiorPool[35],
-      interiorPool[36],
-      interiorPool[37],
-      interiorPool[38],
-      interiorPool[39],
-      interiorPool[40],
-      wix.cabin,
-      wix.discussion,
-    ],
+    images: [...ashaGrandGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Asha Grand Trichy | NammaOffice",
@@ -438,19 +428,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      tidelGallery[8],
-      tidelGallery[9],
-      tidelGallery[10],
-      tidelGallery[11],
-      tidelGallery[12],
-      tidelGallery[13],
-      interiorPool[41],
-      interiorPool[42],
-      wix.cabin,
-      wix.discussion,
-      wix.dining,
-    ],
+    images: [...tidelTirupurGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space in Tirupur | NammaOffice TIDEL NEO",
