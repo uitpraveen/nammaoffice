@@ -247,7 +247,7 @@ export default async function LocationPage({ params }: Props) {
           <aside className="lg:w-[38%]">
             <div className="sticky top-32 flex flex-col gap-5">
               <GoogleMap
-                query={location.address}
+                query={location.mapQuery ?? location.address}
                 title={`${location.name}, ${city.name}`}
                 className="h-56 rounded-2xl overflow-hidden"
               />

@@ -434,3 +434,24 @@ export const texvalleyGallery: readonly string[] = [
   W + "texvalley/texvalley-26.jpg",
   W + "texvalley/texvalley-27.jpg",
 ];
+
+/**
+ * Salem IPOD (Reliance Mega Mall) — real photos of the NammaOffice x Reliance
+ * iPOD work-pod inside the mall.
+ */
+export const ipodGallery: readonly string[] = [
+  W + "ipod/ipod-01.jpg",
+  W + "ipod/ipod-02.jpg",
+];
+
+/**
+ * Hosur Sipcot Phase II — no on-site photos yet, so a curated set of interior
+ * shots from the pool that are not shown on any other centre.
+ */
+export const hosurGallery: readonly string[] = [
+  W + "fd8c76_0d7b8ba865cf48168671dbbe325c4bac~mv2.jpeg",
+  W + "fd8c76_856492ca2cc0460f9d569385dcd37096~mv2.jpeg",
+  W + "fd8c76_a989392be7a148d78a8e7e34d8a25b36~mv2.jpeg",
+  W + "fd8c76_d52103781e3b4471baf59da33069f7ea~mv2.jpeg",
+  W + "fd8c76_f74a00e95a5f44e298fb5e8fd11b4fd1~mv2.jpeg",
+];

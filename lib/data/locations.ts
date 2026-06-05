@@ -1,5 +1,5 @@
 import type { City, CitySlug, Location } from "@/lib/types";
-import { wix, tidelSalemGallery, tidelTirupurGallery, ashaGrandGallery, anushkaGallery, rajeshwariGallery, balajiGallery, texvalleyGallery, interiorPool } from "@/lib/data/wix-pool";
+import { wix, tidelSalemGallery, tidelTirupurGallery, ashaGrandGallery, anushkaGallery, rajeshwariGallery, balajiGallery, texvalleyGallery, ipodGallery, hosurGallery } from "@/lib/data/wix-pool";
 
 export const cities: City[] = [
   {
@@ -81,6 +81,7 @@ export const locations: Location[] = [
     city: "salem",
     address:
       "5th Floor, Anushka Tower, Brindavan Road, above LIC, opposite IBACO Icecream, Salem, Tamil Nadu - 636 016",
+    mapQuery: "Anushka Tower, Brindavan Road, Fairlands, Salem, Tamil Nadu 636016",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6643, lng: 78.146 },
@@ -121,6 +122,7 @@ export const locations: Location[] = [
     city: "salem",
     address:
       "3rd Floor, Balaji Towers, 11, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu - 636 007",
+    mapQuery: "Balaji Towers, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu 636007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6712, lng: 78.1558 },
@@ -155,6 +157,7 @@ export const locations: Location[] = [
     city: "salem",
     address:
       "4th Floor, Rajeshwari Towers, 69/4, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu - 636 007",
+    mapQuery: "Rajeshwari Towers, Ramakrishna Road, Seerangapalayam, Salem, Tamil Nadu 636007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6735, lng: 78.1503 },
@@ -195,6 +198,7 @@ export const locations: Location[] = [
     city: "salem",
     address:
       "Bus Stand, 24, West, New Bus Stand Road, opp. ATC, Meyyanur, Salem, Tamil Nadu - 636 004",
+    mapQuery: "Salem New Bus Stand, Meyyanur, Salem, Tamil Nadu 636004",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.6777, lng: 78.1424 },
@@ -232,7 +236,8 @@ export const locations: Location[] = [
     name: "TIDEL NEO",
     city: "salem",
     address:
-      "P36Q+CJH TIDEL NEO, Kullagoundanoor, Karuppur, Salem, Tamil Nadu - 636 011",
+      "NammaOffice, TIDEL NEO, Kullagoundanoor, Karuppur, Salem, Tamil Nadu - 636 011",
+    mapQuery: "P36Q+CJH, Salem, Tamil Nadu",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.5667, lng: 78.1989 },
@@ -272,10 +277,11 @@ export const locations: Location[] = [
     name: "IPOD (Reliance Mega Mall)",
     city: "salem",
     address:
-      "1st Floor, Reliance Mega Mall, 5 Road Junction, Meyyanur, Salem, Tamil Nadu - 636 004",
+      "1st Floor, Reliance Mega Mall, Five Roads Junction, Meyyanur, Salem, Tamil Nadu - 636 004",
+    mapQuery: "Reliance Mega Mall, Five Roads Junction, Meyyanur, Salem, Tamil Nadu 636004",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
-    coordinates: { lat: 11.647, lng: 78.1577 },
+    coordinates: { lat: 11.6749, lng: 78.1325 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
       "NammaOffice IPOD sits inside Reliance Mega Mall at the 5 Road Junction in Meyyanur - one of Salem's busiest commercial nodes. With a mall ecosystem of retail, dining, and entertainment downstairs, this centre is built for teams that want vibrancy on tap.",
@@ -294,17 +300,7 @@ export const locations: Location[] = [
       "meeting-hall",
       "business-lounge",
     ],
-    images: [
-      interiorPool[27],
-      interiorPool[28],
-      interiorPool[29],
-      interiorPool[30],
-      interiorPool[31],
-      interiorPool[32],
-      interiorPool[33],
-      wix.cabin,
-      wix.discussion,
-    ],
+    images: [...ipodGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Reliance Mega Mall, Meyyanur, Salem | NammaOffice",
@@ -317,6 +313,7 @@ export const locations: Location[] = [
     city: "trichy",
     address:
       "TS No 13, 1, Ramanathapuram Road, Thiruvalarchi Patti, Gundur, Tiruchirappalli, Tamil Nadu - 620 007",
+    mapQuery: "Asha Grand, Ramanathapuram Road, Gundur, Tiruchirappalli, Tamil Nadu 620007",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 10.7397, lng: 78.7553 },
@@ -358,6 +355,7 @@ export const locations: Location[] = [
     city: "tirupur",
     address:
       "TIDEL NEO, 2nd Floor, 424/4, Palaniyappa Nagar, Rakkiyapalayam Road, Thirumuruganpoondi, Tirupur - 641 652",
+    mapQuery: "TIDEL Neo, Thirumuruganpoondi, Tirupur, Tamil Nadu 641652",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 11.1085, lng: 77.3411 },
@@ -398,10 +396,11 @@ export const locations: Location[] = [
     name: "Texvalley",
     city: "erode",
     address:
-      "Texvalley, NH-544, Salem–Kochi Highway, Gangapuram (P.O), Chithode, Erode, Tamil Nadu - 638 102",
+      "Texvalley, NH-544, Salem-Kochi Highway, Gangapuram (P.O), Chithode, Erode, Tamil Nadu - 638 102",
+    mapQuery: "Texvalley, NH 544, Chithode, Erode, Tamil Nadu 638102",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
-    coordinates: { lat: 11.365, lng: 77.7 },
+    coordinates: { lat: 11.3722, lng: 77.6458 },
     operatingHours: "Mon–Sat: 8:00 AM – 9:00 PM",
     description:
       "NammaOffice Texvalley sits on NH-544 (the Salem–Kochi highway) at Chithode - ideal for traders and textile exporters who run between Erode, Coimbatore, and Tirupur. Easy highway access, plenty of parking, and a calm professional environment removed from city traffic.",
@@ -438,6 +437,7 @@ export const locations: Location[] = [
     city: "hosur",
     address:
       "Plot CP-3 & CP-4, near TVS Academy, Sipcot Phase II Industrial Complex, Moranapalli, Hosur, Tamil Nadu - 635 109",
+    mapQuery: "Sipcot Phase II Industrial Complex, near TVS Academy, Moranapalli, Hosur, Tamil Nadu 635109",
     phone: "+91 9092109213",
     email: "info@nammaoffice.com",
     coordinates: { lat: 12.7409, lng: 77.8253 },
@@ -466,16 +466,7 @@ export const locations: Location[] = [
       "business-lounge",
       "managed-office",
     ],
-    images: [
-      interiorPool[32],
-      interiorPool[33],
-      interiorPool[34],
-      interiorPool[35],
-      interiorPool[36],
-      wix.cabin,
-      wix.discussion,
-      wix.dining,
-    ],
+    images: [...hosurGallery],
     nearbyLandmarks: [],
     nearbyFacilities: [],
     seoTitle: "Coworking Space at Sipcot Phase II, Hosur | NammaOffice",

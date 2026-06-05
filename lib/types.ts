@@ -3,6 +3,12 @@ export interface Location {
   name: string;
   city: CitySlug;
   address: string;
+  /**
+   * Precise locator used for the map pin only (a Plus Code, a "lat,lng" string,
+   * or a clean landmark query). Lets the displayed address stay human-readable
+   * while the map drops an exact marker. Falls back to `address` when omitted.
+   */
+  mapQuery?: string;
   phone: string;
   email: string;
   coordinates: { lat: number; lng: number };
