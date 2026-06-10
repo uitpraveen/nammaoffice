@@ -99,7 +99,7 @@ const nextConfig: NextConfig = {
       { source: "/userexperiencenondisclosureform", destination: "/forms", permanent: false },
       { source: "/oath-page", destination: "/", permanent: false },
       { source: "/thank-u-page", destination: "/", permanent: false },
-      { source: "/ipod-usage-booking", destination: "/bookings", permanent: true },
+      // /ipod-usage-booking is now a real page (the pod QR points here) — no redirect.
       { source: "/tidel-neo-salem-aggrement-form", destination: "/locations/salem/tidel-neo", permanent: false },
     ];
   },
