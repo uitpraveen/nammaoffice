@@ -51,7 +51,6 @@ export const clients: Client[] = [
   { id: "compaq-cubics",      name: "Compaq Cubics",           logo: "/images/clients/compaq-cubics.webp", w:  618, h: 560, tile: true },
   { id: "compaq-hopper",      name: "Compaq Hopper",           logo: "/images/clients/compaq-hopper.webp", w:  609, h: 560 },
   { id: "corefactors",        name: "Corefactors",             logo: "/images/clients/corefactors.webp", w:  998, h: 560, tile: true },
-  { id: "deecodes",           name: "Deecodes.io",             logo: "/images/clients/deecodes.webp", w: 1466, h: 560 },
   { id: "dialmia",            name: "Dialmia",                 logo: "/images/clients/dialmia.webp", w:  649, h: 560, tile: true },
   { id: "dr-sasi-eye-care",   name: "Dr. Sasi Eye Care",       logo: "/images/clients/dr-sasi-eye-care.webp", w:  483, h: 560, tile: true },
   { id: "evergrow",           name: "EverGrow International",  logo: "/images/clients/evergrow.webp", w:  447, h: 560 },

@@ -40,6 +40,11 @@ W_MAX        = round(600 * _S)
 
 FORCE_TILE = {"Dr. Sasi Eye Care"}   # peach panel is part of the mark
 
+# Artwork present in SRC that we deliberately do not publish. Keeping the file
+# in the folder (and its META row below) means re-including one later is just a
+# matter of deleting its name from here.
+SKIP = {"Deecodes.io"}
+
 # filename stem -> (slug, display name)
 META = {
     "3KTS-LOGO":                                           ("3kts",               "3K Technology Services"),
@@ -134,6 +139,9 @@ def opaque_bbox(alpha, t=8):
 entries, report = [], []
 for f in sorted(glob.glob(os.path.join(SRC, "*.jpg"))):
     stem = os.path.splitext(os.path.basename(f))[0]
+    if stem in SKIP:
+        print(f"  -- skipping {stem} (listed in SKIP)")
+        continue
     if stem not in META:
         print("  ?? no META entry for", stem); continue
     slug, name = META[stem]
