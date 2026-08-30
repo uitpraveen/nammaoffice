@@ -1,0 +1,78 @@
+# Preview deploy for pull requests.
+#
+# Every PR gets its own URL built from that branch's code, so a change can be
+# reviewed on a real page before it reaches nammaoffice.com. This is also the
+# merge gate: if the build fails here, the check fails and the PR is blocked.
+name: Deploy preview
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+# A new push to the same PR makes the previous preview pointless, so cancel it.
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+permissions:
+  contents: read
+  pull-requests: write   # needed to post the preview URL as a comment
+
+jobs:
+  preview:
+    name: Build and deploy preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true   # see production.yml for why
+
+      - name: Pull Vercel project settings and preview env
+        run: npx --yes vercel@58.9.0 pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: npx --yes vercel@58.9.0 build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy build output as a preview
+        id: deploy
+        run: |
+          url=$(npx --yes vercel@58.9.0 deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Post the preview URL on the PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.deploy.outputs.url }}';
+            const marker = '<!-- vercel-preview -->';
+            const body = `${marker}\n**Preview deployed**\n\n${url}\n\nBuilt from \`${context.sha.slice(0, 7)}\`. This is not the live site; nammaoffice.com only changes when this merges to \`main\`.`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number,
+            });
+            // Update our own comment instead of adding a new one on every push.
+            const existing = comments.find(c => c.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number, body,
+              });
+            }
