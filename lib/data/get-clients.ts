@@ -1,6 +1,5 @@
 import "server-only";
-import { promises as fs } from "node:fs";
-import path from "node:path";
+import { readClients } from "@/lib/admin/store";
 import type { Client } from "./clients";
 
 /**
@@ -8,11 +7,10 @@ import type { Client } from "./clients";
  *
  * A static `import data from "./clients.json"` is baked into the bundle at
  * build time, so a logo added through /admin/logos would not appear until the
- * site was rebuilt. Reading the file here means the page can be regenerated on
- * demand: the admin calls revalidatePath("/") after every change, and the wall
- * updates without a deploy.
+ * site was rebuilt. Going through the store means the page can be regenerated
+ * on demand: the admin calls revalidatePath("/") after every change.
+ *
+ * The store falls back to the committed list whenever Blob is empty or
+ * unreachable, so the wall cannot render blank.
  */
-export async function getClients(): Promise<Client[]> {
-  const file = path.join(process.cwd(), "lib", "data", "clients.json");
-  return JSON.parse(await fs.readFile(file, "utf8"));
-}
+export const getClients = (): Promise<Client[]> => readClients();

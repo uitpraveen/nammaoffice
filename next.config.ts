@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     deviceSizes: [320, 640, 768, 1024, 1280, 1536],
     remotePatterns: [
       { protocol: "https", hostname: "images.pexels.com", pathname: "/**" },
+      // Client logos added through /admin/logos are stored in Vercel Blob.
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com", pathname: "/**" },
     ],
   },
   trailingSlash: false,

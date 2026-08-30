@@ -23,6 +23,24 @@ export const navigation: NavItem[] = [
   { label: "Amenities", href: "/#amenities" },
   { label: "Franchise", href: "/franchise" },
   {
+    label: "Resources",
+    href: "/case-studies",
+    children: [
+      {
+        label: "Client Stories",
+        href: "/case-studies",
+        description: "Case studies - how teams across Tamil Nadu grow with NammaOffice.",
+        icon: "Sparkles",
+      },
+      {
+        label: "News & Videos",
+        href: "/news",
+        description: "Updates, events, walkthroughs and insights from our centres.",
+        icon: "Newspaper",
+      },
+    ],
+  },
+  {
     label: "Forms",
     href: "/forms",
     children: [
