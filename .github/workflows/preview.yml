@@ -43,8 +43,13 @@ jobs:
         run: npm run lint
         continue-on-error: true   # see production.yml for why
 
+      - name: Check what the token can reach
+        run: |
+          echo "Identity:"; npx --yes vercel@58.9.0 whoami --token=${{ secrets.VERCEL_TOKEN }} || true
+          echo "Teams visible to this token:"; npx --yes vercel@58.9.0 teams ls --token=${{ secrets.VERCEL_TOKEN }} || true
+
       - name: Pull Vercel project settings and preview env
-        run: npx --yes vercel@58.9.0 pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx --yes vercel@58.9.0 pull --yes --environment=preview --scope=uitpraveens-projects --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build
         run: npx --yes vercel@58.9.0 build --token=${{ secrets.VERCEL_TOKEN }}
@@ -52,7 +57,7 @@ jobs:
       - name: Deploy build output as a preview
         id: deploy
         run: |
-          url=$(npx --yes vercel@58.9.0 deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          url=$(npx --yes vercel@58.9.0 deploy --prebuilt --scope=uitpraveens-projects --token=${{ secrets.VERCEL_TOKEN }})
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
       - name: Post the preview URL on the PR
