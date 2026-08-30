@@ -51,11 +51,6 @@ jobs:
         run: npm run lint
         continue-on-error: true
 
-      - name: Check what the token can reach
-        run: |
-          echo "Identity:"; npx --yes vercel@58.9.0 whoami --token=${{ secrets.VERCEL_TOKEN }} || true
-          echo "Teams visible to this token:"; npx --yes vercel@58.9.0 teams ls --token=${{ secrets.VERCEL_TOKEN }} || true
-
       - name: Pull Vercel project settings and production env
         run: npx --yes vercel@58.9.0 pull --yes --environment=production --scope=uitpraveens-projects --token=${{ secrets.VERCEL_TOKEN }}
 
