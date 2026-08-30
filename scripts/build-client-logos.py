@@ -40,10 +40,24 @@ W_MAX        = round(600 * _S)
 
 FORCE_TILE = {"Dr. Sasi Eye Care"}   # peach panel is part of the mark
 
-# Artwork present in SRC that we deliberately do not publish. Keeping the file
-# in the folder (and its META row below) means re-including one later is just a
-# matter of deleting its name from here.
-SKIP = {"Deecodes.io"}
+# Slugs present in SRC that we deliberately do not publish, usually because the
+# client relationship has ended. Keeping the artwork in the folder (and its META
+# row below) means re-including one later is just deleting its slug from here.
+SKIP = {
+    "deecodes",
+    # Removed 2026-08-30: no longer associated with NammaOffice.
+    "indecomm",
+    "metropolis",
+    "asian-holidays",
+    "featherlite",
+    "fixocare",
+    "lgt-wealth-india",
+    "nativespeill",
+    "octadigi",
+    "kalvium",
+    "payagri",
+    "compaq-hopper",     # note: "compaq-cubics" is a different client and stays
+}
 
 # filename stem -> (slug, display name)
 META = {
@@ -139,12 +153,12 @@ def opaque_bbox(alpha, t=8):
 entries, report = [], []
 for f in sorted(glob.glob(os.path.join(SRC, "*.jpg"))):
     stem = os.path.splitext(os.path.basename(f))[0]
-    if stem in SKIP:
-        print(f"  -- skipping {stem} (listed in SKIP)")
-        continue
     if stem not in META:
         print("  ?? no META entry for", stem); continue
     slug, name = META[stem]
+    if slug in SKIP:
+        print(f"  -- skipping {name} ({slug}): listed in SKIP")
+        continue
 
     raw = Image.open(f)
     if raw.mode in ("RGBA", "LA", "P"):        # flatten any existing alpha onto white
