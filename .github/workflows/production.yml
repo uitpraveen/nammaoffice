@@ -23,6 +23,9 @@ concurrency:
   group: production-deploy
   cancel-in-progress: false
 
+permissions:
+  contents: write   # the regeneration step commits rebuilt logo assets back
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -34,6 +37,36 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+
+      # --- client logos -------------------------------------------------
+      # client-logos/ is the source of truth for the wall. Anyone can add a
+      # client by dropping their artwork in there, or remove one by deleting
+      # the file: this step rebuilds the processed images and the data file
+      # from whatever is in that folder, so nobody needs Python installed or
+      # has to touch generated code. Committing the result back keeps local
+      # development in step with what shipped.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild client logos from client-logos/
+        run: |
+          pip install --quiet pillow numpy scipy
+          python3 scripts/build-client-logos.py
+
+      - name: Commit regenerated logos if they changed
+        run: |
+          if git diff --quiet -- public/images/clients lib/data/clients.json client-logos; then
+            echo "Logos unchanged."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/clients lib/data/clients.json client-logos
+          git commit -m "chore: rebuild client logos from client-logos/ [skip ci]"
+          git push
+          echo "Committed rebuilt logos."
+      # ------------------------------------------------------------------
 
       - uses: actions/setup-node@v4
         with:

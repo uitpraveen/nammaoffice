@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion } from "motion/react";
-import { clients, type Client } from "@/lib/data/clients";
+import type { Client } from "@/lib/data/clients";
 
 /**
  * Client-logo wall - "ink rule". Three counter-scrolling rows of marks set
@@ -37,7 +37,7 @@ const ROWS = 3;
  *  the rows never settle into a visible lockstep. */
 const ROW_SPEEDS = [86, 107, 94];
 
-export function ClientLogos() {
+export function ClientLogos({ clients }: { clients: Client[] }) {
   const wall = useRef<HTMLDivElement>(null);
 
   // Deal the (alphabetical) list round-robin across the rows so each row gets
