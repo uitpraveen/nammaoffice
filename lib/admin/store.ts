@@ -13,11 +13,16 @@ import type { Client } from "@/lib/data/clients";
  *   blob   - Vercel's filesystem is read-only, so production keeps the list
  *            and any newly uploaded images in Blob storage instead.
  *
- * The 37 logos that shipped with the site keep their /images/clients/*.webp
- * URLs and are still served straight from the deployment. Only the list and
- * anything added later live in Blob. That means turning this on cannot change
- * or break a single logo that is already on the wall: the worst case is that
- * Blob is unreachable and the site falls back to the committed list.
+ * The logos that shipped with the site keep their /images/clients/*.webp URLs
+ * and are still served straight from the deployment. Only the list and
+ * anything uploaded later live in Blob, so switching this on could not change
+ * a logo that was already on the wall.
+ *
+ * Once a Blob manifest exists it IS the live list, and lib/data/clients.json
+ * becomes a fallback used only when Blob is unreachable. Keep the two roughly
+ * in step: if the committed copy drifts, an outage would not just fail, it
+ * would quietly show an older wall. scripts/build-client-logos.py rewrites the
+ * committed copy, which is why it no longer runs in CI.
  */
 const ROOT = process.cwd();
 const IMAGES_DIR = path.join(ROOT, "public", "images", "clients");

@@ -106,10 +106,20 @@ the client logo row.
 
 ## For developers
 
-The source artwork lives in `client-logos/` in the repository, named by slug.
-`lib/data/clients.json` is the list the site reads, and
-`public/images/clients/` holds the processed images. All three are kept in
-step by the admin page and by `scripts/build-client-logos.py`, which rebuilds
-everything from `client-logos/`.
+**In production the admin page is the source of truth.** Logos added through
+it live in a Vercel Blob store, along with the list itself.
 
-Do not hand-edit `lib/data/clients.ts`; it only declares the types now.
+`lib/data/clients.json` in the repository is a fallback, used only if Blob is
+unreachable, so that the wall degrades to an older list rather than rendering
+empty. Keep it roughly current: regenerate with
+`python3 scripts/build-client-logos.py`, which rebuilds it and the images in
+`public/images/clients/` from the artwork in `client-logos/`. That script does
+not run in CI, because its output would not match what the admin page has
+saved.
+
+Locally there is no Blob token, so the admin writes plain files into the
+repository instead: exactly the changes you would commit by hand. Do not copy
+the production Blob token into `.env.local`, or your dev server will edit the
+live site.
+
+Do not hand-edit `lib/data/clients.ts`; it only declares the types.

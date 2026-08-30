@@ -168,13 +168,6 @@
     "tile": true
   },
   {
-    "id": "practiz",
-    "name": "Practiz",
-    "logo": "/images/clients/practiz.webp",
-    "w": 1466,
-    "h": 560
-  },
-  {
     "id": "sdq",
     "name": "SDQ LLC",
     "logo": "/images/clients/sdq.webp",
