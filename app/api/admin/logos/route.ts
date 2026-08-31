@@ -84,9 +84,26 @@ export async function POST(request: Request) {
   }
 
   const ext = (file.name.match(/\.([a-z0-9]+)$/i)?.[1] || "png").toLowerCase();
-  await saveLogo(entry, result.webp, { bytes: Buffer.from(await file.arrayBuffer()), ext });
+  // Use what was actually stored, not what we were about to store. In
+  // production the image goes to Blob and gets a different URL, so replying
+  // with the local path made the new card render as a broken image until the
+  // page was reloaded.
+  let stored;
+  try {
+    stored = await saveLogo(entry, result.webp, {
+      bytes: Buffer.from(await file.arrayBuffer()),
+      ext,
+    });
+  } catch {
+    // The list is read before it is written back, so a failed read must not be
+    // papered over: writing anyway would rebuild it from the deployed copy and
+    // lose earlier changes.
+    return NextResponse.json({
+      error: "Could not reach the logo storage, so nothing was saved. Try again in a moment.",
+    }, { status: 503 });
+  }
   revalidatePath("/");
-  return NextResponse.json({ ok: true, entry, warning });
+  return NextResponse.json({ ok: true, entry: stored, warning });
 }
 
 export async function DELETE(request: Request) {
@@ -98,7 +115,14 @@ export async function DELETE(request: Request) {
   if (!id || typeof id !== "string") {
     return NextResponse.json({ error: "Which logo?" }, { status: 400 });
   }
-  const removed = await removeLogo(id);
+  let removed;
+  try {
+    removed = await removeLogo(id);
+  } catch {
+    return NextResponse.json({
+      error: "Could not reach the logo storage, so nothing was removed. Try again in a moment.",
+    }, { status: 503 });
+  }
   if (!removed) return NextResponse.json({ error: "No logo with that id." }, { status: 404 });
   revalidatePath("/");
   return NextResponse.json({ ok: true });

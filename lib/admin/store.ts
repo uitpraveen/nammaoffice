@@ -2,6 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { del, list, put } from "@vercel/blob";
 import type { Client } from "@/lib/data/clients";
+import committed from "@/lib/data/clients.json";
 
 /**
  * Where the admin page saves logos.
@@ -49,6 +50,30 @@ async function blobManifestUrl(): Promise<string | null> {
   return blobs[0]?.url ?? null;
 }
 
+/**
+ * The live list, or a thrown error.
+ *
+ * Used by anything that then writes the list back. A silent fallback here is
+ * dangerous: a single flaky read would rebuild the manifest from the deployed
+ * copy and throw away every change made through the admin page. Failing loudly
+ * turns that into a visible error instead of quiet data loss.
+ */
+export async function readClientsStrict(): Promise<Client[]> {
+  if (!useBlob) return JSON.parse(await fs.readFile(DATA_FILE, "utf8"));
+  const url = await blobManifestUrl();
+  // No manifest yet means nobody has saved anything, so the deployed list is
+  // genuinely the current one.
+  if (!url) return committedClients();
+  const fresh = `${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`;
+  const response = await fetch(fresh, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Could not read the logo list (${response.status}).`);
+  return (await response.json()) as Client[];
+}
+
+/**
+ * The live list, falling back to the deployed copy if storage is unreachable.
+ * Only for rendering: better a slightly stale wall than a blank one.
+ */
 export async function readClients(): Promise<Client[]> {
   if (!useBlob) return committedClients();
   try {
@@ -91,11 +116,15 @@ async function writeClients(clients: Client[]) {
   // revalidates the home page straight after this, and that regeneration
   // reads the manifest back, so returning too early would rebuild the wall
   // from the previous version. Wait until the write is actually visible.
-  const expected = sorted.length;
-  for (let attempt = 0; attempt < 6; attempt++) {
-    const seen = await readClients();
-    if (seen.length === expected) return;
-    await new Promise((resolve) => setTimeout(resolve, 350));
+  const expected = JSON.stringify(sorted.map((c) => c.id));
+  for (let attempt = 0; attempt < 10; attempt++) {
+    try {
+      const seen = await readClientsStrict();
+      if (JSON.stringify(seen.map((c) => c.id)) === expected) return;
+    } catch {
+      // Still settling. Keep waiting rather than treating it as done.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 400));
   }
   // Six tries is over two seconds. Carry on rather than failing the save: the
   // write itself succeeded, and the page will pick it up on a later request.
@@ -140,13 +169,13 @@ export async function saveLogo(
     }
   }
 
-  const clients = await readClients();
+  const clients = await readClientsStrict();
   await writeClients([...clients.filter((c) => c.id !== stored.id), stored]);
   return stored;
 }
 
 export async function removeLogo(id: string) {
-  const clients = await readClients();
+  const clients = await readClientsStrict();
   if (!clients.some((c) => c.id === id)) return false;
   await writeClients(clients.filter((c) => c.id !== id));
 
