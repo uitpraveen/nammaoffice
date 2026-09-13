@@ -1,6 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+function subscribe(listener: () => void) {
+  window.addEventListener("hashchange", listener);
+  window.addEventListener("popstate", listener);
+  return () => {
+    window.removeEventListener("hashchange", listener);
+    window.removeEventListener("popstate", listener);
+  };
+}
+const getHash = () => window.location.hash;
+const serverHash = () => "";
 
 /**
  * Returns whether a nav `href` should render in its active state for
@@ -14,27 +25,8 @@ import { useEffect, useState } from "react";
  *   - any other path → active when the pathname starts with the href
  */
 export function useActiveHref(href: string, pathname: string) {
-  const [hash, setHash] = useState("");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const sync = () => setHash(window.location.hash);
-    window.addEventListener("hashchange", sync);
-    window.addEventListener("popstate", sync);
-    return () => {
-      window.removeEventListener("hashchange", sync);
-      window.removeEventListener("popstate", sync);
-    };
-  }, []);
-
-  // Re-sync after a Next.js Link navigation. `pushState`/`replaceState`
-  // don't fire `hashchange`, so without this the previous page's hash
-  // would linger in state - e.g. /#amenities → /franchise → / would
-  // leave Amenities highlighted because the hook still saw "#amenities".
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setHash(window.location.hash);
-  }, [pathname]);
+  // A Next pathname change also renders this hook and reads the latest snapshot.
+  const hash = useSyncExternalStore(subscribe, getHash, serverHash);
 
   if (href === "/") {
     return pathname === "/" && !hash;

@@ -1,0 +1,15 @@
+# Run Caddy on the VPS host, proxying the loopback-only web port.
+# Replace the domain only after a staging review and authorized cutover.
+{$CMS_DOMAIN} {
+  encode zstd gzip
+  request_body {
+    max_size 11MB
+  }
+  header {
+    X-Content-Type-Options nosniff
+    Referrer-Policy strict-origin-when-cross-origin
+    X-Frame-Options SAMEORIGIN
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  }
+  reverse_proxy 127.0.0.1:3000
+}

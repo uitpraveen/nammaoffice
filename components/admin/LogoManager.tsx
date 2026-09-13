@@ -1,319 +1,474 @@
 "use client";
-
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Client } from "@/lib/data/clients";
-
-/**
- * Add and remove client logos.
- *
- * The important idea: nobody has to know what the wall needs. You pick a file,
- * optionally drag a box around the part you want, and the server runs the same
- * trimming and size-matching the rest of the wall was built with. The preview
- * shows the finished mark on the real cream background at the real size, so
- * what you approve is exactly what ships.
- */
-
-interface Props {
-  initialClients: Client[];
-  canWrite: boolean;
-}
+import type { ManagedClient } from "@/lib/cms/types";
+import type { Crop } from "@/lib/admin/process-logo";
+import { AdminNav } from "./AdminNav";
+import { adminRequest } from "./request";
 
 interface Preview {
   preview: string;
   entry: Client;
   warning: string | null;
 }
-
-/** Fractional crop box, 0..1 of the source image. */
-interface Box { x: number; y: number; w: number; h: number }
-
-export function LogoManager({ initialClients, canWrite }: Props) {
+const button =
+  "rounded-lg border border-[var(--color-navy)] px-4 py-2 text-sm disabled:opacity-40";
+export function LogoManager({
+  initialClients,
+  canWrite,
+}: {
+  initialClients: ManagedClient[];
+  canWrite: boolean;
+}) {
   const [clients, setClients] = useState(initialClients);
   const [file, setFile] = useState<File | null>(null);
   const [objectUrl, setObjectUrl] = useState<string | null>(null);
   const [name, setName] = useState("");
-  const [box, setBox] = useState<Box | null>(null);
+  const [box, setBox] = useState<Crop | null>(null);
   const [preview, setPreview] = useState<Preview | null>(null);
-  const [busy, setBusy] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
-
-  useEffect(() => () => { if (objectUrl) URL.revokeObjectURL(objectUrl); }, [objectUrl]);
-
-  function chooseFile(next: File | null) {
-    if (!next) return;
-    if (objectUrl) URL.revokeObjectURL(objectUrl);
-    setFile(next);
-    setObjectUrl(URL.createObjectURL(next));
+  const [replacement, setReplacement] = useState<ManagedClient | null>(null);
+  const [busy, setBusy] = useState("");
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [fileKey, setFileKey] = useState(0);
+  const lock = useRef(false);
+  useEffect(
+    () => () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    },
+    [objectUrl],
+  );
+  const active = clients.filter((c) => c.status === "published");
+  const archived = clients.filter((c) => c.status === "archived");
+  const duplicate =
+    preview && !replacement && clients.find((c) => c.id === preview.entry.id);
+  function reset(client: ManagedClient | null = null) {
+    setReplacement(client);
+    setName(client?.name || "");
+    setFile(null);
+    setObjectUrl(null);
     setBox(null);
     setPreview(null);
-    setError(null);
-    if (!name) {
-      // "acme-corp logo (1).png" -> "Acme Corp"
-      setName(next.name.replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " ")
-        .replace(/\b(logo|final|copy|\(\d+\))\b/gi, "").replace(/\s+/g, " ").trim()
-        .replace(/\b\w/g, (c) => c.toUpperCase()));
+    setFileKey((k) => k + 1);
+    setError("");
+  }
+  function chooseFile(next: File | null) {
+    setPreview(null);
+    setBox(null);
+    setError("");
+    setFile(null);
+    setObjectUrl(null);
+    if (!next) return;
+    if (next.size > 3 * 1024 * 1024) {
+      setError("Choose an image under 3 MB.");
+      return;
+    }
+    setFile(next);
+    setObjectUrl(URL.createObjectURL(next));
+    if (!name)
+      setName(
+        next.name
+          .replace(/\.[^.]+$/, "")
+          .replace(/[-_]+/g, " ")
+          .trim(),
+      );
+  }
+  function updateClient(entry: ManagedClient) {
+    setClients((current) =>
+      [...current.filter((c) => c.id !== entry.id), entry].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      ),
+    );
+  }
+  async function run(mode: "preview" | "save") {
+    if (lock.current || !file || !name.trim()) return;
+    lock.current = true;
+    setBusy(mode);
+    setError("");
+    setNotice("");
+    try {
+      const form = new FormData();
+      form.set("file", file);
+      form.set("name", name.trim());
+      form.set("version", replacement?.version || "");
+      if (replacement) form.set("id", replacement.id);
+      if (mode === "preview") form.set("preview", "true");
+      if (box) form.set("crop", JSON.stringify(box));
+      const body = await adminRequest("/api/admin/logos", {
+        method: "POST",
+        body: form,
+      });
+      if (mode === "preview") setPreview(body);
+      else {
+        updateClient(body.entry);
+        reset();
+        setNotice(
+          `${body.entry.name} published.${body.warning ? ` ${body.warning}` : ""}`,
+        );
+      }
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      lock.current = false;
+      setBusy("");
     }
   }
-
-  const run = useCallback(async (mode: "preview" | "save") => {
-    if (!file || !name.trim()) return;
-    setBusy(mode); setError(null); setNotice(null);
-    const form = new FormData();
-    form.set("file", file);
-    form.set("name", name.trim());
-    if (mode === "preview") form.set("preview", "true");
-    if (box) form.set("crop", JSON.stringify({ x: box.x, y: box.y, width: box.w, height: box.h }));
-
-    const response = await fetch("/api/admin/logos", { method: "POST", body: form });
-    const body = await response.json().catch(() => ({}));
-    setBusy(null);
-
-    if (!response.ok) { setError(body.error || "Something went wrong."); return; }
-    if (mode === "preview") { setPreview(body); return; }
-
-    setClients((current) =>
-      [...current.filter((c) => c.id !== body.entry.id), body.entry]
-        .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
-    setNotice(`${body.entry.name} added.${body.warning ? " " + body.warning : ""}`);
-    setFile(null); setObjectUrl(null); setName(""); setBox(null); setPreview(null);
-  }, [file, name, box]);
-
-  async function remove(client: Client) {
-    if (!confirm(`Remove ${client.name} from the wall?`)) return;
-    setBusy(client.id); setError(null); setNotice(null);
-    const response = await fetch("/api/admin/logos", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: client.id }),
-    });
-    const body = await response.json().catch(() => ({}));
-    setBusy(null);
-    if (!response.ok) { setError(body.error || "Could not remove that logo."); return; }
-    setClients((current) => current.filter((c) => c.id !== client.id));
-    setNotice(`${client.name} removed.`);
+  async function changeStatus(client: ManagedClient) {
+    if (lock.current) return;
+    if (
+      client.status === "published" &&
+      !confirm(
+        `Remove ${client.name} from the website? You can restore it from Archived logos.`,
+      )
+    )
+      return;
+    lock.current = true;
+    setBusy(client.id);
+    setError("");
+    setNotice("");
+    try {
+      const body = await adminRequest("/api/admin/logos", {
+        method: client.status === "published" ? "DELETE" : "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: client.id, version: client.version }),
+      });
+      updateClient(body.entry);
+      setNotice(
+        `${client.name} ${body.entry.status === "archived" ? "archived" : "restored"}.`,
+      );
+      if (replacement?.id === client.id) reset();
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      lock.current = false;
+      setBusy("");
+    }
   }
-
-  return (
-    <main className="min-h-screen bg-[var(--color-bg)] pb-24">
-      <header className="border-b border-[var(--color-border)] bg-white/70 backdrop-blur">
-        <div className="content-width flex flex-wrap items-baseline justify-between gap-3 py-5">
-          <div>
-            <p className="eyebrow">NammaOffice</p>
-            <h1 className="display-md mt-1 text-[var(--color-navy)]">Client logos</h1>
-          </div>
-          <p className="text-sm text-[var(--color-ink-secondary)]">
-            {clients.length} on the wall
-          </p>
-        </div>
-      </header>
-
-      <div className="content-width">
-        {!canWrite && (
-          <p className="mt-6 rounded-xl border border-[var(--color-gold-300)] bg-[var(--color-gold-50)] px-4 py-3 text-sm text-[var(--color-gold-700)]">
-            Read-only here. Saving works when this runs on your own machine; the
-            production storage step is not finished yet.
-          </p>
-        )}
-        {error && (
-          <p role="alert" className="mt-6 rounded-xl border border-[var(--color-gold-300)] bg-white px-4 py-3 text-sm text-[var(--color-gold-700)]">{error}</p>
-        )}
-        {notice && (
-          <p role="status" className="mt-6 rounded-xl border border-[var(--color-border-strong)] bg-white px-4 py-3 text-sm text-[var(--color-ink)]">{notice}</p>
-        )}
-
-        {/* ---------------- add ---------------- */}
-        <section className="mt-8 rounded-2xl border border-[var(--color-border)] bg-white p-6">
-          <h2 className="text-lg font-semibold text-[var(--color-navy)]">Add a logo</h2>
-          <p className="mt-1 text-sm text-[var(--color-ink-secondary)]">
-            An SVG or a PNG with a transparent background gives the best result.
-            A plain photo or screenshot will look soft however it is processed.
-          </p>
-
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-ink)]">Logo file</label>
-              <input
-                type="file"
-                accept="image/png,image/jpeg,image/webp,image/svg+xml"
-                onChange={(e) => chooseFile(e.target.files?.[0] ?? null)}
-                className="mt-2 block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--color-navy)] file:px-4 file:py-2 file:text-sm file:text-white"
-              />
-
-              <label htmlFor="client-name" className="mt-5 block text-sm font-medium text-[var(--color-ink)]">
-                Client name
-              </label>
-              <input
-                id="client-name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Acme Corp"
-                className="mt-2 w-full rounded-xl border border-[var(--color-border-strong)] px-4 py-2.5 text-[15px] outline-none focus-visible:border-[var(--color-gold)]"
-              />
-              <p className="mt-1.5 text-xs text-[var(--color-ink-muted)]">
-                Shown on hover and read out by screen readers.
+  function cards(items: ManagedClient[]) {
+    return (
+      <ul className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((client) => (
+          <li
+            key={client.id}
+            className="min-w-0 rounded-xl border hairline bg-white p-4"
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden">
+                <Image
+                  unoptimized
+                  src={client.logo}
+                  alt=""
+                  width={client.w}
+                  height={client.h}
+                  className="max-h-14 max-w-full object-contain"
+                />
+              </div>
+              <p className="min-w-0 break-words text-sm font-medium">
+                {client.name}
               </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => run("preview")}
-                  disabled={!file || !name.trim() || busy !== null}
-                  className="rounded-xl border border-[var(--color-navy)] px-4 py-2.5 text-sm font-medium text-[var(--color-navy)] transition disabled:opacity-40 hover:bg-[var(--color-surface-alt)]"
-                >
-                  {busy === "preview" ? "Processing…" : "Preview"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => run("save")}
-                  disabled={!preview || busy !== null || !canWrite}
-                  className="rounded-xl bg-[var(--color-gold)] px-4 py-2.5 text-sm font-medium text-white transition disabled:opacity-40 hover:bg-[var(--color-gold-600)]"
-                >
-                  {busy === "save" ? "Saving…" : "Add to wall"}
-                </button>
-              </div>
             </div>
-
-            <div>
-              {objectUrl ? (
-                <Cropper src={objectUrl} box={box} onChange={setBox} />
-              ) : (
-                <div className="grid h-48 place-items-center rounded-xl border border-dashed border-[var(--color-border-strong)] text-sm text-[var(--color-ink-muted)]">
-                  Choose a file to see it here
-                </div>
-              )}
+            <div className="mt-3 flex flex-wrap gap-3">
+              <button
+                type="button"
+                className={button}
+                disabled={!!busy || !canWrite}
+                onClick={() => {
+                  reset(client);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                Replace
+              </button>
+              <button
+                type="button"
+                className={button}
+                disabled={!!busy || !canWrite}
+                onClick={() => changeStatus(client)}
+              >
+                {busy === client.id
+                  ? "Saving…"
+                  : client.status === "archived"
+                    ? "Restore"
+                    : "Remove"}
+              </button>
             </div>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  return (
+    <>
+      <AdminNav />
+      <main className="min-h-screen bg-[var(--color-bg)] pb-20">
+        <div className="content-width min-w-0 pt-8">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <h1 className="display text-3xl">Client logos</h1>
+            <p className="text-sm">{active.length} on the wall</p>
           </div>
-
-          {preview && (
-            <div className="mt-6 border-t border-[var(--color-border)] pt-6">
-              <h3 className="text-sm font-medium text-[var(--color-ink)]">
-                How it will look on the wall
-              </h3>
-              {preview.warning && (
-                <p className="mt-2 text-sm text-[var(--color-gold-700)]">{preview.warning}</p>
-              )}
-              {/* Same ground and same height as the real section, so this is a
-                  true preview rather than an approximation. */}
-              <div className="mt-3 flex items-center gap-10 overflow-x-auto rounded-xl bg-[var(--color-bg)] px-8 py-6">
-                {clients.slice(0, 2).map((c) => (
-                  <Image key={c.id} src={c.logo} alt={c.name} width={c.w} height={c.h}
-                    className="w-auto shrink-0 opacity-40" style={{ height: 112 }} />
-                ))}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={preview.preview} alt={preview.entry.name}
-                  className="w-auto shrink-0" style={{ height: 112 }} />
-                {clients.slice(2, 4).map((c) => (
-                  <Image key={c.id} src={c.logo} alt={c.name} width={c.w} height={c.h}
-                    className="w-auto shrink-0 opacity-40" style={{ height: 112 }} />
-                ))}
-              </div>
+          {!canWrite && (
+            <p role="alert" className="mt-5 rounded-xl border p-4">
+              Image storage is not configured. Open Setup & backup for the
+              required settings.
+            </p>
+          )}
+          {error && (
+            <div
+              role="alert"
+              className="mt-5 rounded-xl border border-red-300 bg-red-50 p-4 text-sm text-red-800"
+            >
+              {error}{" "}
+              <a className="ml-2 underline" href="/admin/logos">
+                Reload editor
+              </a>{" "}
+              <a className="ml-2 underline" href="/admin/login">
+                Sign in
+              </a>
             </div>
           )}
-        </section>
-
-        {/* ---------------- current wall ---------------- */}
-        <section className="mt-10">
-          <h2 className="text-lg font-semibold text-[var(--color-navy)]">On the wall now</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {clients.map((client) => (
-              <li key={client.id}
-                className="flex items-center gap-4 rounded-xl border border-[var(--color-border)] bg-white p-3">
-                <div className="grid h-16 w-28 shrink-0 place-items-center rounded-lg bg-[var(--color-bg)]">
-                  <Image src={client.logo} alt="" width={client.w} height={client.h}
-                    className="w-auto" style={{ height: 44 }} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-[var(--color-ink)]">{client.name}</p>
-                  <p className="truncate text-xs text-[var(--color-ink-muted)]">{client.id}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => remove(client)}
-                  disabled={busy !== null || !canWrite}
-                  className="shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-[var(--color-gold-700)] transition disabled:opacity-30 hover:bg-[var(--color-gold-50)]"
+          {notice && (
+            <p role="status" className="mt-5 rounded-xl border p-4 text-sm">
+              {notice}
+            </p>
+          )}
+          <section className="mt-6 min-w-0 rounded-2xl border hairline bg-white p-5 md:p-6">
+            <h2 className="text-xl font-semibold">
+              {replacement ? `Replace ${replacement.name}` : "Add a logo"}
+            </h2>
+            <p className="mt-2 text-sm">
+              Use an SVG, PNG, JPG or WebP under 3 MB. Preview before
+              publishing.
+            </p>
+            <fieldset
+              disabled={!!busy}
+              className="mt-5 grid min-w-0 gap-5 md:grid-cols-2"
+            >
+              <div className="min-w-0">
+                <label
+                  htmlFor="logo-file"
+                  className="block text-sm font-medium"
                 >
-                  {busy === client.id ? "Removing…" : "Remove"}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </main>
+                  Logo file
+                </label>
+                <input
+                  key={fileKey}
+                  id="logo-file"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  onChange={(e) => chooseFile(e.target.files?.[0] || null)}
+                  className="mt-2 block w-full min-w-0 text-sm"
+                />
+                <label
+                  htmlFor="client-name"
+                  className="mt-5 block text-sm font-medium"
+                >
+                  Client name
+                </label>
+                <input
+                  id="client-name"
+                  value={name}
+                  maxLength={150}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    setPreview(null);
+                  }}
+                  className="mt-2 w-full rounded-xl border p-3"
+                />
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    className={button}
+                    disabled={!file || !name.trim()}
+                    onClick={() => run("preview")}
+                  >
+                    {busy === "preview" ? "Processing…" : "Preview"}
+                  </button>
+                  <button
+                    type="button"
+                    className={`${button} bg-[var(--color-navy)] text-white`}
+                    disabled={!preview || !!duplicate || !canWrite}
+                    onClick={() => run("save")}
+                  >
+                    {busy === "save"
+                      ? "Saving…"
+                      : replacement
+                        ? "Publish replacement"
+                        : "Add to wall"}
+                  </button>
+                  {replacement && (
+                    <button
+                      type="button"
+                      className={button}
+                      onClick={() => reset()}
+                    >
+                      Cancel replacement
+                    </button>
+                  )}
+                </div>
+                {duplicate && (
+                  <p role="alert" className="mt-3 text-sm">
+                    This client already exists.{" "}
+                    <button
+                      type="button"
+                      className="underline"
+                      onClick={() => reset(duplicate)}
+                    >
+                      Replace its logo
+                    </button>{" "}
+                    or restore it from the list.
+                  </p>
+                )}
+              </div>
+              <div className="min-w-0">
+                {objectUrl ? (
+                  <Cropper
+                    src={objectUrl}
+                    box={box}
+                    disabled={!!busy}
+                    onChange={(next) => {
+                      setBox(next);
+                      setPreview(null);
+                    }}
+                  />
+                ) : (
+                  <div className="grid h-40 place-items-center rounded-xl border border-dashed text-sm">
+                    Choose a file to see it here
+                  </div>
+                )}
+              </div>
+            </fieldset>
+            {preview && (
+              <div className="mt-6 min-w-0 border-t pt-5">
+                <h3 className="font-medium">How it will look on the wall</h3>
+                {preview.warning && (
+                  <p className="mt-2 text-sm">{preview.warning}</p>
+                )}
+                <div className="mt-3 flex max-w-full items-center gap-8 overflow-x-auto rounded-xl bg-[var(--color-bg)] p-5">
+                  {active.slice(0, 1).map((c) => (
+                    <Image
+                      unoptimized
+                      key={c.id}
+                      src={c.logo}
+                      alt={c.name}
+                      width={c.w}
+                      height={c.h}
+                      className="h-28 w-auto shrink-0 opacity-40"
+                    />
+                  ))}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={preview.preview}
+                    alt={preview.entry.name}
+                    className="h-28 w-auto shrink-0"
+                  />
+                </div>
+              </div>
+            )}
+          </section>
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold">On the wall now</h2>
+            {cards(active)}
+          </section>
+          {archived.length > 0 && (
+            <section className="mt-10">
+              <h2 className="text-xl font-semibold">Archived logos</h2>
+              <p className="mt-2 text-sm">
+                Hidden from the website. Original artwork is kept so these can
+                be restored.
+              </p>
+              {cards(archived)}
+            </section>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
-
-/**
- * Optional crop. Most logos need nothing here, because the server trims dead
- * space on its own. It exists for the awkward cases: artwork with a strapline
- * you do not want, a border, or two marks in one file.
- */
-function Cropper({ src, box, onChange }: {
+function Cropper({
+  src,
+  box,
+  onChange,
+  disabled,
+}: {
   src: string;
-  box: Box | null;
-  onChange: (box: Box | null) => void;
+  box: Crop | null;
+  onChange: (box: Crop | null) => void;
+  disabled: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [drag, setDrag] = useState<{ x: number; y: number } | null>(null);
-
-  const point = (event: React.PointerEvent) => {
-    const rect = ref.current!.getBoundingClientRect();
+  const ref = useRef<HTMLImageElement>(null);
+  const drag = useRef<{ x: number; y: number } | null>(null);
+  const point = (e: React.PointerEvent) => {
+    const r = ref.current!.getBoundingClientRect();
     return {
-      x: Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width)),
-      y: Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height)),
+      x: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)),
+      y: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)),
     };
   };
-
   return (
     <div>
       <div
-        ref={ref}
-        className="relative select-none overflow-hidden rounded-xl border border-[var(--color-border-strong)] bg-[repeating-conic-gradient(#f1ede3_0_25%,#fff_0_50%)] bg-[length:16px_16px] touch-none"
+        className="relative inline-block max-w-full select-none overflow-hidden rounded-lg border bg-white align-top touch-none"
         onPointerDown={(e) => {
-          (e.target as Element).setPointerCapture?.(e.pointerId);
-          const p = point(e);
-          setDrag(p);
-          onChange({ x: p.x, y: p.y, w: 0, h: 0 });
+          if (disabled) return;
+          e.currentTarget.setPointerCapture(e.pointerId);
+          drag.current = point(e);
+          onChange(null);
         }}
         onPointerMove={(e) => {
-          if (!drag) return;
-          const p = point(e);
+          if (!drag.current || disabled) return;
+          const p = point(e),
+            d = drag.current;
           onChange({
-            x: Math.min(drag.x, p.x), y: Math.min(drag.y, p.y),
-            w: Math.abs(p.x - drag.x), h: Math.abs(p.y - drag.y),
+            x: Math.min(d.x, p.x),
+            y: Math.min(d.y, p.y),
+            width: Math.abs(p.x - d.x),
+            height: Math.abs(p.y - d.y),
           });
         }}
         onPointerUp={() => {
-          setDrag(null);
-          // A stray click should not become a useless sliver of a crop.
-          if (box && (box.w < 0.02 || box.h < 0.02)) onChange(null);
+          drag.current = null;
+          if (box && (box.width < 0.02 || box.height < 0.02)) onChange(null);
+        }}
+        onPointerCancel={() => {
+          drag.current = null;
+          onChange(null);
         }}
       >
+        {/* The element bounds equal the rendered image bounds; there is no object-contain letterboxing. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="Uploaded logo" className="pointer-events-none block max-h-64 w-full object-contain" />
-        {box && box.w > 0 && (
+        <img
+          ref={ref}
+          src={src}
+          alt="Uploaded logo"
+          draggable={false}
+          className="pointer-events-none block h-auto max-h-64 w-auto max-w-full"
+        />
+        {box && (
           <div
-            className="pointer-events-none absolute border-2 border-[var(--color-gold)] bg-[var(--color-gold)]/10"
+            className="pointer-events-none absolute border-2 border-amber-600 bg-amber-300/20"
             style={{
-              left: `${box.x * 100}%`, top: `${box.y * 100}%`,
-              width: `${box.w * 100}%`, height: `${box.h * 100}%`,
+              left: `${box.x * 100}%`,
+              top: `${box.y * 100}%`,
+              width: `${box.width * 100}%`,
+              height: `${box.height * 100}%`,
             }}
           />
         )}
       </div>
-      <div className="mt-2 flex items-center justify-between gap-3">
-        <p className="text-xs text-[var(--color-ink-muted)]">
-          Optional: drag a box to keep only part of the image.
-        </p>
+      <p className="mt-2 text-xs">
+        Optional: drag to keep part of the image.{" "}
         {box && (
-          <button type="button" onClick={() => onChange(null)}
-            className="shrink-0 text-xs font-medium text-[var(--color-gold-700)] underline">
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => onChange(null)}
+            className="underline"
+          >
             Clear crop
           </button>
         )}
-      </div>
+      </p>
     </div>
   );
 }

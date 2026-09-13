@@ -1,0 +1,83 @@
+name: nammaoffice
+services:
+  postgres:
+    image: postgres:18-bookworm
+    environment:
+      POSTGRES_DB: nammaoffice
+      POSTGRES_USER: nammaoffice
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a unique database password}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nammaoffice -d nammaoffice"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    networks: [internal]
+  media-init:
+    image: node:24-bookworm-slim
+    user: root
+    command: ["sh", "-c", "mkdir -p /data/media && chown -R 1001:1001 /data && chmod 700 /data"]
+    volumes: ["media:/data"]
+    networks: [internal]
+  migrate:
+    build: {context: ., target: worker}
+    command: ["npm", "run", "cms:setup"]
+    environment: &cms-env
+      DATABASE_URL: postgresql://nammaoffice:${POSTGRES_PASSWORD}@postgres:5432/nammaoffice
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:?Set the HTTPS public origin}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set a random auth secret}
+      CMS_DATA_DIR: /data
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      CMS_GOOGLE_WORKSPACE_DOMAIN: ${CMS_GOOGLE_WORKSPACE_DOMAIN:-}
+      CMS_ALLOWED_EMAILS: ${CMS_ALLOWED_EMAILS:-}
+      CMS_MAIL_MODE: ${CMS_MAIL_MODE:-local}
+      CMS_MAIL_FROM: ${CMS_MAIL_FROM:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CMS_BOOTSTRAP_EMAIL: ${CMS_BOOTSTRAP_EMAIL:?Set the first administrator email}
+    volumes: ["media:/data"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      media-init: {condition: service_completed_successfully}
+    networks: [internal]
+  web:
+    build: {context: ., target: web}
+    environment: *cms-env
+    volumes: ["media:/data"]
+    ports: ["127.0.0.1:${CMS_HTTP_PORT:-3000}:3000"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+    networks: [internal]
+  worker:
+    build: {context: ., target: worker}
+    environment: *cms-env
+    volumes: ["media:/data"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+    networks: [internal]
+  backup:
+    profiles: [ops]
+    build: {context: ., target: backup}
+    environment:
+      <<: *cms-env
+      CMS_BACKUP_KEY: ${CMS_BACKUP_KEY:-}
+      CMS_BACKUP_DIR: /data/backups
+    volumes: ["media:/data"]
+    depends_on:
+      postgres: {condition: service_healthy}
+    networks: [internal]
+volumes:
+  database:
+  media:
+networks:
+  internal:

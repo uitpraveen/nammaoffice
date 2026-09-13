@@ -226,31 +226,24 @@ function Marquee({ items, direction, speedSec }: MarqueeProps) {
 
 /** Rendered CSS height of a canvas at each breakpoint - must track --logo-h
  *  below, since `sizes` is what decides which raster Next actually serves. */
-const RENDERED_H = { sm: 82, md: 100, lg: 112 };
 
 function Mark({ client: c, decorative }: { client: Client; decorative?: boolean }) {
-  // Every canvas is the same height but a different width, so one shared
-  // `sizes` string would over-serve the narrow marks and under-serve the wide
-  // ones. Derive each logo's true CSS width from its own aspect ratio instead.
-  const w = (h: number) => Math.ceil((c.w / c.h) * h);
-  const sizes =
-    `(max-width: 767px) ${w(RENDERED_H.sm)}px, ` +
-    `(max-width: 1279px) ${w(RENDERED_H.md)}px, ` +
-    `${w(RENDERED_H.lg)}px`;
-
+  const artwork = (
+    <Image
+      unoptimized
+      src={c.logo}
+      alt={decorative ? "" : c.name}
+      width={c.w}
+      height={c.h}
+      loading="eager"
+      className="select-none"
+      style={{ height: "var(--logo-h)", width: "clamp(140px, 16vw, 210px)", objectFit: "contain" }}
+      draggable={false}
+    />
+  );
   return (
     <div {...(decorative ? { "aria-hidden": true } : {})} title={c.name} className="clients-mark">
-      <Image
-        src={c.logo}
-        alt={decorative ? "" : c.name}
-        width={c.w}
-        height={c.h}
-        sizes={sizes}
-        loading="eager"
-        className="w-auto select-none"
-        style={{ height: "var(--logo-h)" }}
-        draggable={false}
-      />
+      {c.website && !decorative ? <a href={c.website} target="_blank" rel="noopener noreferrer" aria-label={`${c.name} website`}>{artwork}</a> : artwork}
     </div>
   );
 }

@@ -100,9 +100,11 @@ export function DateTimePicker({
 
   // Re-sync viewingDate when the controlled value changes externally
   // (e.g. parent re-mounts the form with a saved draft).
-  useEffect(() => {
+  const [previousValue, setPreviousValue] = useState(value);
+  if (previousValue !== value) {
+    setPreviousValue(value);
     if (parsed) setViewingDate(stripTime(parsed));
-  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+  }
 
   // Close on outside click + ESC
   useEffect(() => {

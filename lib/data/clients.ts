@@ -21,6 +21,7 @@ import data from "./clients.json";
  *    renders the average mark at roughly 0.56 * H.
  */
 export interface Client {
+  website?: string;
   id: string;
   name: string;
   /** Logo path under /public. */

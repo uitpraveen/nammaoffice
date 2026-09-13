@@ -32,6 +32,16 @@ jobs:
     name: Build and deploy to nammaoffice.com
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    services:
+      redis:
+        image: redis:7.4
+        ports:
+          - 16479:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
 
@@ -43,13 +53,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Informational only. The repo currently has 4 pre-existing
-      # react-hooks/set-state-in-effect errors; making this blocking today
-      # would wedge every release. Drop continue-on-error once they are fixed
-      # and this becomes a real gate.
       - name: Lint
         run: npm run lint
-        continue-on-error: true
+
+      - name: Start local Redis test transport
+        run: |
+          node scripts/redis-rest-test-adapter.mjs > /tmp/cms-redis-test.log 2>&1 &
+          for attempt in 1 2 3 4 5; do
+            if curl --fail --silent http://127.0.0.1:16480/health; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/cms-redis-test.log
+          exit 1
+
+      - name: CMS regression tests
+        env:
+          CMS_TEST_REDIS_URL: http://127.0.0.1:16480
+        run: npm test
 
       - name: Pull Vercel project settings and production env
         run: npx --yes vercel@58.9.0 pull --yes --environment=production --scope=uitpraveens-projects --token=${{ secrets.VERCEL_TOKEN }}

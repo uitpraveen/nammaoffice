@@ -1,5 +1,7 @@
 "use client";
 
+import { HeroPoster } from "./HeroPoster";
+import type { HeroPromotion } from "@/lib/studio/promotions";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -72,7 +74,16 @@ const SLIDES: Slide[] = [
 const SLIDE_MS = 7000;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-export function HeroSection() {
+export function HeroSection({initialPromotion=null}:{initialPromotion?:HeroPromotion|null}) {
+  const [expiredWindow,setExpiredWindow]=useState("");
+  const windowKey=initialPromotion?`${initialPromotion.id}:${initialPromotion.data.endsAt}`:"";
+  const promotion=windowKey!==expiredWindow?initialPromotion:null;
+  useEffect(()=>{
+    if(!initialPromotion)return;
+    let timer:ReturnType<typeof setTimeout>;
+    const expire=()=>{const remaining=Date.parse(initialPromotion.data.endsAt)-Date.now();if(remaining<=0){setExpiredWindow(`${initialPromotion.id}:${initialPromotion.data.endsAt}`);return;}timer=setTimeout(expire,Math.min(remaining,86400000));};
+    expire();return()=>clearTimeout(timer);
+  },[initialPromotion]);
   const [[active, direction], setActiveDir] = useState<[number, number]>([0, 1]);
   // Two independent pause sources so they don't clobber each other: the manual
   // play/pause button owns `userPaused`; hovering the hero owns `hovering`.
@@ -179,8 +190,8 @@ export function HeroSection() {
           back to top-aligned when content would overflow upward, so the
           eyebrow never gets pushed under the navbar. */}
       <div className="relative z-10 flex-1 min-h-0 flex w-full [align-items:safe_center]">
-        <div className="content-width w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-6 md:gap-10 lg:gap-16 items-center">
+        <div className="content-width w-full" style={{maxWidth:promotion?1440:undefined}}>
+        <div className={cn("grid grid-cols-1 gap-6 items-center",promotion?"lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-8":"lg:grid-cols-[1.35fr_1fr] md:gap-10 lg:gap-16")}>
           {/* Left - copy */}
           <div className="text-left flex flex-col items-start max-w-[720px]">
             <AnimatePresence initial={false} mode="wait">
@@ -253,7 +264,7 @@ export function HeroSection() {
               Opacity-only fade (no transform) - `backdrop-filter` flickers /
               snaps in late when its container is being translated, so we keep
               the parent static and just fade the cards in. */}
-          <motion.div
+          {promotion?<div className="w-full min-w-0 max-w-[640px] mx-auto lg:max-w-none lg:ml-auto lg:mr-0"><HeroPoster data={promotion.data}/></div>:<motion.div
             className="hidden lg:flex flex-col gap-3 w-full max-w-[360px] ml-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -346,7 +357,7 @@ export function HeroSection() {
                 <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
               </div>
             </button>
-          </motion.div>
+          </motion.div>}
         </div>
         </div>
       </div>

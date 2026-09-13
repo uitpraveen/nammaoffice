@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
-import GoogleTagManager from "@/components/analytics/GoogleTagManager";
-import MetaPixel from "@/components/analytics/MetaPixel";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import "@/components/studio/studio.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,11 +78,7 @@ export default function RootLayout({
               "(function(){try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});}if(window.caches&&window.caches.keys){window.caches.keys().then(function(ks){ks.forEach(function(k){window.caches.delete(k);});}).catch(function(){});}}catch(e){}})();",
           }}
         />
-        <SmoothScroll />
-        <GoogleTagManager />
         {children}
-        <GoogleAnalytics />
-        <MetaPixel />
       </body>
     </html>
   );

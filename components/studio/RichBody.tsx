@@ -1,0 +1,8 @@
+import type { ReactNode } from "react";
+import type { RichNode } from "@/lib/studio/validation";
+function render(n:RichNode,key:number):ReactNode{
+ const children=n.content?.map((c,i)=>render(c,i));
+ if(n.type==="text"){let text:ReactNode=n.text;for(const [i,m] of (n.marks||[]).entries()){if(m.type==="bold")text=<strong key={i}>{text}</strong>;if(m.type==="italic")text=<em key={i}>{text}</em>;if(m.type==="strike")text=<s key={i}>{text}</s>;if(m.type==="underline")text=<u key={i}>{text}</u>;if(m.type==="code")text=<code key={i}>{text}</code>;if(m.type==="link"){const href=String(m.attrs?.href||"");if(/^https?:\/\//i.test(href)||href.startsWith("mailto:"))text=<a key={i} href={href} rel="noopener noreferrer">{text}</a>;}}return <span key={key}>{text}</span>;}
+ switch(n.type){case"doc":return <div key={key}>{children}</div>;case"heading":return Number(n.attrs?.level)===3?<h3 key={key}>{children}</h3>:Number(n.attrs?.level)===4?<h4 key={key}>{children}</h4>:<h2 key={key}>{children}</h2>;case"paragraph":return <p key={key}>{children}</p>;case"bulletList":return <ul key={key}>{children}</ul>;case"orderedList":return <ol key={key} start={Number(n.attrs?.start)||1}>{children}</ol>;case"listItem":return <li key={key}>{children}</li>;case"blockquote":return <blockquote key={key}>{children}</blockquote>;case"hardBreak":return <br key={key}/>;case"horizontalRule":return <hr key={key}/>;case"codeBlock":return <pre key={key}><code>{children}</code></pre>;default:return null;}
+}
+export function RichBody({body}:{body:RichNode}){return <div className="studio-preview">{render(body,0)}</div>;}

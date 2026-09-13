@@ -1,12 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
+  serverExternalPackages: ["pg", "pg-boss", "sharp"],
+  // Runtime data is a persistent volume, never part of an application bundle.
+  outputFileTracingExcludes: {
+    "/*": ["./.local/**/*", "./.cms/**/*", "./client-logos/**/*", "./.env*", "./tests/**/*", "./docs/**/*"],
+  },
   images: {
+    qualities: [50, 75],
     formats: ["image/webp", "image/avif"],
     deviceSizes: [320, 640, 768, 1024, 1280, 1536],
     remotePatterns: [
       { protocol: "https", hostname: "images.pexels.com", pathname: "/**" },
-      // Client logos added through /admin/logos are stored in Vercel Blob.
+      // Retained only for legacy imported remote artwork; Studio serves local /media files.
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com", pathname: "/**" },
     ],
   },
@@ -82,7 +89,7 @@ const nextConfig: NextConfig = {
       { source: "/book-online", destination: "/bookings", permanent: true },
 
       // Removed content (news/events/blog) — funnel to home rather than 404.
-      { source: "/newsinsights", destination: "/", permanent: false },
+      { source: "/newsinsights", destination: "/news", permanent: false },
       { source: "/event-list", destination: "/", permanent: false },
       { source: "/events", destination: "/", permanent: false },
       { source: "/challenges", destination: "/", permanent: false },

@@ -1,0 +1,12 @@
+"use client";
+import { useEditor,EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Placeholder from "@tiptap/extension-placeholder";
+import { useEffect } from "react";
+import type { RichNode } from "@/lib/studio/validation";
+export function RichTextEditor({value,onChange}:{value:RichNode;onChange:(value:RichNode)=>void}){
+ const editor=useEditor({extensions:[StarterKit.configure({heading:{levels:[2,3,4]},link:{openOnClick:false,protocols:["http","https","mailto"]}}),Placeholder.configure({placeholder:"Tell your story. Add headings, links and useful details…"})],content:value,immediatelyRender:false,onUpdate:({editor})=>onChange(editor.getJSON() as RichNode)});
+ useEffect(()=>{if(editor&&JSON.stringify(editor.getJSON())!==JSON.stringify(value))editor.commands.setContent(value,{emitUpdate:false});},[value,editor]);
+ if(!editor)return <div className="studio-card studio-muted">Loading editor…</div>;
+ return <div className="studio-richtext"><div className="studio-editorbar" aria-label="Text formatting">{[{label:"Bold",active:editor.isActive("bold"),run:()=>editor.chain().focus().toggleBold().run()},{label:"Italic",active:editor.isActive("italic"),run:()=>editor.chain().focus().toggleItalic().run()},{label:"H2",active:editor.isActive("heading",{level:2}),run:()=>editor.chain().focus().toggleHeading({level:2}).run()},{label:"H3",active:editor.isActive("heading",{level:3}),run:()=>editor.chain().focus().toggleHeading({level:3}).run()},{label:"Bullet list",active:editor.isActive("bulletList"),run:()=>editor.chain().focus().toggleBulletList().run()},{label:"Numbered list",active:editor.isActive("orderedList"),run:()=>editor.chain().focus().toggleOrderedList().run()},{label:"Quote",active:editor.isActive("blockquote"),run:()=>editor.chain().focus().toggleBlockquote().run()}].map(b=><button type="button" key={b.label} aria-pressed={b.active} className={b.active?"is-active":""} onClick={b.run}>{b.label}</button>)}<button type="button" onClick={()=>{const href=prompt("Link URL (https://…)",editor.getAttributes("link").href||"https://");if(href===null)return;if(!href)editor.chain().focus().unsetLink().run();else if(/^https?:\/\//i.test(href)||href.startsWith("mailto:"))editor.chain().focus().setLink({href}).run();else alert("Use an http, https or email link.");}}>Link</button><button type="button" onClick={()=>editor.chain().focus().undo().run()}>Undo</button><button type="button" onClick={()=>editor.chain().focus().redo().run()}>Redo</button></div><EditorContent editor={editor}/></div>;
+}

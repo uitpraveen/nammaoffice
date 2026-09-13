@@ -183,7 +183,7 @@ function roundedAlpha(w: number, h: number, r: number): Uint8Array {
 const MAX_WORKING_EDGE = 4000;
 
 export async function processLogo(input: Buffer, crop?: Crop): Promise<ProcessedLogo> {
-  let img = sharp(input, { failOn: "none" });
+  let img = sharp(input, { failOn: "none", limitInputPixels: 16000000 });
   let meta = await img.metadata();
   if (!meta.width || !meta.height) throw new Error("Could not read that image.");
 

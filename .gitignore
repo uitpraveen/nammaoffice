@@ -48,3 +48,15 @@ next-env.d.ts
 
 # claude code local settings (machine-specific permission allowlist)
 /.claude/settings.local.json
+
+# Local CMS development content and immutable uploads
+/.cms/
+/public/images/cms/
+
+# VPS CMS local database, media, mail and credentials
+.local/
+playwright-report/
+test-results/
+
+# Claude Code local session state (pid + sessionId, machine-specific)
+.claude/scheduled_tasks.lock

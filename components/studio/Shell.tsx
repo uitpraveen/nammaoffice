@@ -1,0 +1,13 @@
+"use client";
+import Link from "next/link";
+import { usePathname,useRouter } from "next/navigation";
+import { useState } from "react";
+import { LayoutDashboard,Images,Newspaper,BookOpen,BriefcaseBusiness,Quote,Users,ShieldCheck,History,ExternalLink,LogOut } from "lucide-react";
+import type { Actor } from "@/lib/studio/access";
+import { authClient } from "@/lib/studio/client";
+const links=[{href:"/admin",label:"Overview",icon:LayoutDashboard,roles:["admin","editor","author"]},{href:"/admin/logos",label:"Client logos",icon:Images,roles:["admin","editor"]},{href:"/admin/blogs",label:"Blogs",icon:BookOpen,roles:["admin","editor","author"]},{href:"/admin/news",label:"News",icon:Newspaper,roles:["admin","editor","author"]},{href:"/admin/case-studies",label:"Case studies",icon:BriefcaseBusiness,roles:["admin","editor","author"]},{href:"/admin/testimonials",label:"Testimonials",icon:Quote,roles:["admin","editor"]},{href:"/admin/promotions",label:"Hero promotions",icon:Images,roles:["admin","editor"]},{href:"/admin/media",label:"Media library",icon:Images,roles:["admin","editor","author"]},{href:"/admin/users",label:"Team & access",icon:Users,roles:["admin"]},{href:"/admin/audit",label:"Activity log",icon:History,roles:["admin"]},{href:"/admin/security",label:"Account security",icon:ShieldCheck,roles:["admin","editor","author"]}];
+export function Shell({actor,children}:{actor:Actor;children:React.ReactNode}){
+ const path=usePathname(),router=useRouter();const[error,setError]=useState("");
+ async function logout(){const r=await authClient.signOut();if(r.error){setError(r.error.message||"Sign out failed.");return;}router.replace("/admin/login");router.refresh();}
+ return <div className="studio"><header className="studio-header"><Link href="/admin" className="studio-brand">nammaoffice<span style={{color:"#a44832"}}>.</span><small>Content studio</small></Link><div className="studio-row"><div style={{fontSize:12,textAlign:"right"}}>{actor.name}<div className="studio-muted" style={{textTransform:"capitalize"}}>{actor.role}</div></div><button className="studio-button small" onClick={logout}><LogOut size={14}/>Sign out</button></div></header>{error&&<div className="studio-alert" role="alert">{error}</div>}<div className="studio-layout"><nav className="studio-nav" aria-label="Studio navigation"><div className="studio-nav-label">Workspace</div>{links.filter(l=>l.roles.includes(actor.role)).map(l=><Link key={l.href} href={l.href} className={path===l.href?"active":""}><l.icon size={17}/>{l.label}</Link>)}<div className="studio-nav-label">Website</div><Link href="/" target="_blank" rel="noopener"><ExternalLink size={16}/>View website</Link></nav><main className="studio-main">{children}</main></div></div>;
+}

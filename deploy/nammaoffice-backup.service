@@ -1,0 +1,10 @@
+[Unit]
+Description=NammaOffice encrypted database and media backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/nammaoffice
+ExecStart=/usr/bin/docker compose --env-file /etc/nammaoffice/cms.env --profile ops run --rm backup
+TimeoutStartSec=1800

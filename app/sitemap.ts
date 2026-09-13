@@ -1,12 +1,17 @@
 import { MetadataRoute } from "next";
+import { publicEntries } from "@/lib/studio/public";
 import { cities, locations } from "@/lib/data/locations";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const content = await Promise.all([publicEntries("blog",10000),publicEntries("news",10000),publicEntries("case-study",10000)]);
   const baseUrl = "https://nammaoffice.com";
 
   const staticPages = [
     "",
     "/locations",
+    "/news",
+    "/blogs",
+    "/case-studies",
     "/franchise",
     "/registration/company",
     "/registration/user",
@@ -41,5 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...cityEntries, ...locationEntries];
+  const newsEntries: MetadataRoute.Sitemap = content.flat().map(post => ({
+    url: `${baseUrl}/${post.kind === "blog" ? "blogs" : post.kind === "case-study" ? "case-studies" : "news"}/${post.data.slug}`, lastModified: new Date(post.updated_at), changeFrequency: "weekly", priority: 0.6,
+  }));
+  return [...staticEntries, ...cityEntries, ...locationEntries, ...newsEntries];
 }

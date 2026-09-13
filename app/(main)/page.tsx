@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { activeHeroPromotion } from "@/lib/studio/promotions";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StoryStrip } from "@/components/sections/StoryStrip";
 import { LocationsShowcase } from "@/components/sections/LocationsShowcase";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { getClients } from "@/lib/data/get-clients";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { AmenitiesShowcase } from "@/components/sections/AmenitiesShowcase";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -23,10 +25,11 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <HeroSection />
+      <HeroSection initialPromotion={await activeHeroPromotion()} />
       <StoryStrip />
       <LocationsShowcase />
       <ClientLogos clients={await getClients()} />
+      <Testimonials />
       <StatsBand />
       <AmenitiesShowcase />
     </>

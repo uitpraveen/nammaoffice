@@ -118,9 +118,11 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
   }, [open]);
 
   // Close on route change.
-  useEffect(() => {
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+  if (previousPathname !== pathname) {
+    setPreviousPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <div

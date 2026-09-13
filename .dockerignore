@@ -1,0 +1,13 @@
+.git
+.github
+.next
+node_modules
+.env*
+.local
+.cms
+.claude
+client-logos
+test-results
+playwright-report
+.DS_Store
+*.log

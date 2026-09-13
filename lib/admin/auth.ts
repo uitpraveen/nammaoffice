@@ -15,14 +15,21 @@ const MAX_AGE_SECONDS = 60 * 60 * 12;
 
 function secret() {
   const s = process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD;
-  if (!s) throw new Error("ADMIN_PASSWORD is not set, so the admin area cannot be opened.");
+  if (!s)
+    throw new Error(
+      "ADMIN_PASSWORD is not set, so the admin area cannot be opened.",
+    );
   return s;
 }
 
-const sign = (payload: string) => createHmac("sha256", secret()).update(payload).digest("hex");
+const sign = (payload: string) =>
+  createHmac("sha256", secret())
+    .update(`${process.env.ADMIN_PASSWORD}\0${payload}`)
+    .digest("hex");
 
 function safeEqual(a: string, b: string) {
-  const ab = Buffer.from(a), bb = Buffer.from(b);
+  const ab = Buffer.from(a),
+    bb = Buffer.from(b);
   return ab.length === bb.length && timingSafeEqual(ab, bb);
 }
 
@@ -39,9 +46,11 @@ export function createSessionValue() {
 
 export function sessionIsValid(value: string | undefined) {
   if (!value) return false;
+  if (!/^\d{13}\.[a-f0-9]{64}$/.test(value) || !adminIsConfigured())
+    return false;
   const [expires, mac] = value.split(".");
-  if (!expires || !mac) return false;
-  if (Number(expires) < Date.now()) return false;
+  const remaining = Number(expires) - Date.now();
+  if (remaining <= 0 || remaining > MAX_AGE_SECONDS * 1000) return false;
   try {
     return safeEqual(mac, sign(expires));
   } catch {

@@ -21,7 +21,9 @@ import {
   Mail,
   MapPin,
   Menu,
+  Newspaper,
   Phone,
+  Sparkles,
   TicketCheck,
   UserPlus,
   X,
@@ -37,6 +39,8 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   CalendarCheck,
   TicketCheck,
   LifeBuoy,
+  Newspaper,
+  Sparkles,
 };
 const DEFAULT_NAV_ICON: LucideIcon = FileText;
 
@@ -161,9 +165,11 @@ export function Header() {
   }, [open]);
 
   // Close overlay on route change.
-  useEffect(() => {
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+  if (previousPathname !== pathname) {
+    setPreviousPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <>
