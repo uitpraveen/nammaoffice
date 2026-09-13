@@ -22,24 +22,31 @@ export const navigation: NavItem[] = [
   { label: "Locations", href: "/#centres" },
   { label: "Amenities", href: "/#amenities" },
   { label: "Franchise", href: "/franchise" },
-  {
-    label: "Resources",
-    href: "/case-studies",
-    children: [
-      {
-        label: "Client Stories",
-        href: "/case-studies",
-        description: "Case studies - how teams across Tamil Nadu grow with NammaOffice.",
-        icon: "Sparkles",
-      },
-      {
-        label: "News & Videos",
-        href: "/news",
-        description: "Updates, events, walkthroughs and insights from our centres.",
-        icon: "Newspaper",
-      },
-    ],
-  },
+  // Resources is hidden until the pages it links to actually exist.
+  // /blogs, /case-studies and /news all 404 in production: the menu was
+  // committed while the route files were still untracked, so visitors on
+  // nammaoffice.com were being sent to dead pages. Uncomment this once
+  // those routes ship with real content (the drafted posts are fictional
+  // placeholders and must not be published as-is).
+  // {
+  //   label: "Resources",
+  //   href: "/case-studies",
+  //   children: [
+  //     { label: "Blog", href: "/blogs", description: "Ideas and stories for better work.", icon: "Newspaper" },
+  //     {
+  //       label: "Client Stories",
+  //       href: "/case-studies",
+  //       description: "Case studies - how teams across Tamil Nadu grow with NammaOffice.",
+  //       icon: "Sparkles",
+  //     },
+  //     {
+  //       label: "News & Videos",
+  //       href: "/news",
+  //       description: "Updates, events, walkthroughs and insights from our centres.",
+  //       icon: "Newspaper",
+  //     },
+  //   ],
+  // },
   {
     label: "Forms",
     href: "/forms",
